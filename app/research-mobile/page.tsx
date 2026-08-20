@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- vinext production Link navigation is broken; force document loads. */
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getPublishedReports } from "@/lib/reports";
 
 export const metadata: Metadata = {
@@ -42,9 +42,9 @@ export default function ResearchMobileTheme() {
           </div>
         </dl>
         <div className="topic-actions">
-          <Link href="/research-mobile/popup" className="primary-link">
+          <a href="/research-mobile/popup" className="primary-link">
             打开课题索引 →
-          </Link>
+          </a>
         </div>
       </section>
     </div>

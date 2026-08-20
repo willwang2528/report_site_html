@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render(pathname, origin = "http://localhost") {
@@ -72,4 +73,16 @@ test("renders the complete hierarchy and rejects unknown reports", async () => {
   }
   const missing = await render("/research-mobile/popup/not-a-report");
   assert.equal(missing.status, 404);
+});
+
+test("critical site navigation avoids the broken vinext client Link runtime", async () => {
+  for (const source of [
+    "../app/page.tsx",
+    "../app/research-mobile/page.tsx",
+    "../app/research-mobile/popup/page.tsx",
+    "../app/components/ResearchShell.tsx",
+  ]) {
+    const code = await readFile(new URL(source, import.meta.url), "utf8");
+    assert.doesNotMatch(code, /next\/link/);
+  }
 });

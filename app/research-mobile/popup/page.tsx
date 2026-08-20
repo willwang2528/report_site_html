@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getPublishedReports, getReport } from "@/lib/reports";
 
 export const metadata: Metadata = {
@@ -30,7 +29,7 @@ export default function PopupTopic() {
           <h2 id="reports-heading">当前报告</h2>
         </div>
         {reports.map((report, indexNumber) => (
-          <Link
+          <a
             key={report.slug}
             href={`/research-mobile/popup/${report.slug}`}
             className="report-record"
@@ -50,7 +49,7 @@ export default function PopupTopic() {
             <span className="record-arrow" aria-hidden="true">
               ↗
             </span>
-          </Link>
+          </a>
         ))}
       </section>
       <aside className="boundary-note">

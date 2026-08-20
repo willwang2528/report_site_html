@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+/* eslint-disable @next/next/no-html-link-for-pages -- vinext production Link navigation is broken; force document loads. */
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -48,23 +48,23 @@ export function ResearchShell({ children }: { children: React.ReactNode }) {
         className={`archive-spine ${menuOpen ? "archive-spine-open" : ""}`}
       >
         <div>
-          <Link href="/" className="archive-brand" onClick={() => setMenuOpen(false)}>
+          <a href="/" className="archive-brand" onClick={() => setMenuOpen(false)}>
             <span className="archive-brand-mark">R/</span>
             <span>Research Archive</span>
-          </Link>
+          </a>
           <p className="archive-label">主题档案</p>
           <nav aria-label="研究主题导航">
-            <Link
+            <a
               href="/research-mobile"
               className={`tree-theme ${pathname === "/research-mobile" ? "active" : ""}`}
               onClick={() => setMenuOpen(false)}
             >
               research-移动端
-            </Link>
+            </a>
             <div className="tree-branch">
               <span className="tree-topic">Popup Research</span>
               {reportLinks.map((item) => (
-                <Link
+                <a
                   key={item.href}
                   href={item.href}
                   className={`tree-report ${isCurrent(pathname, item.href) ? "active" : ""}`}
@@ -72,7 +72,7 @@ export function ResearchShell({ children }: { children: React.ReactNode }) {
                 >
                   <span>{item.label}</span>
                   <small>{item.code}</small>
-                </Link>
+                </a>
               ))}
             </div>
           </nav>
