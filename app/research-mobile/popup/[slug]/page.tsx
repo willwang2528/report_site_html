@@ -1,0 +1,46 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { ReportReader } from "@/app/components/ReportReader";
+import { getPublishedReports, getReport } from "@/lib/reports";
+
+type PageProps = { params: Promise<{ slug: string }> };
+
+export function generateStaticParams() {
+  return getPublishedReports().map((report) => ({ slug: report.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const report = getReport(slug);
+  if (!report || report.slug === "index") return {};
+  const title = `${report.title} · research-移动端`;
+  return {
+    title,
+    description: report.summary,
+    openGraph: {
+      title,
+      description: report.summary,
+      images: [
+        {
+          url: "/og.png",
+          width: 1200,
+          height: 630,
+          alt: `${report.title} · research-移动端`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: report.summary,
+      images: ["/og.png"],
+    },
+  };
+}
+
+export default async function ReportPage({ params }: PageProps) {
+  const { slug } = await params;
+  const report = getReport(slug);
+  if (!report || report.slug === "index") notFound();
+  return <ReportReader report={report} />;
+}

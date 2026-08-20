@@ -1,0 +1,496 @@
+{
+  "generatedAt": "2026-08-20T03:52:11.064Z",
+  "reports": [
+    {
+      "slug": "index",
+      "file": "README.md",
+      "kind": "课题索引",
+      "eyebrow": "POPUP RESEARCH / INDEX",
+      "summary": "移动端 Agent 弹窗研究的入口、交付关系与安全边界。",
+      "scope": "课题入口 · 研究边界 · 报告关系",
+      "title": "Popup Research",
+      "date": "2026-08-06",
+      "sourceHash": "837d77f1dca8d6d59c171b707b36cbf55771383c401e4a6996aaee85202e657c",
+      "raw": "# Popup Research\n\n本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。\n\n当前交付：\n\n1. [移动端 UI 弹窗底层原理调研](./01-popup-principles.md)\n2. [现有弹窗自动化方法对比](./02-methods-comparison.md)\n\n核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。\n\n",
+      "html": "<h1 id=\"index-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付：</p>\n<ol>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n",
+      "headings": [
+        {
+          "depth": 1,
+          "id": "index-h1-0",
+          "text": "Popup Research"
+        }
+      ],
+      "sections": [
+        {
+          "id": "index-section-0",
+          "title": "导读",
+          "html": "<h1 id=\"index-slide-0-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付：</p>\n<ol>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n"
+        }
+      ]
+    },
+    {
+      "slug": "principles",
+      "file": "01-popup-principles.md",
+      "kind": "底层原理",
+      "eyebrow": "INTERRUPT STACK / PRINCIPLES",
+      "summary": "解释弹窗的所有者、显示层、输入焦点与语义树，以及它为何会阻断移动端 Agent。",
+      "scope": "Android · iOS · Mobile Web / WebView",
+      "title": "移动端 UI 弹窗底层原理调研",
+      "date": "2026-08-06",
+      "sourceHash": "7407bd7bf98d813935aa612ef61c10cc5cff23478e7cdb17081e76745e18dfaf",
+      "raw": "# 移动端 UI 弹窗底层原理调研\n\n- 日期：2026-08-06\n- 范围：Android、iOS、移动 Web/WebView\n- 目标：解释弹窗为何出现、为何会阻断 Agent、是否属于人类检测，以及哪些边界会限制自动化\n- 研究边界：本文中的“绕过”只指在正常、获授权的软件使用或测试环境中检测并处理弹窗，不指规避 CAPTCHA、风控、身份验证或平台安全控制\n\n## 1. 结论先行\n\n1. **普通 UI 弹窗通常不是人类检测。** 它首先是一种模态交互：临时把决策权集中到一个前景界面，要求用户确认、取消、输入或选择后，原流程才继续。\n2. **系统权限弹窗也不是 CAPTCHA。** 它的主要任务是跨越 App 沙箱前取得知情授权，并把“允许/拒绝”写入系统维护的权限状态。\n3. **有些系统弹窗确实会抵抗自动点击，但原因是交互完整性，而非判断操作者是不是人。** 系统需要防止后台 App、透明遮罩、跨 UID 注入或恶意无障碍服务替用户确认。\n4. **CAPTCHA/风控挑战是另一类机制。** reCAPTCHA 明确使用风险分析区分人与机器人；普通 Alert、权限提示、错误提示没有这一判别目标。\n5. **弹窗不是一种统一对象。** 外观相似的矩形框，可能属于当前 App、操作系统、浏览器进程、网页 DOM 或第三方验证服务。所有者不同，自动化接口也不同。\n6. **Agent 被卡住的本质是“可交互前景发生了切换”。** 顶层窗口或 top layer 获得焦点，底层页面被遮挡、变为不可交互或不再出现在当前可访问性根节点中。\n7. **可靠处理不能只靠找“允许/关闭”文字。** 需要同时判断弹窗所有者、语义、触发上下文、动作后果，并验证弹窗确实消失、原任务状态确实恢复。\n8. **通用方案应是分层中断处理器。** 依次使用平台/协议事件、语义 UI 树、已知规则，最后才使用截图、OCR 或视觉模型；高风险或语义不明时交还用户。\n\n## 2. 什么算“弹窗”\n\n| 类别 | 典型例子 | 所有者 | 是否通常阻断底层 UI | 核心目的 |\n|---|---|---|---:|---|\n| App 内原生模态框 | Android `AlertDialog`、iOS `UIAlertController` | 当前 App | 是 | 决策、提示、输入、错误恢复 |\n| App 自绘遮罩 | Compose/SwiftUI/Flutter/React Native 自定义 modal | 当前 App | 通常是 | 产品流程、广告、运营、引导 |\n| 系统权限提示 | 相机、定位、麦克风、通知 | OS/权限控制组件 | 是 | 数据与设备能力授权 |\n| 系统选择器/确认页 | 文件、照片、默认应用、VPN、录屏 | OS 或系统 App | 是 | 受控资源选择或高权限确认 |\n| 系统级中断 | 低电量、系统升级、存储不足、来电 | OS | 有时 | 设备状态与紧急通知 |\n| Web 原生提示 | `alert()`、`confirm()`、`prompt()` | 浏览器 | 是 | 浏览器级用户提示 |\n| Web DOM 模态框 | `<dialog>`、CSS 遮罩、组件库 modal | 网页 | 取决于实现 | 网页业务流程 |\n| 认证/安全 UI | 生物识别、PIN、支付确认 | OS/可信组件/业务方 | 是 | 身份、用户在场或意图确认 |\n| 人机挑战 | CAPTCHA、风险挑战、异常流量页 | 风控服务 | 是 | 区分或约束自动化访问 |\n| 非模态遮挡 | Toast、Snackbar、Banner、悬浮窗 | App/OS/其他 App | 通常否 | 短暂通知或快捷操作 |\n\n“是否看起来像一个框”不是可靠分类标准。真正有用的两个问题是：**谁拥有这个 UI**，以及**它是否改变输入焦点/可交互树**。\n\n## 3. 通用底层机制\n\n一个典型模态弹窗可以抽象成以下状态转换：\n\n```text\n业务或系统事件\n  → 创建/呈现前景 UI\n  → 放到更高层级并取得输入焦点\n  → 底层页面被遮挡或变为不可交互\n  → 用户/自动化选择某个动作\n  → 回调更新业务或权限状态\n  → 移除弹窗并恢复原流程\n```\n\n这里有三个彼此独立的层面：\n\n- **显示层**：窗口、Surface、view controller 或浏览器 top layer 决定谁绘制在最上方。\n- **输入层**：焦点、命中测试和事件分发决定触摸/键盘事件送给谁。\n- **语义层**：可访问性树或自动化协议暴露“alert、button、text”等节点，供测试工具理解与操作。\n\n视觉上看到弹窗，不代表自动化一定能在语义树中看到它；反过来，协议可能直接报告一个原生 user prompt，而不需要做图像识别。\n\n## 4. Android：窗口、权限控制与跨应用边界\n\n### 4.1 App 自己的 Dialog\n\nAndroid 官方把 Dialog 定义为一个要求用户在继续前作出动作的小窗口。`DialogFragment` 管理其生命周期，按钮动作触发回调，然后 Dialog 被 dismiss 或 cancel。[Android Dialog 官方文档](https://developer.android.com/develop/ui/views/components/dialogs)\n\n这类弹窗通常仍属于当前 App：\n\n- UI 节点往往在当前 App 的可访问性树中；\n- Espresso、Compose Test、UI Automator 或 Appium 通常都能定位；\n- 如果掌握源码，最可靠的方法是直接使用稳定 resource id、test tag 或领域事件，而不是 OCR。\n\n### 4.2 窗口为什么能“盖住”原界面\n\nAndroid 的 `WindowManager` 管理窗口生命周期、输入与焦点、位置和 z-order；`SurfaceFlinger` 把各个 Surface 对应的图层合成为最终画面。弹窗获得更高层级和交互焦点后，底层 Activity 仍可能存在，但不再是当前可操作目标。[AOSP：SurfaceFlinger and WindowManager](https://source.android.com/docs/core/graphics/surfaceflinger-windowmanager)\n\nAndroid 的 `UiAutomation` 文档进一步说明：当模态窗口显示、用户无法触摸其后方内容时，自动化接口可能只报告最上层模态窗口。这正是 Agent 原来使用的 UI 节点“突然消失”的一个底层原因。[Android `UiAutomation`](https://developer.android.com/reference/android/app/UiAutomation)\n\n### 4.3 系统权限弹窗\n\n危险权限的典型流程是：App 声明权限，在需要时调用请求 API，系统显示不可由 App 自定义的权限提示，用户选择后，系统异步返回结果。Android 要求 App 每次使用受保护能力前检查状态，并在拒绝后降级功能。[Android 运行时权限流程](https://developer.android.com/training/permissions/requesting)\n\n这意味着权限弹窗具有几个特征：\n\n- **请求方和呈现方不同**：App 发起请求，系统权限组件负责可信呈现与状态写入。\n- **决定的是 capability，不只是关掉一个框**：点击 Allow 会改变 App 对相机、定位等资源的访问权。\n- **状态是持久的并随版本变化**：一次性权限、近似位置、永久拒绝和自动重置都会改变后续是否再次出现弹窗。\n- **厂商可定制外观，但需遵守兼容性模型**：AOSP 要求 Android 6.0 以上设备的运行时权限流程与 `PermissionController` 模型保持一致。[AOSP 运行时权限](https://source.android.com/docs/core/permissions/runtime_perms)\n\n### 4.4 为什么普通 App 不能随意关掉系统 UI\n\n从 Android 12 起，普通 App 通过 `ACTION_CLOSE_SYSTEM_DIALOGS` 关闭系统对话框的能力受到限制；官方列出的例外之一是 instrumentation test。这是在保护用户对系统 UI 的控制权，而不是在执行人机分类。[Android 12 行为变更](https://developer.android.com/about/versions/12/behavior-changes-all)\n\nAndroid 还防御 tapjacking：恶意 App 可能用透明或部分遮罩诱骗用户点击安全敏感控件。Android 12 起会默认阻止来自另一 UID 的不可信全遮挡触摸，敏感 view 也可过滤被遮挡的触摸。[Android Tapjacking 风险与缓解](https://developer.android.com/privacy-and-security/risks/tapjacking)\n\n因此，“这个按钮不接受某种注入点击”更可能意味着系统在保护点击来源与界面完整性，而不是在判断点击者有无人的智能。\n\n## 5. iOS：App 模态呈现与系统隐私授权\n\n### 5.1 App 自己的 Alert\n\n`UIAlertController` 是一个由 App 创建的 view controller；UIKit 把 alert/action sheet 模态呈现在 App 内容之上，用户点 action 后执行 App 提供的处理闭包。[Apple `UIAlertController`](https://developer.apple.com/documentation/uikit/uialertcontroller)\n\n更一般地，UIKit 的 modal presentation 会全部或部分覆盖当前 view controller，用于对当前工作流造成临时中断；dismiss 后恢复原界面。[Apple：Showing and hiding view controllers](https://developer.apple.com/documentation/uikit/showing-and-hiding-view-controllers)\n\n### 5.2 系统权限 Alert\n\n当 App 首次访问受保护资源时，系统生成权限提示，标题由系统生成，App 提供 purpose string；用户决定允许或拒绝，系统记住选择，后续访问根据授权状态成功或失败。[Apple：Requesting access to protected resources](https://developer.apple.com/documentation/uikit/requesting-access-to-protected-resources)\n\n所以 iOS 权限弹窗和 App 自己的 `UIAlertController` 外观相近，但信任域不同。前者的权限状态由系统维护，App 不能把它当普通子 view 直接删除。\n\n### 5.3 XCTest 如何理解“中断”\n\nApple 把 UI interruption 定义为意外阻挡测试目标的界面变化，既包括 App 自己的 modal，也包括 OS 弹出的照片权限等系统 UI。XCTest 只在当前目标元素被无关 UI 阻断时尝试 interruption monitor；预期中的 alert 应直接作为测试流程的一部分处理。[Apple：Handling UI Interruptions](https://developer.apple.com/documentation/xctest/handling-ui-interruptions)\n\n这个设计揭示了一个通用原则：**弹窗检测不应只做全屏轮询，而应与“当前动作为什么无法到达目标”结合。**\n\n## 6. 移动 Web/WebView：两种完全不同的 modal\n\n### 6.1 浏览器原生 user prompt\n\n`alert()`、`confirm()`、`prompt()` 属于浏览器 user prompt。W3C WebDriver 为其定义了独立的 Get Alert Text、Accept Alert、Dismiss Alert 和 Send Alert Text 命令，因此最可靠的处理是走浏览器协议，而不是截图找按钮。[W3C WebDriver 2：User prompts](https://www.w3.org/TR/webdriver2/#user-prompts)\n\nPlaywright 也通过 `page.on('dialog')` 直接分发 Dialog 对象；未注册监听器时默认 dismiss，注册后处理器必须 accept 或 dismiss，否则页面动作会一直等待。[Playwright Dialog API](https://playwright.dev/docs/api/class-dialog)\n\n### 6.2 DOM 模态框\n\n`<dialog>.showModal()` 会把元素放进文档 top layer；规范要求除顶层 dialog 及其后代外，文档其余节点变为 inert。自定义 CSS/JavaScript 遮罩可能模拟相同效果，但是否真正设置焦点陷阱和 inert 取决于实现。[WHATWG HTML：modal dialogs](https://html.spec.whatwg.org/dev/interaction.html#modal-dialogs-and-inert-subtrees)\n\n因此 Web Agent 应先判断：\n\n- 浏览器是否报告原生 user prompt；\n- DOM 中是否有 `dialog[open]`、`role=dialog/alertdialog`、`aria-modal=true`；\n- 最后才把它当纯像素遮罩处理。\n\n## 7. 它到底是不是“人类检测”\n\n| 机制 | 是否在区分人与机器 | 真正检查的对象 |\n|---|---:|---|\n| App 提示/错误框 | 否 | 用户是否确认、取消或补充输入 |\n| 系统权限弹窗 | 通常否 | 用户是否授权某 App 获得特定能力 |\n| 删除/支付确认 | 通常否 | 操作意图与后果确认 |\n| 生物识别/PIN | 不是一般意义 CAPTCHA | 身份、凭据或用户在场 |\n| Tapjacking/遮罩防护 | 否 | 输入来源和 UI 完整性 |\n| CAPTCHA/reCAPTCHA | 是 | 流量/交互更像人还是自动化程序 |\n| 风控挑战 | 可能 | 风险分数、设备/账号/行为异常 |\n\nGoogle 对 reCAPTCHA 的定义是使用风险分析技术区分人与 bot，并防止 spam 和 abuse。[Google reCAPTCHA](https://developers.google.com/recaptcha)\n\n所以更准确的回答是：\n\n> **普通弹窗不是为了防 Agent；它是为了控制流程、取得授权或确认意图。平台对部分弹窗的自动化限制，确实也会阻止恶意 Agent，但这是安全边界带来的副作用或防护目标，而不是弹窗本身在做“你是不是人”的分类。**\n\n## 8. 为什么通用 Agent 容易被弹窗卡住\n\n1. **所有者切换**：前景从被测 App 切到系统包、SpringBoard、浏览器 chrome 或另一个 Activity。\n2. **观察空间不完整**：自绘 Canvas、游戏引擎、WebView、secure UI 可能没有完整的语义节点。\n3. **定位器不稳定**：按钮文案随语言、OS 版本、厂商和授权历史变化。\n4. **时间不确定**：网络错误、首次启动提示、权限提示和系统通知可能异步出现。\n5. **同形不同义**：相同的“继续”可能代表关闭教程、分享数据、订阅付费或安装证书。\n6. **底层状态并非只有 visible/hidden**：权限状态、App 生命周期、窗口焦点和动画稳定性都会影响下一动作。\n7. **视觉动作缺少原子性**：截图到点击之间 UI 可能变化，导致点到刚好出现在相同坐标的新控件。\n8. **平台与商店政策限制**：例如 Google Play 允许确定性、规则驱动的无障碍自动化，但禁止一般 App 使用 Accessibility API 自主发起、规划并执行任意动作；非无障碍工具还需申报、显著披露和用户同意。[Google Play AccessibilityService 政策](https://support.google.com/googleplay/android-developer/answer/10964491)\n\n## 9. 对后续解决方案的直接约束\n\n后续方案应把“处理一次弹窗”建模为一个可验证的中断恢复事务：\n\n```text\nDetect  检测当前任务是否被前景 UI 阻断\nClassify 识别所有者、类别、语义和风险\nDecide  根据任务意图与策略选择 dismiss / deny / allow / ask-user\nAct  优先语义动作，其次协议动作，最后坐标动作\nVerify 验证弹窗消失、权限/业务状态符合预期、原任务目标重新可达\nResume 从受阻步骤重试，而不是盲目执行下一步\n```\n\n关键安全原则：**“自动关闭”可以是低风险默认值；“自动允许”必须由用户任务、显式策略或测试用例提供依据。** 对支付、删除账号、安装未知软件、隐私共享、生物识别、系统安全设置和 CAPTCHA，不应使用通用的自动 Allow 规则。\n\n## 10. 研究局限\n\n- 平台行为会随 OS、OEM、Appium/XCTest/UI Automator 版本变化，文中接口状态以 2026-08-06 可访问的官方资料为准。\n- 本阶段没有指定具体设备和 Agent 框架，因此结论是跨平台机制模型，不是某一机型上的兼容性保证。\n- 没有把 CAPTCHA/风控规避纳入解决方案；它们只用于回答“是否属于人类检测”的分类问题。\n- HarmonyOS 等平台可沿用“所有者 × 感知通道 × 动作通道”的分析框架，但在进入实现阶段前仍需针对目标系统版本补充官方 API 验证。\n\n",
+      "html": "<h1 id=\"principles-h1-0\">移动端 UI 弹窗底层原理调研</h1>\n<ul>\n<li>日期：2026-08-06</li>\n<li>范围：Android、iOS、移动 Web/WebView</li>\n<li>目标：解释弹窗为何出现、为何会阻断 Agent、是否属于人类检测，以及哪些边界会限制自动化</li>\n<li>研究边界：本文中的“绕过”只指在正常、获授权的软件使用或测试环境中检测并处理弹窗，不指规避 CAPTCHA、风控、身份验证或平台安全控制</li>\n</ul>\n<h2 id=\"principles-h2-1\">1. 结论先行</h2>\n<ol>\n<li><strong>普通 UI 弹窗通常不是人类检测。</strong> 它首先是一种模态交互：临时把决策权集中到一个前景界面，要求用户确认、取消、输入或选择后，原流程才继续。</li>\n<li><strong>系统权限弹窗也不是 CAPTCHA。</strong> 它的主要任务是跨越 App 沙箱前取得知情授权，并把“允许/拒绝”写入系统维护的权限状态。</li>\n<li><strong>有些系统弹窗确实会抵抗自动点击，但原因是交互完整性，而非判断操作者是不是人。</strong> 系统需要防止后台 App、透明遮罩、跨 UID 注入或恶意无障碍服务替用户确认。</li>\n<li><strong>CAPTCHA/风控挑战是另一类机制。</strong> reCAPTCHA 明确使用风险分析区分人与机器人；普通 Alert、权限提示、错误提示没有这一判别目标。</li>\n<li><strong>弹窗不是一种统一对象。</strong> 外观相似的矩形框，可能属于当前 App、操作系统、浏览器进程、网页 DOM 或第三方验证服务。所有者不同，自动化接口也不同。</li>\n<li><strong>Agent 被卡住的本质是“可交互前景发生了切换”。</strong> 顶层窗口或 top layer 获得焦点，底层页面被遮挡、变为不可交互或不再出现在当前可访问性根节点中。</li>\n<li><strong>可靠处理不能只靠找“允许/关闭”文字。</strong> 需要同时判断弹窗所有者、语义、触发上下文、动作后果，并验证弹窗确实消失、原任务状态确实恢复。</li>\n<li><strong>通用方案应是分层中断处理器。</strong> 依次使用平台/协议事件、语义 UI 树、已知规则，最后才使用截图、OCR 或视觉模型；高风险或语义不明时交还用户。</li>\n</ol>\n<h2 id=\"principles-h2-2\">2. 什么算“弹窗”</h2>\n<table>\n<thead>\n<tr>\n<th>类别</th>\n<th>典型例子</th>\n<th>所有者</th>\n<th align=\"right\">是否通常阻断底层 UI</th>\n<th>核心目的</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>App 内原生模态框</td>\n<td>Android <code>AlertDialog</code>、iOS <code>UIAlertController</code></td>\n<td>当前 App</td>\n<td align=\"right\">是</td>\n<td>决策、提示、输入、错误恢复</td>\n</tr>\n<tr>\n<td>App 自绘遮罩</td>\n<td>Compose/SwiftUI/Flutter/React Native 自定义 modal</td>\n<td>当前 App</td>\n<td align=\"right\">通常是</td>\n<td>产品流程、广告、运营、引导</td>\n</tr>\n<tr>\n<td>系统权限提示</td>\n<td>相机、定位、麦克风、通知</td>\n<td>OS/权限控制组件</td>\n<td align=\"right\">是</td>\n<td>数据与设备能力授权</td>\n</tr>\n<tr>\n<td>系统选择器/确认页</td>\n<td>文件、照片、默认应用、VPN、录屏</td>\n<td>OS 或系统 App</td>\n<td align=\"right\">是</td>\n<td>受控资源选择或高权限确认</td>\n</tr>\n<tr>\n<td>系统级中断</td>\n<td>低电量、系统升级、存储不足、来电</td>\n<td>OS</td>\n<td align=\"right\">有时</td>\n<td>设备状态与紧急通知</td>\n</tr>\n<tr>\n<td>Web 原生提示</td>\n<td><code>alert()</code>、<code>confirm()</code>、<code>prompt()</code></td>\n<td>浏览器</td>\n<td align=\"right\">是</td>\n<td>浏览器级用户提示</td>\n</tr>\n<tr>\n<td>Web DOM 模态框</td>\n<td><code>&lt;dialog&gt;</code>、CSS 遮罩、组件库 modal</td>\n<td>网页</td>\n<td align=\"right\">取决于实现</td>\n<td>网页业务流程</td>\n</tr>\n<tr>\n<td>认证/安全 UI</td>\n<td>生物识别、PIN、支付确认</td>\n<td>OS/可信组件/业务方</td>\n<td align=\"right\">是</td>\n<td>身份、用户在场或意图确认</td>\n</tr>\n<tr>\n<td>人机挑战</td>\n<td>CAPTCHA、风险挑战、异常流量页</td>\n<td>风控服务</td>\n<td align=\"right\">是</td>\n<td>区分或约束自动化访问</td>\n</tr>\n<tr>\n<td>非模态遮挡</td>\n<td>Toast、Snackbar、Banner、悬浮窗</td>\n<td>App/OS/其他 App</td>\n<td align=\"right\">通常否</td>\n<td>短暂通知或快捷操作</td>\n</tr>\n</tbody></table>\n<p>“是否看起来像一个框”不是可靠分类标准。真正有用的两个问题是：<strong>谁拥有这个 UI</strong>，以及<strong>它是否改变输入焦点/可交互树</strong>。</p>\n<h2 id=\"principles-h2-3\">3. 通用底层机制</h2>\n<p>一个典型模态弹窗可以抽象成以下状态转换：</p>\n<pre><code class=\"language-text\">业务或系统事件\n  → 创建/呈现前景 UI\n  → 放到更高层级并取得输入焦点\n  → 底层页面被遮挡或变为不可交互\n  → 用户/自动化选择某个动作\n  → 回调更新业务或权限状态\n  → 移除弹窗并恢复原流程\n</code></pre>\n<p>这里有三个彼此独立的层面：</p>\n<ul>\n<li><strong>显示层</strong>：窗口、Surface、view controller 或浏览器 top layer 决定谁绘制在最上方。</li>\n<li><strong>输入层</strong>：焦点、命中测试和事件分发决定触摸/键盘事件送给谁。</li>\n<li><strong>语义层</strong>：可访问性树或自动化协议暴露“alert、button、text”等节点，供测试工具理解与操作。</li>\n</ul>\n<p>视觉上看到弹窗，不代表自动化一定能在语义树中看到它；反过来，协议可能直接报告一个原生 user prompt，而不需要做图像识别。</p>\n<h2 id=\"principles-h2-4\">4. Android：窗口、权限控制与跨应用边界</h2>\n<h3 id=\"principles-h3-5\">4.1 App 自己的 Dialog</h3>\n<p>Android 官方把 Dialog 定义为一个要求用户在继续前作出动作的小窗口。<code>DialogFragment</code> 管理其生命周期，按钮动作触发回调，然后 Dialog 被 dismiss 或 cancel。<a href=\"https://developer.android.com/develop/ui/views/components/dialogs\" target=\"_blank\" rel=\"noreferrer\">Android Dialog 官方文档</a></p>\n<p>这类弹窗通常仍属于当前 App：</p>\n<ul>\n<li>UI 节点往往在当前 App 的可访问性树中；</li>\n<li>Espresso、Compose Test、UI Automator 或 Appium 通常都能定位；</li>\n<li>如果掌握源码，最可靠的方法是直接使用稳定 resource id、test tag 或领域事件，而不是 OCR。</li>\n</ul>\n<h3 id=\"principles-h3-6\">4.2 窗口为什么能“盖住”原界面</h3>\n<p>Android 的 <code>WindowManager</code> 管理窗口生命周期、输入与焦点、位置和 z-order；<code>SurfaceFlinger</code> 把各个 Surface 对应的图层合成为最终画面。弹窗获得更高层级和交互焦点后，底层 Activity 仍可能存在，但不再是当前可操作目标。<a href=\"https://source.android.com/docs/core/graphics/surfaceflinger-windowmanager\" target=\"_blank\" rel=\"noreferrer\">AOSP：SurfaceFlinger and WindowManager</a></p>\n<p>Android 的 <code>UiAutomation</code> 文档进一步说明：当模态窗口显示、用户无法触摸其后方内容时，自动化接口可能只报告最上层模态窗口。这正是 Agent 原来使用的 UI 节点“突然消失”的一个底层原因。<a href=\"https://developer.android.com/reference/android/app/UiAutomation\" target=\"_blank\" rel=\"noreferrer\">Android <code>UiAutomation</code></a></p>\n<h3 id=\"principles-h3-7\">4.3 系统权限弹窗</h3>\n<p>危险权限的典型流程是：App 声明权限，在需要时调用请求 API，系统显示不可由 App 自定义的权限提示，用户选择后，系统异步返回结果。Android 要求 App 每次使用受保护能力前检查状态，并在拒绝后降级功能。<a href=\"https://developer.android.com/training/permissions/requesting\" target=\"_blank\" rel=\"noreferrer\">Android 运行时权限流程</a></p>\n<p>这意味着权限弹窗具有几个特征：</p>\n<ul>\n<li><strong>请求方和呈现方不同</strong>：App 发起请求，系统权限组件负责可信呈现与状态写入。</li>\n<li><strong>决定的是 capability，不只是关掉一个框</strong>：点击 Allow 会改变 App 对相机、定位等资源的访问权。</li>\n<li><strong>状态是持久的并随版本变化</strong>：一次性权限、近似位置、永久拒绝和自动重置都会改变后续是否再次出现弹窗。</li>\n<li><strong>厂商可定制外观，但需遵守兼容性模型</strong>：AOSP 要求 Android 6.0 以上设备的运行时权限流程与 <code>PermissionController</code> 模型保持一致。<a href=\"https://source.android.com/docs/core/permissions/runtime_perms\" target=\"_blank\" rel=\"noreferrer\">AOSP 运行时权限</a></li>\n</ul>\n<h3 id=\"principles-h3-8\">4.4 为什么普通 App 不能随意关掉系统 UI</h3>\n<p>从 Android 12 起，普通 App 通过 <code>ACTION_CLOSE_SYSTEM_DIALOGS</code> 关闭系统对话框的能力受到限制；官方列出的例外之一是 instrumentation test。这是在保护用户对系统 UI 的控制权，而不是在执行人机分类。<a href=\"https://developer.android.com/about/versions/12/behavior-changes-all\" target=\"_blank\" rel=\"noreferrer\">Android 12 行为变更</a></p>\n<p>Android 还防御 tapjacking：恶意 App 可能用透明或部分遮罩诱骗用户点击安全敏感控件。Android 12 起会默认阻止来自另一 UID 的不可信全遮挡触摸，敏感 view 也可过滤被遮挡的触摸。<a href=\"https://developer.android.com/privacy-and-security/risks/tapjacking\" target=\"_blank\" rel=\"noreferrer\">Android Tapjacking 风险与缓解</a></p>\n<p>因此，“这个按钮不接受某种注入点击”更可能意味着系统在保护点击来源与界面完整性，而不是在判断点击者有无人的智能。</p>\n<h2 id=\"principles-h2-9\">5. iOS：App 模态呈现与系统隐私授权</h2>\n<h3 id=\"principles-h3-10\">5.1 App 自己的 Alert</h3>\n<p><code>UIAlertController</code> 是一个由 App 创建的 view controller；UIKit 把 alert/action sheet 模态呈现在 App 内容之上，用户点 action 后执行 App 提供的处理闭包。<a href=\"https://developer.apple.com/documentation/uikit/uialertcontroller\" target=\"_blank\" rel=\"noreferrer\">Apple <code>UIAlertController</code></a></p>\n<p>更一般地，UIKit 的 modal presentation 会全部或部分覆盖当前 view controller，用于对当前工作流造成临时中断；dismiss 后恢复原界面。<a href=\"https://developer.apple.com/documentation/uikit/showing-and-hiding-view-controllers\" target=\"_blank\" rel=\"noreferrer\">Apple：Showing and hiding view controllers</a></p>\n<h3 id=\"principles-h3-11\">5.2 系统权限 Alert</h3>\n<p>当 App 首次访问受保护资源时，系统生成权限提示，标题由系统生成，App 提供 purpose string；用户决定允许或拒绝，系统记住选择，后续访问根据授权状态成功或失败。<a href=\"https://developer.apple.com/documentation/uikit/requesting-access-to-protected-resources\" target=\"_blank\" rel=\"noreferrer\">Apple：Requesting access to protected resources</a></p>\n<p>所以 iOS 权限弹窗和 App 自己的 <code>UIAlertController</code> 外观相近，但信任域不同。前者的权限状态由系统维护，App 不能把它当普通子 view 直接删除。</p>\n<h3 id=\"principles-h3-12\">5.3 XCTest 如何理解“中断”</h3>\n<p>Apple 把 UI interruption 定义为意外阻挡测试目标的界面变化，既包括 App 自己的 modal，也包括 OS 弹出的照片权限等系统 UI。XCTest 只在当前目标元素被无关 UI 阻断时尝试 interruption monitor；预期中的 alert 应直接作为测试流程的一部分处理。<a href=\"https://developer.apple.com/documentation/xctest/handling-ui-interruptions\" target=\"_blank\" rel=\"noreferrer\">Apple：Handling UI Interruptions</a></p>\n<p>这个设计揭示了一个通用原则：<strong>弹窗检测不应只做全屏轮询，而应与“当前动作为什么无法到达目标”结合。</strong></p>\n<h2 id=\"principles-h2-13\">6. 移动 Web/WebView：两种完全不同的 modal</h2>\n<h3 id=\"principles-h3-14\">6.1 浏览器原生 user prompt</h3>\n<p><code>alert()</code>、<code>confirm()</code>、<code>prompt()</code> 属于浏览器 user prompt。W3C WebDriver 为其定义了独立的 Get Alert Text、Accept Alert、Dismiss Alert 和 Send Alert Text 命令，因此最可靠的处理是走浏览器协议，而不是截图找按钮。<a href=\"https://www.w3.org/TR/webdriver2/#user-prompts\" target=\"_blank\" rel=\"noreferrer\">W3C WebDriver 2：User prompts</a></p>\n<p>Playwright 也通过 <code>page.on(&#39;dialog&#39;)</code> 直接分发 Dialog 对象；未注册监听器时默认 dismiss，注册后处理器必须 accept 或 dismiss，否则页面动作会一直等待。<a href=\"https://playwright.dev/docs/api/class-dialog\" target=\"_blank\" rel=\"noreferrer\">Playwright Dialog API</a></p>\n<h3 id=\"principles-h3-15\">6.2 DOM 模态框</h3>\n<p><code>&lt;dialog&gt;.showModal()</code> 会把元素放进文档 top layer；规范要求除顶层 dialog 及其后代外，文档其余节点变为 inert。自定义 CSS/JavaScript 遮罩可能模拟相同效果，但是否真正设置焦点陷阱和 inert 取决于实现。<a href=\"https://html.spec.whatwg.org/dev/interaction.html#modal-dialogs-and-inert-subtrees\" target=\"_blank\" rel=\"noreferrer\">WHATWG HTML：modal dialogs</a></p>\n<p>因此 Web Agent 应先判断：</p>\n<ul>\n<li>浏览器是否报告原生 user prompt；</li>\n<li>DOM 中是否有 <code>dialog[open]</code>、<code>role=dialog/alertdialog</code>、<code>aria-modal=true</code>；</li>\n<li>最后才把它当纯像素遮罩处理。</li>\n</ul>\n<h2 id=\"principles-h2-16\">7. 它到底是不是“人类检测”</h2>\n<table>\n<thead>\n<tr>\n<th>机制</th>\n<th align=\"right\">是否在区分人与机器</th>\n<th>真正检查的对象</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>App 提示/错误框</td>\n<td align=\"right\">否</td>\n<td>用户是否确认、取消或补充输入</td>\n</tr>\n<tr>\n<td>系统权限弹窗</td>\n<td align=\"right\">通常否</td>\n<td>用户是否授权某 App 获得特定能力</td>\n</tr>\n<tr>\n<td>删除/支付确认</td>\n<td align=\"right\">通常否</td>\n<td>操作意图与后果确认</td>\n</tr>\n<tr>\n<td>生物识别/PIN</td>\n<td align=\"right\">不是一般意义 CAPTCHA</td>\n<td>身份、凭据或用户在场</td>\n</tr>\n<tr>\n<td>Tapjacking/遮罩防护</td>\n<td align=\"right\">否</td>\n<td>输入来源和 UI 完整性</td>\n</tr>\n<tr>\n<td>CAPTCHA/reCAPTCHA</td>\n<td align=\"right\">是</td>\n<td>流量/交互更像人还是自动化程序</td>\n</tr>\n<tr>\n<td>风控挑战</td>\n<td align=\"right\">可能</td>\n<td>风险分数、设备/账号/行为异常</td>\n</tr>\n</tbody></table>\n<p>Google 对 reCAPTCHA 的定义是使用风险分析技术区分人与 bot，并防止 spam 和 abuse。<a href=\"https://developers.google.com/recaptcha\" target=\"_blank\" rel=\"noreferrer\">Google reCAPTCHA</a></p>\n<p>所以更准确的回答是：</p>\n<blockquote>\n<p><strong>普通弹窗不是为了防 Agent；它是为了控制流程、取得授权或确认意图。平台对部分弹窗的自动化限制，确实也会阻止恶意 Agent，但这是安全边界带来的副作用或防护目标，而不是弹窗本身在做“你是不是人”的分类。</strong></p>\n</blockquote>\n<h2 id=\"principles-h2-17\">8. 为什么通用 Agent 容易被弹窗卡住</h2>\n<ol>\n<li><strong>所有者切换</strong>：前景从被测 App 切到系统包、SpringBoard、浏览器 chrome 或另一个 Activity。</li>\n<li><strong>观察空间不完整</strong>：自绘 Canvas、游戏引擎、WebView、secure UI 可能没有完整的语义节点。</li>\n<li><strong>定位器不稳定</strong>：按钮文案随语言、OS 版本、厂商和授权历史变化。</li>\n<li><strong>时间不确定</strong>：网络错误、首次启动提示、权限提示和系统通知可能异步出现。</li>\n<li><strong>同形不同义</strong>：相同的“继续”可能代表关闭教程、分享数据、订阅付费或安装证书。</li>\n<li><strong>底层状态并非只有 visible/hidden</strong>：权限状态、App 生命周期、窗口焦点和动画稳定性都会影响下一动作。</li>\n<li><strong>视觉动作缺少原子性</strong>：截图到点击之间 UI 可能变化，导致点到刚好出现在相同坐标的新控件。</li>\n<li><strong>平台与商店政策限制</strong>：例如 Google Play 允许确定性、规则驱动的无障碍自动化，但禁止一般 App 使用 Accessibility API 自主发起、规划并执行任意动作；非无障碍工具还需申报、显著披露和用户同意。<a href=\"https://support.google.com/googleplay/android-developer/answer/10964491\" target=\"_blank\" rel=\"noreferrer\">Google Play AccessibilityService 政策</a></li>\n</ol>\n<h2 id=\"principles-h2-18\">9. 对后续解决方案的直接约束</h2>\n<p>后续方案应把“处理一次弹窗”建模为一个可验证的中断恢复事务：</p>\n<pre><code class=\"language-text\">Detect  检测当前任务是否被前景 UI 阻断\nClassify 识别所有者、类别、语义和风险\nDecide  根据任务意图与策略选择 dismiss / deny / allow / ask-user\nAct  优先语义动作，其次协议动作，最后坐标动作\nVerify 验证弹窗消失、权限/业务状态符合预期、原任务目标重新可达\nResume 从受阻步骤重试，而不是盲目执行下一步\n</code></pre>\n<p>关键安全原则：<strong>“自动关闭”可以是低风险默认值；“自动允许”必须由用户任务、显式策略或测试用例提供依据。</strong> 对支付、删除账号、安装未知软件、隐私共享、生物识别、系统安全设置和 CAPTCHA，不应使用通用的自动 Allow 规则。</p>\n<h2 id=\"principles-h2-19\">10. 研究局限</h2>\n<ul>\n<li>平台行为会随 OS、OEM、Appium/XCTest/UI Automator 版本变化，文中接口状态以 2026-08-06 可访问的官方资料为准。</li>\n<li>本阶段没有指定具体设备和 Agent 框架，因此结论是跨平台机制模型，不是某一机型上的兼容性保证。</li>\n<li>没有把 CAPTCHA/风控规避纳入解决方案；它们只用于回答“是否属于人类检测”的分类问题。</li>\n<li>HarmonyOS 等平台可沿用“所有者 × 感知通道 × 动作通道”的分析框架，但在进入实现阶段前仍需针对目标系统版本补充官方 API 验证。</li>\n</ul>\n",
+      "headings": [
+        {
+          "depth": 1,
+          "id": "principles-h1-0",
+          "text": "移动端 UI 弹窗底层原理调研"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-1",
+          "text": "1. 结论先行"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-2",
+          "text": "2. 什么算“弹窗”"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-3",
+          "text": "3. 通用底层机制"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-4",
+          "text": "4. Android：窗口、权限控制与跨应用边界"
+        },
+        {
+          "depth": 3,
+          "id": "principles-h3-5",
+          "text": "4.1 App 自己的 Dialog"
+        },
+        {
+          "depth": 3,
+          "id": "principles-h3-6",
+          "text": "4.2 窗口为什么能“盖住”原界面"
+        },
+        {
+          "depth": 3,
+          "id": "principles-h3-7",
+          "text": "4.3 系统权限弹窗"
+        },
+        {
+          "depth": 3,
+          "id": "principles-h3-8",
+          "text": "4.4 为什么普通 App 不能随意关掉系统 UI"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-9",
+          "text": "5. iOS：App 模态呈现与系统隐私授权"
+        },
+        {
+          "depth": 3,
+          "id": "principles-h3-10",
+          "text": "5.1 App 自己的 Alert"
+        },
+        {
+          "depth": 3,
+          "id": "principles-h3-11",
+          "text": "5.2 系统权限 Alert"
+        },
+        {
+          "depth": 3,
+          "id": "principles-h3-12",
+          "text": "5.3 XCTest 如何理解“中断”"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-13",
+          "text": "6. 移动 Web/WebView：两种完全不同的 modal"
+        },
+        {
+          "depth": 3,
+          "id": "principles-h3-14",
+          "text": "6.1 浏览器原生 user prompt"
+        },
+        {
+          "depth": 3,
+          "id": "principles-h3-15",
+          "text": "6.2 DOM 模态框"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-16",
+          "text": "7. 它到底是不是“人类检测”"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-17",
+          "text": "8. 为什么通用 Agent 容易被弹窗卡住"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-18",
+          "text": "9. 对后续解决方案的直接约束"
+        },
+        {
+          "depth": 2,
+          "id": "principles-h2-19",
+          "text": "10. 研究局限"
+        }
+      ],
+      "sections": [
+        {
+          "id": "principles-section-0",
+          "title": "导读",
+          "html": "<h1 id=\"principles-slide-0-h1-0\">移动端 UI 弹窗底层原理调研</h1>\n<ul>\n<li>日期：2026-08-06</li>\n<li>范围：Android、iOS、移动 Web/WebView</li>\n<li>目标：解释弹窗为何出现、为何会阻断 Agent、是否属于人类检测，以及哪些边界会限制自动化</li>\n<li>研究边界：本文中的“绕过”只指在正常、获授权的软件使用或测试环境中检测并处理弹窗，不指规避 CAPTCHA、风控、身份验证或平台安全控制</li>\n</ul>\n"
+        },
+        {
+          "id": "principles-section-1",
+          "title": "1. 结论先行",
+          "html": "<h2 id=\"principles-slide-1-h2-0\">1. 结论先行</h2>\n<ol>\n<li><strong>普通 UI 弹窗通常不是人类检测。</strong> 它首先是一种模态交互：临时把决策权集中到一个前景界面，要求用户确认、取消、输入或选择后，原流程才继续。</li>\n<li><strong>系统权限弹窗也不是 CAPTCHA。</strong> 它的主要任务是跨越 App 沙箱前取得知情授权，并把“允许/拒绝”写入系统维护的权限状态。</li>\n<li><strong>有些系统弹窗确实会抵抗自动点击，但原因是交互完整性，而非判断操作者是不是人。</strong> 系统需要防止后台 App、透明遮罩、跨 UID 注入或恶意无障碍服务替用户确认。</li>\n<li><strong>CAPTCHA/风控挑战是另一类机制。</strong> reCAPTCHA 明确使用风险分析区分人与机器人；普通 Alert、权限提示、错误提示没有这一判别目标。</li>\n<li><strong>弹窗不是一种统一对象。</strong> 外观相似的矩形框，可能属于当前 App、操作系统、浏览器进程、网页 DOM 或第三方验证服务。所有者不同，自动化接口也不同。</li>\n<li><strong>Agent 被卡住的本质是“可交互前景发生了切换”。</strong> 顶层窗口或 top layer 获得焦点，底层页面被遮挡、变为不可交互或不再出现在当前可访问性根节点中。</li>\n<li><strong>可靠处理不能只靠找“允许/关闭”文字。</strong> 需要同时判断弹窗所有者、语义、触发上下文、动作后果，并验证弹窗确实消失、原任务状态确实恢复。</li>\n<li><strong>通用方案应是分层中断处理器。</strong> 依次使用平台/协议事件、语义 UI 树、已知规则，最后才使用截图、OCR 或视觉模型；高风险或语义不明时交还用户。</li>\n</ol>\n"
+        },
+        {
+          "id": "principles-section-2",
+          "title": "2. 什么算“弹窗”",
+          "html": "<h2 id=\"principles-slide-2-h2-0\">2. 什么算“弹窗”</h2>\n<table>\n<thead>\n<tr>\n<th>类别</th>\n<th>典型例子</th>\n<th>所有者</th>\n<th align=\"right\">是否通常阻断底层 UI</th>\n<th>核心目的</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>App 内原生模态框</td>\n<td>Android <code>AlertDialog</code>、iOS <code>UIAlertController</code></td>\n<td>当前 App</td>\n<td align=\"right\">是</td>\n<td>决策、提示、输入、错误恢复</td>\n</tr>\n<tr>\n<td>App 自绘遮罩</td>\n<td>Compose/SwiftUI/Flutter/React Native 自定义 modal</td>\n<td>当前 App</td>\n<td align=\"right\">通常是</td>\n<td>产品流程、广告、运营、引导</td>\n</tr>\n<tr>\n<td>系统权限提示</td>\n<td>相机、定位、麦克风、通知</td>\n<td>OS/权限控制组件</td>\n<td align=\"right\">是</td>\n<td>数据与设备能力授权</td>\n</tr>\n<tr>\n<td>系统选择器/确认页</td>\n<td>文件、照片、默认应用、VPN、录屏</td>\n<td>OS 或系统 App</td>\n<td align=\"right\">是</td>\n<td>受控资源选择或高权限确认</td>\n</tr>\n<tr>\n<td>系统级中断</td>\n<td>低电量、系统升级、存储不足、来电</td>\n<td>OS</td>\n<td align=\"right\">有时</td>\n<td>设备状态与紧急通知</td>\n</tr>\n<tr>\n<td>Web 原生提示</td>\n<td><code>alert()</code>、<code>confirm()</code>、<code>prompt()</code></td>\n<td>浏览器</td>\n<td align=\"right\">是</td>\n<td>浏览器级用户提示</td>\n</tr>\n<tr>\n<td>Web DOM 模态框</td>\n<td><code>&lt;dialog&gt;</code>、CSS 遮罩、组件库 modal</td>\n<td>网页</td>\n<td align=\"right\">取决于实现</td>\n<td>网页业务流程</td>\n</tr>\n<tr>\n<td>认证/安全 UI</td>\n<td>生物识别、PIN、支付确认</td>\n<td>OS/可信组件/业务方</td>\n<td align=\"right\">是</td>\n<td>身份、用户在场或意图确认</td>\n</tr>\n<tr>\n<td>人机挑战</td>\n<td>CAPTCHA、风险挑战、异常流量页</td>\n<td>风控服务</td>\n<td align=\"right\">是</td>\n<td>区分或约束自动化访问</td>\n</tr>\n<tr>\n<td>非模态遮挡</td>\n<td>Toast、Snackbar、Banner、悬浮窗</td>\n<td>App/OS/其他 App</td>\n<td align=\"right\">通常否</td>\n<td>短暂通知或快捷操作</td>\n</tr>\n</tbody></table>\n<p>“是否看起来像一个框”不是可靠分类标准。真正有用的两个问题是：<strong>谁拥有这个 UI</strong>，以及<strong>它是否改变输入焦点/可交互树</strong>。</p>\n"
+        },
+        {
+          "id": "principles-section-3",
+          "title": "3. 通用底层机制",
+          "html": "<h2 id=\"principles-slide-3-h2-0\">3. 通用底层机制</h2>\n<p>一个典型模态弹窗可以抽象成以下状态转换：</p>\n<pre><code class=\"language-text\">业务或系统事件\n  → 创建/呈现前景 UI\n  → 放到更高层级并取得输入焦点\n  → 底层页面被遮挡或变为不可交互\n  → 用户/自动化选择某个动作\n  → 回调更新业务或权限状态\n  → 移除弹窗并恢复原流程\n</code></pre>\n<p>这里有三个彼此独立的层面：</p>\n<ul>\n<li><strong>显示层</strong>：窗口、Surface、view controller 或浏览器 top layer 决定谁绘制在最上方。</li>\n<li><strong>输入层</strong>：焦点、命中测试和事件分发决定触摸/键盘事件送给谁。</li>\n<li><strong>语义层</strong>：可访问性树或自动化协议暴露“alert、button、text”等节点，供测试工具理解与操作。</li>\n</ul>\n<p>视觉上看到弹窗，不代表自动化一定能在语义树中看到它；反过来，协议可能直接报告一个原生 user prompt，而不需要做图像识别。</p>\n"
+        },
+        {
+          "id": "principles-section-4",
+          "title": "4. Android：窗口、权限控制与跨应用边界",
+          "html": "<h2 id=\"principles-slide-4-h2-0\">4. Android：窗口、权限控制与跨应用边界</h2>\n"
+        },
+        {
+          "id": "principles-section-5",
+          "title": "4.1 App 自己的 Dialog",
+          "html": "<h3 id=\"principles-slide-5-h3-0\">4.1 App 自己的 Dialog</h3>\n<p>Android 官方把 Dialog 定义为一个要求用户在继续前作出动作的小窗口。<code>DialogFragment</code> 管理其生命周期，按钮动作触发回调，然后 Dialog 被 dismiss 或 cancel。<a href=\"https://developer.android.com/develop/ui/views/components/dialogs\" target=\"_blank\" rel=\"noreferrer\">Android Dialog 官方文档</a></p>\n<p>这类弹窗通常仍属于当前 App：</p>\n<ul>\n<li>UI 节点往往在当前 App 的可访问性树中；</li>\n<li>Espresso、Compose Test、UI Automator 或 Appium 通常都能定位；</li>\n<li>如果掌握源码，最可靠的方法是直接使用稳定 resource id、test tag 或领域事件，而不是 OCR。</li>\n</ul>\n"
+        },
+        {
+          "id": "principles-section-6",
+          "title": "4.2 窗口为什么能“盖住”原界面",
+          "html": "<h3 id=\"principles-slide-6-h3-0\">4.2 窗口为什么能“盖住”原界面</h3>\n<p>Android 的 <code>WindowManager</code> 管理窗口生命周期、输入与焦点、位置和 z-order；<code>SurfaceFlinger</code> 把各个 Surface 对应的图层合成为最终画面。弹窗获得更高层级和交互焦点后，底层 Activity 仍可能存在，但不再是当前可操作目标。<a href=\"https://source.android.com/docs/core/graphics/surfaceflinger-windowmanager\" target=\"_blank\" rel=\"noreferrer\">AOSP：SurfaceFlinger and WindowManager</a></p>\n<p>Android 的 <code>UiAutomation</code> 文档进一步说明：当模态窗口显示、用户无法触摸其后方内容时，自动化接口可能只报告最上层模态窗口。这正是 Agent 原来使用的 UI 节点“突然消失”的一个底层原因。<a href=\"https://developer.android.com/reference/android/app/UiAutomation\" target=\"_blank\" rel=\"noreferrer\">Android <code>UiAutomation</code></a></p>\n"
+        },
+        {
+          "id": "principles-section-7",
+          "title": "4.3 系统权限弹窗",
+          "html": "<h3 id=\"principles-slide-7-h3-0\">4.3 系统权限弹窗</h3>\n<p>危险权限的典型流程是：App 声明权限，在需要时调用请求 API，系统显示不可由 App 自定义的权限提示，用户选择后，系统异步返回结果。Android 要求 App 每次使用受保护能力前检查状态，并在拒绝后降级功能。<a href=\"https://developer.android.com/training/permissions/requesting\" target=\"_blank\" rel=\"noreferrer\">Android 运行时权限流程</a></p>\n<p>这意味着权限弹窗具有几个特征：</p>\n<ul>\n<li><strong>请求方和呈现方不同</strong>：App 发起请求，系统权限组件负责可信呈现与状态写入。</li>\n<li><strong>决定的是 capability，不只是关掉一个框</strong>：点击 Allow 会改变 App 对相机、定位等资源的访问权。</li>\n<li><strong>状态是持久的并随版本变化</strong>：一次性权限、近似位置、永久拒绝和自动重置都会改变后续是否再次出现弹窗。</li>\n<li><strong>厂商可定制外观，但需遵守兼容性模型</strong>：AOSP 要求 Android 6.0 以上设备的运行时权限流程与 <code>PermissionController</code> 模型保持一致。<a href=\"https://source.android.com/docs/core/permissions/runtime_perms\" target=\"_blank\" rel=\"noreferrer\">AOSP 运行时权限</a></li>\n</ul>\n"
+        },
+        {
+          "id": "principles-section-8",
+          "title": "4.4 为什么普通 App 不能随意关掉系统 UI",
+          "html": "<h3 id=\"principles-slide-8-h3-0\">4.4 为什么普通 App 不能随意关掉系统 UI</h3>\n<p>从 Android 12 起，普通 App 通过 <code>ACTION_CLOSE_SYSTEM_DIALOGS</code> 关闭系统对话框的能力受到限制；官方列出的例外之一是 instrumentation test。这是在保护用户对系统 UI 的控制权，而不是在执行人机分类。<a href=\"https://developer.android.com/about/versions/12/behavior-changes-all\" target=\"_blank\" rel=\"noreferrer\">Android 12 行为变更</a></p>\n<p>Android 还防御 tapjacking：恶意 App 可能用透明或部分遮罩诱骗用户点击安全敏感控件。Android 12 起会默认阻止来自另一 UID 的不可信全遮挡触摸，敏感 view 也可过滤被遮挡的触摸。<a href=\"https://developer.android.com/privacy-and-security/risks/tapjacking\" target=\"_blank\" rel=\"noreferrer\">Android Tapjacking 风险与缓解</a></p>\n<p>因此，“这个按钮不接受某种注入点击”更可能意味着系统在保护点击来源与界面完整性，而不是在判断点击者有无人的智能。</p>\n"
+        },
+        {
+          "id": "principles-section-9",
+          "title": "5. iOS：App 模态呈现与系统隐私授权",
+          "html": "<h2 id=\"principles-slide-9-h2-0\">5. iOS：App 模态呈现与系统隐私授权</h2>\n"
+        },
+        {
+          "id": "principles-section-10",
+          "title": "5.1 App 自己的 Alert",
+          "html": "<h3 id=\"principles-slide-10-h3-0\">5.1 App 自己的 Alert</h3>\n<p><code>UIAlertController</code> 是一个由 App 创建的 view controller；UIKit 把 alert/action sheet 模态呈现在 App 内容之上，用户点 action 后执行 App 提供的处理闭包。<a href=\"https://developer.apple.com/documentation/uikit/uialertcontroller\" target=\"_blank\" rel=\"noreferrer\">Apple <code>UIAlertController</code></a></p>\n<p>更一般地，UIKit 的 modal presentation 会全部或部分覆盖当前 view controller，用于对当前工作流造成临时中断；dismiss 后恢复原界面。<a href=\"https://developer.apple.com/documentation/uikit/showing-and-hiding-view-controllers\" target=\"_blank\" rel=\"noreferrer\">Apple：Showing and hiding view controllers</a></p>\n"
+        },
+        {
+          "id": "principles-section-11",
+          "title": "5.2 系统权限 Alert",
+          "html": "<h3 id=\"principles-slide-11-h3-0\">5.2 系统权限 Alert</h3>\n<p>当 App 首次访问受保护资源时，系统生成权限提示，标题由系统生成，App 提供 purpose string；用户决定允许或拒绝，系统记住选择，后续访问根据授权状态成功或失败。<a href=\"https://developer.apple.com/documentation/uikit/requesting-access-to-protected-resources\" target=\"_blank\" rel=\"noreferrer\">Apple：Requesting access to protected resources</a></p>\n<p>所以 iOS 权限弹窗和 App 自己的 <code>UIAlertController</code> 外观相近，但信任域不同。前者的权限状态由系统维护，App 不能把它当普通子 view 直接删除。</p>\n"
+        },
+        {
+          "id": "principles-section-12",
+          "title": "5.3 XCTest 如何理解“中断”",
+          "html": "<h3 id=\"principles-slide-12-h3-0\">5.3 XCTest 如何理解“中断”</h3>\n<p>Apple 把 UI interruption 定义为意外阻挡测试目标的界面变化，既包括 App 自己的 modal，也包括 OS 弹出的照片权限等系统 UI。XCTest 只在当前目标元素被无关 UI 阻断时尝试 interruption monitor；预期中的 alert 应直接作为测试流程的一部分处理。<a href=\"https://developer.apple.com/documentation/xctest/handling-ui-interruptions\" target=\"_blank\" rel=\"noreferrer\">Apple：Handling UI Interruptions</a></p>\n<p>这个设计揭示了一个通用原则：<strong>弹窗检测不应只做全屏轮询，而应与“当前动作为什么无法到达目标”结合。</strong></p>\n"
+        },
+        {
+          "id": "principles-section-13",
+          "title": "6. 移动 Web/WebView：两种完全不同的 modal",
+          "html": "<h2 id=\"principles-slide-13-h2-0\">6. 移动 Web/WebView：两种完全不同的 modal</h2>\n"
+        },
+        {
+          "id": "principles-section-14",
+          "title": "6.1 浏览器原生 user prompt",
+          "html": "<h3 id=\"principles-slide-14-h3-0\">6.1 浏览器原生 user prompt</h3>\n<p><code>alert()</code>、<code>confirm()</code>、<code>prompt()</code> 属于浏览器 user prompt。W3C WebDriver 为其定义了独立的 Get Alert Text、Accept Alert、Dismiss Alert 和 Send Alert Text 命令，因此最可靠的处理是走浏览器协议，而不是截图找按钮。<a href=\"https://www.w3.org/TR/webdriver2/#user-prompts\" target=\"_blank\" rel=\"noreferrer\">W3C WebDriver 2：User prompts</a></p>\n<p>Playwright 也通过 <code>page.on(&#39;dialog&#39;)</code> 直接分发 Dialog 对象；未注册监听器时默认 dismiss，注册后处理器必须 accept 或 dismiss，否则页面动作会一直等待。<a href=\"https://playwright.dev/docs/api/class-dialog\" target=\"_blank\" rel=\"noreferrer\">Playwright Dialog API</a></p>\n"
+        },
+        {
+          "id": "principles-section-15",
+          "title": "6.2 DOM 模态框",
+          "html": "<h3 id=\"principles-slide-15-h3-0\">6.2 DOM 模态框</h3>\n<p><code>&lt;dialog&gt;.showModal()</code> 会把元素放进文档 top layer；规范要求除顶层 dialog 及其后代外，文档其余节点变为 inert。自定义 CSS/JavaScript 遮罩可能模拟相同效果，但是否真正设置焦点陷阱和 inert 取决于实现。<a href=\"https://html.spec.whatwg.org/dev/interaction.html#modal-dialogs-and-inert-subtrees\" target=\"_blank\" rel=\"noreferrer\">WHATWG HTML：modal dialogs</a></p>\n<p>因此 Web Agent 应先判断：</p>\n<ul>\n<li>浏览器是否报告原生 user prompt；</li>\n<li>DOM 中是否有 <code>dialog[open]</code>、<code>role=dialog/alertdialog</code>、<code>aria-modal=true</code>；</li>\n<li>最后才把它当纯像素遮罩处理。</li>\n</ul>\n"
+        },
+        {
+          "id": "principles-section-16",
+          "title": "7. 它到底是不是“人类检测”",
+          "html": "<h2 id=\"principles-slide-16-h2-0\">7. 它到底是不是“人类检测”</h2>\n<table>\n<thead>\n<tr>\n<th>机制</th>\n<th align=\"right\">是否在区分人与机器</th>\n<th>真正检查的对象</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>App 提示/错误框</td>\n<td align=\"right\">否</td>\n<td>用户是否确认、取消或补充输入</td>\n</tr>\n<tr>\n<td>系统权限弹窗</td>\n<td align=\"right\">通常否</td>\n<td>用户是否授权某 App 获得特定能力</td>\n</tr>\n<tr>\n<td>删除/支付确认</td>\n<td align=\"right\">通常否</td>\n<td>操作意图与后果确认</td>\n</tr>\n<tr>\n<td>生物识别/PIN</td>\n<td align=\"right\">不是一般意义 CAPTCHA</td>\n<td>身份、凭据或用户在场</td>\n</tr>\n<tr>\n<td>Tapjacking/遮罩防护</td>\n<td align=\"right\">否</td>\n<td>输入来源和 UI 完整性</td>\n</tr>\n<tr>\n<td>CAPTCHA/reCAPTCHA</td>\n<td align=\"right\">是</td>\n<td>流量/交互更像人还是自动化程序</td>\n</tr>\n<tr>\n<td>风控挑战</td>\n<td align=\"right\">可能</td>\n<td>风险分数、设备/账号/行为异常</td>\n</tr>\n</tbody></table>\n<p>Google 对 reCAPTCHA 的定义是使用风险分析技术区分人与 bot，并防止 spam 和 abuse。<a href=\"https://developers.google.com/recaptcha\" target=\"_blank\" rel=\"noreferrer\">Google reCAPTCHA</a></p>\n<p>所以更准确的回答是：</p>\n<blockquote>\n<p><strong>普通弹窗不是为了防 Agent；它是为了控制流程、取得授权或确认意图。平台对部分弹窗的自动化限制，确实也会阻止恶意 Agent，但这是安全边界带来的副作用或防护目标，而不是弹窗本身在做“你是不是人”的分类。</strong></p>\n</blockquote>\n"
+        },
+        {
+          "id": "principles-section-17",
+          "title": "8. 为什么通用 Agent 容易被弹窗卡住",
+          "html": "<h2 id=\"principles-slide-17-h2-0\">8. 为什么通用 Agent 容易被弹窗卡住</h2>\n<ol>\n<li><strong>所有者切换</strong>：前景从被测 App 切到系统包、SpringBoard、浏览器 chrome 或另一个 Activity。</li>\n<li><strong>观察空间不完整</strong>：自绘 Canvas、游戏引擎、WebView、secure UI 可能没有完整的语义节点。</li>\n<li><strong>定位器不稳定</strong>：按钮文案随语言、OS 版本、厂商和授权历史变化。</li>\n<li><strong>时间不确定</strong>：网络错误、首次启动提示、权限提示和系统通知可能异步出现。</li>\n<li><strong>同形不同义</strong>：相同的“继续”可能代表关闭教程、分享数据、订阅付费或安装证书。</li>\n<li><strong>底层状态并非只有 visible/hidden</strong>：权限状态、App 生命周期、窗口焦点和动画稳定性都会影响下一动作。</li>\n<li><strong>视觉动作缺少原子性</strong>：截图到点击之间 UI 可能变化，导致点到刚好出现在相同坐标的新控件。</li>\n<li><strong>平台与商店政策限制</strong>：例如 Google Play 允许确定性、规则驱动的无障碍自动化，但禁止一般 App 使用 Accessibility API 自主发起、规划并执行任意动作；非无障碍工具还需申报、显著披露和用户同意。<a href=\"https://support.google.com/googleplay/android-developer/answer/10964491\" target=\"_blank\" rel=\"noreferrer\">Google Play AccessibilityService 政策</a></li>\n</ol>\n"
+        },
+        {
+          "id": "principles-section-18",
+          "title": "9. 对后续解决方案的直接约束",
+          "html": "<h2 id=\"principles-slide-18-h2-0\">9. 对后续解决方案的直接约束</h2>\n<p>后续方案应把“处理一次弹窗”建模为一个可验证的中断恢复事务：</p>\n<pre><code class=\"language-text\">Detect  检测当前任务是否被前景 UI 阻断\nClassify 识别所有者、类别、语义和风险\nDecide  根据任务意图与策略选择 dismiss / deny / allow / ask-user\nAct  优先语义动作，其次协议动作，最后坐标动作\nVerify 验证弹窗消失、权限/业务状态符合预期、原任务目标重新可达\nResume 从受阻步骤重试，而不是盲目执行下一步\n</code></pre>\n<p>关键安全原则：<strong>“自动关闭”可以是低风险默认值；“自动允许”必须由用户任务、显式策略或测试用例提供依据。</strong> 对支付、删除账号、安装未知软件、隐私共享、生物识别、系统安全设置和 CAPTCHA，不应使用通用的自动 Allow 规则。</p>\n"
+        },
+        {
+          "id": "principles-section-19",
+          "title": "10. 研究局限",
+          "html": "<h2 id=\"principles-slide-19-h2-0\">10. 研究局限</h2>\n<ul>\n<li>平台行为会随 OS、OEM、Appium/XCTest/UI Automator 版本变化，文中接口状态以 2026-08-06 可访问的官方资料为准。</li>\n<li>本阶段没有指定具体设备和 Agent 框架，因此结论是跨平台机制模型，不是某一机型上的兼容性保证。</li>\n<li>没有把 CAPTCHA/风控规避纳入解决方案；它们只用于回答“是否属于人类检测”的分类问题。</li>\n<li>HarmonyOS 等平台可沿用“所有者 × 感知通道 × 动作通道”的分析框架，但在进入实现阶段前仍需针对目标系统版本补充官方 API 验证。</li>\n</ul>\n"
+        }
+      ]
+    },
+    {
+      "slug": "methods",
+      "file": "02-methods-comparison.md",
+      "kind": "方法对比",
+      "eyebrow": "RECOVERY POLICY / METHODS",
+      "summary": "比较状态预置、原生 watcher、语义 UI、OCR/VLM 与人工接管，并给出跨平台恢复架构。",
+      "scope": "检测 · 分类 · 决策 · 动作 · 验证 · 恢复",
+      "title": "移动端弹窗自动化：现有方法对比",
+      "date": "2026-08-06",
+      "sourceHash": "3311755e193042125762b3698f4d6945ad6c0b0554de4922624a3251322d978a",
+      "raw": "# 移动端弹窗自动化：现有方法对比\n\n- 日期：2026-08-06\n- 配套报告：[移动端 UI 弹窗底层原理调研](./01-popup-principles.md)\n- 目标：比较“自动识别并关闭/允许”弹窗的现有工程与研究路线，并给出跨平台推荐架构\n\n## 1. 推荐结论\n\n不存在一个在 Android、iOS、Web、所有 App 和所有弹窗上都可靠的单一 API。最佳现有方案是一个按确定性从高到低排列的分层中断处理器：\n\n1. **测试预置/状态控制**：已知权限在测试开始前 grant、deny 或 reset，避免无关弹窗进入主任务。\n2. **原生协议或框架事件**：WebDriver/Playwright user prompt、XCTest interruption monitor、UI Automator watcher。\n3. **语义 UI 树规则**：根据 package/bundle、role/class、resource id、label、层级和触发上下文识别。\n4. **视觉/OCR/VLM 兜底**：处理自绘、Canvas、游戏、复杂 WebView 和语义树缺失的 UI。\n5. **风险策略与人工接管**：未知后果、敏感授权、支付、安装、删除、认证和 CAPTCHA 不盲点。\n6. **动作后验证**：确认弹窗消失、状态改变正确、原任务目标重新可达；失败时回滚或改用下一层方法。\n\n这条路线比“每隔一秒截图并寻找 Allow/OK”更可靠，原因是它利用了弹窗所有者已经暴露的结构化控制面，同时把视觉模型限制在真正需要它的长尾场景。\n\n## 2. 方法总表\n\n评分说明：可靠性和通用性采用 1–5 级相对评分；具体表现仍取决于 OS、App 和测试权限。\n\n| 方法 | 最适合的弹窗 | Android | iOS | Web/WebView | 可靠性 | 通用性 | 主要限制 | 建议定位 |\n|---|---|---:|---:|---:|---:|---:|---|---|\n| App 源码内 handler/test hook | 自家 App 原生/自绘 modal | 是 | 是 | 是 | 5 | 1 | 必须掌握源码 | 自家 App 首选 |\n| 测试前权限/状态预置 | 已知权限提示、首次启动状态 | 强 | 模拟器强、真机有限 | 浏览器上下文可配置 | 5 | 2 | 不处理未知业务弹窗 | 测试环境首选 |\n| 浏览器 prompt 协议 | `alert/confirm/prompt/beforeunload` | WebView 条件支持 | WebView 条件支持 | 强 | 5 | 2 | 不处理 DOM 自绘 modal | Web 原生 prompt 首选 |\n| Android UI Automator watcher | 权限框、系统/跨 App UI | 强 | 否 | 间接 | 4.5 | 3 | instrumentation/设备测试语境 | Android 系统 UI 首选 |\n| XCTest interruption monitor | 非预期 iOS modal/系统 alert | 否 | 强 | Safari 条件支持 | 4.5 | 3 | XCTest 测试语境；预期 alert 应直接处理 | iOS 测试首选 |\n| Appium 原生 alert/capability | 跨平台测试中的标准 alert | 强 | 强 | 强 | 4 | 3 | 驱动差异；全局 auto-accept 语义粗糙 | 跨平台测试入口 |\n| Espresso/Compose/XCUITest 元素定位 | 当前 App 内弹窗 | 强 | 强 | 否 | 4.5 | 2 | 通常只覆盖被测 App/测试进程 | 应用内测试首选 |\n| Android AccessibilityService | 量产 Android 上的语义节点/动作 | 有条件 | 无对等公共能力 | 间接 | 3.5 | 4 | 用户授权、节点缺失、商店政策严格 | 仅窄目的规则自动化 |\n| UI 树通用规则引擎 | 原生、跨 App、已知模式 | 强 | 测试环境强 | DOM 强 | 4 | 4 | 本地化、OEM、节点质量 | 通用 Agent 主干 |\n| OCR + 模板匹配 | 文字稳定、外观固定的弹窗 | 是 | 是 | 是 | 3 | 4 | 多语言、缩放、主题变化 | 视觉轻量兜底 |\n| VLM/视觉 grounding | 未知、自绘、语义树缺失 | 是 | 是 | 是 | 2.5–4 | 5 | 成本、延迟、误点、不可重复 | 长尾兜底，不独立决策高风险动作 |\n| 坐标/ADB/input 注入 | 固定设备固定页面 | 是 | 测试工具条件支持 | 是 | 1.5 | 3 | 分辨率、动画、竞态极脆弱 | 最后手段 |\n| Root/jailbreak/hooking | 研究或专用设备上的内部状态 | 有 | 有 | 不适用 | 视实现 | 3 | 安全、维护、合规和可部署性差 | 不作为产品主路线 |\n| 人工确认/接管 | 高风险、未知语义、认证挑战 | 是 | 是 | 是 | 5 | 5 | 有人工延迟 | 必须保留的安全出口 |\n\n## 3. 各类方法的工作原理与证据\n\n### 3.1 方法 A：在弹窗产生前控制状态\n\n如果弹窗与测试目标无关，最稳的方法不是“点掉”，而是让设备从确定状态开始：\n\n- Android 可在安装测试 APK 时使用 `adb shell install -g` 自动授予 manifest 中的运行时权限；官方权限文档也给出了清理 permission flags 的调试方法。[Android 运行时权限](https://developer.android.com/training/permissions/requesting)\n- Appium Android 的 `autoGrantPermissions` 会在测试开始时根据 App 请求的权限进行授权。[Appium UiAutomator2 Driver](https://github.com/appium/appium-uiautomator2-driver)\n- Appium XCUITest 在 Simulator 上提供 `appium:permissions` 来 grant、revoke 或 reset 指定服务；这不是任意真实 iPhone 上的通用权限后门。[Appium XCUITest capabilities](https://appium.github.io/appium-xcuitest-driver/latest/reference/capabilities/)\n- 对自家 App，可通过 launch argument、测试配置、依赖注入或清理 onboarding 状态，使弹窗出现与否变得确定。\n\n优点是无视觉竞态、速度快；缺点是它只能消除**已知且允许预置**的中断，不能处理运行中由网络、业务或 OS 状态触发的未知弹窗。\n\n### 3.2 方法 B：平台原生 watcher/interruption handler\n\n这是最贴合“任务进行中突然冒出弹窗”的现成机制。\n\n#### Android UI Automator\n\n现代 UI Automator 提供 `watchFor` 处理意外 UI，官方示例直接使用 `PermissionDialog` 并调用 `clickAllow()` 或 `clickDeny()`；也可按相同模式定义自有 `ScopedWatcher`。[Android：Write automated tests with UI Automator](https://developer.android.com/training/testing/other-components/ui-automator) 截至本文，承载该 DSL 的 UI Automator 2.4 API 仍标为开发中，实际项目应锁定并验证具体版本。\n\n示意：\n\n```kotlin\nwatchFor(PermissionDialog) {\n    if (policy.expectedPermissionRequest()) clickAllow()\n    else clickDeny()\n}\n```\n\n它的优势是跨当前 Activity、能操作系统和已安装 App 的可见元素。相比 Espresso，它的作用域更大，但需要更多显式同步，官方也提醒跨 App 大测试更容易产生 flaky 行为。[Android 大型测试稳定性](https://developer.android.com/training/testing/instrumented-tests/stability)\n\n#### iOS XCTest\n\nXCTest 的 `addUIInterruptionMonitor` 在目标元素被无关 UI 阻挡时调用 handler；多个 handler 以后进先出顺序尝试。Apple 明确建议：如果 alert 是预期业务步骤，直接查询并操作它，不要把它注册成“意外中断”。[Apple：Handling UI Interruptions](https://developer.apple.com/documentation/xctest/handling-ui-interruptions)\n\n示意：\n\n```swift\naddUIInterruptionMonitor(withDescription: \"Known system permission\") { alert in\n    guard policy.matchesExpectedPermission(alert) else { return false }\n    alert.buttons[policy.desiredAction].tap()\n    return true\n}\n```\n\n这一机制非常适合测试，但不等于 App Store 中任意 App 都能获得跨 App 自动控制能力。\n\n### 3.3 方法 C：WebDriver、Playwright 与 Appium 的 alert API\n\n对浏览器原生 prompt，应调用协议动作：\n\n- W3C WebDriver 定义 Accept Alert、Dismiss Alert、Get Alert Text、Send Alert Text。[W3C WebDriver 2](https://www.w3.org/TR/webdriver2/#user-prompts)\n- Playwright 用 `page.on('dialog')` 接收结构化事件并调用 `accept()`/`dismiss()`；默认会自动 dismiss。[Playwright Dialog](https://playwright.dev/docs/api/class-dialog)\n- Appium 沿用 WebDriver user prompt 语义。XCUITest driver 还支持 `autoAcceptAlerts`、`autoDismissAlerts`，并可通过 selector 指定应点击的 alert button。[Appium XCUITest settings](https://appium.github.io/appium-xcuitest-driver/latest/reference/settings/)\n\n注意：`autoAcceptAlerts=true` 是粗粒度开关。它可能同时接受定位、照片、联系人等隐私授权，不适合作为未知弹窗的默认策略。更稳的方法是先读取按钮/文本和触发上下文，再选择动作。\n\n### 3.4 方法 D：语义 UI 树与规则引擎\n\nAndroid UI Automator/UiAutomation/Accessibility、iOS XCTest/Appium page source、Web DOM 都能在条件允许时提供结构化节点：\n\n```text\nowner/package + window role + element role/class\n+ resource-id/accessibility-id + label/text\n+ bounds + enabled/clickable/hittable\n+ foreground transition + previous agent action\n```\n\n规则应优先使用稳定标识：\n\n1. 所有者或 package/bundle；\n2. role/class，例如 alert、dialog、button；\n3. resource id、accessibility id、test tag；\n4. 语义文案与本地化词典；\n5. 相对层级和几何位置；\n6. 触发前一步及当前任务意图。\n\nAndroid AccessibilityService 可以接收界面状态变化事件、查询活动窗口，并让节点执行 `ACTION_CLICK`；当节点 click 实现不完整时，API 还允许无障碍服务用 gesture tap 兜底。[Android `AccessibilityService`](https://developer.android.com/reference/android/accessibilityservice/AccessibilityService)\n\n但量产方案有两个重要限制：\n\n- 自绘控件可能没有完整节点，`rootInActiveWindow` 也可能为空；\n- Google Play 只允许窄目的、用户可理解的确定性规则自动化，一般 App 不得借 Accessibility API 自主发起、规划和执行任意动作，且需满足申报、披露和同意要求。[Google Play AccessibilityService 政策](https://support.google.com/googleplay/android-developer/answer/10964491)\n\n因此 AccessibilityService 是一种**技术能力**，不是自动获得的产品分发许可。\n\n### 3.5 方法 E：OCR、模板匹配与视觉模型\n\n当 UI 树缺失时，可从截图中完成：\n\n1. 检测可能的弹窗区域和遮罩；\n2. OCR 提取标题、正文和按钮；\n3. 视觉 grounding 把“稍后”“关闭”“允许”等语义映射到坐标；\n4. 结合任务上下文决定动作；\n5. 点击后重新截图并验证。\n\n现有移动 Agent 研究提供了可复用证据：\n\n| 工作 | 发表状态 | 感知/动作思路 | 对弹窗课题的价值 | 主要局限 |\n|---|---|---|---|---|\n| [AppAgent](https://arxiv.org/abs/2312.13771)（Zhang et al., 2023） | arXiv 预印本；后续版本发表于 [CHI 2025](https://dl.acm.org/doi/10.1145/3706598.3713600) | 截图、带编号的可交互元素、tap/swipe；探索或人类示范建立知识库 | 说明不依赖 App 后端也能操作多种手机 UI | 不是专门的中断检测器；视觉误点和探索成本仍在 |\n| [Mobile-Agent](https://arxiv.org/abs/2401.16158)（Wang et al., 2024） | arXiv 预印本 | 视觉感知、OCR、图标检测和坐标动作 | 适合 UI 树缺失的自绘弹窗 | 对系统权限语义和高风险决策没有协议级保证 |\n| [Mobile-Agent-v2](https://papers.nips.cc/paper_files/paper/2024/hash/0520537ba799d375b8ff5523295c337a-Abstract-Conference.html)（Wang et al., NeurIPS 2024） | 同行评审会议论文 | 规划、决策、反思分工，记录任务进展并根据动作结果纠错 | “点击后观察结果再纠错”可用于弹窗恢复 | 主要解决长程导航，不是弹窗安全策略 |\n| [AndroidWorld](https://arxiv.org/abs/2405.14573)（Rawles et al., 2024） | arXiv 预印本 | 真 Android 环境、动态任务、可访问性树与截图基线 | 可用于构造可复现的意外弹窗评测 | 原始任务不等于弹窗专项 benchmark；基线成功率显示泛化仍难 |\n| [UGround](https://arxiv.org/abs/2410.05243)（Gou et al., 2024） | arXiv 预印本 | 纯视觉 GUI grounding，跨平台从表达定位像素坐标 | 提升未知 UI 的坐标定位能力 | 定位正确不等于动作语义或授权决策正确 |\n| [DroidAgent](https://arxiv.org/abs/2311.08649)（Yoon et al., 2023） | arXiv 预印本 | LLM、长短期记忆和 Android GUI 交互 | 支持目标驱动探索与异常后的继续规划 | 测试目标生成不是弹窗分类，且 LLM 行为有随机性 |\n| [VLM-Fuzz](https://conf.researchr.org/details/fse-2026/fse-2026-journal-first/18/VLM-Fuzz-Vision-Language-Model-Assisted-Recursive-Depth-First-Search-Exploration-for)（Demissie et al., FSE 2026 Journal-First） | 同行评审 Journal-First 展示 | VLM 辅助 Android GUI 深度优先探索，明确把 pop-up 作为易卡住的 widget | 直接证明弹窗是自动探索覆盖率中的实际障碍 | 面向测试探索，不直接给出跨平台权限与风险策略 |\n\n这些工作支持“视觉是必要的长尾能力”，但没有证明纯视觉可以安全地对所有弹窗自动 Allow。视觉模型擅长**找位置和理解表面语义**，而权限、支付、身份和数据共享仍需要结构化状态与策略约束。\n\n### 3.6 方法 F：固定坐标、ADB input 与按键退回\n\n固定坐标点击、Back/Escape 或 tap 屏幕外部实现简单，但缺陷明显：\n\n- 分辨率、字体缩放、横竖屏、刘海/安全区和主题变化会移动按钮；\n- 弹窗消失到点击发生之间可能出现新的控件；\n- Back 可能取消业务而不是单纯关闭提示；\n- “默认右侧按钮是确认”在不同平台、语言和对话框类型上并不成立。\n\n只建议在固定实验设备、固定系统镜像、固定 App 版本下作为可回放脚本的末级 fallback，并且每次动作后必须截图与状态校验。\n\n### 3.7 方法 G：Root、jailbreak、hook 或修改系统组件\n\n这类方式可能获得窗口内部状态或直接改权限，但会破坏研究结果的可部署性：\n\n- 难以覆盖普通量产设备；\n- 版本与厂商耦合严重；\n- 改变了原安全模型，无法代表正常用户环境；\n- 增加攻击面、合规与维护成本。\n\n它适合研究系统内部实现或专用实验镜像，不适合作为“正常软件使用突然遇到弹窗”的默认解决路线。\n\n## 4. 按场景选择方法\n\n| 场景 | 首选 | 次选 | 不建议默认使用 |\n|---|---|---|---|\n| 自家 Android/iOS App 的业务弹窗 | 稳定 id/test hook + Espresso/Compose/XCTest | Appium/UI 树 | OCR、坐标 |\n| Android 系统权限框（测试设备） | 状态预置；若要测 UI，则 UI Automator `PermissionDialog` watcher | Appium UiAutomator2 | 纯文本 XPath、盲点 Allow |\n| iOS 系统权限框（测试设备） | 明确预期时直接操作 alert；非预期时 XCTest interruption monitor | Appium XCUITest alert API | 量产 App 试图跨 App 操作 |\n| 移动 Web 原生 prompt | WebDriver/Playwright dialog API | Appium web context | 截图点击浏览器按钮 |\n| Web DOM modal | DOM role/id/selector | OCR/VLM | 当成 WebDriver native alert |\n| 第三方 App 的已知低风险提示 | 语义 UI 树 + 所有者/文案/上下文规则 | 视觉 grounding | 全局 autoAccept |\n| 未知自绘弹窗 | VLM/OCR 分类 + 保守策略 | 人工确认 | 仅凭按钮颜色或位置 |\n| 支付、删除、安装、隐私共享 | 显式任务确认或人工接管 | 专项 allowlist | 通用自动允许 |\n| CAPTCHA/风控/生物识别 | 官方流程或人工完成 | 业务 API/授权集成 | 规避或模拟通过 |\n\n## 5. 推荐的跨平台实现架构\n\n### 5.1 平台适配层\n\n```text\nAndroid adapter\n  - foreground package/window\n  - UI Automator / Appium page source\n  - PermissionDialog watcher\n  - screenshot + input action\n\niOS adapter\n  - XCTest/Appium alert tree\n  - UI interruption monitor\n  - simulator permission state\n  - screenshot + XCTest action\n\nWeb adapter\n  - WebDriver/Playwright user-prompt event\n  - DOM dialog/alertdialog/top-layer inspection\n  - screenshot fallback\n```\n\n### 5.2 中断检测器\n\n不要只用“截图里有矩形框”。应聚合以下信号：\n\n- 当前目标元素从可点击变为 blocked/not hittable；\n- foreground package/bundle/window 发生变化；\n- 出现 `alert/dialog/alertdialog` 或系统权限节点；\n- DOM 出现 open modal/top-layer/inert 状态；\n- 屏幕出现高置信度遮罩和集中式 action 区；\n- Agent 连续动作无状态变化或收到 `unexpected alert open`；\n- 上一步恰好触发敏感能力、外部 intent、文件选择器或网络失败。\n\n### 5.3 分类器\n\n分类键建议为：\n\n```text\nowner: app | system | browser | third-party-security\nkind: permission | error | onboarding | ad | update | chooser |\n      transaction | authentication | captcha | unknown\nconsequence: dismiss-only | reversible-state-change | sensitive-grant |\n             financial/destructive | identity/security\nconfidence: 0..1\n```\n\n### 5.4 决策策略\n\n推荐默认策略：\n\n| 分类 | 默认动作 |\n|---|---|\n| 已知提示、教程、非关键广告 | dismiss/skip |\n| 可恢复错误提示 | acknowledge，然后重试受阻步骤 |\n| 与当前任务无关的权限请求 | deny 或 ask-user，不默认 allow |\n| 当前任务明确需要、且在 allowlist 中的权限 | allow；记录权限、范围和触发原因 |\n| 更新提示 | 选“稍后”，除非任务就是更新 |\n| 隐私共享、通知订阅、跟踪授权 | 依据显式用户策略，否则 ask-user |\n| 支付、删除、安装、设备管理、安全设置 | ask-user/专项确认 |\n| CAPTCHA、风控、PIN、生物识别 | handoff，不自动规避 |\n| unknown | 优先安全退出或 ask-user；绝不盲点正向按钮 |\n\n### 5.5 动作执行与验证\n\n动作通道优先级：\n\n```text\n协议 accept/dismiss\n  > element semantic click\n  > platform watcher action\n  > grounded coordinate tap\n  > generic Back / outside tap\n```\n\n验证至少包含三项：\n\n1. 弹窗节点或视觉区域已消失；\n2. 前景 App/窗口和原任务目标重新可达；\n3. 权限或业务状态与期望一致，而不是“框没了就算成功”。\n\n如验证失败，应重新观察并选择其他 handler，不应无上限重复同一坐标。建议为每个弹窗指纹设置最多 1–2 次动作尝试，随后进入恢复或人工接管。\n\n## 6. 最小可行系统（MVP）\n\n在没有指定 Agent 框架的前提下，建议先实现以下跨平台抽象，而不是直接训练一个模型：\n\n```text\nPopupObservation\n  platform\n  foreground_owner\n  semantic_tree\n  screenshot\n  trigger_action\n  blocked_target\n\nPopupDecision\n  class\n  action\n  target_locator\n  confidence\n  rationale\n  requires_user\n\nPopupOutcome\n  dismissed\n  state_delta\n  task_resumed\n  evidence_before_after\n```\n\n第一版规则库只需覆盖：\n\n- Android/iOS 常见权限弹窗；\n- App 内 `alert/dialog` 的 Cancel/Close/Later/Skip；\n- 网络错误的 OK/Retry；\n- Android/iOS 更新提示的 Later；\n- WebDriver 原生 prompt；\n- DOM `role=dialog/alertdialog`；\n- unknown/high-risk → user handoff。\n\n视觉模型只在语义通道没有结果时运行。这样可以先得到可测、可解释的基线，再评估 VLM 是否真正提高覆盖率。\n\n## 7. 建议的评测指标\n\n不能只统计“弹窗关闭率”。至少需要：\n\n| 指标 | 定义 |\n|---|---|\n| Detection recall | 实际阻断任务的弹窗有多少被发现 |\n| False interruption rate | 正常页面被误判为弹窗的比例 |\n| Classification accuracy | owner/kind/consequence 分类正确率 |\n| Safe action accuracy | 选择的 allow/deny/dismiss/ask 是否符合策略 |\n| Resume success | 处理后原任务是否真正继续 |\n| Harmful confirmation rate | 错误确认敏感/破坏性动作的比例，目标应为 0 |\n| Steps/latency | 每次中断恢复的动作数和延迟 |\n| Cross-version robustness | OS、OEM、语言、主题、屏幕尺寸变化下的稳定性 |\n| Explanation coverage | 每次自动动作是否留下触发依据和前后状态证据 |\n\n评测集应按“所有者 × 弹窗类别 × 平台 × 语言 × 风险等级”分层，并包含异步出现、按钮换序、语义树缺失、连续弹窗和弹窗后页面跳转等压力场景。\n\n## 8. 当前研究空白\n\n1. 现有移动 Agent benchmark 多评估长程任务成功率，缺少以“意外中断恢复”和误确认代价为核心的专项 benchmark。\n2. 视觉 grounding 研究主要回答“点哪里”，对“是否应该允许”及动作后果建模不足。\n3. UI 自动化框架有成熟的权限 watcher，但主要服务确定性测试；开放世界 Agent 的弹窗类别与策略更动态。\n4. 跨 Android OEM、iOS 版本、本地化和辅助功能设置的系统性弹窗语料不足。\n5. 现有论文常用任务成功率汇总，较少单独报告错误授权、破坏性确认和安全 handoff 的指标。\n\n这意味着本课题真正有价值的方向不是再造一个“找关闭按钮”的视觉模型，而是研究：\n\n> **如何把平台级中断信号、语义 UI、视觉 grounding、任务意图和动作风险统一成一个可验证、跨平台、不会盲目授权的 Popup Recovery Policy。**\n\n## 9. 最终方法排序\n\n如果现在必须选一条实现路线：\n\n1. Android 测试环境：UI Automator `watchFor` + 语义规则 + 权限状态预置。\n2. iOS 测试环境：预期 alert 直接处理 + XCTest interruption monitor + Simulator 状态预置。\n3. 移动 Web：WebDriver/Playwright prompt 事件 + DOM dialog 规则。\n4. 跨平台 Agent：Appium/平台 adapter 提供语义树，VLM 只处理语义缺失长尾。\n5. 产品安全策略：未知默认不 Allow；高风险必须显式用户确认；所有动作做前后状态验证。\n\n这套组合覆盖了“正常使用中突然出现一个弹窗”的主要情况，同时尊重系统权限、安全 UI 和应用商店政策边界。\n",
+      "html": "<h1 id=\"methods-h1-0\">移动端弹窗自动化：现有方法对比</h1>\n<ul>\n<li>日期：2026-08-06</li>\n<li>配套报告：<a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li>目标：比较“自动识别并关闭/允许”弹窗的现有工程与研究路线，并给出跨平台推荐架构</li>\n</ul>\n<h2 id=\"methods-h2-1\">1. 推荐结论</h2>\n<p>不存在一个在 Android、iOS、Web、所有 App 和所有弹窗上都可靠的单一 API。最佳现有方案是一个按确定性从高到低排列的分层中断处理器：</p>\n<ol>\n<li><strong>测试预置/状态控制</strong>：已知权限在测试开始前 grant、deny 或 reset，避免无关弹窗进入主任务。</li>\n<li><strong>原生协议或框架事件</strong>：WebDriver/Playwright user prompt、XCTest interruption monitor、UI Automator watcher。</li>\n<li><strong>语义 UI 树规则</strong>：根据 package/bundle、role/class、resource id、label、层级和触发上下文识别。</li>\n<li><strong>视觉/OCR/VLM 兜底</strong>：处理自绘、Canvas、游戏、复杂 WebView 和语义树缺失的 UI。</li>\n<li><strong>风险策略与人工接管</strong>：未知后果、敏感授权、支付、安装、删除、认证和 CAPTCHA 不盲点。</li>\n<li><strong>动作后验证</strong>：确认弹窗消失、状态改变正确、原任务目标重新可达；失败时回滚或改用下一层方法。</li>\n</ol>\n<p>这条路线比“每隔一秒截图并寻找 Allow/OK”更可靠，原因是它利用了弹窗所有者已经暴露的结构化控制面，同时把视觉模型限制在真正需要它的长尾场景。</p>\n<h2 id=\"methods-h2-2\">2. 方法总表</h2>\n<p>评分说明：可靠性和通用性采用 1–5 级相对评分；具体表现仍取决于 OS、App 和测试权限。</p>\n<table>\n<thead>\n<tr>\n<th>方法</th>\n<th>最适合的弹窗</th>\n<th align=\"right\">Android</th>\n<th align=\"right\">iOS</th>\n<th align=\"right\">Web/WebView</th>\n<th align=\"right\">可靠性</th>\n<th align=\"right\">通用性</th>\n<th>主要限制</th>\n<th>建议定位</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>App 源码内 handler/test hook</td>\n<td>自家 App 原生/自绘 modal</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">5</td>\n<td align=\"right\">1</td>\n<td>必须掌握源码</td>\n<td>自家 App 首选</td>\n</tr>\n<tr>\n<td>测试前权限/状态预置</td>\n<td>已知权限提示、首次启动状态</td>\n<td align=\"right\">强</td>\n<td align=\"right\">模拟器强、真机有限</td>\n<td align=\"right\">浏览器上下文可配置</td>\n<td align=\"right\">5</td>\n<td align=\"right\">2</td>\n<td>不处理未知业务弹窗</td>\n<td>测试环境首选</td>\n</tr>\n<tr>\n<td>浏览器 prompt 协议</td>\n<td><code>alert/confirm/prompt/beforeunload</code></td>\n<td align=\"right\">WebView 条件支持</td>\n<td align=\"right\">WebView 条件支持</td>\n<td align=\"right\">强</td>\n<td align=\"right\">5</td>\n<td align=\"right\">2</td>\n<td>不处理 DOM 自绘 modal</td>\n<td>Web 原生 prompt 首选</td>\n</tr>\n<tr>\n<td>Android UI Automator watcher</td>\n<td>权限框、系统/跨 App UI</td>\n<td align=\"right\">强</td>\n<td align=\"right\">否</td>\n<td align=\"right\">间接</td>\n<td align=\"right\">4.5</td>\n<td align=\"right\">3</td>\n<td>instrumentation/设备测试语境</td>\n<td>Android 系统 UI 首选</td>\n</tr>\n<tr>\n<td>XCTest interruption monitor</td>\n<td>非预期 iOS modal/系统 alert</td>\n<td align=\"right\">否</td>\n<td align=\"right\">强</td>\n<td align=\"right\">Safari 条件支持</td>\n<td align=\"right\">4.5</td>\n<td align=\"right\">3</td>\n<td>XCTest 测试语境；预期 alert 应直接处理</td>\n<td>iOS 测试首选</td>\n</tr>\n<tr>\n<td>Appium 原生 alert/capability</td>\n<td>跨平台测试中的标准 alert</td>\n<td align=\"right\">强</td>\n<td align=\"right\">强</td>\n<td align=\"right\">强</td>\n<td align=\"right\">4</td>\n<td align=\"right\">3</td>\n<td>驱动差异；全局 auto-accept 语义粗糙</td>\n<td>跨平台测试入口</td>\n</tr>\n<tr>\n<td>Espresso/Compose/XCUITest 元素定位</td>\n<td>当前 App 内弹窗</td>\n<td align=\"right\">强</td>\n<td align=\"right\">强</td>\n<td align=\"right\">否</td>\n<td align=\"right\">4.5</td>\n<td align=\"right\">2</td>\n<td>通常只覆盖被测 App/测试进程</td>\n<td>应用内测试首选</td>\n</tr>\n<tr>\n<td>Android AccessibilityService</td>\n<td>量产 Android 上的语义节点/动作</td>\n<td align=\"right\">有条件</td>\n<td align=\"right\">无对等公共能力</td>\n<td align=\"right\">间接</td>\n<td align=\"right\">3.5</td>\n<td align=\"right\">4</td>\n<td>用户授权、节点缺失、商店政策严格</td>\n<td>仅窄目的规则自动化</td>\n</tr>\n<tr>\n<td>UI 树通用规则引擎</td>\n<td>原生、跨 App、已知模式</td>\n<td align=\"right\">强</td>\n<td align=\"right\">测试环境强</td>\n<td align=\"right\">DOM 强</td>\n<td align=\"right\">4</td>\n<td align=\"right\">4</td>\n<td>本地化、OEM、节点质量</td>\n<td>通用 Agent 主干</td>\n</tr>\n<tr>\n<td>OCR + 模板匹配</td>\n<td>文字稳定、外观固定的弹窗</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">3</td>\n<td align=\"right\">4</td>\n<td>多语言、缩放、主题变化</td>\n<td>视觉轻量兜底</td>\n</tr>\n<tr>\n<td>VLM/视觉 grounding</td>\n<td>未知、自绘、语义树缺失</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">2.5–4</td>\n<td align=\"right\">5</td>\n<td>成本、延迟、误点、不可重复</td>\n<td>长尾兜底，不独立决策高风险动作</td>\n</tr>\n<tr>\n<td>坐标/ADB/input 注入</td>\n<td>固定设备固定页面</td>\n<td align=\"right\">是</td>\n<td align=\"right\">测试工具条件支持</td>\n<td align=\"right\">是</td>\n<td align=\"right\">1.5</td>\n<td align=\"right\">3</td>\n<td>分辨率、动画、竞态极脆弱</td>\n<td>最后手段</td>\n</tr>\n<tr>\n<td>Root/jailbreak/hooking</td>\n<td>研究或专用设备上的内部状态</td>\n<td align=\"right\">有</td>\n<td align=\"right\">有</td>\n<td align=\"right\">不适用</td>\n<td align=\"right\">视实现</td>\n<td align=\"right\">3</td>\n<td>安全、维护、合规和可部署性差</td>\n<td>不作为产品主路线</td>\n</tr>\n<tr>\n<td>人工确认/接管</td>\n<td>高风险、未知语义、认证挑战</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">5</td>\n<td align=\"right\">5</td>\n<td>有人工延迟</td>\n<td>必须保留的安全出口</td>\n</tr>\n</tbody></table>\n<h2 id=\"methods-h2-3\">3. 各类方法的工作原理与证据</h2>\n<h3 id=\"methods-h3-4\">3.1 方法 A：在弹窗产生前控制状态</h3>\n<p>如果弹窗与测试目标无关，最稳的方法不是“点掉”，而是让设备从确定状态开始：</p>\n<ul>\n<li>Android 可在安装测试 APK 时使用 <code>adb shell install -g</code> 自动授予 manifest 中的运行时权限；官方权限文档也给出了清理 permission flags 的调试方法。<a href=\"https://developer.android.com/training/permissions/requesting\" target=\"_blank\" rel=\"noreferrer\">Android 运行时权限</a></li>\n<li>Appium Android 的 <code>autoGrantPermissions</code> 会在测试开始时根据 App 请求的权限进行授权。<a href=\"https://github.com/appium/appium-uiautomator2-driver\" target=\"_blank\" rel=\"noreferrer\">Appium UiAutomator2 Driver</a></li>\n<li>Appium XCUITest 在 Simulator 上提供 <code>appium:permissions</code> 来 grant、revoke 或 reset 指定服务；这不是任意真实 iPhone 上的通用权限后门。<a href=\"https://appium.github.io/appium-xcuitest-driver/latest/reference/capabilities/\" target=\"_blank\" rel=\"noreferrer\">Appium XCUITest capabilities</a></li>\n<li>对自家 App，可通过 launch argument、测试配置、依赖注入或清理 onboarding 状态，使弹窗出现与否变得确定。</li>\n</ul>\n<p>优点是无视觉竞态、速度快；缺点是它只能消除<strong>已知且允许预置</strong>的中断，不能处理运行中由网络、业务或 OS 状态触发的未知弹窗。</p>\n<h3 id=\"methods-h3-5\">3.2 方法 B：平台原生 watcher/interruption handler</h3>\n<p>这是最贴合“任务进行中突然冒出弹窗”的现成机制。</p>\n<h4 id=\"methods-h4-6\">Android UI Automator</h4>\n<p>现代 UI Automator 提供 <code>watchFor</code> 处理意外 UI，官方示例直接使用 <code>PermissionDialog</code> 并调用 <code>clickAllow()</code> 或 <code>clickDeny()</code>；也可按相同模式定义自有 <code>ScopedWatcher</code>。<a href=\"https://developer.android.com/training/testing/other-components/ui-automator\" target=\"_blank\" rel=\"noreferrer\">Android：Write automated tests with UI Automator</a> 截至本文，承载该 DSL 的 UI Automator 2.4 API 仍标为开发中，实际项目应锁定并验证具体版本。</p>\n<p>示意：</p>\n<pre><code class=\"language-kotlin\">watchFor(PermissionDialog) {\n    if (policy.expectedPermissionRequest()) clickAllow()\n    else clickDeny()\n}\n</code></pre>\n<p>它的优势是跨当前 Activity、能操作系统和已安装 App 的可见元素。相比 Espresso，它的作用域更大，但需要更多显式同步，官方也提醒跨 App 大测试更容易产生 flaky 行为。<a href=\"https://developer.android.com/training/testing/instrumented-tests/stability\" target=\"_blank\" rel=\"noreferrer\">Android 大型测试稳定性</a></p>\n<h4 id=\"methods-h4-7\">iOS XCTest</h4>\n<p>XCTest 的 <code>addUIInterruptionMonitor</code> 在目标元素被无关 UI 阻挡时调用 handler；多个 handler 以后进先出顺序尝试。Apple 明确建议：如果 alert 是预期业务步骤，直接查询并操作它，不要把它注册成“意外中断”。<a href=\"https://developer.apple.com/documentation/xctest/handling-ui-interruptions\" target=\"_blank\" rel=\"noreferrer\">Apple：Handling UI Interruptions</a></p>\n<p>示意：</p>\n<pre><code class=\"language-swift\">addUIInterruptionMonitor(withDescription: &quot;Known system permission&quot;) { alert in\n    guard policy.matchesExpectedPermission(alert) else { return false }\n    alert.buttons[policy.desiredAction].tap()\n    return true\n}\n</code></pre>\n<p>这一机制非常适合测试，但不等于 App Store 中任意 App 都能获得跨 App 自动控制能力。</p>\n<h3 id=\"methods-h3-8\">3.3 方法 C：WebDriver、Playwright 与 Appium 的 alert API</h3>\n<p>对浏览器原生 prompt，应调用协议动作：</p>\n<ul>\n<li>W3C WebDriver 定义 Accept Alert、Dismiss Alert、Get Alert Text、Send Alert Text。<a href=\"https://www.w3.org/TR/webdriver2/#user-prompts\" target=\"_blank\" rel=\"noreferrer\">W3C WebDriver 2</a></li>\n<li>Playwright 用 <code>page.on(&#39;dialog&#39;)</code> 接收结构化事件并调用 <code>accept()</code>/<code>dismiss()</code>；默认会自动 dismiss。<a href=\"https://playwright.dev/docs/api/class-dialog\" target=\"_blank\" rel=\"noreferrer\">Playwright Dialog</a></li>\n<li>Appium 沿用 WebDriver user prompt 语义。XCUITest driver 还支持 <code>autoAcceptAlerts</code>、<code>autoDismissAlerts</code>，并可通过 selector 指定应点击的 alert button。<a href=\"https://appium.github.io/appium-xcuitest-driver/latest/reference/settings/\" target=\"_blank\" rel=\"noreferrer\">Appium XCUITest settings</a></li>\n</ul>\n<p>注意：<code>autoAcceptAlerts=true</code> 是粗粒度开关。它可能同时接受定位、照片、联系人等隐私授权，不适合作为未知弹窗的默认策略。更稳的方法是先读取按钮/文本和触发上下文，再选择动作。</p>\n<h3 id=\"methods-h3-9\">3.4 方法 D：语义 UI 树与规则引擎</h3>\n<p>Android UI Automator/UiAutomation/Accessibility、iOS XCTest/Appium page source、Web DOM 都能在条件允许时提供结构化节点：</p>\n<pre><code class=\"language-text\">owner/package + window role + element role/class\n+ resource-id/accessibility-id + label/text\n+ bounds + enabled/clickable/hittable\n+ foreground transition + previous agent action\n</code></pre>\n<p>规则应优先使用稳定标识：</p>\n<ol>\n<li>所有者或 package/bundle；</li>\n<li>role/class，例如 alert、dialog、button；</li>\n<li>resource id、accessibility id、test tag；</li>\n<li>语义文案与本地化词典；</li>\n<li>相对层级和几何位置；</li>\n<li>触发前一步及当前任务意图。</li>\n</ol>\n<p>Android AccessibilityService 可以接收界面状态变化事件、查询活动窗口，并让节点执行 <code>ACTION_CLICK</code>；当节点 click 实现不完整时，API 还允许无障碍服务用 gesture tap 兜底。<a href=\"https://developer.android.com/reference/android/accessibilityservice/AccessibilityService\" target=\"_blank\" rel=\"noreferrer\">Android <code>AccessibilityService</code></a></p>\n<p>但量产方案有两个重要限制：</p>\n<ul>\n<li>自绘控件可能没有完整节点，<code>rootInActiveWindow</code> 也可能为空；</li>\n<li>Google Play 只允许窄目的、用户可理解的确定性规则自动化，一般 App 不得借 Accessibility API 自主发起、规划和执行任意动作，且需满足申报、披露和同意要求。<a href=\"https://support.google.com/googleplay/android-developer/answer/10964491\" target=\"_blank\" rel=\"noreferrer\">Google Play AccessibilityService 政策</a></li>\n</ul>\n<p>因此 AccessibilityService 是一种<strong>技术能力</strong>，不是自动获得的产品分发许可。</p>\n<h3 id=\"methods-h3-10\">3.5 方法 E：OCR、模板匹配与视觉模型</h3>\n<p>当 UI 树缺失时，可从截图中完成：</p>\n<ol>\n<li>检测可能的弹窗区域和遮罩；</li>\n<li>OCR 提取标题、正文和按钮；</li>\n<li>视觉 grounding 把“稍后”“关闭”“允许”等语义映射到坐标；</li>\n<li>结合任务上下文决定动作；</li>\n<li>点击后重新截图并验证。</li>\n</ol>\n<p>现有移动 Agent 研究提供了可复用证据：</p>\n<table>\n<thead>\n<tr>\n<th>工作</th>\n<th>发表状态</th>\n<th>感知/动作思路</th>\n<th>对弹窗课题的价值</th>\n<th>主要局限</th>\n</tr>\n</thead>\n<tbody><tr>\n<td><a href=\"https://arxiv.org/abs/2312.13771\" target=\"_blank\" rel=\"noreferrer\">AppAgent</a>（Zhang et al., 2023）</td>\n<td>arXiv 预印本；后续版本发表于 <a href=\"https://dl.acm.org/doi/10.1145/3706598.3713600\" target=\"_blank\" rel=\"noreferrer\">CHI 2025</a></td>\n<td>截图、带编号的可交互元素、tap/swipe；探索或人类示范建立知识库</td>\n<td>说明不依赖 App 后端也能操作多种手机 UI</td>\n<td>不是专门的中断检测器；视觉误点和探索成本仍在</td>\n</tr>\n<tr>\n<td><a href=\"https://arxiv.org/abs/2401.16158\" target=\"_blank\" rel=\"noreferrer\">Mobile-Agent</a>（Wang et al., 2024）</td>\n<td>arXiv 预印本</td>\n<td>视觉感知、OCR、图标检测和坐标动作</td>\n<td>适合 UI 树缺失的自绘弹窗</td>\n<td>对系统权限语义和高风险决策没有协议级保证</td>\n</tr>\n<tr>\n<td><a href=\"https://papers.nips.cc/paper_files/paper/2024/hash/0520537ba799d375b8ff5523295c337a-Abstract-Conference.html\" target=\"_blank\" rel=\"noreferrer\">Mobile-Agent-v2</a>（Wang et al., NeurIPS 2024）</td>\n<td>同行评审会议论文</td>\n<td>规划、决策、反思分工，记录任务进展并根据动作结果纠错</td>\n<td>“点击后观察结果再纠错”可用于弹窗恢复</td>\n<td>主要解决长程导航，不是弹窗安全策略</td>\n</tr>\n<tr>\n<td><a href=\"https://arxiv.org/abs/2405.14573\" target=\"_blank\" rel=\"noreferrer\">AndroidWorld</a>（Rawles et al., 2024）</td>\n<td>arXiv 预印本</td>\n<td>真 Android 环境、动态任务、可访问性树与截图基线</td>\n<td>可用于构造可复现的意外弹窗评测</td>\n<td>原始任务不等于弹窗专项 benchmark；基线成功率显示泛化仍难</td>\n</tr>\n<tr>\n<td><a href=\"https://arxiv.org/abs/2410.05243\" target=\"_blank\" rel=\"noreferrer\">UGround</a>（Gou et al., 2024）</td>\n<td>arXiv 预印本</td>\n<td>纯视觉 GUI grounding，跨平台从表达定位像素坐标</td>\n<td>提升未知 UI 的坐标定位能力</td>\n<td>定位正确不等于动作语义或授权决策正确</td>\n</tr>\n<tr>\n<td><a href=\"https://arxiv.org/abs/2311.08649\" target=\"_blank\" rel=\"noreferrer\">DroidAgent</a>（Yoon et al., 2023）</td>\n<td>arXiv 预印本</td>\n<td>LLM、长短期记忆和 Android GUI 交互</td>\n<td>支持目标驱动探索与异常后的继续规划</td>\n<td>测试目标生成不是弹窗分类，且 LLM 行为有随机性</td>\n</tr>\n<tr>\n<td><a href=\"https://conf.researchr.org/details/fse-2026/fse-2026-journal-first/18/VLM-Fuzz-Vision-Language-Model-Assisted-Recursive-Depth-First-Search-Exploration-for\" target=\"_blank\" rel=\"noreferrer\">VLM-Fuzz</a>（Demissie et al., FSE 2026 Journal-First）</td>\n<td>同行评审 Journal-First 展示</td>\n<td>VLM 辅助 Android GUI 深度优先探索，明确把 pop-up 作为易卡住的 widget</td>\n<td>直接证明弹窗是自动探索覆盖率中的实际障碍</td>\n<td>面向测试探索，不直接给出跨平台权限与风险策略</td>\n</tr>\n</tbody></table>\n<p>这些工作支持“视觉是必要的长尾能力”，但没有证明纯视觉可以安全地对所有弹窗自动 Allow。视觉模型擅长<strong>找位置和理解表面语义</strong>，而权限、支付、身份和数据共享仍需要结构化状态与策略约束。</p>\n<h3 id=\"methods-h3-11\">3.6 方法 F：固定坐标、ADB input 与按键退回</h3>\n<p>固定坐标点击、Back/Escape 或 tap 屏幕外部实现简单，但缺陷明显：</p>\n<ul>\n<li>分辨率、字体缩放、横竖屏、刘海/安全区和主题变化会移动按钮；</li>\n<li>弹窗消失到点击发生之间可能出现新的控件；</li>\n<li>Back 可能取消业务而不是单纯关闭提示；</li>\n<li>“默认右侧按钮是确认”在不同平台、语言和对话框类型上并不成立。</li>\n</ul>\n<p>只建议在固定实验设备、固定系统镜像、固定 App 版本下作为可回放脚本的末级 fallback，并且每次动作后必须截图与状态校验。</p>\n<h3 id=\"methods-h3-12\">3.7 方法 G：Root、jailbreak、hook 或修改系统组件</h3>\n<p>这类方式可能获得窗口内部状态或直接改权限，但会破坏研究结果的可部署性：</p>\n<ul>\n<li>难以覆盖普通量产设备；</li>\n<li>版本与厂商耦合严重；</li>\n<li>改变了原安全模型，无法代表正常用户环境；</li>\n<li>增加攻击面、合规与维护成本。</li>\n</ul>\n<p>它适合研究系统内部实现或专用实验镜像，不适合作为“正常软件使用突然遇到弹窗”的默认解决路线。</p>\n<h2 id=\"methods-h2-13\">4. 按场景选择方法</h2>\n<table>\n<thead>\n<tr>\n<th>场景</th>\n<th>首选</th>\n<th>次选</th>\n<th>不建议默认使用</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>自家 Android/iOS App 的业务弹窗</td>\n<td>稳定 id/test hook + Espresso/Compose/XCTest</td>\n<td>Appium/UI 树</td>\n<td>OCR、坐标</td>\n</tr>\n<tr>\n<td>Android 系统权限框（测试设备）</td>\n<td>状态预置；若要测 UI，则 UI Automator <code>PermissionDialog</code> watcher</td>\n<td>Appium UiAutomator2</td>\n<td>纯文本 XPath、盲点 Allow</td>\n</tr>\n<tr>\n<td>iOS 系统权限框（测试设备）</td>\n<td>明确预期时直接操作 alert；非预期时 XCTest interruption monitor</td>\n<td>Appium XCUITest alert API</td>\n<td>量产 App 试图跨 App 操作</td>\n</tr>\n<tr>\n<td>移动 Web 原生 prompt</td>\n<td>WebDriver/Playwright dialog API</td>\n<td>Appium web context</td>\n<td>截图点击浏览器按钮</td>\n</tr>\n<tr>\n<td>Web DOM modal</td>\n<td>DOM role/id/selector</td>\n<td>OCR/VLM</td>\n<td>当成 WebDriver native alert</td>\n</tr>\n<tr>\n<td>第三方 App 的已知低风险提示</td>\n<td>语义 UI 树 + 所有者/文案/上下文规则</td>\n<td>视觉 grounding</td>\n<td>全局 autoAccept</td>\n</tr>\n<tr>\n<td>未知自绘弹窗</td>\n<td>VLM/OCR 分类 + 保守策略</td>\n<td>人工确认</td>\n<td>仅凭按钮颜色或位置</td>\n</tr>\n<tr>\n<td>支付、删除、安装、隐私共享</td>\n<td>显式任务确认或人工接管</td>\n<td>专项 allowlist</td>\n<td>通用自动允许</td>\n</tr>\n<tr>\n<td>CAPTCHA/风控/生物识别</td>\n<td>官方流程或人工完成</td>\n<td>业务 API/授权集成</td>\n<td>规避或模拟通过</td>\n</tr>\n</tbody></table>\n<h2 id=\"methods-h2-14\">5. 推荐的跨平台实现架构</h2>\n<h3 id=\"methods-h3-15\">5.1 平台适配层</h3>\n<pre><code class=\"language-text\">Android adapter\n  - foreground package/window\n  - UI Automator / Appium page source\n  - PermissionDialog watcher\n  - screenshot + input action\n\niOS adapter\n  - XCTest/Appium alert tree\n  - UI interruption monitor\n  - simulator permission state\n  - screenshot + XCTest action\n\nWeb adapter\n  - WebDriver/Playwright user-prompt event\n  - DOM dialog/alertdialog/top-layer inspection\n  - screenshot fallback\n</code></pre>\n<h3 id=\"methods-h3-16\">5.2 中断检测器</h3>\n<p>不要只用“截图里有矩形框”。应聚合以下信号：</p>\n<ul>\n<li>当前目标元素从可点击变为 blocked/not hittable；</li>\n<li>foreground package/bundle/window 发生变化；</li>\n<li>出现 <code>alert/dialog/alertdialog</code> 或系统权限节点；</li>\n<li>DOM 出现 open modal/top-layer/inert 状态；</li>\n<li>屏幕出现高置信度遮罩和集中式 action 区；</li>\n<li>Agent 连续动作无状态变化或收到 <code>unexpected alert open</code>；</li>\n<li>上一步恰好触发敏感能力、外部 intent、文件选择器或网络失败。</li>\n</ul>\n<h3 id=\"methods-h3-17\">5.3 分类器</h3>\n<p>分类键建议为：</p>\n<pre><code class=\"language-text\">owner: app | system | browser | third-party-security\nkind: permission | error | onboarding | ad | update | chooser |\n      transaction | authentication | captcha | unknown\nconsequence: dismiss-only | reversible-state-change | sensitive-grant |\n             financial/destructive | identity/security\nconfidence: 0..1\n</code></pre>\n<h3 id=\"methods-h3-18\">5.4 决策策略</h3>\n<p>推荐默认策略：</p>\n<table>\n<thead>\n<tr>\n<th>分类</th>\n<th>默认动作</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>已知提示、教程、非关键广告</td>\n<td>dismiss/skip</td>\n</tr>\n<tr>\n<td>可恢复错误提示</td>\n<td>acknowledge，然后重试受阻步骤</td>\n</tr>\n<tr>\n<td>与当前任务无关的权限请求</td>\n<td>deny 或 ask-user，不默认 allow</td>\n</tr>\n<tr>\n<td>当前任务明确需要、且在 allowlist 中的权限</td>\n<td>allow；记录权限、范围和触发原因</td>\n</tr>\n<tr>\n<td>更新提示</td>\n<td>选“稍后”，除非任务就是更新</td>\n</tr>\n<tr>\n<td>隐私共享、通知订阅、跟踪授权</td>\n<td>依据显式用户策略，否则 ask-user</td>\n</tr>\n<tr>\n<td>支付、删除、安装、设备管理、安全设置</td>\n<td>ask-user/专项确认</td>\n</tr>\n<tr>\n<td>CAPTCHA、风控、PIN、生物识别</td>\n<td>handoff，不自动规避</td>\n</tr>\n<tr>\n<td>unknown</td>\n<td>优先安全退出或 ask-user；绝不盲点正向按钮</td>\n</tr>\n</tbody></table>\n<h3 id=\"methods-h3-19\">5.5 动作执行与验证</h3>\n<p>动作通道优先级：</p>\n<pre><code class=\"language-text\">协议 accept/dismiss\n  &gt; element semantic click\n  &gt; platform watcher action\n  &gt; grounded coordinate tap\n  &gt; generic Back / outside tap\n</code></pre>\n<p>验证至少包含三项：</p>\n<ol>\n<li>弹窗节点或视觉区域已消失；</li>\n<li>前景 App/窗口和原任务目标重新可达；</li>\n<li>权限或业务状态与期望一致，而不是“框没了就算成功”。</li>\n</ol>\n<p>如验证失败，应重新观察并选择其他 handler，不应无上限重复同一坐标。建议为每个弹窗指纹设置最多 1–2 次动作尝试，随后进入恢复或人工接管。</p>\n<h2 id=\"methods-h2-20\">6. 最小可行系统（MVP）</h2>\n<p>在没有指定 Agent 框架的前提下，建议先实现以下跨平台抽象，而不是直接训练一个模型：</p>\n<pre><code class=\"language-text\">PopupObservation\n  platform\n  foreground_owner\n  semantic_tree\n  screenshot\n  trigger_action\n  blocked_target\n\nPopupDecision\n  class\n  action\n  target_locator\n  confidence\n  rationale\n  requires_user\n\nPopupOutcome\n  dismissed\n  state_delta\n  task_resumed\n  evidence_before_after\n</code></pre>\n<p>第一版规则库只需覆盖：</p>\n<ul>\n<li>Android/iOS 常见权限弹窗；</li>\n<li>App 内 <code>alert/dialog</code> 的 Cancel/Close/Later/Skip；</li>\n<li>网络错误的 OK/Retry；</li>\n<li>Android/iOS 更新提示的 Later；</li>\n<li>WebDriver 原生 prompt；</li>\n<li>DOM <code>role=dialog/alertdialog</code>；</li>\n<li>unknown/high-risk → user handoff。</li>\n</ul>\n<p>视觉模型只在语义通道没有结果时运行。这样可以先得到可测、可解释的基线，再评估 VLM 是否真正提高覆盖率。</p>\n<h2 id=\"methods-h2-21\">7. 建议的评测指标</h2>\n<p>不能只统计“弹窗关闭率”。至少需要：</p>\n<table>\n<thead>\n<tr>\n<th>指标</th>\n<th>定义</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Detection recall</td>\n<td>实际阻断任务的弹窗有多少被发现</td>\n</tr>\n<tr>\n<td>False interruption rate</td>\n<td>正常页面被误判为弹窗的比例</td>\n</tr>\n<tr>\n<td>Classification accuracy</td>\n<td>owner/kind/consequence 分类正确率</td>\n</tr>\n<tr>\n<td>Safe action accuracy</td>\n<td>选择的 allow/deny/dismiss/ask 是否符合策略</td>\n</tr>\n<tr>\n<td>Resume success</td>\n<td>处理后原任务是否真正继续</td>\n</tr>\n<tr>\n<td>Harmful confirmation rate</td>\n<td>错误确认敏感/破坏性动作的比例，目标应为 0</td>\n</tr>\n<tr>\n<td>Steps/latency</td>\n<td>每次中断恢复的动作数和延迟</td>\n</tr>\n<tr>\n<td>Cross-version robustness</td>\n<td>OS、OEM、语言、主题、屏幕尺寸变化下的稳定性</td>\n</tr>\n<tr>\n<td>Explanation coverage</td>\n<td>每次自动动作是否留下触发依据和前后状态证据</td>\n</tr>\n</tbody></table>\n<p>评测集应按“所有者 × 弹窗类别 × 平台 × 语言 × 风险等级”分层，并包含异步出现、按钮换序、语义树缺失、连续弹窗和弹窗后页面跳转等压力场景。</p>\n<h2 id=\"methods-h2-22\">8. 当前研究空白</h2>\n<ol>\n<li>现有移动 Agent benchmark 多评估长程任务成功率，缺少以“意外中断恢复”和误确认代价为核心的专项 benchmark。</li>\n<li>视觉 grounding 研究主要回答“点哪里”，对“是否应该允许”及动作后果建模不足。</li>\n<li>UI 自动化框架有成熟的权限 watcher，但主要服务确定性测试；开放世界 Agent 的弹窗类别与策略更动态。</li>\n<li>跨 Android OEM、iOS 版本、本地化和辅助功能设置的系统性弹窗语料不足。</li>\n<li>现有论文常用任务成功率汇总，较少单独报告错误授权、破坏性确认和安全 handoff 的指标。</li>\n</ol>\n<p>这意味着本课题真正有价值的方向不是再造一个“找关闭按钮”的视觉模型，而是研究：</p>\n<blockquote>\n<p><strong>如何把平台级中断信号、语义 UI、视觉 grounding、任务意图和动作风险统一成一个可验证、跨平台、不会盲目授权的 Popup Recovery Policy。</strong></p>\n</blockquote>\n<h2 id=\"methods-h2-23\">9. 最终方法排序</h2>\n<p>如果现在必须选一条实现路线：</p>\n<ol>\n<li>Android 测试环境：UI Automator <code>watchFor</code> + 语义规则 + 权限状态预置。</li>\n<li>iOS 测试环境：预期 alert 直接处理 + XCTest interruption monitor + Simulator 状态预置。</li>\n<li>移动 Web：WebDriver/Playwright prompt 事件 + DOM dialog 规则。</li>\n<li>跨平台 Agent：Appium/平台 adapter 提供语义树，VLM 只处理语义缺失长尾。</li>\n<li>产品安全策略：未知默认不 Allow；高风险必须显式用户确认；所有动作做前后状态验证。</li>\n</ol>\n<p>这套组合覆盖了“正常使用中突然出现一个弹窗”的主要情况，同时尊重系统权限、安全 UI 和应用商店政策边界。</p>\n",
+      "headings": [
+        {
+          "depth": 1,
+          "id": "methods-h1-0",
+          "text": "移动端弹窗自动化：现有方法对比"
+        },
+        {
+          "depth": 2,
+          "id": "methods-h2-1",
+          "text": "1. 推荐结论"
+        },
+        {
+          "depth": 2,
+          "id": "methods-h2-2",
+          "text": "2. 方法总表"
+        },
+        {
+          "depth": 2,
+          "id": "methods-h2-3",
+          "text": "3. 各类方法的工作原理与证据"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-4",
+          "text": "3.1 方法 A：在弹窗产生前控制状态"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-5",
+          "text": "3.2 方法 B：平台原生 watcher/interruption handler"
+        },
+        {
+          "depth": 4,
+          "id": "methods-h4-6",
+          "text": "Android UI Automator"
+        },
+        {
+          "depth": 4,
+          "id": "methods-h4-7",
+          "text": "iOS XCTest"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-8",
+          "text": "3.3 方法 C：WebDriver、Playwright 与 Appium 的 alert API"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-9",
+          "text": "3.4 方法 D：语义 UI 树与规则引擎"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-10",
+          "text": "3.5 方法 E：OCR、模板匹配与视觉模型"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-11",
+          "text": "3.6 方法 F：固定坐标、ADB input 与按键退回"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-12",
+          "text": "3.7 方法 G：Root、jailbreak、hook 或修改系统组件"
+        },
+        {
+          "depth": 2,
+          "id": "methods-h2-13",
+          "text": "4. 按场景选择方法"
+        },
+        {
+          "depth": 2,
+          "id": "methods-h2-14",
+          "text": "5. 推荐的跨平台实现架构"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-15",
+          "text": "5.1 平台适配层"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-16",
+          "text": "5.2 中断检测器"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-17",
+          "text": "5.3 分类器"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-18",
+          "text": "5.4 决策策略"
+        },
+        {
+          "depth": 3,
+          "id": "methods-h3-19",
+          "text": "5.5 动作执行与验证"
+        },
+        {
+          "depth": 2,
+          "id": "methods-h2-20",
+          "text": "6. 最小可行系统（MVP）"
+        },
+        {
+          "depth": 2,
+          "id": "methods-h2-21",
+          "text": "7. 建议的评测指标"
+        },
+        {
+          "depth": 2,
+          "id": "methods-h2-22",
+          "text": "8. 当前研究空白"
+        },
+        {
+          "depth": 2,
+          "id": "methods-h2-23",
+          "text": "9. 最终方法排序"
+        }
+      ],
+      "sections": [
+        {
+          "id": "methods-section-0",
+          "title": "导读",
+          "html": "<h1 id=\"methods-slide-0-h1-0\">移动端弹窗自动化：现有方法对比</h1>\n<ul>\n<li>日期：2026-08-06</li>\n<li>配套报告：<a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li>目标：比较“自动识别并关闭/允许”弹窗的现有工程与研究路线，并给出跨平台推荐架构</li>\n</ul>\n"
+        },
+        {
+          "id": "methods-section-1",
+          "title": "1. 推荐结论",
+          "html": "<h2 id=\"methods-slide-1-h2-0\">1. 推荐结论</h2>\n<p>不存在一个在 Android、iOS、Web、所有 App 和所有弹窗上都可靠的单一 API。最佳现有方案是一个按确定性从高到低排列的分层中断处理器：</p>\n<ol>\n<li><strong>测试预置/状态控制</strong>：已知权限在测试开始前 grant、deny 或 reset，避免无关弹窗进入主任务。</li>\n<li><strong>原生协议或框架事件</strong>：WebDriver/Playwright user prompt、XCTest interruption monitor、UI Automator watcher。</li>\n<li><strong>语义 UI 树规则</strong>：根据 package/bundle、role/class、resource id、label、层级和触发上下文识别。</li>\n<li><strong>视觉/OCR/VLM 兜底</strong>：处理自绘、Canvas、游戏、复杂 WebView 和语义树缺失的 UI。</li>\n<li><strong>风险策略与人工接管</strong>：未知后果、敏感授权、支付、安装、删除、认证和 CAPTCHA 不盲点。</li>\n<li><strong>动作后验证</strong>：确认弹窗消失、状态改变正确、原任务目标重新可达；失败时回滚或改用下一层方法。</li>\n</ol>\n<p>这条路线比“每隔一秒截图并寻找 Allow/OK”更可靠，原因是它利用了弹窗所有者已经暴露的结构化控制面，同时把视觉模型限制在真正需要它的长尾场景。</p>\n"
+        },
+        {
+          "id": "methods-section-2",
+          "title": "2. 方法总表",
+          "html": "<h2 id=\"methods-slide-2-h2-0\">2. 方法总表</h2>\n<p>评分说明：可靠性和通用性采用 1–5 级相对评分；具体表现仍取决于 OS、App 和测试权限。</p>\n<table>\n<thead>\n<tr>\n<th>方法</th>\n<th>最适合的弹窗</th>\n<th align=\"right\">Android</th>\n<th align=\"right\">iOS</th>\n<th align=\"right\">Web/WebView</th>\n<th align=\"right\">可靠性</th>\n<th align=\"right\">通用性</th>\n<th>主要限制</th>\n<th>建议定位</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>App 源码内 handler/test hook</td>\n<td>自家 App 原生/自绘 modal</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">5</td>\n<td align=\"right\">1</td>\n<td>必须掌握源码</td>\n<td>自家 App 首选</td>\n</tr>\n<tr>\n<td>测试前权限/状态预置</td>\n<td>已知权限提示、首次启动状态</td>\n<td align=\"right\">强</td>\n<td align=\"right\">模拟器强、真机有限</td>\n<td align=\"right\">浏览器上下文可配置</td>\n<td align=\"right\">5</td>\n<td align=\"right\">2</td>\n<td>不处理未知业务弹窗</td>\n<td>测试环境首选</td>\n</tr>\n<tr>\n<td>浏览器 prompt 协议</td>\n<td><code>alert/confirm/prompt/beforeunload</code></td>\n<td align=\"right\">WebView 条件支持</td>\n<td align=\"right\">WebView 条件支持</td>\n<td align=\"right\">强</td>\n<td align=\"right\">5</td>\n<td align=\"right\">2</td>\n<td>不处理 DOM 自绘 modal</td>\n<td>Web 原生 prompt 首选</td>\n</tr>\n<tr>\n<td>Android UI Automator watcher</td>\n<td>权限框、系统/跨 App UI</td>\n<td align=\"right\">强</td>\n<td align=\"right\">否</td>\n<td align=\"right\">间接</td>\n<td align=\"right\">4.5</td>\n<td align=\"right\">3</td>\n<td>instrumentation/设备测试语境</td>\n<td>Android 系统 UI 首选</td>\n</tr>\n<tr>\n<td>XCTest interruption monitor</td>\n<td>非预期 iOS modal/系统 alert</td>\n<td align=\"right\">否</td>\n<td align=\"right\">强</td>\n<td align=\"right\">Safari 条件支持</td>\n<td align=\"right\">4.5</td>\n<td align=\"right\">3</td>\n<td>XCTest 测试语境；预期 alert 应直接处理</td>\n<td>iOS 测试首选</td>\n</tr>\n<tr>\n<td>Appium 原生 alert/capability</td>\n<td>跨平台测试中的标准 alert</td>\n<td align=\"right\">强</td>\n<td align=\"right\">强</td>\n<td align=\"right\">强</td>\n<td align=\"right\">4</td>\n<td align=\"right\">3</td>\n<td>驱动差异；全局 auto-accept 语义粗糙</td>\n<td>跨平台测试入口</td>\n</tr>\n<tr>\n<td>Espresso/Compose/XCUITest 元素定位</td>\n<td>当前 App 内弹窗</td>\n<td align=\"right\">强</td>\n<td align=\"right\">强</td>\n<td align=\"right\">否</td>\n<td align=\"right\">4.5</td>\n<td align=\"right\">2</td>\n<td>通常只覆盖被测 App/测试进程</td>\n<td>应用内测试首选</td>\n</tr>\n<tr>\n<td>Android AccessibilityService</td>\n<td>量产 Android 上的语义节点/动作</td>\n<td align=\"right\">有条件</td>\n<td align=\"right\">无对等公共能力</td>\n<td align=\"right\">间接</td>\n<td align=\"right\">3.5</td>\n<td align=\"right\">4</td>\n<td>用户授权、节点缺失、商店政策严格</td>\n<td>仅窄目的规则自动化</td>\n</tr>\n<tr>\n<td>UI 树通用规则引擎</td>\n<td>原生、跨 App、已知模式</td>\n<td align=\"right\">强</td>\n<td align=\"right\">测试环境强</td>\n<td align=\"right\">DOM 强</td>\n<td align=\"right\">4</td>\n<td align=\"right\">4</td>\n<td>本地化、OEM、节点质量</td>\n<td>通用 Agent 主干</td>\n</tr>\n<tr>\n<td>OCR + 模板匹配</td>\n<td>文字稳定、外观固定的弹窗</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">3</td>\n<td align=\"right\">4</td>\n<td>多语言、缩放、主题变化</td>\n<td>视觉轻量兜底</td>\n</tr>\n<tr>\n<td>VLM/视觉 grounding</td>\n<td>未知、自绘、语义树缺失</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">2.5–4</td>\n<td align=\"right\">5</td>\n<td>成本、延迟、误点、不可重复</td>\n<td>长尾兜底，不独立决策高风险动作</td>\n</tr>\n<tr>\n<td>坐标/ADB/input 注入</td>\n<td>固定设备固定页面</td>\n<td align=\"right\">是</td>\n<td align=\"right\">测试工具条件支持</td>\n<td align=\"right\">是</td>\n<td align=\"right\">1.5</td>\n<td align=\"right\">3</td>\n<td>分辨率、动画、竞态极脆弱</td>\n<td>最后手段</td>\n</tr>\n<tr>\n<td>Root/jailbreak/hooking</td>\n<td>研究或专用设备上的内部状态</td>\n<td align=\"right\">有</td>\n<td align=\"right\">有</td>\n<td align=\"right\">不适用</td>\n<td align=\"right\">视实现</td>\n<td align=\"right\">3</td>\n<td>安全、维护、合规和可部署性差</td>\n<td>不作为产品主路线</td>\n</tr>\n<tr>\n<td>人工确认/接管</td>\n<td>高风险、未知语义、认证挑战</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">是</td>\n<td align=\"right\">5</td>\n<td align=\"right\">5</td>\n<td>有人工延迟</td>\n<td>必须保留的安全出口</td>\n</tr>\n</tbody></table>\n"
+        },
+        {
+          "id": "methods-section-3",
+          "title": "3. 各类方法的工作原理与证据",
+          "html": "<h2 id=\"methods-slide-3-h2-0\">3. 各类方法的工作原理与证据</h2>\n"
+        },
+        {
+          "id": "methods-section-4",
+          "title": "3.1 方法 A：在弹窗产生前控制状态",
+          "html": "<h3 id=\"methods-slide-4-h3-0\">3.1 方法 A：在弹窗产生前控制状态</h3>\n<p>如果弹窗与测试目标无关，最稳的方法不是“点掉”，而是让设备从确定状态开始：</p>\n<ul>\n<li>Android 可在安装测试 APK 时使用 <code>adb shell install -g</code> 自动授予 manifest 中的运行时权限；官方权限文档也给出了清理 permission flags 的调试方法。<a href=\"https://developer.android.com/training/permissions/requesting\" target=\"_blank\" rel=\"noreferrer\">Android 运行时权限</a></li>\n<li>Appium Android 的 <code>autoGrantPermissions</code> 会在测试开始时根据 App 请求的权限进行授权。<a href=\"https://github.com/appium/appium-uiautomator2-driver\" target=\"_blank\" rel=\"noreferrer\">Appium UiAutomator2 Driver</a></li>\n<li>Appium XCUITest 在 Simulator 上提供 <code>appium:permissions</code> 来 grant、revoke 或 reset 指定服务；这不是任意真实 iPhone 上的通用权限后门。<a href=\"https://appium.github.io/appium-xcuitest-driver/latest/reference/capabilities/\" target=\"_blank\" rel=\"noreferrer\">Appium XCUITest capabilities</a></li>\n<li>对自家 App，可通过 launch argument、测试配置、依赖注入或清理 onboarding 状态，使弹窗出现与否变得确定。</li>\n</ul>\n<p>优点是无视觉竞态、速度快；缺点是它只能消除<strong>已知且允许预置</strong>的中断，不能处理运行中由网络、业务或 OS 状态触发的未知弹窗。</p>\n"
+        },
+        {
+          "id": "methods-section-5",
+          "title": "3.2 方法 B：平台原生 watcher/interruption handler",
+          "html": "<h3 id=\"methods-slide-5-h3-0\">3.2 方法 B：平台原生 watcher/interruption handler</h3>\n<p>这是最贴合“任务进行中突然冒出弹窗”的现成机制。</p>\n<h4 id=\"methods-slide-5-h4-1\">Android UI Automator</h4>\n<p>现代 UI Automator 提供 <code>watchFor</code> 处理意外 UI，官方示例直接使用 <code>PermissionDialog</code> 并调用 <code>clickAllow()</code> 或 <code>clickDeny()</code>；也可按相同模式定义自有 <code>ScopedWatcher</code>。<a href=\"https://developer.android.com/training/testing/other-components/ui-automator\" target=\"_blank\" rel=\"noreferrer\">Android：Write automated tests with UI Automator</a> 截至本文，承载该 DSL 的 UI Automator 2.4 API 仍标为开发中，实际项目应锁定并验证具体版本。</p>\n<p>示意：</p>\n<pre><code class=\"language-kotlin\">watchFor(PermissionDialog) {\n    if (policy.expectedPermissionRequest()) clickAllow()\n    else clickDeny()\n}\n</code></pre>\n<p>它的优势是跨当前 Activity、能操作系统和已安装 App 的可见元素。相比 Espresso，它的作用域更大，但需要更多显式同步，官方也提醒跨 App 大测试更容易产生 flaky 行为。<a href=\"https://developer.android.com/training/testing/instrumented-tests/stability\" target=\"_blank\" rel=\"noreferrer\">Android 大型测试稳定性</a></p>\n<h4 id=\"methods-slide-5-h4-2\">iOS XCTest</h4>\n<p>XCTest 的 <code>addUIInterruptionMonitor</code> 在目标元素被无关 UI 阻挡时调用 handler；多个 handler 以后进先出顺序尝试。Apple 明确建议：如果 alert 是预期业务步骤，直接查询并操作它，不要把它注册成“意外中断”。<a href=\"https://developer.apple.com/documentation/xctest/handling-ui-interruptions\" target=\"_blank\" rel=\"noreferrer\">Apple：Handling UI Interruptions</a></p>\n<p>示意：</p>\n<pre><code class=\"language-swift\">addUIInterruptionMonitor(withDescription: &quot;Known system permission&quot;) { alert in\n    guard policy.matchesExpectedPermission(alert) else { return false }\n    alert.buttons[policy.desiredAction].tap()\n    return true\n}\n</code></pre>\n<p>这一机制非常适合测试，但不等于 App Store 中任意 App 都能获得跨 App 自动控制能力。</p>\n"
+        },
+        {
+          "id": "methods-section-6",
+          "title": "3.3 方法 C：WebDriver、Playwright 与 Appium 的 alert API",
+          "html": "<h3 id=\"methods-slide-6-h3-0\">3.3 方法 C：WebDriver、Playwright 与 Appium 的 alert API</h3>\n<p>对浏览器原生 prompt，应调用协议动作：</p>\n<ul>\n<li>W3C WebDriver 定义 Accept Alert、Dismiss Alert、Get Alert Text、Send Alert Text。<a href=\"https://www.w3.org/TR/webdriver2/#user-prompts\" target=\"_blank\" rel=\"noreferrer\">W3C WebDriver 2</a></li>\n<li>Playwright 用 <code>page.on(&#39;dialog&#39;)</code> 接收结构化事件并调用 <code>accept()</code>/<code>dismiss()</code>；默认会自动 dismiss。<a href=\"https://playwright.dev/docs/api/class-dialog\" target=\"_blank\" rel=\"noreferrer\">Playwright Dialog</a></li>\n<li>Appium 沿用 WebDriver user prompt 语义。XCUITest driver 还支持 <code>autoAcceptAlerts</code>、<code>autoDismissAlerts</code>，并可通过 selector 指定应点击的 alert button。<a href=\"https://appium.github.io/appium-xcuitest-driver/latest/reference/settings/\" target=\"_blank\" rel=\"noreferrer\">Appium XCUITest settings</a></li>\n</ul>\n<p>注意：<code>autoAcceptAlerts=true</code> 是粗粒度开关。它可能同时接受定位、照片、联系人等隐私授权，不适合作为未知弹窗的默认策略。更稳的方法是先读取按钮/文本和触发上下文，再选择动作。</p>\n"
+        },
+        {
+          "id": "methods-section-7",
+          "title": "3.4 方法 D：语义 UI 树与规则引擎",
+          "html": "<h3 id=\"methods-slide-7-h3-0\">3.4 方法 D：语义 UI 树与规则引擎</h3>\n<p>Android UI Automator/UiAutomation/Accessibility、iOS XCTest/Appium page source、Web DOM 都能在条件允许时提供结构化节点：</p>\n<pre><code class=\"language-text\">owner/package + window role + element role/class\n+ resource-id/accessibility-id + label/text\n+ bounds + enabled/clickable/hittable\n+ foreground transition + previous agent action\n</code></pre>\n<p>规则应优先使用稳定标识：</p>\n<ol>\n<li>所有者或 package/bundle；</li>\n<li>role/class，例如 alert、dialog、button；</li>\n<li>resource id、accessibility id、test tag；</li>\n<li>语义文案与本地化词典；</li>\n<li>相对层级和几何位置；</li>\n<li>触发前一步及当前任务意图。</li>\n</ol>\n<p>Android AccessibilityService 可以接收界面状态变化事件、查询活动窗口，并让节点执行 <code>ACTION_CLICK</code>；当节点 click 实现不完整时，API 还允许无障碍服务用 gesture tap 兜底。<a href=\"https://developer.android.com/reference/android/accessibilityservice/AccessibilityService\" target=\"_blank\" rel=\"noreferrer\">Android <code>AccessibilityService</code></a></p>\n<p>但量产方案有两个重要限制：</p>\n<ul>\n<li>自绘控件可能没有完整节点，<code>rootInActiveWindow</code> 也可能为空；</li>\n<li>Google Play 只允许窄目的、用户可理解的确定性规则自动化，一般 App 不得借 Accessibility API 自主发起、规划和执行任意动作，且需满足申报、披露和同意要求。<a href=\"https://support.google.com/googleplay/android-developer/answer/10964491\" target=\"_blank\" rel=\"noreferrer\">Google Play AccessibilityService 政策</a></li>\n</ul>\n<p>因此 AccessibilityService 是一种<strong>技术能力</strong>，不是自动获得的产品分发许可。</p>\n"
+        },
+        {
+          "id": "methods-section-8",
+          "title": "3.5 方法 E：OCR、模板匹配与视觉模型",
+          "html": "<h3 id=\"methods-slide-8-h3-0\">3.5 方法 E：OCR、模板匹配与视觉模型</h3>\n<p>当 UI 树缺失时，可从截图中完成：</p>\n<ol>\n<li>检测可能的弹窗区域和遮罩；</li>\n<li>OCR 提取标题、正文和按钮；</li>\n<li>视觉 grounding 把“稍后”“关闭”“允许”等语义映射到坐标；</li>\n<li>结合任务上下文决定动作；</li>\n<li>点击后重新截图并验证。</li>\n</ol>\n<p>现有移动 Agent 研究提供了可复用证据：</p>\n<table>\n<thead>\n<tr>\n<th>工作</th>\n<th>发表状态</th>\n<th>感知/动作思路</th>\n<th>对弹窗课题的价值</th>\n<th>主要局限</th>\n</tr>\n</thead>\n<tbody><tr>\n<td><a href=\"https://arxiv.org/abs/2312.13771\" target=\"_blank\" rel=\"noreferrer\">AppAgent</a>（Zhang et al., 2023）</td>\n<td>arXiv 预印本；后续版本发表于 <a href=\"https://dl.acm.org/doi/10.1145/3706598.3713600\" target=\"_blank\" rel=\"noreferrer\">CHI 2025</a></td>\n<td>截图、带编号的可交互元素、tap/swipe；探索或人类示范建立知识库</td>\n<td>说明不依赖 App 后端也能操作多种手机 UI</td>\n<td>不是专门的中断检测器；视觉误点和探索成本仍在</td>\n</tr>\n<tr>\n<td><a href=\"https://arxiv.org/abs/2401.16158\" target=\"_blank\" rel=\"noreferrer\">Mobile-Agent</a>（Wang et al., 2024）</td>\n<td>arXiv 预印本</td>\n<td>视觉感知、OCR、图标检测和坐标动作</td>\n<td>适合 UI 树缺失的自绘弹窗</td>\n<td>对系统权限语义和高风险决策没有协议级保证</td>\n</tr>\n<tr>\n<td><a href=\"https://papers.nips.cc/paper_files/paper/2024/hash/0520537ba799d375b8ff5523295c337a-Abstract-Conference.html\" target=\"_blank\" rel=\"noreferrer\">Mobile-Agent-v2</a>（Wang et al., NeurIPS 2024）</td>\n<td>同行评审会议论文</td>\n<td>规划、决策、反思分工，记录任务进展并根据动作结果纠错</td>\n<td>“点击后观察结果再纠错”可用于弹窗恢复</td>\n<td>主要解决长程导航，不是弹窗安全策略</td>\n</tr>\n<tr>\n<td><a href=\"https://arxiv.org/abs/2405.14573\" target=\"_blank\" rel=\"noreferrer\">AndroidWorld</a>（Rawles et al., 2024）</td>\n<td>arXiv 预印本</td>\n<td>真 Android 环境、动态任务、可访问性树与截图基线</td>\n<td>可用于构造可复现的意外弹窗评测</td>\n<td>原始任务不等于弹窗专项 benchmark；基线成功率显示泛化仍难</td>\n</tr>\n<tr>\n<td><a href=\"https://arxiv.org/abs/2410.05243\" target=\"_blank\" rel=\"noreferrer\">UGround</a>（Gou et al., 2024）</td>\n<td>arXiv 预印本</td>\n<td>纯视觉 GUI grounding，跨平台从表达定位像素坐标</td>\n<td>提升未知 UI 的坐标定位能力</td>\n<td>定位正确不等于动作语义或授权决策正确</td>\n</tr>\n<tr>\n<td><a href=\"https://arxiv.org/abs/2311.08649\" target=\"_blank\" rel=\"noreferrer\">DroidAgent</a>（Yoon et al., 2023）</td>\n<td>arXiv 预印本</td>\n<td>LLM、长短期记忆和 Android GUI 交互</td>\n<td>支持目标驱动探索与异常后的继续规划</td>\n<td>测试目标生成不是弹窗分类，且 LLM 行为有随机性</td>\n</tr>\n<tr>\n<td><a href=\"https://conf.researchr.org/details/fse-2026/fse-2026-journal-first/18/VLM-Fuzz-Vision-Language-Model-Assisted-Recursive-Depth-First-Search-Exploration-for\" target=\"_blank\" rel=\"noreferrer\">VLM-Fuzz</a>（Demissie et al., FSE 2026 Journal-First）</td>\n<td>同行评审 Journal-First 展示</td>\n<td>VLM 辅助 Android GUI 深度优先探索，明确把 pop-up 作为易卡住的 widget</td>\n<td>直接证明弹窗是自动探索覆盖率中的实际障碍</td>\n<td>面向测试探索，不直接给出跨平台权限与风险策略</td>\n</tr>\n</tbody></table>\n<p>这些工作支持“视觉是必要的长尾能力”，但没有证明纯视觉可以安全地对所有弹窗自动 Allow。视觉模型擅长<strong>找位置和理解表面语义</strong>，而权限、支付、身份和数据共享仍需要结构化状态与策略约束。</p>\n"
+        },
+        {
+          "id": "methods-section-9",
+          "title": "3.6 方法 F：固定坐标、ADB input 与按键退回",
+          "html": "<h3 id=\"methods-slide-9-h3-0\">3.6 方法 F：固定坐标、ADB input 与按键退回</h3>\n<p>固定坐标点击、Back/Escape 或 tap 屏幕外部实现简单，但缺陷明显：</p>\n<ul>\n<li>分辨率、字体缩放、横竖屏、刘海/安全区和主题变化会移动按钮；</li>\n<li>弹窗消失到点击发生之间可能出现新的控件；</li>\n<li>Back 可能取消业务而不是单纯关闭提示；</li>\n<li>“默认右侧按钮是确认”在不同平台、语言和对话框类型上并不成立。</li>\n</ul>\n<p>只建议在固定实验设备、固定系统镜像、固定 App 版本下作为可回放脚本的末级 fallback，并且每次动作后必须截图与状态校验。</p>\n"
+        },
+        {
+          "id": "methods-section-10",
+          "title": "3.7 方法 G：Root、jailbreak、hook 或修改系统组件",
+          "html": "<h3 id=\"methods-slide-10-h3-0\">3.7 方法 G：Root、jailbreak、hook 或修改系统组件</h3>\n<p>这类方式可能获得窗口内部状态或直接改权限，但会破坏研究结果的可部署性：</p>\n<ul>\n<li>难以覆盖普通量产设备；</li>\n<li>版本与厂商耦合严重；</li>\n<li>改变了原安全模型，无法代表正常用户环境；</li>\n<li>增加攻击面、合规与维护成本。</li>\n</ul>\n<p>它适合研究系统内部实现或专用实验镜像，不适合作为“正常软件使用突然遇到弹窗”的默认解决路线。</p>\n"
+        },
+        {
+          "id": "methods-section-11",
+          "title": "4. 按场景选择方法",
+          "html": "<h2 id=\"methods-slide-11-h2-0\">4. 按场景选择方法</h2>\n<table>\n<thead>\n<tr>\n<th>场景</th>\n<th>首选</th>\n<th>次选</th>\n<th>不建议默认使用</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>自家 Android/iOS App 的业务弹窗</td>\n<td>稳定 id/test hook + Espresso/Compose/XCTest</td>\n<td>Appium/UI 树</td>\n<td>OCR、坐标</td>\n</tr>\n<tr>\n<td>Android 系统权限框（测试设备）</td>\n<td>状态预置；若要测 UI，则 UI Automator <code>PermissionDialog</code> watcher</td>\n<td>Appium UiAutomator2</td>\n<td>纯文本 XPath、盲点 Allow</td>\n</tr>\n<tr>\n<td>iOS 系统权限框（测试设备）</td>\n<td>明确预期时直接操作 alert；非预期时 XCTest interruption monitor</td>\n<td>Appium XCUITest alert API</td>\n<td>量产 App 试图跨 App 操作</td>\n</tr>\n<tr>\n<td>移动 Web 原生 prompt</td>\n<td>WebDriver/Playwright dialog API</td>\n<td>Appium web context</td>\n<td>截图点击浏览器按钮</td>\n</tr>\n<tr>\n<td>Web DOM modal</td>\n<td>DOM role/id/selector</td>\n<td>OCR/VLM</td>\n<td>当成 WebDriver native alert</td>\n</tr>\n<tr>\n<td>第三方 App 的已知低风险提示</td>\n<td>语义 UI 树 + 所有者/文案/上下文规则</td>\n<td>视觉 grounding</td>\n<td>全局 autoAccept</td>\n</tr>\n<tr>\n<td>未知自绘弹窗</td>\n<td>VLM/OCR 分类 + 保守策略</td>\n<td>人工确认</td>\n<td>仅凭按钮颜色或位置</td>\n</tr>\n<tr>\n<td>支付、删除、安装、隐私共享</td>\n<td>显式任务确认或人工接管</td>\n<td>专项 allowlist</td>\n<td>通用自动允许</td>\n</tr>\n<tr>\n<td>CAPTCHA/风控/生物识别</td>\n<td>官方流程或人工完成</td>\n<td>业务 API/授权集成</td>\n<td>规避或模拟通过</td>\n</tr>\n</tbody></table>\n"
+        },
+        {
+          "id": "methods-section-12",
+          "title": "5. 推荐的跨平台实现架构",
+          "html": "<h2 id=\"methods-slide-12-h2-0\">5. 推荐的跨平台实现架构</h2>\n"
+        },
+        {
+          "id": "methods-section-13",
+          "title": "5.1 平台适配层",
+          "html": "<h3 id=\"methods-slide-13-h3-0\">5.1 平台适配层</h3>\n<pre><code class=\"language-text\">Android adapter\n  - foreground package/window\n  - UI Automator / Appium page source\n  - PermissionDialog watcher\n  - screenshot + input action\n\niOS adapter\n  - XCTest/Appium alert tree\n  - UI interruption monitor\n  - simulator permission state\n  - screenshot + XCTest action\n\nWeb adapter\n  - WebDriver/Playwright user-prompt event\n  - DOM dialog/alertdialog/top-layer inspection\n  - screenshot fallback\n</code></pre>\n"
+        },
+        {
+          "id": "methods-section-14",
+          "title": "5.2 中断检测器",
+          "html": "<h3 id=\"methods-slide-14-h3-0\">5.2 中断检测器</h3>\n<p>不要只用“截图里有矩形框”。应聚合以下信号：</p>\n<ul>\n<li>当前目标元素从可点击变为 blocked/not hittable；</li>\n<li>foreground package/bundle/window 发生变化；</li>\n<li>出现 <code>alert/dialog/alertdialog</code> 或系统权限节点；</li>\n<li>DOM 出现 open modal/top-layer/inert 状态；</li>\n<li>屏幕出现高置信度遮罩和集中式 action 区；</li>\n<li>Agent 连续动作无状态变化或收到 <code>unexpected alert open</code>；</li>\n<li>上一步恰好触发敏感能力、外部 intent、文件选择器或网络失败。</li>\n</ul>\n"
+        },
+        {
+          "id": "methods-section-15",
+          "title": "5.3 分类器",
+          "html": "<h3 id=\"methods-slide-15-h3-0\">5.3 分类器</h3>\n<p>分类键建议为：</p>\n<pre><code class=\"language-text\">owner: app | system | browser | third-party-security\nkind: permission | error | onboarding | ad | update | chooser |\n      transaction | authentication | captcha | unknown\nconsequence: dismiss-only | reversible-state-change | sensitive-grant |\n             financial/destructive | identity/security\nconfidence: 0..1\n</code></pre>\n"
+        },
+        {
+          "id": "methods-section-16",
+          "title": "5.4 决策策略",
+          "html": "<h3 id=\"methods-slide-16-h3-0\">5.4 决策策略</h3>\n<p>推荐默认策略：</p>\n<table>\n<thead>\n<tr>\n<th>分类</th>\n<th>默认动作</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>已知提示、教程、非关键广告</td>\n<td>dismiss/skip</td>\n</tr>\n<tr>\n<td>可恢复错误提示</td>\n<td>acknowledge，然后重试受阻步骤</td>\n</tr>\n<tr>\n<td>与当前任务无关的权限请求</td>\n<td>deny 或 ask-user，不默认 allow</td>\n</tr>\n<tr>\n<td>当前任务明确需要、且在 allowlist 中的权限</td>\n<td>allow；记录权限、范围和触发原因</td>\n</tr>\n<tr>\n<td>更新提示</td>\n<td>选“稍后”，除非任务就是更新</td>\n</tr>\n<tr>\n<td>隐私共享、通知订阅、跟踪授权</td>\n<td>依据显式用户策略，否则 ask-user</td>\n</tr>\n<tr>\n<td>支付、删除、安装、设备管理、安全设置</td>\n<td>ask-user/专项确认</td>\n</tr>\n<tr>\n<td>CAPTCHA、风控、PIN、生物识别</td>\n<td>handoff，不自动规避</td>\n</tr>\n<tr>\n<td>unknown</td>\n<td>优先安全退出或 ask-user；绝不盲点正向按钮</td>\n</tr>\n</tbody></table>\n"
+        },
+        {
+          "id": "methods-section-17",
+          "title": "5.5 动作执行与验证",
+          "html": "<h3 id=\"methods-slide-17-h3-0\">5.5 动作执行与验证</h3>\n<p>动作通道优先级：</p>\n<pre><code class=\"language-text\">协议 accept/dismiss\n  &gt; element semantic click\n  &gt; platform watcher action\n  &gt; grounded coordinate tap\n  &gt; generic Back / outside tap\n</code></pre>\n<p>验证至少包含三项：</p>\n<ol>\n<li>弹窗节点或视觉区域已消失；</li>\n<li>前景 App/窗口和原任务目标重新可达；</li>\n<li>权限或业务状态与期望一致，而不是“框没了就算成功”。</li>\n</ol>\n<p>如验证失败，应重新观察并选择其他 handler，不应无上限重复同一坐标。建议为每个弹窗指纹设置最多 1–2 次动作尝试，随后进入恢复或人工接管。</p>\n"
+        },
+        {
+          "id": "methods-section-18",
+          "title": "6. 最小可行系统（MVP）",
+          "html": "<h2 id=\"methods-slide-18-h2-0\">6. 最小可行系统（MVP）</h2>\n<p>在没有指定 Agent 框架的前提下，建议先实现以下跨平台抽象，而不是直接训练一个模型：</p>\n<pre><code class=\"language-text\">PopupObservation\n  platform\n  foreground_owner\n  semantic_tree\n  screenshot\n  trigger_action\n  blocked_target\n\nPopupDecision\n  class\n  action\n  target_locator\n  confidence\n  rationale\n  requires_user\n\nPopupOutcome\n  dismissed\n  state_delta\n  task_resumed\n  evidence_before_after\n</code></pre>\n<p>第一版规则库只需覆盖：</p>\n<ul>\n<li>Android/iOS 常见权限弹窗；</li>\n<li>App 内 <code>alert/dialog</code> 的 Cancel/Close/Later/Skip；</li>\n<li>网络错误的 OK/Retry；</li>\n<li>Android/iOS 更新提示的 Later；</li>\n<li>WebDriver 原生 prompt；</li>\n<li>DOM <code>role=dialog/alertdialog</code>；</li>\n<li>unknown/high-risk → user handoff。</li>\n</ul>\n<p>视觉模型只在语义通道没有结果时运行。这样可以先得到可测、可解释的基线，再评估 VLM 是否真正提高覆盖率。</p>\n"
+        },
+        {
+          "id": "methods-section-19",
+          "title": "7. 建议的评测指标",
+          "html": "<h2 id=\"methods-slide-19-h2-0\">7. 建议的评测指标</h2>\n<p>不能只统计“弹窗关闭率”。至少需要：</p>\n<table>\n<thead>\n<tr>\n<th>指标</th>\n<th>定义</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Detection recall</td>\n<td>实际阻断任务的弹窗有多少被发现</td>\n</tr>\n<tr>\n<td>False interruption rate</td>\n<td>正常页面被误判为弹窗的比例</td>\n</tr>\n<tr>\n<td>Classification accuracy</td>\n<td>owner/kind/consequence 分类正确率</td>\n</tr>\n<tr>\n<td>Safe action accuracy</td>\n<td>选择的 allow/deny/dismiss/ask 是否符合策略</td>\n</tr>\n<tr>\n<td>Resume success</td>\n<td>处理后原任务是否真正继续</td>\n</tr>\n<tr>\n<td>Harmful confirmation rate</td>\n<td>错误确认敏感/破坏性动作的比例，目标应为 0</td>\n</tr>\n<tr>\n<td>Steps/latency</td>\n<td>每次中断恢复的动作数和延迟</td>\n</tr>\n<tr>\n<td>Cross-version robustness</td>\n<td>OS、OEM、语言、主题、屏幕尺寸变化下的稳定性</td>\n</tr>\n<tr>\n<td>Explanation coverage</td>\n<td>每次自动动作是否留下触发依据和前后状态证据</td>\n</tr>\n</tbody></table>\n<p>评测集应按“所有者 × 弹窗类别 × 平台 × 语言 × 风险等级”分层，并包含异步出现、按钮换序、语义树缺失、连续弹窗和弹窗后页面跳转等压力场景。</p>\n"
+        },
+        {
+          "id": "methods-section-20",
+          "title": "8. 当前研究空白",
+          "html": "<h2 id=\"methods-slide-20-h2-0\">8. 当前研究空白</h2>\n<ol>\n<li>现有移动 Agent benchmark 多评估长程任务成功率，缺少以“意外中断恢复”和误确认代价为核心的专项 benchmark。</li>\n<li>视觉 grounding 研究主要回答“点哪里”，对“是否应该允许”及动作后果建模不足。</li>\n<li>UI 自动化框架有成熟的权限 watcher，但主要服务确定性测试；开放世界 Agent 的弹窗类别与策略更动态。</li>\n<li>跨 Android OEM、iOS 版本、本地化和辅助功能设置的系统性弹窗语料不足。</li>\n<li>现有论文常用任务成功率汇总，较少单独报告错误授权、破坏性确认和安全 handoff 的指标。</li>\n</ol>\n<p>这意味着本课题真正有价值的方向不是再造一个“找关闭按钮”的视觉模型，而是研究：</p>\n<blockquote>\n<p><strong>如何把平台级中断信号、语义 UI、视觉 grounding、任务意图和动作风险统一成一个可验证、跨平台、不会盲目授权的 Popup Recovery Policy。</strong></p>\n</blockquote>\n"
+        },
+        {
+          "id": "methods-section-21",
+          "title": "9. 最终方法排序",
+          "html": "<h2 id=\"methods-slide-21-h2-0\">9. 最终方法排序</h2>\n<p>如果现在必须选一条实现路线：</p>\n<ol>\n<li>Android 测试环境：UI Automator <code>watchFor</code> + 语义规则 + 权限状态预置。</li>\n<li>iOS 测试环境：预期 alert 直接处理 + XCTest interruption monitor + Simulator 状态预置。</li>\n<li>移动 Web：WebDriver/Playwright prompt 事件 + DOM dialog 规则。</li>\n<li>跨平台 Agent：Appium/平台 adapter 提供语义树，VLM 只处理语义缺失长尾。</li>\n<li>产品安全策略：未知默认不 Allow；高风险必须显式用户确认；所有动作做前后状态验证。</li>\n</ol>\n<p>这套组合覆盖了“正常使用中突然出现一个弹窗”的主要情况，同时尊重系统权限、安全 UI 和应用商店政策边界。</p>\n"
+        }
+      ]
+    }
+  ]
+}
