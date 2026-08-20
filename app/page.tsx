@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "研究档案",
@@ -26,9 +25,9 @@ export default function Home() {
             把原始 Markdown 保留下来，把论证转换为可链接、可检索、可全屏演示的 HTML
             研究档案。
           </p>
-          <Link href="/research-mobile" className="primary-link">
+          <a href="/research-mobile" className="primary-link">
             进入 research-移动端 <span aria-hidden="true">→</span>
-          </Link>
+          </a>
         </div>
         <div
           className="home-stack"
@@ -53,7 +52,7 @@ export default function Home() {
           <p>ARCHIVE REGISTER</p>
           <h2 id="register-heading">主题档案</h2>
         </header>
-        <Link href="/research-mobile" className="register-row">
+        <a href="/research-mobile" className="register-row">
           <span className="register-code">THEME / 001</span>
           <span>
             <strong>research-移动端</strong>
@@ -63,7 +62,7 @@ export default function Home() {
           <span className="register-arrow" aria-hidden="true">
             ↗
           </span>
-        </Link>
+        </a>
       </section>
       <footer className="home-footer">
         <span>原始材料：Markdown</span>

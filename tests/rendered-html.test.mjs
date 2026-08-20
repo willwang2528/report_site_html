@@ -30,6 +30,7 @@ test("renders the research archive home", async () => {
   const html = await response.text();
   assert.match(html, /弹窗不是一个框/);
   assert.match(html, /research-移动端/);
+  assert.equal((html.match(/href="\/research-mobile"/g) ?? []).length, 2);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 

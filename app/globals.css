@@ -108,6 +108,11 @@ a {
   text-transform: uppercase;
 }
 
+.home-thesis {
+  position: relative;
+  z-index: 2;
+}
+
 .home-thesis h1 {
   max-width: 900px;
   margin: 0;
@@ -127,6 +132,8 @@ a {
 }
 
 .primary-link {
+  position: relative;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -153,6 +160,7 @@ a {
   position: relative;
   min-height: 430px;
   isolation: isolate;
+  pointer-events: none;
 }
 
 .home-window {
