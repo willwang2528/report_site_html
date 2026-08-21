@@ -46,6 +46,11 @@ for (const [path, title, proof] of [
     "移动端弹窗自动化：现有方法对比",
     "不存在一个在 Android、iOS、Web",
   ],
+  [
+    "/research-mobile/popup/principles-brief",
+    "移动端 UI 弹窗底层原理调研（简述版）",
+    "跨版本结论",
+  ],
 ]) {
   test(`server-renders ${path}`, async () => {
     const response = await render(path, "https://reports.example");
@@ -65,6 +70,18 @@ for (const [path, title, proof] of [
     assert.match(html, /<table>/);
   });
 }
+
+test("lists the brief principles report after the existing reports", async () => {
+  const response = await render("/research-mobile/popup");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  const principles = html.indexOf('href="/research-mobile/popup/principles"');
+  const methods = html.indexOf('href="/research-mobile/popup/methods"');
+  const brief = html.indexOf('href="/research-mobile/popup/principles-brief"');
+  assert.ok(principles >= 0);
+  assert.ok(methods > principles);
+  assert.ok(brief > methods);
+});
 
 test("renders the complete hierarchy and rejects unknown reports", async () => {
   for (const path of ["/research-mobile", "/research-mobile/popup"]) {

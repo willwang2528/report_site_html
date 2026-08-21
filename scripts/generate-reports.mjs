@@ -35,6 +35,15 @@ const definitions = [
       "比较状态预置、原生 watcher、语义 UI、OCR/VLM 与人工接管，并给出跨平台恢复架构。",
     scope: "检测 · 分类 · 决策 · 动作 · 验证 · 恢复",
   },
+  {
+    slug: "principles-brief",
+    file: "03-popup-principles-brief.md",
+    kind: "底层原理 · 简述版",
+    eyebrow: "PRINCIPLES / BRIEF",
+    summary:
+      "用最短路径解释弹窗阻断机制，并核验 8 月 6 日至 8 月 22 日的跨平台 API 变化与长期复用性。",
+    scope: "版本核验 · 稳定接口 · 复用架构",
+  },
 ];
 
 marked.use({ gfm: true, breaks: false });

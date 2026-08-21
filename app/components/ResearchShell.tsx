@@ -16,6 +16,11 @@ const reportLinks = [
     label: "现有方法对比",
     code: "METHODS",
   },
+  {
+    href: "/research-mobile/popup/principles-brief",
+    label: "底层原理调研（简述版）",
+    code: "BRIEF",
+  },
 ];
 
 function isCurrent(pathname: string, href: string) {
