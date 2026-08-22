@@ -1,5 +1,39 @@
 # Errors
 
+## [ERR-20260822-004] private-production-browser-handoff
+
+**Logged**: 2026-08-22T13:38:12+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: infra
+
+### Summary
+The automated browser tab could not navigate from localhost to the private Sites production URL after a successful deployment.
+
+### Error
+
+```text
+net::ERR_CONNECTION_CLOSED
+```
+
+### Context
+- Sites deployment version 6 had already reported `succeeded`.
+- The same browser tab had completed local desktop and mobile interaction checks.
+
+### Suggested Fix
+Use the Sites browser handoff entry point for the private production URL; do not interpret a browser-side connection close as a failed deployment.
+
+### Metadata
+- Reproducible: unknown
+- Related Files: .openai/hosting.json
+- Tags: sites, private-site, browser, handoff
+
+### Resolution
+- **Resolved**: 2026-08-22T13:39:00+08:00
+- **Notes**: Queued the deployed private URL through the Codex Sites browser handoff; deployment remained successful.
+
+---
+
 ## [ERR-20260822-003] local-preview-sandbox-boundary
 
 **Logged**: 2026-08-22T13:32:31+08:00
