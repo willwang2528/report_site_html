@@ -38,11 +38,12 @@ const definitions = [
   {
     slug: "principles-brief",
     file: "03-popup-principles-brief.md",
-    kind: "底层原理 · 简述版",
-    eyebrow: "PRINCIPLES / BRIEF",
+    kind: "论文精读",
+    eyebrow: "PAPER READING / PERMISSION LITERACY",
     summary:
-      "用最短路径解释弹窗阻断机制，并核验 8 月 6 日至 8 月 22 日的跨平台 API 变化与长期复用性。",
-    scope: "版本核验 · 稳定接口 · 复用架构",
+      "拆解移动 GUI Agent 的权限素养、任务条件化请求者偏差，以及提示缓解中的安全—可用性权衡。",
+    scope: "权限素养 · 最小权限 · 任务先验 · 提示缓解",
+    ogImage: "/research-mobile/popup-assets/2608.04755/figure-2.png",
   },
 ];
 

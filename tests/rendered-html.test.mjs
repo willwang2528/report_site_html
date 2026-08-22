@@ -35,21 +35,24 @@ test("renders the research archive home", async () => {
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
-for (const [path, title, proof] of [
+for (const [path, title, proof, ogImage] of [
   [
     "/research-mobile/popup/principles",
     "移动端 UI 弹窗底层原理调研",
     "普通 UI 弹窗通常不是人类检测",
+    "og.png",
   ],
   [
     "/research-mobile/popup/methods",
     "移动端弹窗自动化：现有方法对比",
     "不存在一个在 Android、iOS、Web",
+    "og.png",
   ],
   [
     "/research-mobile/popup/principles-brief",
-    "移动端 UI 弹窗底层原理调研（简述版）",
-    "跨版本结论",
+    "“允许”以完成任务，却在无意中授予过多权限",
+    "任务条件化的请求者身份偏差",
+    "research-mobile/popup-assets/2608.04755/figure-2.png",
   ],
 ]) {
   test(`server-renders ${path}`, async () => {
@@ -62,7 +65,9 @@ for (const [path, title, proof] of [
     assert.match(html, new RegExp(`<title>[^<]*${title}[^<]*</title>`));
     assert.match(
       html,
-      /property="og:image" content="https:\/\/reports\.example\/og\.png"/,
+      new RegExp(
+        `property="og:image" content="https://reports\\.example/${ogImage.replaceAll(".", "\\.")}"`,
+      ),
     );
     assert.match(html, /布局编排/);
     assert.match(html, /编排预览/);
@@ -70,6 +75,28 @@ for (const [path, title, proof] of [
     assert.match(html, /<table>/);
   });
 }
+
+test("publishes the paper deep reading and its primary result figure", async () => {
+  const response = await render("/research-mobile/popup/principles-brief");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /href="https:\/\/arxiv\.org\/abs\/2608\.04755"/);
+  assert.match(
+    html,
+    /src="\/research-mobile\/popup-assets\/2608\.04755\/figure-2\.png"/,
+  );
+  assert.match(html, /26\/32/);
+  assert.match(html, /0\/32/);
+  assert.doesNotMatch(html, /Android 17 QPR2 Beta 3/);
+
+  const png = await readFile(
+    new URL(
+      "../dist/client/research-mobile/popup-assets/2608.04755/figure-2.png",
+      import.meta.url,
+    ),
+  );
+  assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+});
 
 test("lists the brief principles report after the existing reports", async () => {
   const response = await render("/research-mobile/popup");

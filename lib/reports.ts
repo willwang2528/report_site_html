@@ -20,6 +20,7 @@ export type ReportRecord = {
   title: string;
   summary: string;
   scope: string;
+  ogImage?: string;
   date: string;
   sourceHash: string;
   raw: string;

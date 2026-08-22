@@ -20,8 +20,8 @@ const reportLinks = [
   },
   {
     href: "/research-mobile/popup/principles-brief",
-    label: "底层原理调研（简述版）",
-    code: "BRIEF",
+    label: "权限素养论文精读",
+    code: "PAPER",
   },
 ];
 
