@@ -60,6 +60,30 @@ for (const [path, title, proof, ogImage] of [
     "关闭弹窗后，再比较宿主",
     "research-mobile/popup-assets/vlm-fuzz/fig-7-popup-state-space.png",
   ],
+  [
+    "/research-mobile/popup/popsweeper",
+    "PopSweeper：把阻塞弹窗转化为可供测试脚本点击的坐标",
+    "87.1%",
+    "research-mobile/popup-assets/popsweeper/page_007_fig_fig_3.png",
+  ],
+  [
+    "/research-mobile/popup/sneaky-popups",
+    "Understanding the Sneaky Patterns：为研究欺骗弹窗而构建的识别、处置与探索闭环",
+    "超过 88%",
+    "research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_2.png",
+  ],
+  [
+    "/research-mobile/popup/whispertest",
+    "WhisperTest：用 Voice Control 打通非越狱 iPhone 的弹窗执行链",
+    "48/50",
+    "research-mobile/popup-assets/whispertest/page_003_fig_figure_1.png",
+  ],
+  [
+    "/research-mobile/popup/cookieverse",
+    "Exploring the Cookieverse：BannerClick 如何进入设置并执行拒绝",
+    "Android User-Agent",
+    "research-mobile/popup-assets/cookieverse/page_007_fig_fig_1.png",
+  ],
 ]) {
   test(`server-renders ${path}`, async () => {
     const response = await render(path, "https://reports.example");
@@ -127,6 +151,47 @@ test("publishes the VLM-Fuzz deep reading with formal-version evidence", async (
   assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
 });
 
+test("publishes four additional popup papers with their evidence boundaries", async () => {
+  const cases = [
+    {
+      path: "/research-mobile/popup/popsweeper",
+      claims: [/回放模拟/, /没有让真实测试脚本在物理设备上点击后继续原任务/],
+      asset:
+        "../dist/client/research-mobile/popup-assets/popsweeper/page_007_fig_fig_3.png",
+    },
+    {
+      path: "/research-mobile/popup/sneaky-popups",
+      claims: [/弹窗消失/, /不理解用户任务/],
+      asset:
+        "../dist/client/research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_2.png",
+    },
+    {
+      path: "/research-mobile/popup/whispertest",
+      claims: [/48\/50/, /预设偏好/],
+      asset:
+        "../dist/client/research-mobile/popup-assets/whispertest/page_003_fig_figure_1.png",
+    },
+    {
+      path: "/research-mobile/popup/cookieverse",
+      claims: [/移动 Web/, /不是物理 Android/],
+      asset:
+        "../dist/client/research-mobile/popup-assets/cookieverse/page_007_fig_fig_1.png",
+    },
+  ];
+
+  for (const item of cases) {
+    const response = await render(item.path);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    for (const claim of item.claims) assert.match(html, claim);
+    const png = await readFile(new URL(item.asset, import.meta.url));
+    assert.deepEqual(
+      [...png.subarray(0, 8)],
+      [137, 80, 78, 71, 13, 10, 26, 10],
+    );
+  }
+});
+
 test("groups reports into solution and paper modules", async () => {
   const response = await render("/research-mobile/popup");
   assert.equal(response.status, 200);
@@ -137,12 +202,22 @@ test("groups reports into solution and paper modules", async () => {
   const papersHeading = html.indexOf("论文模块");
   const brief = html.indexOf('href="/research-mobile/popup/principles-brief"');
   const vlmFuzz = html.indexOf('href="/research-mobile/popup/vlm-fuzz"');
+  const popSweeper = html.indexOf('href="/research-mobile/popup/popsweeper"');
+  const sneakyPopups = html.indexOf(
+    'href="/research-mobile/popup/sneaky-popups"',
+  );
+  const whisperTest = html.indexOf('href="/research-mobile/popup/whispertest"');
+  const cookieverse = html.indexOf('href="/research-mobile/popup/cookieverse"');
   assert.ok(solutionsHeading >= 0);
   assert.ok(principles > solutionsHeading);
   assert.ok(methods > principles);
   assert.ok(papersHeading > methods);
   assert.ok(brief > papersHeading);
   assert.ok(vlmFuzz > brief);
+  assert.ok(popSweeper > vlmFuzz);
+  assert.ok(sneakyPopups > popSweeper);
+  assert.ok(whisperTest > sneakyPopups);
+  assert.ok(cookieverse > whisperTest);
   assert.doesNotMatch(html, />当前报告</);
 });
 

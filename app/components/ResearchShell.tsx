@@ -43,6 +43,26 @@ const reportGroups = [
         label: "VLM-Fuzz 论文精读",
         code: "VLM-FUZZ",
       },
+      {
+        href: "/research-mobile/popup/popsweeper",
+        label: "PopSweeper 论文精读",
+        code: "POPSWEEPER",
+      },
+      {
+        href: "/research-mobile/popup/sneaky-popups",
+        label: "Poker 论文精读",
+        code: "POKER",
+      },
+      {
+        href: "/research-mobile/popup/whispertest",
+        label: "WhisperTest 论文精读",
+        code: "WHISPERTEST",
+      },
+      {
+        href: "/research-mobile/popup/cookieverse",
+        label: "Cookieverse 论文精读",
+        code: "BANNERCLICK",
+      },
     ],
   },
 ];

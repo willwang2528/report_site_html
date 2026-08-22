@@ -6,11 +6,11 @@ import test from "node:test";
 const expected = {
   index: {
     file: "README.md",
-    hash: "94ae66f16b841b0e8ed9e54839e031e8ceb484c7b1078017caf153b6f73d950b",
+    hash: "90fd3ce0109ec5d4e5dbd4fb068a9deec5bdc03a810e3b4d64b1ef975bf5b507",
     h2: 0,
     tables: 0,
     codeBlocks: 0,
-    links: 4,
+    links: 8,
     presentationSections: 1,
   },
   principles: {
@@ -48,6 +48,42 @@ const expected = {
     codeBlocks: 2,
     links: 3,
     presentationSections: 15,
+  },
+  popsweeper: {
+    file: "05-popsweeper.md",
+    hash: "acd4b3ab82d12375bf6cd235598ba633cf3262da469150b0fedf31faacb4afed",
+    h2: 12,
+    tables: 2,
+    codeBlocks: 0,
+    links: 4,
+    presentationSections: 27,
+  },
+  "sneaky-popups": {
+    file: "06-sneaky-popups.md",
+    hash: "b63290e172ce593c94a50d5de470f7d8ae02cf1cd6b69ac45de0376a6042f705",
+    h2: 12,
+    tables: 2,
+    codeBlocks: 0,
+    links: 4,
+    presentationSections: 24,
+  },
+  whispertest: {
+    file: "07-whispertest.md",
+    hash: "15639994a13873a4c5227e480a173e026284cf21b6d5a9d70d9727eb309734da",
+    h2: 12,
+    tables: 1,
+    codeBlocks: 0,
+    links: 4,
+    presentationSections: 27,
+  },
+  cookieverse: {
+    file: "08-cookieverse.md",
+    hash: "d8403d6146c9efe75d3bbb01324a1918e9bce79a25c4c7cb100e2f396b65686b",
+    h2: 12,
+    tables: 1,
+    codeBlocks: 0,
+    links: 6,
+    presentationSections: 28,
   },
 };
 
@@ -113,6 +149,10 @@ test("published reports declare one of the two topic modules", () => {
       ["methods", "solutions"],
       ["principles-brief", "papers"],
       ["vlm-fuzz", "papers"],
+      ["popsweeper", "papers"],
+      ["sneaky-popups", "papers"],
+      ["whispertest", "papers"],
+      ["cookieverse", "papers"],
     ],
   );
 });

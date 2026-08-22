@@ -60,6 +60,54 @@ const definitions = [
     scope: "临时状态 · 宿主差分 · 路径重放 · 多入口测试",
     ogImage: "/research-mobile/popup-assets/vlm-fuzz/fig-7-popup-state-space.png",
   },
+  {
+    slug: "popsweeper",
+    file: "05-popsweeper.md",
+    kind: "论文精读",
+    module: "papers",
+    eyebrow: "PAPER READING / POPSWEEPER",
+    summary:
+      "拆解 Android 测试器如何检测阻塞弹窗、定位关闭入口并把点击坐标回传给自动化脚本。",
+    scope: "视觉检测 · 关闭控件定位 · 模拟回放 · Android",
+    ogImage:
+      "/research-mobile/popup-assets/popsweeper/page_007_fig_fig_3.png",
+  },
+  {
+    slug: "sneaky-popups",
+    file: "06-sneaky-popups.md",
+    kind: "论文精读",
+    module: "papers",
+    eyebrow: "PAPER READING / POKER",
+    summary:
+      "拆解 Poker 如何识别弹窗区域、点击候选控件直到弹窗消失，并继续采集 Android 应用。",
+    scope: "欺骗弹窗 · 视觉识别 · 消失验证 · Android",
+    ogImage:
+      "/research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_2.png",
+  },
+  {
+    slug: "whispertest",
+    file: "07-whispertest.md",
+    kind: "论文精读",
+    module: "papers",
+    eyebrow: "PAPER READING / WHISPERTEST",
+    summary:
+      "拆解非越狱 iPhone 如何结合可访问性、OCR 与 Voice Control，完成阻塞弹窗的真机交互。",
+    scope: "Accessibility · OCR · Voice Control · iOS",
+    ogImage:
+      "/research-mobile/popup-assets/whispertest/page_003_fig_figure_1.png",
+  },
+  {
+    slug: "cookieverse",
+    file: "08-cookieverse.md",
+    kind: "论文精读",
+    module: "papers",
+    eyebrow: "PAPER READING / BANNERCLICK",
+    summary:
+      "拆解 BannerClick 如何在移动网页配置中识别 Cookie Banner，并进入设置面板继续执行拒绝。",
+    scope: "Mobile Web · DOM · Cookie Banner · CMP",
+    ogImage:
+      "/research-mobile/popup-assets/cookieverse/page_007_fig_fig_1.png",
+  },
 ];
 
 marked.use({ gfm: true, breaks: false });
@@ -72,7 +120,18 @@ function rewriteMarkdownLinks(markdown) {
       "(./03-popup-principles-brief.md)",
       "(/research-mobile/popup/principles-brief)",
     )
-    .replaceAll("(./04-vlm-fuzz.md)", "(/research-mobile/popup/vlm-fuzz)");
+    .replaceAll("(./04-vlm-fuzz.md)", "(/research-mobile/popup/vlm-fuzz)")
+    .replaceAll("(./05-popsweeper.md)", "(/research-mobile/popup/popsweeper)")
+    .replaceAll(
+      "(./06-sneaky-popups.md)",
+      "(/research-mobile/popup/sneaky-popups)",
+    )
+    .replaceAll("(./07-whispertest.md)", "(/research-mobile/popup/whispertest)")
+    .replaceAll("(./08-cookieverse.md)", "(/research-mobile/popup/cookieverse)");
+}
+
+function stripFrontmatter(markdown) {
+  return markdown.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n+/, "");
 }
 
 function plainText(html) {
@@ -127,9 +186,13 @@ const reports = [];
 for (const definition of definitions) {
   const sourcePath = path.join(contentDir, definition.file);
   const raw = await readFile(sourcePath, "utf8");
-  const rendered = render(raw, definition.slug);
-  const title = raw.match(/^#\s+(.+)$/m)?.[1]?.trim() ?? definition.kind;
-  const date = raw.match(/^- 日期：(.+)$/m)?.[1]?.trim() ?? "2026-08-06";
+  const source = stripFrontmatter(raw);
+  const rendered = render(source, definition.slug);
+  const title = source.match(/^#\s+(.+)$/m)?.[1]?.trim() ?? definition.kind;
+  const date =
+    raw.match(/^- 日期：(.+)$/m)?.[1]?.trim() ??
+    raw.match(/^date:\s*(.+)$/m)?.[1]?.trim() ??
+    "2026-08-06";
 
   reports.push({
     ...definition,
@@ -139,7 +202,7 @@ for (const definition of definitions) {
     raw,
     html: rendered.html,
     headings: rendered.headings,
-    sections: makeSections(raw, definition.slug),
+    sections: makeSections(source, definition.slug),
   });
 }
 

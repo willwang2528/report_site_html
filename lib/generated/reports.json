@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22T08:37:53.170Z",
+  "generatedAt": "2026-08-22T09:45:48.676Z",
   "reports": [
     {
       "slug": "index",
@@ -11,9 +11,9 @@
       "scope": "课题入口 · 研究边界 · 报告关系",
       "title": "Popup Research",
       "date": "2026-08-06",
-      "sourceHash": "94ae66f16b841b0e8ed9e54839e031e8ceb484c7b1078017caf153b6f73d950b",
-      "raw": "# Popup Research\n\n本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。\n\n当前交付分成两个子模块：\n\n1. **底层解决方法**\n   - [移动端 UI 弹窗底层原理调研](./01-popup-principles.md)\n   - [现有弹窗自动化方法对比](./02-methods-comparison.md)\n2. **论文模块**\n   - [移动 GUI Agent 权限素养论文精读](./03-popup-principles-brief.md)\n   - [VLM-Fuzz 弹窗递归探索论文精读](./04-vlm-fuzz.md)\n\n核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。\n",
-      "html": "<h1 id=\"index-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付分成两个子模块：</p>\n<ol>\n<li><strong>底层解决方法</strong><ul>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ul>\n</li>\n<li><strong>论文模块</strong><ul>\n<li><a href=\"/research-mobile/popup/principles-brief\">移动 GUI Agent 权限素养论文精读</a></li>\n<li><a href=\"/research-mobile/popup/vlm-fuzz\">VLM-Fuzz 弹窗递归探索论文精读</a></li>\n</ul>\n</li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n",
+      "sourceHash": "90fd3ce0109ec5d4e5dbd4fb068a9deec5bdc03a810e3b4d64b1ef975bf5b507",
+      "raw": "# Popup Research\n\n本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。\n\n当前交付分成两个子模块：\n\n1. **底层解决方法**\n   - [移动端 UI 弹窗底层原理调研](./01-popup-principles.md)\n   - [现有弹窗自动化方法对比](./02-methods-comparison.md)\n2. **论文模块**\n   - [移动 GUI Agent 权限素养论文精读](./03-popup-principles-brief.md)\n   - [VLM-Fuzz 弹窗递归探索论文精读](./04-vlm-fuzz.md)\n   - [PopSweeper 阻塞弹窗检测与关闭论文精读](./05-popsweeper.md)\n   - [Poker 欺骗弹窗识别与处置论文精读](./06-sneaky-popups.md)\n   - [WhisperTest iOS 真机弹窗交互论文精读](./07-whispertest.md)\n   - [Cookieverse / BannerClick 移动网页弹窗论文精读](./08-cookieverse.md)\n\n核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。\n",
+      "html": "<h1 id=\"index-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付分成两个子模块：</p>\n<ol>\n<li><strong>底层解决方法</strong><ul>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ul>\n</li>\n<li><strong>论文模块</strong><ul>\n<li><a href=\"/research-mobile/popup/principles-brief\">移动 GUI Agent 权限素养论文精读</a></li>\n<li><a href=\"/research-mobile/popup/vlm-fuzz\">VLM-Fuzz 弹窗递归探索论文精读</a></li>\n<li><a href=\"/research-mobile/popup/popsweeper\">PopSweeper 阻塞弹窗检测与关闭论文精读</a></li>\n<li><a href=\"/research-mobile/popup/sneaky-popups\">Poker 欺骗弹窗识别与处置论文精读</a></li>\n<li><a href=\"/research-mobile/popup/whispertest\">WhisperTest iOS 真机弹窗交互论文精读</a></li>\n<li><a href=\"/research-mobile/popup/cookieverse\">Cookieverse / BannerClick 移动网页弹窗论文精读</a></li>\n</ul>\n</li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n",
       "headings": [
         {
           "depth": 1,
@@ -25,7 +25,7 @@
         {
           "id": "index-section-0",
           "title": "导读",
-          "html": "<h1 id=\"index-slide-0-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付分成两个子模块：</p>\n<ol>\n<li><strong>底层解决方法</strong><ul>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ul>\n</li>\n<li><strong>论文模块</strong><ul>\n<li><a href=\"/research-mobile/popup/principles-brief\">移动 GUI Agent 权限素养论文精读</a></li>\n<li><a href=\"/research-mobile/popup/vlm-fuzz\">VLM-Fuzz 弹窗递归探索论文精读</a></li>\n</ul>\n</li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n"
+          "html": "<h1 id=\"index-slide-0-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付分成两个子模块：</p>\n<ol>\n<li><strong>底层解决方法</strong><ul>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ul>\n</li>\n<li><strong>论文模块</strong><ul>\n<li><a href=\"/research-mobile/popup/principles-brief\">移动 GUI Agent 权限素养论文精读</a></li>\n<li><a href=\"/research-mobile/popup/vlm-fuzz\">VLM-Fuzz 弹窗递归探索论文精读</a></li>\n<li><a href=\"/research-mobile/popup/popsweeper\">PopSweeper 阻塞弹窗检测与关闭论文精读</a></li>\n<li><a href=\"/research-mobile/popup/sneaky-popups\">Poker 欺骗弹窗识别与处置论文精读</a></li>\n<li><a href=\"/research-mobile/popup/whispertest\">WhisperTest iOS 真机弹窗交互论文精读</a></li>\n<li><a href=\"/research-mobile/popup/cookieverse\">Cookieverse / BannerClick 移动网页弹窗论文精读</a></li>\n</ul>\n</li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n"
         }
       ]
     },
@@ -790,6 +790,1142 @@
           "id": "vlm-fuzz-section-14",
           "title": "8. 精读判断",
           "html": "<h2 id=\"vlm-fuzz-slide-14-h2-0\">8. 精读判断</h2>\n<p>这篇论文对弹窗问题最强的贡献是状态建模：临时覆盖层不会污染宿主访问计数，关闭后会核对宿主是否改变，未完成分支能通过动作序列重放恢复。最弱的地方也很明确：论文只证明完整 GUI 测试器有效，没有测量弹窗子机制的独立增益。</p>\n<p>所以，若把它放进移动端弹窗方案库，正确标签应是：<strong>覆盖率导向测试框架中的递归弹窗恢复机制</strong>，而不是“通用弹窗自动决策方案”。</p>\n"
+        }
+      ]
+    },
+    {
+      "slug": "popsweeper",
+      "file": "05-popsweeper.md",
+      "kind": "论文精读",
+      "module": "papers",
+      "eyebrow": "PAPER READING / POPSWEEPER",
+      "summary": "拆解 Android 测试器如何检测阻塞弹窗、定位关闭入口并把点击坐标回传给自动化脚本。",
+      "scope": "视觉检测 · 关闭控件定位 · 模拟回放 · Android",
+      "ogImage": "/research-mobile/popup-assets/popsweeper/page_007_fig_fig_3.png",
+      "title": "PopSweeper：把阻塞弹窗转化为可供测试脚本点击的坐标",
+      "date": "2026-08-22",
+      "sourceHash": "acd4b3ab82d12375bf6cd235598ba633cf3262da469150b0fedf31faacb4afed",
+      "raw": "---\ntags:\n  - papers/gui-agent-testing\n  - papers/mobile-popup\naliases:\n  - PopSweeper\n  - Android 阻塞弹窗视觉处理\ndate: 2026-08-22\narxiv_id: 2412.02933\n---\n\n# PopSweeper：把阻塞弹窗转化为可供测试脚本点击的坐标\n\n## 核心信息\n\n- 标题: PopSweeper: Automatically Detecting and Resolving App-Blocking Pop-Ups to Assist Automated Mobile GUI Testing\n- 标题翻译: PopSweeper：自动检测和解决阻塞应用的弹窗，以辅助移动 GUI 自动化测试\n- 作者: Linqiang Guo, Wei Liu, Yi Wen Heng, Tse-Hsun (Peter) Chen, Yang Wang\n- 机构: Concordia University\n- 发表时间: 2024-12-04\n- 发表渠道: arXiv 预印本\n- arXiv: 2412.02933\n- 论文链接: [arXiv](https://arxiv.org/abs/2412.02933)\n- 数据 / 资源: [Zenodo 数据集](https://doi.org/10.5281/zenodo.13788488)\n- 论文类型: Android GUI 测试工具与视觉检测方法\n\n## 原文摘要翻译\n\n图形用户界面是用户与移动应用交互的主要方式，因此对应用功能和用户体验都至关重要。然而，自动化测试中的一项主要挑战是广告、系统提示等阻塞应用的弹窗频繁出现。这些弹窗会遮挡关键界面元素、打断测试执行，并经常需要人工干预，从而造成结果不准确、测试时间增加和可靠性下降。论文提出 PopSweeper，在自动化 GUI 测试期间实时检测并解决阻塞弹窗。系统结合基于深度学习的计算机视觉技术完成弹窗检测和关闭按钮定位。作者在 RICO 数据集的七万余张应用截图以及从应用商店收集的 87 个热门应用上评估系统，并人工识别出 832 个阻塞弹窗。弹窗分类达到 91.7% 的精确率和 93.5% 的召回率，关闭按钮检测达到 93.9% 的框平均精度和 89.2% 的召回率。端到端评测中，PopSweeper 在 87.1% 的应用上成功处理全部阻塞，单帧分类与关闭按钮检测在 60 毫秒内完成。\n\n## 创新点\n\n1. **把弹窗处置封装为外置视觉守门器。** 系统只接收截图流并返回关闭坐标，无需修改被测应用，也不绑定具体 GUI 测试框架。\n2. **将存在性判断与关闭入口定位拆开。** 串联分类器先确认是否为阻塞弹窗，YOLO-World 只在阳性截图上定位按钮，便于分别测量错误来源。\n3. **用帧变化门控降低实时成本。** 100 毫秒采样与 RGB 直方图差分过滤重复帧，避免对每个视频帧运行深模型。\n4. **公开针对阻塞弹窗的数据材料。** 作者从 RICO 和热门应用中整理了弹窗、普通内容和关闭按钮标注，为后续检测研究提供专门数据。\n\n## 一句话总结\n\nPopSweeper 解决的是“自动化脚本被意外覆盖层挡住后，如何从截图中找到关闭入口”：它能返回可点击坐标，但不理解按钮语义，也没有证明点击后原测试任务在真机上正确恢复。\n\n## 研究问题\n\n坐标型和录制回放型测试依赖界面布局稳定。随机出现的全屏广告或局部覆盖层会产生两类故障：目标控件被遮挡时，原点击没有效果；脚本继续执行时，后续坐标可能反而命中广告并跳出被测应用。PopSweeper 不重新设计测试搜索算法，而是在测试器前面增加一个持续监视截图的视觉模块。\n\n论文只把全屏弹窗和局部覆盖弹窗定义为阻塞对象。顶部或底部 Banner 通常不阻断底层操作，因此不属于主要处置目标。这一操作化定义决定了系统更适合广告和明确带关闭入口的覆盖层，而不是所有系统授权或业务对话框。\n\n## 数据与任务定义\n\n### 数据来源\n\n- RICO 提供 72,218 张截图，人工筛出 757 张阻塞弹窗，来自约 748 个应用；另外随机抽取 1,200 张普通应用内容。\n- 研究者从 Google Play 和一个中国第三方应用商店选择 87 个热门 Android 应用，先人工完成权限和引导，再录制每个应用 60 秒、每秒 60 帧的典型使用过程。\n- 训练集通过热门应用样本重复采样和亮度、对比度、模糊等增强扩充；训练、验证、测试按 6:2:2 划分，并避免训练和测试共享同一应用。\n\n### 三项任务\n\n| 任务 | 输入 | 输出 | 评价指标 |\n|---|---|---|---|\n| 弹窗分类 | 单张 GUI 截图 | 是否存在阻塞弹窗 | 精确率、召回率、F1 |\n| 关闭按钮定位 | 已知含弹窗的截图 | 关闭入口边界框 | 召回率、BoxAP、mAP |\n| 模拟端到端处置 | GIF 或录屏逐帧回放 | 关闭坐标或继续信号 | 坐标命中精确率与召回率、应用级全部处理率、延迟 |\n\n第三项仍是回放模拟：系统把返回坐标与人工标注框比较，没有让真实测试脚本在物理设备上点击后继续原任务。\n\n## 方法主线\n\n### 机制流程\n\n1. **输入与门控。** 从测试视频流每 100 毫秒采一帧，以相邻帧 RGB 直方图相似度判断界面是否变化；相似度高于 0.8 时跳过深模型。\n2. **存在性判断。** ResNet50 先判断截图是否含阻塞弹窗；只有阳性结果才交给 MobileNetV2 二次核验，以减少误报。\n3. **关闭入口定位。** 对确认含弹窗的截图运行微调后的 YOLO-World，输出关闭按钮边界框 $(x_1,y_1,x_2,y_2)$。\n4. **交给测试器执行。** PopSweeper 返回按钮中心坐标；调用方负责实际点击。若没有明显变化，则返回继续信号。\n\n![PopSweeper 总体流程](/research-mobile/popup-assets/popsweeper/page_007_fig_fig_3.png)\n*图 3：截图变化门控、弹窗串联分类和关闭坐标输出的完整链路。*\n\n### 为什么使用串联分类器\n\n单独的 MobileNetV2 召回率较高，但误报更多；ResNet50 能捕获更复杂的纹理与边界。论文让 ResNet50 先广泛筛选，再用轻量模型复核阳性结果。这不是两个模型投票，而是严格的串联门控：第二级只接收第一级判为弹窗的截图。\n\n### 关闭按钮模型\n\nYOLO-World 接收缩放到 $640\\times640$ 的截图，针对圆形叉号、文本按钮、透明图标等样式微调。它与 Faster R-CNN、YOLOv8 比较时，优势主要体现在召回率和较严格交并比阈值下的定位表现，并非所有指标都显著领先。\n\n## 关键结果\n\n### 分类与定位\n\n| 结果 | PopSweeper | 关键基线或解释 |\n|---|---:|---|\n| 弹窗分类精确率 | 91.7% | 单独 ResNet50 为 86.8% |\n| 弹窗分类召回率 | 93.5% | MobileNetV2 为 95.8%，但精确率更低 |\n| 弹窗分类 F1 | 92.6% | 最强单模型 ResNet50 为 90.5% |\n| 关闭按钮召回率 | 89.2% | 与 YOLOv8 相同，高于 Faster R-CNN 的 86.4% |\n| 关闭按钮 mAP@50 | 93.6% | YOLOv8 为 91.8%，Faster R-CNN 为 93.0% |\n\n零样本 CLIP 的召回率可达 96% 至 99%，但精确率只有 44% 至 47%。这说明针对弹窗场景，过高敏感度会把大量普通界面判成弹窗，不适合作为自动点击的直接前置条件。\n\n### 模拟端到端\n\n- RICO 与首批热门应用回放：精确率 88.7%、召回率 84.4%，135/155 个应用中的全部弹窗均被正确处理，即 87.1%。\n- 额外 51 个热门应用回放：25 个出现弹窗，系统在 19 个应用中处理成功；坐标精确率 87.1%、召回率 79.4%。\n- 变化检测平均耗时约 4.8 毫秒；被选中截图的分类约 40 毫秒，阳性截图的按钮定位约 20 毫秒。\n\n### 失败分布\n\n热门应用上的关闭按钮定位明显弱于 RICO。全屏弹窗尤其困难：精确率为 75%，召回率只有 37.5%；局部覆盖弹窗则为 90% 和 81.8%。原因包括文本型“关闭/跳过”、中文文案、半透明图标和与内容融合的全屏设计。\n\n![弹窗与普通内容的误分类示例](/research-mobile/popup-assets/popsweeper/page_012_fig_fig_4.png)\n*图 4：左侧透明弹窗融入内容而被漏检，右侧普通卡片含叉号而被误报。*\n\n## 深度分析\n\n### 论文真正证明了什么\n\n最强证据是模块级视觉识别：在应用隔离的数据划分上，存在性分类、按钮定位和录屏回放坐标匹配都达到较高指标。串联分类确实改善了精确率，帧门控也把平均单次处理保持在实时可用范围。\n\n但“返回坐标命中人工框”不等于“测试继续”。一次点击还可能打开浏览器、开始订阅、触发安装，或者改变宿主页面。论文的错误分析也承认，误返回弹窗内部坐标可能产生不可预测行为。它没有重新读取宿主状态、验证弹窗消失、恢复失败步骤或重放原任务路径。\n\n### 与其他弹窗方法的关系\n\n- PopSweeper 适合做通用视觉前置检测器，尤其是无 UI 树的广告覆盖层。\n- Poker 会遍历弹窗内多个组件，目标是让弹窗消失并继续采集；风险比只定位一个关闭入口更高。\n- VLM-Fuzz 保存宿主状态和转移路径，解决关闭后恢复搜索位置；PopSweeper 没有这层状态机。\n- BannerClick 依赖 DOM 和词义，能够明确区分接受、拒绝和设置；PopSweeper 只寻找视觉上像关闭入口的对象。\n\n### 工程上应补的闭环\n\n一个可投入真实测试的版本需要在返回坐标之后增加：点击前动作风险检查、点击后弹窗消失验证、宿主页面指纹比较、失败步骤重试、跨应用跳转检测，以及不可逆副作用记录。否则它更准确的定位是“关闭坐标建议器”，而不是完整的任务恢复器。\n\n## 局限\n\n1. 只评估 Android，且模型依赖作者构建的数据分布。\n2. 端到端实验基于 GIF 和录屏回放，没有物理设备上的真实点击闭环。\n3. 系统不理解允许、拒绝、稍后、订阅、支付等动作语义。\n4. 主要覆盖有可识别关闭入口的弹窗；无关闭入口、多步骤配置和强制选择不在能力中心。\n5. 100 毫秒采样和 0.8 直方图阈值是经验选择，论文没有独立消融。\n6. 全屏、中文、文本型和半透明关闭入口的跨分布表现明显下降。\n7. 论文是预印本；正文结论处还出现“七千张截图”的笔误，与方法和摘要中的七万余张不一致，应以数据章节为准。\n\n## 我的笔记\n\n### 最值得保留的设计\n\n把弹窗存在性判断与关闭入口定位拆成两个可观测阶段，是这篇论文最可复用的部分。对任意会执行真实点击的系统，精确率应优先于单纯召回率，因为假阳性可能直接触发业务副作用。\n\n### 复现实验建议\n\n后续应构造真机事件流，记录弹窗出现前的任务步骤，执行返回坐标后测量弹窗消失率、原控件可达率、任务恢复率、跨应用跳转率和副作用率；并按全屏、局部覆盖、透明、文本、多语言和无关闭入口分层报告。\n\n### 适合站点中的定位\n\n**Android 阻塞弹窗的视觉检测与关闭坐标定位方法。** 它解决“看见并指向关闭入口”，不单独解决“选择正确动作”和“回到原任务”。\n\n## 引用\n\n- [arXiv 论文页面](https://arxiv.org/abs/2412.02933)\n- [公开数据集](https://doi.org/10.5281/zenodo.13788488)\n",
+      "html": "<h1 id=\"popsweeper-h1-0\">PopSweeper：把阻塞弹窗转化为可供测试脚本点击的坐标</h1>\n<h2 id=\"popsweeper-h2-1\">核心信息</h2>\n<ul>\n<li>标题: PopSweeper: Automatically Detecting and Resolving App-Blocking Pop-Ups to Assist Automated Mobile GUI Testing</li>\n<li>标题翻译: PopSweeper：自动检测和解决阻塞应用的弹窗，以辅助移动 GUI 自动化测试</li>\n<li>作者: Linqiang Guo, Wei Liu, Yi Wen Heng, Tse-Hsun (Peter) Chen, Yang Wang</li>\n<li>机构: Concordia University</li>\n<li>发表时间: 2024-12-04</li>\n<li>发表渠道: arXiv 预印本</li>\n<li>arXiv: 2412.02933</li>\n<li>论文链接: <a href=\"https://arxiv.org/abs/2412.02933\" target=\"_blank\" rel=\"noreferrer\">arXiv</a></li>\n<li>数据 / 资源: <a href=\"https://doi.org/10.5281/zenodo.13788488\" target=\"_blank\" rel=\"noreferrer\">Zenodo 数据集</a></li>\n<li>论文类型: Android GUI 测试工具与视觉检测方法</li>\n</ul>\n<h2 id=\"popsweeper-h2-2\">原文摘要翻译</h2>\n<p>图形用户界面是用户与移动应用交互的主要方式，因此对应用功能和用户体验都至关重要。然而，自动化测试中的一项主要挑战是广告、系统提示等阻塞应用的弹窗频繁出现。这些弹窗会遮挡关键界面元素、打断测试执行，并经常需要人工干预，从而造成结果不准确、测试时间增加和可靠性下降。论文提出 PopSweeper，在自动化 GUI 测试期间实时检测并解决阻塞弹窗。系统结合基于深度学习的计算机视觉技术完成弹窗检测和关闭按钮定位。作者在 RICO 数据集的七万余张应用截图以及从应用商店收集的 87 个热门应用上评估系统，并人工识别出 832 个阻塞弹窗。弹窗分类达到 91.7% 的精确率和 93.5% 的召回率，关闭按钮检测达到 93.9% 的框平均精度和 89.2% 的召回率。端到端评测中，PopSweeper 在 87.1% 的应用上成功处理全部阻塞，单帧分类与关闭按钮检测在 60 毫秒内完成。</p>\n<h2 id=\"popsweeper-h2-3\">创新点</h2>\n<ol>\n<li><strong>把弹窗处置封装为外置视觉守门器。</strong> 系统只接收截图流并返回关闭坐标，无需修改被测应用，也不绑定具体 GUI 测试框架。</li>\n<li><strong>将存在性判断与关闭入口定位拆开。</strong> 串联分类器先确认是否为阻塞弹窗，YOLO-World 只在阳性截图上定位按钮，便于分别测量错误来源。</li>\n<li><strong>用帧变化门控降低实时成本。</strong> 100 毫秒采样与 RGB 直方图差分过滤重复帧，避免对每个视频帧运行深模型。</li>\n<li><strong>公开针对阻塞弹窗的数据材料。</strong> 作者从 RICO 和热门应用中整理了弹窗、普通内容和关闭按钮标注，为后续检测研究提供专门数据。</li>\n</ol>\n<h2 id=\"popsweeper-h2-4\">一句话总结</h2>\n<p>PopSweeper 解决的是“自动化脚本被意外覆盖层挡住后，如何从截图中找到关闭入口”：它能返回可点击坐标，但不理解按钮语义，也没有证明点击后原测试任务在真机上正确恢复。</p>\n<h2 id=\"popsweeper-h2-5\">研究问题</h2>\n<p>坐标型和录制回放型测试依赖界面布局稳定。随机出现的全屏广告或局部覆盖层会产生两类故障：目标控件被遮挡时，原点击没有效果；脚本继续执行时，后续坐标可能反而命中广告并跳出被测应用。PopSweeper 不重新设计测试搜索算法，而是在测试器前面增加一个持续监视截图的视觉模块。</p>\n<p>论文只把全屏弹窗和局部覆盖弹窗定义为阻塞对象。顶部或底部 Banner 通常不阻断底层操作，因此不属于主要处置目标。这一操作化定义决定了系统更适合广告和明确带关闭入口的覆盖层，而不是所有系统授权或业务对话框。</p>\n<h2 id=\"popsweeper-h2-6\">数据与任务定义</h2>\n<h3 id=\"popsweeper-h3-7\">数据来源</h3>\n<ul>\n<li>RICO 提供 72,218 张截图，人工筛出 757 张阻塞弹窗，来自约 748 个应用；另外随机抽取 1,200 张普通应用内容。</li>\n<li>研究者从 Google Play 和一个中国第三方应用商店选择 87 个热门 Android 应用，先人工完成权限和引导，再录制每个应用 60 秒、每秒 60 帧的典型使用过程。</li>\n<li>训练集通过热门应用样本重复采样和亮度、对比度、模糊等增强扩充；训练、验证、测试按 6:2:2 划分，并避免训练和测试共享同一应用。</li>\n</ul>\n<h3 id=\"popsweeper-h3-8\">三项任务</h3>\n<table>\n<thead>\n<tr>\n<th>任务</th>\n<th>输入</th>\n<th>输出</th>\n<th>评价指标</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>弹窗分类</td>\n<td>单张 GUI 截图</td>\n<td>是否存在阻塞弹窗</td>\n<td>精确率、召回率、F1</td>\n</tr>\n<tr>\n<td>关闭按钮定位</td>\n<td>已知含弹窗的截图</td>\n<td>关闭入口边界框</td>\n<td>召回率、BoxAP、mAP</td>\n</tr>\n<tr>\n<td>模拟端到端处置</td>\n<td>GIF 或录屏逐帧回放</td>\n<td>关闭坐标或继续信号</td>\n<td>坐标命中精确率与召回率、应用级全部处理率、延迟</td>\n</tr>\n</tbody></table>\n<p>第三项仍是回放模拟：系统把返回坐标与人工标注框比较，没有让真实测试脚本在物理设备上点击后继续原任务。</p>\n<h2 id=\"popsweeper-h2-9\">方法主线</h2>\n<h3 id=\"popsweeper-h3-10\">机制流程</h3>\n<ol>\n<li><strong>输入与门控。</strong> 从测试视频流每 100 毫秒采一帧，以相邻帧 RGB 直方图相似度判断界面是否变化；相似度高于 0.8 时跳过深模型。</li>\n<li><strong>存在性判断。</strong> ResNet50 先判断截图是否含阻塞弹窗；只有阳性结果才交给 MobileNetV2 二次核验，以减少误报。</li>\n<li><strong>关闭入口定位。</strong> 对确认含弹窗的截图运行微调后的 YOLO-World，输出关闭按钮边界框 $(x_1,y_1,x_2,y_2)$。</li>\n<li><strong>交给测试器执行。</strong> PopSweeper 返回按钮中心坐标；调用方负责实际点击。若没有明显变化，则返回继续信号。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/popsweeper/page_007_fig_fig_3.png\" alt=\"PopSweeper 总体流程\">\n<em>图 3：截图变化门控、弹窗串联分类和关闭坐标输出的完整链路。</em></p>\n<h3 id=\"popsweeper-h3-11\">为什么使用串联分类器</h3>\n<p>单独的 MobileNetV2 召回率较高，但误报更多；ResNet50 能捕获更复杂的纹理与边界。论文让 ResNet50 先广泛筛选，再用轻量模型复核阳性结果。这不是两个模型投票，而是严格的串联门控：第二级只接收第一级判为弹窗的截图。</p>\n<h3 id=\"popsweeper-h3-12\">关闭按钮模型</h3>\n<p>YOLO-World 接收缩放到 $640\\times640$ 的截图，针对圆形叉号、文本按钮、透明图标等样式微调。它与 Faster R-CNN、YOLOv8 比较时，优势主要体现在召回率和较严格交并比阈值下的定位表现，并非所有指标都显著领先。</p>\n<h2 id=\"popsweeper-h2-13\">关键结果</h2>\n<h3 id=\"popsweeper-h3-14\">分类与定位</h3>\n<table>\n<thead>\n<tr>\n<th>结果</th>\n<th align=\"right\">PopSweeper</th>\n<th>关键基线或解释</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>弹窗分类精确率</td>\n<td align=\"right\">91.7%</td>\n<td>单独 ResNet50 为 86.8%</td>\n</tr>\n<tr>\n<td>弹窗分类召回率</td>\n<td align=\"right\">93.5%</td>\n<td>MobileNetV2 为 95.8%，但精确率更低</td>\n</tr>\n<tr>\n<td>弹窗分类 F1</td>\n<td align=\"right\">92.6%</td>\n<td>最强单模型 ResNet50 为 90.5%</td>\n</tr>\n<tr>\n<td>关闭按钮召回率</td>\n<td align=\"right\">89.2%</td>\n<td>与 YOLOv8 相同，高于 Faster R-CNN 的 86.4%</td>\n</tr>\n<tr>\n<td>关闭按钮 mAP@50</td>\n<td align=\"right\">93.6%</td>\n<td>YOLOv8 为 91.8%，Faster R-CNN 为 93.0%</td>\n</tr>\n</tbody></table>\n<p>零样本 CLIP 的召回率可达 96% 至 99%，但精确率只有 44% 至 47%。这说明针对弹窗场景，过高敏感度会把大量普通界面判成弹窗，不适合作为自动点击的直接前置条件。</p>\n<h3 id=\"popsweeper-h3-15\">模拟端到端</h3>\n<ul>\n<li>RICO 与首批热门应用回放：精确率 88.7%、召回率 84.4%，135/155 个应用中的全部弹窗均被正确处理，即 87.1%。</li>\n<li>额外 51 个热门应用回放：25 个出现弹窗，系统在 19 个应用中处理成功；坐标精确率 87.1%、召回率 79.4%。</li>\n<li>变化检测平均耗时约 4.8 毫秒；被选中截图的分类约 40 毫秒，阳性截图的按钮定位约 20 毫秒。</li>\n</ul>\n<h3 id=\"popsweeper-h3-16\">失败分布</h3>\n<p>热门应用上的关闭按钮定位明显弱于 RICO。全屏弹窗尤其困难：精确率为 75%，召回率只有 37.5%；局部覆盖弹窗则为 90% 和 81.8%。原因包括文本型“关闭/跳过”、中文文案、半透明图标和与内容融合的全屏设计。</p>\n<p><img src=\"/research-mobile/popup-assets/popsweeper/page_012_fig_fig_4.png\" alt=\"弹窗与普通内容的误分类示例\">\n<em>图 4：左侧透明弹窗融入内容而被漏检，右侧普通卡片含叉号而被误报。</em></p>\n<h2 id=\"popsweeper-h2-17\">深度分析</h2>\n<h3 id=\"popsweeper-h3-18\">论文真正证明了什么</h3>\n<p>最强证据是模块级视觉识别：在应用隔离的数据划分上，存在性分类、按钮定位和录屏回放坐标匹配都达到较高指标。串联分类确实改善了精确率，帧门控也把平均单次处理保持在实时可用范围。</p>\n<p>但“返回坐标命中人工框”不等于“测试继续”。一次点击还可能打开浏览器、开始订阅、触发安装，或者改变宿主页面。论文的错误分析也承认，误返回弹窗内部坐标可能产生不可预测行为。它没有重新读取宿主状态、验证弹窗消失、恢复失败步骤或重放原任务路径。</p>\n<h3 id=\"popsweeper-h3-19\">与其他弹窗方法的关系</h3>\n<ul>\n<li>PopSweeper 适合做通用视觉前置检测器，尤其是无 UI 树的广告覆盖层。</li>\n<li>Poker 会遍历弹窗内多个组件，目标是让弹窗消失并继续采集；风险比只定位一个关闭入口更高。</li>\n<li>VLM-Fuzz 保存宿主状态和转移路径，解决关闭后恢复搜索位置；PopSweeper 没有这层状态机。</li>\n<li>BannerClick 依赖 DOM 和词义，能够明确区分接受、拒绝和设置；PopSweeper 只寻找视觉上像关闭入口的对象。</li>\n</ul>\n<h3 id=\"popsweeper-h3-20\">工程上应补的闭环</h3>\n<p>一个可投入真实测试的版本需要在返回坐标之后增加：点击前动作风险检查、点击后弹窗消失验证、宿主页面指纹比较、失败步骤重试、跨应用跳转检测，以及不可逆副作用记录。否则它更准确的定位是“关闭坐标建议器”，而不是完整的任务恢复器。</p>\n<h2 id=\"popsweeper-h2-21\">局限</h2>\n<ol>\n<li>只评估 Android，且模型依赖作者构建的数据分布。</li>\n<li>端到端实验基于 GIF 和录屏回放，没有物理设备上的真实点击闭环。</li>\n<li>系统不理解允许、拒绝、稍后、订阅、支付等动作语义。</li>\n<li>主要覆盖有可识别关闭入口的弹窗；无关闭入口、多步骤配置和强制选择不在能力中心。</li>\n<li>100 毫秒采样和 0.8 直方图阈值是经验选择，论文没有独立消融。</li>\n<li>全屏、中文、文本型和半透明关闭入口的跨分布表现明显下降。</li>\n<li>论文是预印本；正文结论处还出现“七千张截图”的笔误，与方法和摘要中的七万余张不一致，应以数据章节为准。</li>\n</ol>\n<h2 id=\"popsweeper-h2-22\">我的笔记</h2>\n<h3 id=\"popsweeper-h3-23\">最值得保留的设计</h3>\n<p>把弹窗存在性判断与关闭入口定位拆成两个可观测阶段，是这篇论文最可复用的部分。对任意会执行真实点击的系统，精确率应优先于单纯召回率，因为假阳性可能直接触发业务副作用。</p>\n<h3 id=\"popsweeper-h3-24\">复现实验建议</h3>\n<p>后续应构造真机事件流，记录弹窗出现前的任务步骤，执行返回坐标后测量弹窗消失率、原控件可达率、任务恢复率、跨应用跳转率和副作用率；并按全屏、局部覆盖、透明、文本、多语言和无关闭入口分层报告。</p>\n<h3 id=\"popsweeper-h3-25\">适合站点中的定位</h3>\n<p><strong>Android 阻塞弹窗的视觉检测与关闭坐标定位方法。</strong> 它解决“看见并指向关闭入口”，不单独解决“选择正确动作”和“回到原任务”。</p>\n<h2 id=\"popsweeper-h2-26\">引用</h2>\n<ul>\n<li><a href=\"https://arxiv.org/abs/2412.02933\" target=\"_blank\" rel=\"noreferrer\">arXiv 论文页面</a></li>\n<li><a href=\"https://doi.org/10.5281/zenodo.13788488\" target=\"_blank\" rel=\"noreferrer\">公开数据集</a></li>\n</ul>\n",
+      "headings": [
+        {
+          "depth": 1,
+          "id": "popsweeper-h1-0",
+          "text": "PopSweeper：把阻塞弹窗转化为可供测试脚本点击的坐标"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-1",
+          "text": "核心信息"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-2",
+          "text": "原文摘要翻译"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-3",
+          "text": "创新点"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-4",
+          "text": "一句话总结"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-5",
+          "text": "研究问题"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-6",
+          "text": "数据与任务定义"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-7",
+          "text": "数据来源"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-8",
+          "text": "三项任务"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-9",
+          "text": "方法主线"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-10",
+          "text": "机制流程"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-11",
+          "text": "为什么使用串联分类器"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-12",
+          "text": "关闭按钮模型"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-13",
+          "text": "关键结果"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-14",
+          "text": "分类与定位"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-15",
+          "text": "模拟端到端"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-16",
+          "text": "失败分布"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-17",
+          "text": "深度分析"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-18",
+          "text": "论文真正证明了什么"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-19",
+          "text": "与其他弹窗方法的关系"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-20",
+          "text": "工程上应补的闭环"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-21",
+          "text": "局限"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-22",
+          "text": "我的笔记"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-23",
+          "text": "最值得保留的设计"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-24",
+          "text": "复现实验建议"
+        },
+        {
+          "depth": 3,
+          "id": "popsweeper-h3-25",
+          "text": "适合站点中的定位"
+        },
+        {
+          "depth": 2,
+          "id": "popsweeper-h2-26",
+          "text": "引用"
+        }
+      ],
+      "sections": [
+        {
+          "id": "popsweeper-section-0",
+          "title": "导读",
+          "html": "<h1 id=\"popsweeper-slide-0-h1-0\">PopSweeper：把阻塞弹窗转化为可供测试脚本点击的坐标</h1>\n"
+        },
+        {
+          "id": "popsweeper-section-1",
+          "title": "核心信息",
+          "html": "<h2 id=\"popsweeper-slide-1-h2-0\">核心信息</h2>\n<ul>\n<li>标题: PopSweeper: Automatically Detecting and Resolving App-Blocking Pop-Ups to Assist Automated Mobile GUI Testing</li>\n<li>标题翻译: PopSweeper：自动检测和解决阻塞应用的弹窗，以辅助移动 GUI 自动化测试</li>\n<li>作者: Linqiang Guo, Wei Liu, Yi Wen Heng, Tse-Hsun (Peter) Chen, Yang Wang</li>\n<li>机构: Concordia University</li>\n<li>发表时间: 2024-12-04</li>\n<li>发表渠道: arXiv 预印本</li>\n<li>arXiv: 2412.02933</li>\n<li>论文链接: <a href=\"https://arxiv.org/abs/2412.02933\" target=\"_blank\" rel=\"noreferrer\">arXiv</a></li>\n<li>数据 / 资源: <a href=\"https://doi.org/10.5281/zenodo.13788488\" target=\"_blank\" rel=\"noreferrer\">Zenodo 数据集</a></li>\n<li>论文类型: Android GUI 测试工具与视觉检测方法</li>\n</ul>\n"
+        },
+        {
+          "id": "popsweeper-section-2",
+          "title": "原文摘要翻译",
+          "html": "<h2 id=\"popsweeper-slide-2-h2-0\">原文摘要翻译</h2>\n<p>图形用户界面是用户与移动应用交互的主要方式，因此对应用功能和用户体验都至关重要。然而，自动化测试中的一项主要挑战是广告、系统提示等阻塞应用的弹窗频繁出现。这些弹窗会遮挡关键界面元素、打断测试执行，并经常需要人工干预，从而造成结果不准确、测试时间增加和可靠性下降。论文提出 PopSweeper，在自动化 GUI 测试期间实时检测并解决阻塞弹窗。系统结合基于深度学习的计算机视觉技术完成弹窗检测和关闭按钮定位。作者在 RICO 数据集的七万余张应用截图以及从应用商店收集的 87 个热门应用上评估系统，并人工识别出 832 个阻塞弹窗。弹窗分类达到 91.7% 的精确率和 93.5% 的召回率，关闭按钮检测达到 93.9% 的框平均精度和 89.2% 的召回率。端到端评测中，PopSweeper 在 87.1% 的应用上成功处理全部阻塞，单帧分类与关闭按钮检测在 60 毫秒内完成。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-3",
+          "title": "创新点",
+          "html": "<h2 id=\"popsweeper-slide-3-h2-0\">创新点</h2>\n<ol>\n<li><strong>把弹窗处置封装为外置视觉守门器。</strong> 系统只接收截图流并返回关闭坐标，无需修改被测应用，也不绑定具体 GUI 测试框架。</li>\n<li><strong>将存在性判断与关闭入口定位拆开。</strong> 串联分类器先确认是否为阻塞弹窗，YOLO-World 只在阳性截图上定位按钮，便于分别测量错误来源。</li>\n<li><strong>用帧变化门控降低实时成本。</strong> 100 毫秒采样与 RGB 直方图差分过滤重复帧，避免对每个视频帧运行深模型。</li>\n<li><strong>公开针对阻塞弹窗的数据材料。</strong> 作者从 RICO 和热门应用中整理了弹窗、普通内容和关闭按钮标注，为后续检测研究提供专门数据。</li>\n</ol>\n"
+        },
+        {
+          "id": "popsweeper-section-4",
+          "title": "一句话总结",
+          "html": "<h2 id=\"popsweeper-slide-4-h2-0\">一句话总结</h2>\n<p>PopSweeper 解决的是“自动化脚本被意外覆盖层挡住后，如何从截图中找到关闭入口”：它能返回可点击坐标，但不理解按钮语义，也没有证明点击后原测试任务在真机上正确恢复。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-5",
+          "title": "研究问题",
+          "html": "<h2 id=\"popsweeper-slide-5-h2-0\">研究问题</h2>\n<p>坐标型和录制回放型测试依赖界面布局稳定。随机出现的全屏广告或局部覆盖层会产生两类故障：目标控件被遮挡时，原点击没有效果；脚本继续执行时，后续坐标可能反而命中广告并跳出被测应用。PopSweeper 不重新设计测试搜索算法，而是在测试器前面增加一个持续监视截图的视觉模块。</p>\n<p>论文只把全屏弹窗和局部覆盖弹窗定义为阻塞对象。顶部或底部 Banner 通常不阻断底层操作，因此不属于主要处置目标。这一操作化定义决定了系统更适合广告和明确带关闭入口的覆盖层，而不是所有系统授权或业务对话框。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-6",
+          "title": "数据与任务定义",
+          "html": "<h2 id=\"popsweeper-slide-6-h2-0\">数据与任务定义</h2>\n"
+        },
+        {
+          "id": "popsweeper-section-7",
+          "title": "数据来源",
+          "html": "<h3 id=\"popsweeper-slide-7-h3-0\">数据来源</h3>\n<ul>\n<li>RICO 提供 72,218 张截图，人工筛出 757 张阻塞弹窗，来自约 748 个应用；另外随机抽取 1,200 张普通应用内容。</li>\n<li>研究者从 Google Play 和一个中国第三方应用商店选择 87 个热门 Android 应用，先人工完成权限和引导，再录制每个应用 60 秒、每秒 60 帧的典型使用过程。</li>\n<li>训练集通过热门应用样本重复采样和亮度、对比度、模糊等增强扩充；训练、验证、测试按 6:2:2 划分，并避免训练和测试共享同一应用。</li>\n</ul>\n"
+        },
+        {
+          "id": "popsweeper-section-8",
+          "title": "三项任务",
+          "html": "<h3 id=\"popsweeper-slide-8-h3-0\">三项任务</h3>\n<table>\n<thead>\n<tr>\n<th>任务</th>\n<th>输入</th>\n<th>输出</th>\n<th>评价指标</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>弹窗分类</td>\n<td>单张 GUI 截图</td>\n<td>是否存在阻塞弹窗</td>\n<td>精确率、召回率、F1</td>\n</tr>\n<tr>\n<td>关闭按钮定位</td>\n<td>已知含弹窗的截图</td>\n<td>关闭入口边界框</td>\n<td>召回率、BoxAP、mAP</td>\n</tr>\n<tr>\n<td>模拟端到端处置</td>\n<td>GIF 或录屏逐帧回放</td>\n<td>关闭坐标或继续信号</td>\n<td>坐标命中精确率与召回率、应用级全部处理率、延迟</td>\n</tr>\n</tbody></table>\n<p>第三项仍是回放模拟：系统把返回坐标与人工标注框比较，没有让真实测试脚本在物理设备上点击后继续原任务。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-9",
+          "title": "方法主线",
+          "html": "<h2 id=\"popsweeper-slide-9-h2-0\">方法主线</h2>\n"
+        },
+        {
+          "id": "popsweeper-section-10",
+          "title": "机制流程",
+          "html": "<h3 id=\"popsweeper-slide-10-h3-0\">机制流程</h3>\n<ol>\n<li><strong>输入与门控。</strong> 从测试视频流每 100 毫秒采一帧，以相邻帧 RGB 直方图相似度判断界面是否变化；相似度高于 0.8 时跳过深模型。</li>\n<li><strong>存在性判断。</strong> ResNet50 先判断截图是否含阻塞弹窗；只有阳性结果才交给 MobileNetV2 二次核验，以减少误报。</li>\n<li><strong>关闭入口定位。</strong> 对确认含弹窗的截图运行微调后的 YOLO-World，输出关闭按钮边界框 $(x_1,y_1,x_2,y_2)$。</li>\n<li><strong>交给测试器执行。</strong> PopSweeper 返回按钮中心坐标；调用方负责实际点击。若没有明显变化，则返回继续信号。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/popsweeper/page_007_fig_fig_3.png\" alt=\"PopSweeper 总体流程\">\n<em>图 3：截图变化门控、弹窗串联分类和关闭坐标输出的完整链路。</em></p>\n"
+        },
+        {
+          "id": "popsweeper-section-11",
+          "title": "为什么使用串联分类器",
+          "html": "<h3 id=\"popsweeper-slide-11-h3-0\">为什么使用串联分类器</h3>\n<p>单独的 MobileNetV2 召回率较高，但误报更多；ResNet50 能捕获更复杂的纹理与边界。论文让 ResNet50 先广泛筛选，再用轻量模型复核阳性结果。这不是两个模型投票，而是严格的串联门控：第二级只接收第一级判为弹窗的截图。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-12",
+          "title": "关闭按钮模型",
+          "html": "<h3 id=\"popsweeper-slide-12-h3-0\">关闭按钮模型</h3>\n<p>YOLO-World 接收缩放到 $640\\times640$ 的截图，针对圆形叉号、文本按钮、透明图标等样式微调。它与 Faster R-CNN、YOLOv8 比较时，优势主要体现在召回率和较严格交并比阈值下的定位表现，并非所有指标都显著领先。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-13",
+          "title": "关键结果",
+          "html": "<h2 id=\"popsweeper-slide-13-h2-0\">关键结果</h2>\n"
+        },
+        {
+          "id": "popsweeper-section-14",
+          "title": "分类与定位",
+          "html": "<h3 id=\"popsweeper-slide-14-h3-0\">分类与定位</h3>\n<table>\n<thead>\n<tr>\n<th>结果</th>\n<th align=\"right\">PopSweeper</th>\n<th>关键基线或解释</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>弹窗分类精确率</td>\n<td align=\"right\">91.7%</td>\n<td>单独 ResNet50 为 86.8%</td>\n</tr>\n<tr>\n<td>弹窗分类召回率</td>\n<td align=\"right\">93.5%</td>\n<td>MobileNetV2 为 95.8%，但精确率更低</td>\n</tr>\n<tr>\n<td>弹窗分类 F1</td>\n<td align=\"right\">92.6%</td>\n<td>最强单模型 ResNet50 为 90.5%</td>\n</tr>\n<tr>\n<td>关闭按钮召回率</td>\n<td align=\"right\">89.2%</td>\n<td>与 YOLOv8 相同，高于 Faster R-CNN 的 86.4%</td>\n</tr>\n<tr>\n<td>关闭按钮 mAP@50</td>\n<td align=\"right\">93.6%</td>\n<td>YOLOv8 为 91.8%，Faster R-CNN 为 93.0%</td>\n</tr>\n</tbody></table>\n<p>零样本 CLIP 的召回率可达 96% 至 99%，但精确率只有 44% 至 47%。这说明针对弹窗场景，过高敏感度会把大量普通界面判成弹窗，不适合作为自动点击的直接前置条件。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-15",
+          "title": "模拟端到端",
+          "html": "<h3 id=\"popsweeper-slide-15-h3-0\">模拟端到端</h3>\n<ul>\n<li>RICO 与首批热门应用回放：精确率 88.7%、召回率 84.4%，135/155 个应用中的全部弹窗均被正确处理，即 87.1%。</li>\n<li>额外 51 个热门应用回放：25 个出现弹窗，系统在 19 个应用中处理成功；坐标精确率 87.1%、召回率 79.4%。</li>\n<li>变化检测平均耗时约 4.8 毫秒；被选中截图的分类约 40 毫秒，阳性截图的按钮定位约 20 毫秒。</li>\n</ul>\n"
+        },
+        {
+          "id": "popsweeper-section-16",
+          "title": "失败分布",
+          "html": "<h3 id=\"popsweeper-slide-16-h3-0\">失败分布</h3>\n<p>热门应用上的关闭按钮定位明显弱于 RICO。全屏弹窗尤其困难：精确率为 75%，召回率只有 37.5%；局部覆盖弹窗则为 90% 和 81.8%。原因包括文本型“关闭/跳过”、中文文案、半透明图标和与内容融合的全屏设计。</p>\n<p><img src=\"/research-mobile/popup-assets/popsweeper/page_012_fig_fig_4.png\" alt=\"弹窗与普通内容的误分类示例\">\n<em>图 4：左侧透明弹窗融入内容而被漏检，右侧普通卡片含叉号而被误报。</em></p>\n"
+        },
+        {
+          "id": "popsweeper-section-17",
+          "title": "深度分析",
+          "html": "<h2 id=\"popsweeper-slide-17-h2-0\">深度分析</h2>\n"
+        },
+        {
+          "id": "popsweeper-section-18",
+          "title": "论文真正证明了什么",
+          "html": "<h3 id=\"popsweeper-slide-18-h3-0\">论文真正证明了什么</h3>\n<p>最强证据是模块级视觉识别：在应用隔离的数据划分上，存在性分类、按钮定位和录屏回放坐标匹配都达到较高指标。串联分类确实改善了精确率，帧门控也把平均单次处理保持在实时可用范围。</p>\n<p>但“返回坐标命中人工框”不等于“测试继续”。一次点击还可能打开浏览器、开始订阅、触发安装，或者改变宿主页面。论文的错误分析也承认，误返回弹窗内部坐标可能产生不可预测行为。它没有重新读取宿主状态、验证弹窗消失、恢复失败步骤或重放原任务路径。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-19",
+          "title": "与其他弹窗方法的关系",
+          "html": "<h3 id=\"popsweeper-slide-19-h3-0\">与其他弹窗方法的关系</h3>\n<ul>\n<li>PopSweeper 适合做通用视觉前置检测器，尤其是无 UI 树的广告覆盖层。</li>\n<li>Poker 会遍历弹窗内多个组件，目标是让弹窗消失并继续采集；风险比只定位一个关闭入口更高。</li>\n<li>VLM-Fuzz 保存宿主状态和转移路径，解决关闭后恢复搜索位置；PopSweeper 没有这层状态机。</li>\n<li>BannerClick 依赖 DOM 和词义，能够明确区分接受、拒绝和设置；PopSweeper 只寻找视觉上像关闭入口的对象。</li>\n</ul>\n"
+        },
+        {
+          "id": "popsweeper-section-20",
+          "title": "工程上应补的闭环",
+          "html": "<h3 id=\"popsweeper-slide-20-h3-0\">工程上应补的闭环</h3>\n<p>一个可投入真实测试的版本需要在返回坐标之后增加：点击前动作风险检查、点击后弹窗消失验证、宿主页面指纹比较、失败步骤重试、跨应用跳转检测，以及不可逆副作用记录。否则它更准确的定位是“关闭坐标建议器”，而不是完整的任务恢复器。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-21",
+          "title": "局限",
+          "html": "<h2 id=\"popsweeper-slide-21-h2-0\">局限</h2>\n<ol>\n<li>只评估 Android，且模型依赖作者构建的数据分布。</li>\n<li>端到端实验基于 GIF 和录屏回放，没有物理设备上的真实点击闭环。</li>\n<li>系统不理解允许、拒绝、稍后、订阅、支付等动作语义。</li>\n<li>主要覆盖有可识别关闭入口的弹窗；无关闭入口、多步骤配置和强制选择不在能力中心。</li>\n<li>100 毫秒采样和 0.8 直方图阈值是经验选择，论文没有独立消融。</li>\n<li>全屏、中文、文本型和半透明关闭入口的跨分布表现明显下降。</li>\n<li>论文是预印本；正文结论处还出现“七千张截图”的笔误，与方法和摘要中的七万余张不一致，应以数据章节为准。</li>\n</ol>\n"
+        },
+        {
+          "id": "popsweeper-section-22",
+          "title": "我的笔记",
+          "html": "<h2 id=\"popsweeper-slide-22-h2-0\">我的笔记</h2>\n"
+        },
+        {
+          "id": "popsweeper-section-23",
+          "title": "最值得保留的设计",
+          "html": "<h3 id=\"popsweeper-slide-23-h3-0\">最值得保留的设计</h3>\n<p>把弹窗存在性判断与关闭入口定位拆成两个可观测阶段，是这篇论文最可复用的部分。对任意会执行真实点击的系统，精确率应优先于单纯召回率，因为假阳性可能直接触发业务副作用。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-24",
+          "title": "复现实验建议",
+          "html": "<h3 id=\"popsweeper-slide-24-h3-0\">复现实验建议</h3>\n<p>后续应构造真机事件流，记录弹窗出现前的任务步骤，执行返回坐标后测量弹窗消失率、原控件可达率、任务恢复率、跨应用跳转率和副作用率；并按全屏、局部覆盖、透明、文本、多语言和无关闭入口分层报告。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-25",
+          "title": "适合站点中的定位",
+          "html": "<h3 id=\"popsweeper-slide-25-h3-0\">适合站点中的定位</h3>\n<p><strong>Android 阻塞弹窗的视觉检测与关闭坐标定位方法。</strong> 它解决“看见并指向关闭入口”，不单独解决“选择正确动作”和“回到原任务”。</p>\n"
+        },
+        {
+          "id": "popsweeper-section-26",
+          "title": "引用",
+          "html": "<h2 id=\"popsweeper-slide-26-h2-0\">引用</h2>\n<ul>\n<li><a href=\"https://arxiv.org/abs/2412.02933\" target=\"_blank\" rel=\"noreferrer\">arXiv 论文页面</a></li>\n<li><a href=\"https://doi.org/10.5281/zenodo.13788488\" target=\"_blank\" rel=\"noreferrer\">公开数据集</a></li>\n</ul>\n"
+        }
+      ]
+    },
+    {
+      "slug": "sneaky-popups",
+      "file": "06-sneaky-popups.md",
+      "kind": "论文精读",
+      "module": "papers",
+      "eyebrow": "PAPER READING / POKER",
+      "summary": "拆解 Poker 如何识别弹窗区域、点击候选控件直到弹窗消失，并继续采集 Android 应用。",
+      "scope": "欺骗弹窗 · 视觉识别 · 消失验证 · Android",
+      "ogImage": "/research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_2.png",
+      "title": "Understanding the Sneaky Patterns：为研究欺骗弹窗而构建的识别、处置与探索闭环",
+      "date": "2026-08-22",
+      "sourceHash": "b63290e172ce593c94a50d5de470f7d8ae02cf1cd6b69ac45de0376a6042f705",
+      "raw": "---\ntags:\n  - papers/gui-agent-testing\n  - papers/mobile-popup\n  - papers/dark-patterns\naliases:\n  - Poker\n  - Sneaky Pop-up Windows\ndate: 2026-08-22\narxiv_id: 2505.12056\n---\n\n# Understanding the Sneaky Patterns：为研究欺骗弹窗而构建的识别、处置与探索闭环\n\n## 核心信息\n\n- 标题: Understanding the Sneaky Patterns of Pop-up Windows in the Mobile Ecosystem\n- 标题翻译: 理解移动生态系统中弹窗的隐蔽操纵模式\n- 作者: Dongpeng Wu, Yuhong Nan, Shaojiang Wang, Jiawei Wang, Luwa Li, Xueqiang Wang\n- 机构: Sun Yat-sen University; University of Central Florida\n- 发表时间: 2025-05-17\n- 发表渠道: arXiv 预印本\n- arXiv: 2505.12056\n- 论文链接: [arXiv](https://arxiv.org/abs/2505.12056)\n- 代码 / 项目: [Poker 项目](https://github.com/feymanpaper/UIDarkPatternPopup)\n- 论文类型: Android 弹窗生态测量与自动化采集系统\n\n## 原文摘要翻译\n\n弹窗在移动应用中承担改善用户体验、引导用户操作和传递关键信息的作用，但过度使用会严重损害体验。部分弹窗以隐蔽方式误导用户选择，通过策略性设计操纵决策。论文对移动生态中的这类隐蔽模式进行系统研究，总结出文本误导、界面误导、强制操作、脱离上下文和默认侵犯隐私五种模式。为了大规模评估这些现象，作者开发自动分析流水线 Poker，解决真实应用中弹窗识别、消除和收集的问题。实验表明，Poker 能以较高精确率和召回率识别弹窗，超过 88% 的弹窗可以用不超过两次交互消除，并能较稳健地探索应用。作者进一步分析中美各 50 个热门应用，发现两地应用都大量使用隐蔽模式，购物和视频等类别中的促销弹窗尤其突出。\n\n## 创新点\n\n1. **把弹窗视为独立研究对象。** 论文不是把弹窗当作测试噪声，而是提出五类 Sneaky 模式并收集上下文证据。\n2. **形成识别—处置—继续探索的闭环。** Poker 先检测覆盖层，再按优先级点击内部组件，最后继续触发和采集更多弹窗。\n3. **组合视觉和结构证据。** YOLO 提供弹窗区域，半透明遮罩比例用于复核；可点击组件检测失败时再回退到 XML 中位于弹窗区域的控件。\n4. **为商业应用探索加入恢复机制。** 自适应深度优先搜索、LCS 状态抽象和界面转移图共同减轻动态页面爆炸与错误返回。\n\n## 一句话总结\n\nPoker 能在 Android 应用中找到弹窗、优先点击可操作组件并继续探索；它证明了多数弹窗可以很快消失，却没有证明所点击的允许、拒绝、领取或退出符合用户任务与安全偏好。\n\n## 研究问题\n\n论文关注的不是单纯“有没有弹窗”，而是如何大规模采集真实应用里的欺骗设计。为此必须同时解决三个工程问题：弹窗形态和尺寸高度多样；GUI 树混入宿主页面控件，直接遍历会误点；商业应用界面频繁变化，普通 DFS 容易重复、退错页面或路径爆炸。\n\n作者把欺骗行为划分为五类：文本误导、界面误导、强制操作、默认侵犯隐私和脱离上下文。促销与功能只是弹窗用途分类，Sneaky 是对其设计方式的判断；一个权限弹窗也可能因诱导授权而被标成 Sneaky。\n\n![五类 Sneaky 弹窗模式](/research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_1.png)\n*图 1：论文定义的五类操纵性弹窗示例。*\n\n## 数据与任务定义\n\n| 子任务 | 数据或应用 | 目标 |\n|---|---|---|\n| 弹窗识别 | 来自不同应用的 1,048 个弹窗 | 判断并定位弹窗区域 |\n| 弹窗处置 | AUI 数据集和真实探索中的弹窗 | 找出可点击组件，使弹窗消失 |\n| 应用探索 | 腾讯应用宝 50 个热门应用 | 与 Monkey、Q-Testing 比较收集到的弹窗数 |\n| 生态测量 | 中国 50 个、美国 50 个热门应用，每个探索一小时 | 半自动标注类型与五类 Sneaky 模式 |\n\n实验前会人工登录应用并清除缓存。Sneaky 模式最终采用 ChatGLM 辅助识别和人工复核，因此自动化覆盖的是弹窗采集，不是完整的欺骗模式判定。\n\n## 方法主线\n\n### 机制流程\n\n1. **识别。** YOLO 检测弹窗区域；移除检测框后计算屏幕剩余部分的 HSV 阴影比例，以“弹窗通常伴随半透明灰色遮罩”的经验复核假阳性。\n2. **处置。** 第二个 YOLO 模型检测弹窗内部的可点击元素并优先执行；若视觉模型漏检，再把 XML 中位于弹窗区域的可点击组件加入低优先级队列。\n3. **采集上下文。** 保存截图、GUI 信息、触发动作和界面转移，用于后续判断弹窗是否脱离上下文。\n4. **继续探索。** 自适应 DFS 根据覆盖情况调整深度；界面状态由所有可点击组件的位置序列表示，并以最长公共子序列比较相似度。\n5. **恢复路径。** 返回操作因 Fragment 栈而退回首页时，Poker 使用界面转移图重启应用并重放路径，回到此前状态。\n\n![Poker 总体闭环](/research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_2.png)\n*图 2：弹窗识别、处置、上下文保存和应用探索形成循环。*\n\n### 处置策略的真实含义\n\nPoker 会动态测试弹窗中的可点击组件，目标函数是“让弹窗消失并继续采集”。因此一次点击可以是关闭，也可以是确认、领取、下一步或其他能改变弹窗的动作。论文没有任务目标或授权风险模型，不能把它直接改写成面向真实用户的自动同意器。\n\n## 关键结果\n\n### 识别与点击次数\n\n| 指标 | 结果 |\n|---|---:|\n| 弹窗检测精确率 | 98.3% |\n| 弹窗检测召回率 | 94.4% |\n| 弹窗检测 F1 | 96.3% |\n| 确认按钮检测精确率 | 94.9% |\n| 确认按钮检测召回率 | 97.6% |\n| 退出按钮检测精确率 | 91.7% |\n| 退出按钮检测召回率 | 96.5% |\n\n处置实验中有 1,217 个弹窗只需一次点击；论文报告超过 88% 的弹窗在两次点击内消失。少数弹窗需要六次以上点击，常见原因是弹窗只含复选框等非关闭组件，或其组件树混入宿主页面的可点击元素。\n\n### 探索能力\n\nPoker 收集弹窗数的中位数高于 Monkey 和 Q-Testing。Q-Testing 在部分应用中收集到零个弹窗，作者将原因归为开屏广告和频繁视频页面切换导致不断重启。论文以箱线图和定性比较呈现结果，逐应用原始数值与统计检验没有进入主结果表，因此这一差异只宜作描述性解释。\n\n### 生态测量\n\n中国应用共收集 1,374 个弹窗，其中 808 个被标记为 Sneaky；美国应用为 277 个和 152 个。两地促销弹窗中 Sneaky 比例都超过 90%。这些结果说明欺骗设计广泛存在，但地区差异可能同时受应用商店选择、登录状态、版本和探索路径影响。\n\n## 深度分析\n\n### “两次以内关闭”不能直接解释为安全成功率\n\n论文的成功判定是覆盖层消失。对测试数据采集，这个定义合理；对真实用户任务，它不够。点击“下一步”可以让当前弹窗消失，却可能打开另一层促销；点击“允许”可以继续流程，却可能造成过度授权。评估生产方案还必须增加动作语义正确率、宿主状态恢复率和不可逆副作用率。\n\n### 状态恢复机制值得单独复用\n\nPoker 用可点击组件位置序列而非整棵 XML 树做状态摘要，再用 LCS 容忍文本和局部位置变化；返回失败时依靠显式转移图重启并重放。这解决了商业应用中 Fragment 返回不遵循 Activity 栈的问题。三项机制尚缺乏分别消融，恢复成功率也未作为独立评测端点。\n\n### 对 Sneaky 判断的证据应保守\n\nOut-of-Context 需要触发按钮、文本和前后界面的关联；其余类别也依赖语义和设计意图。作者明确承认当前多模态模型不足以可靠全自动分类，所以使用模型加人工复核。站点中应把“Poker 自动采集弹窗”和“研究者半自动判断欺骗模式”分开表述。\n\n## 局限\n\n1. 只实现 Android，所谓迁移到 iOS 只是未来可行性判断。\n2. 弹窗遮罩规则依赖半透明灰色背景，深色模式、灰色填充和边界不清会漏检。\n3. 加载页和二维码扫描页可能被误判为弹窗。\n4. 处置追求弹窗消失，不理解用户任务、授权风险或支付副作用。\n5. 探索机制没有独立消融和专项恢复成功率。\n6. Sneaky 分类是模型辅助加人工复核，不是全自动端到端结果。\n7. 论文是 arXiv 预印本，正文仍保留会议占位文本，实验与表述尚未经正式版本校订。\n\n## 我的笔记\n\n### 最值得保留的设计\n\nPoker 的价值在于把弹窗处理嵌入长期探索：识别和点击只是局部动作，状态摘要、界面转移图和路径恢复才决定测试器能否继续收集。这个设计比固定按返回键更接近真实商业应用。\n\n### 安全改造方向\n\n若用于用户任务，应把当前“可点击组件队列”换成三层策略：先判断动作是否可逆，再结合任务目标选择关闭、拒绝或暂缓，最后在点击后验证宿主状态。权限、订阅、支付、删除、身份验证和平台安全控制不能沿用覆盖率优先策略。\n\n### 适合站点中的定位\n\n**Android 欺骗弹窗研究中的自动识别、快速处置和路径恢复系统。** 它比 PopSweeper 更完整地处理探索连续性，但仍不是用户意图驱动的弹窗决策器。\n\n## 引用\n\n- Dongpeng Wu et al., 2025, arXiv:2505.12056.\n- [arXiv 论文页面](https://arxiv.org/abs/2505.12056)\n- [Poker 项目](https://github.com/feymanpaper/UIDarkPatternPopup)\n",
+      "html": "<h1 id=\"sneaky-popups-h1-0\">Understanding the Sneaky Patterns：为研究欺骗弹窗而构建的识别、处置与探索闭环</h1>\n<h2 id=\"sneaky-popups-h2-1\">核心信息</h2>\n<ul>\n<li>标题: Understanding the Sneaky Patterns of Pop-up Windows in the Mobile Ecosystem</li>\n<li>标题翻译: 理解移动生态系统中弹窗的隐蔽操纵模式</li>\n<li>作者: Dongpeng Wu, Yuhong Nan, Shaojiang Wang, Jiawei Wang, Luwa Li, Xueqiang Wang</li>\n<li>机构: Sun Yat-sen University; University of Central Florida</li>\n<li>发表时间: 2025-05-17</li>\n<li>发表渠道: arXiv 预印本</li>\n<li>arXiv: 2505.12056</li>\n<li>论文链接: <a href=\"https://arxiv.org/abs/2505.12056\" target=\"_blank\" rel=\"noreferrer\">arXiv</a></li>\n<li>代码 / 项目: <a href=\"https://github.com/feymanpaper/UIDarkPatternPopup\" target=\"_blank\" rel=\"noreferrer\">Poker 项目</a></li>\n<li>论文类型: Android 弹窗生态测量与自动化采集系统</li>\n</ul>\n<h2 id=\"sneaky-popups-h2-2\">原文摘要翻译</h2>\n<p>弹窗在移动应用中承担改善用户体验、引导用户操作和传递关键信息的作用，但过度使用会严重损害体验。部分弹窗以隐蔽方式误导用户选择，通过策略性设计操纵决策。论文对移动生态中的这类隐蔽模式进行系统研究，总结出文本误导、界面误导、强制操作、脱离上下文和默认侵犯隐私五种模式。为了大规模评估这些现象，作者开发自动分析流水线 Poker，解决真实应用中弹窗识别、消除和收集的问题。实验表明，Poker 能以较高精确率和召回率识别弹窗，超过 88% 的弹窗可以用不超过两次交互消除，并能较稳健地探索应用。作者进一步分析中美各 50 个热门应用，发现两地应用都大量使用隐蔽模式，购物和视频等类别中的促销弹窗尤其突出。</p>\n<h2 id=\"sneaky-popups-h2-3\">创新点</h2>\n<ol>\n<li><strong>把弹窗视为独立研究对象。</strong> 论文不是把弹窗当作测试噪声，而是提出五类 Sneaky 模式并收集上下文证据。</li>\n<li><strong>形成识别—处置—继续探索的闭环。</strong> Poker 先检测覆盖层，再按优先级点击内部组件，最后继续触发和采集更多弹窗。</li>\n<li><strong>组合视觉和结构证据。</strong> YOLO 提供弹窗区域，半透明遮罩比例用于复核；可点击组件检测失败时再回退到 XML 中位于弹窗区域的控件。</li>\n<li><strong>为商业应用探索加入恢复机制。</strong> 自适应深度优先搜索、LCS 状态抽象和界面转移图共同减轻动态页面爆炸与错误返回。</li>\n</ol>\n<h2 id=\"sneaky-popups-h2-4\">一句话总结</h2>\n<p>Poker 能在 Android 应用中找到弹窗、优先点击可操作组件并继续探索；它证明了多数弹窗可以很快消失，却没有证明所点击的允许、拒绝、领取或退出符合用户任务与安全偏好。</p>\n<h2 id=\"sneaky-popups-h2-5\">研究问题</h2>\n<p>论文关注的不是单纯“有没有弹窗”，而是如何大规模采集真实应用里的欺骗设计。为此必须同时解决三个工程问题：弹窗形态和尺寸高度多样；GUI 树混入宿主页面控件，直接遍历会误点；商业应用界面频繁变化，普通 DFS 容易重复、退错页面或路径爆炸。</p>\n<p>作者把欺骗行为划分为五类：文本误导、界面误导、强制操作、默认侵犯隐私和脱离上下文。促销与功能只是弹窗用途分类，Sneaky 是对其设计方式的判断；一个权限弹窗也可能因诱导授权而被标成 Sneaky。</p>\n<p><img src=\"/research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_1.png\" alt=\"五类 Sneaky 弹窗模式\">\n<em>图 1：论文定义的五类操纵性弹窗示例。</em></p>\n<h2 id=\"sneaky-popups-h2-6\">数据与任务定义</h2>\n<table>\n<thead>\n<tr>\n<th>子任务</th>\n<th>数据或应用</th>\n<th>目标</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>弹窗识别</td>\n<td>来自不同应用的 1,048 个弹窗</td>\n<td>判断并定位弹窗区域</td>\n</tr>\n<tr>\n<td>弹窗处置</td>\n<td>AUI 数据集和真实探索中的弹窗</td>\n<td>找出可点击组件，使弹窗消失</td>\n</tr>\n<tr>\n<td>应用探索</td>\n<td>腾讯应用宝 50 个热门应用</td>\n<td>与 Monkey、Q-Testing 比较收集到的弹窗数</td>\n</tr>\n<tr>\n<td>生态测量</td>\n<td>中国 50 个、美国 50 个热门应用，每个探索一小时</td>\n<td>半自动标注类型与五类 Sneaky 模式</td>\n</tr>\n</tbody></table>\n<p>实验前会人工登录应用并清除缓存。Sneaky 模式最终采用 ChatGLM 辅助识别和人工复核，因此自动化覆盖的是弹窗采集，不是完整的欺骗模式判定。</p>\n<h2 id=\"sneaky-popups-h2-7\">方法主线</h2>\n<h3 id=\"sneaky-popups-h3-8\">机制流程</h3>\n<ol>\n<li><strong>识别。</strong> YOLO 检测弹窗区域；移除检测框后计算屏幕剩余部分的 HSV 阴影比例，以“弹窗通常伴随半透明灰色遮罩”的经验复核假阳性。</li>\n<li><strong>处置。</strong> 第二个 YOLO 模型检测弹窗内部的可点击元素并优先执行；若视觉模型漏检，再把 XML 中位于弹窗区域的可点击组件加入低优先级队列。</li>\n<li><strong>采集上下文。</strong> 保存截图、GUI 信息、触发动作和界面转移，用于后续判断弹窗是否脱离上下文。</li>\n<li><strong>继续探索。</strong> 自适应 DFS 根据覆盖情况调整深度；界面状态由所有可点击组件的位置序列表示，并以最长公共子序列比较相似度。</li>\n<li><strong>恢复路径。</strong> 返回操作因 Fragment 栈而退回首页时，Poker 使用界面转移图重启应用并重放路径，回到此前状态。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_2.png\" alt=\"Poker 总体闭环\">\n<em>图 2：弹窗识别、处置、上下文保存和应用探索形成循环。</em></p>\n<h3 id=\"sneaky-popups-h3-9\">处置策略的真实含义</h3>\n<p>Poker 会动态测试弹窗中的可点击组件，目标函数是“让弹窗消失并继续采集”。因此一次点击可以是关闭，也可以是确认、领取、下一步或其他能改变弹窗的动作。论文没有任务目标或授权风险模型，不能把它直接改写成面向真实用户的自动同意器。</p>\n<h2 id=\"sneaky-popups-h2-10\">关键结果</h2>\n<h3 id=\"sneaky-popups-h3-11\">识别与点击次数</h3>\n<table>\n<thead>\n<tr>\n<th>指标</th>\n<th align=\"right\">结果</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>弹窗检测精确率</td>\n<td align=\"right\">98.3%</td>\n</tr>\n<tr>\n<td>弹窗检测召回率</td>\n<td align=\"right\">94.4%</td>\n</tr>\n<tr>\n<td>弹窗检测 F1</td>\n<td align=\"right\">96.3%</td>\n</tr>\n<tr>\n<td>确认按钮检测精确率</td>\n<td align=\"right\">94.9%</td>\n</tr>\n<tr>\n<td>确认按钮检测召回率</td>\n<td align=\"right\">97.6%</td>\n</tr>\n<tr>\n<td>退出按钮检测精确率</td>\n<td align=\"right\">91.7%</td>\n</tr>\n<tr>\n<td>退出按钮检测召回率</td>\n<td align=\"right\">96.5%</td>\n</tr>\n</tbody></table>\n<p>处置实验中有 1,217 个弹窗只需一次点击；论文报告超过 88% 的弹窗在两次点击内消失。少数弹窗需要六次以上点击，常见原因是弹窗只含复选框等非关闭组件，或其组件树混入宿主页面的可点击元素。</p>\n<h3 id=\"sneaky-popups-h3-12\">探索能力</h3>\n<p>Poker 收集弹窗数的中位数高于 Monkey 和 Q-Testing。Q-Testing 在部分应用中收集到零个弹窗，作者将原因归为开屏广告和频繁视频页面切换导致不断重启。论文以箱线图和定性比较呈现结果，逐应用原始数值与统计检验没有进入主结果表，因此这一差异只宜作描述性解释。</p>\n<h3 id=\"sneaky-popups-h3-13\">生态测量</h3>\n<p>中国应用共收集 1,374 个弹窗，其中 808 个被标记为 Sneaky；美国应用为 277 个和 152 个。两地促销弹窗中 Sneaky 比例都超过 90%。这些结果说明欺骗设计广泛存在，但地区差异可能同时受应用商店选择、登录状态、版本和探索路径影响。</p>\n<h2 id=\"sneaky-popups-h2-14\">深度分析</h2>\n<h3 id=\"sneaky-popups-h3-15\">“两次以内关闭”不能直接解释为安全成功率</h3>\n<p>论文的成功判定是覆盖层消失。对测试数据采集，这个定义合理；对真实用户任务，它不够。点击“下一步”可以让当前弹窗消失，却可能打开另一层促销；点击“允许”可以继续流程，却可能造成过度授权。评估生产方案还必须增加动作语义正确率、宿主状态恢复率和不可逆副作用率。</p>\n<h3 id=\"sneaky-popups-h3-16\">状态恢复机制值得单独复用</h3>\n<p>Poker 用可点击组件位置序列而非整棵 XML 树做状态摘要，再用 LCS 容忍文本和局部位置变化；返回失败时依靠显式转移图重启并重放。这解决了商业应用中 Fragment 返回不遵循 Activity 栈的问题。三项机制尚缺乏分别消融，恢复成功率也未作为独立评测端点。</p>\n<h3 id=\"sneaky-popups-h3-17\">对 Sneaky 判断的证据应保守</h3>\n<p>Out-of-Context 需要触发按钮、文本和前后界面的关联；其余类别也依赖语义和设计意图。作者明确承认当前多模态模型不足以可靠全自动分类，所以使用模型加人工复核。站点中应把“Poker 自动采集弹窗”和“研究者半自动判断欺骗模式”分开表述。</p>\n<h2 id=\"sneaky-popups-h2-18\">局限</h2>\n<ol>\n<li>只实现 Android，所谓迁移到 iOS 只是未来可行性判断。</li>\n<li>弹窗遮罩规则依赖半透明灰色背景，深色模式、灰色填充和边界不清会漏检。</li>\n<li>加载页和二维码扫描页可能被误判为弹窗。</li>\n<li>处置追求弹窗消失，不理解用户任务、授权风险或支付副作用。</li>\n<li>探索机制没有独立消融和专项恢复成功率。</li>\n<li>Sneaky 分类是模型辅助加人工复核，不是全自动端到端结果。</li>\n<li>论文是 arXiv 预印本，正文仍保留会议占位文本，实验与表述尚未经正式版本校订。</li>\n</ol>\n<h2 id=\"sneaky-popups-h2-19\">我的笔记</h2>\n<h3 id=\"sneaky-popups-h3-20\">最值得保留的设计</h3>\n<p>Poker 的价值在于把弹窗处理嵌入长期探索：识别和点击只是局部动作，状态摘要、界面转移图和路径恢复才决定测试器能否继续收集。这个设计比固定按返回键更接近真实商业应用。</p>\n<h3 id=\"sneaky-popups-h3-21\">安全改造方向</h3>\n<p>若用于用户任务，应把当前“可点击组件队列”换成三层策略：先判断动作是否可逆，再结合任务目标选择关闭、拒绝或暂缓，最后在点击后验证宿主状态。权限、订阅、支付、删除、身份验证和平台安全控制不能沿用覆盖率优先策略。</p>\n<h3 id=\"sneaky-popups-h3-22\">适合站点中的定位</h3>\n<p><strong>Android 欺骗弹窗研究中的自动识别、快速处置和路径恢复系统。</strong> 它比 PopSweeper 更完整地处理探索连续性，但仍不是用户意图驱动的弹窗决策器。</p>\n<h2 id=\"sneaky-popups-h2-23\">引用</h2>\n<ul>\n<li>Dongpeng Wu et al., 2025, arXiv:2505.12056.</li>\n<li><a href=\"https://arxiv.org/abs/2505.12056\" target=\"_blank\" rel=\"noreferrer\">arXiv 论文页面</a></li>\n<li><a href=\"https://github.com/feymanpaper/UIDarkPatternPopup\" target=\"_blank\" rel=\"noreferrer\">Poker 项目</a></li>\n</ul>\n",
+      "headings": [
+        {
+          "depth": 1,
+          "id": "sneaky-popups-h1-0",
+          "text": "Understanding the Sneaky Patterns：为研究欺骗弹窗而构建的识别、处置与探索闭环"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-1",
+          "text": "核心信息"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-2",
+          "text": "原文摘要翻译"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-3",
+          "text": "创新点"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-4",
+          "text": "一句话总结"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-5",
+          "text": "研究问题"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-6",
+          "text": "数据与任务定义"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-7",
+          "text": "方法主线"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-8",
+          "text": "机制流程"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-9",
+          "text": "处置策略的真实含义"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-10",
+          "text": "关键结果"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-11",
+          "text": "识别与点击次数"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-12",
+          "text": "探索能力"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-13",
+          "text": "生态测量"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-14",
+          "text": "深度分析"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-15",
+          "text": "“两次以内关闭”不能直接解释为安全成功率"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-16",
+          "text": "状态恢复机制值得单独复用"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-17",
+          "text": "对 Sneaky 判断的证据应保守"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-18",
+          "text": "局限"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-19",
+          "text": "我的笔记"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-20",
+          "text": "最值得保留的设计"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-21",
+          "text": "安全改造方向"
+        },
+        {
+          "depth": 3,
+          "id": "sneaky-popups-h3-22",
+          "text": "适合站点中的定位"
+        },
+        {
+          "depth": 2,
+          "id": "sneaky-popups-h2-23",
+          "text": "引用"
+        }
+      ],
+      "sections": [
+        {
+          "id": "sneaky-popups-section-0",
+          "title": "导读",
+          "html": "<h1 id=\"sneaky-popups-slide-0-h1-0\">Understanding the Sneaky Patterns：为研究欺骗弹窗而构建的识别、处置与探索闭环</h1>\n"
+        },
+        {
+          "id": "sneaky-popups-section-1",
+          "title": "核心信息",
+          "html": "<h2 id=\"sneaky-popups-slide-1-h2-0\">核心信息</h2>\n<ul>\n<li>标题: Understanding the Sneaky Patterns of Pop-up Windows in the Mobile Ecosystem</li>\n<li>标题翻译: 理解移动生态系统中弹窗的隐蔽操纵模式</li>\n<li>作者: Dongpeng Wu, Yuhong Nan, Shaojiang Wang, Jiawei Wang, Luwa Li, Xueqiang Wang</li>\n<li>机构: Sun Yat-sen University; University of Central Florida</li>\n<li>发表时间: 2025-05-17</li>\n<li>发表渠道: arXiv 预印本</li>\n<li>arXiv: 2505.12056</li>\n<li>论文链接: <a href=\"https://arxiv.org/abs/2505.12056\" target=\"_blank\" rel=\"noreferrer\">arXiv</a></li>\n<li>代码 / 项目: <a href=\"https://github.com/feymanpaper/UIDarkPatternPopup\" target=\"_blank\" rel=\"noreferrer\">Poker 项目</a></li>\n<li>论文类型: Android 弹窗生态测量与自动化采集系统</li>\n</ul>\n"
+        },
+        {
+          "id": "sneaky-popups-section-2",
+          "title": "原文摘要翻译",
+          "html": "<h2 id=\"sneaky-popups-slide-2-h2-0\">原文摘要翻译</h2>\n<p>弹窗在移动应用中承担改善用户体验、引导用户操作和传递关键信息的作用，但过度使用会严重损害体验。部分弹窗以隐蔽方式误导用户选择，通过策略性设计操纵决策。论文对移动生态中的这类隐蔽模式进行系统研究，总结出文本误导、界面误导、强制操作、脱离上下文和默认侵犯隐私五种模式。为了大规模评估这些现象，作者开发自动分析流水线 Poker，解决真实应用中弹窗识别、消除和收集的问题。实验表明，Poker 能以较高精确率和召回率识别弹窗，超过 88% 的弹窗可以用不超过两次交互消除，并能较稳健地探索应用。作者进一步分析中美各 50 个热门应用，发现两地应用都大量使用隐蔽模式，购物和视频等类别中的促销弹窗尤其突出。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-3",
+          "title": "创新点",
+          "html": "<h2 id=\"sneaky-popups-slide-3-h2-0\">创新点</h2>\n<ol>\n<li><strong>把弹窗视为独立研究对象。</strong> 论文不是把弹窗当作测试噪声，而是提出五类 Sneaky 模式并收集上下文证据。</li>\n<li><strong>形成识别—处置—继续探索的闭环。</strong> Poker 先检测覆盖层，再按优先级点击内部组件，最后继续触发和采集更多弹窗。</li>\n<li><strong>组合视觉和结构证据。</strong> YOLO 提供弹窗区域，半透明遮罩比例用于复核；可点击组件检测失败时再回退到 XML 中位于弹窗区域的控件。</li>\n<li><strong>为商业应用探索加入恢复机制。</strong> 自适应深度优先搜索、LCS 状态抽象和界面转移图共同减轻动态页面爆炸与错误返回。</li>\n</ol>\n"
+        },
+        {
+          "id": "sneaky-popups-section-4",
+          "title": "一句话总结",
+          "html": "<h2 id=\"sneaky-popups-slide-4-h2-0\">一句话总结</h2>\n<p>Poker 能在 Android 应用中找到弹窗、优先点击可操作组件并继续探索；它证明了多数弹窗可以很快消失，却没有证明所点击的允许、拒绝、领取或退出符合用户任务与安全偏好。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-5",
+          "title": "研究问题",
+          "html": "<h2 id=\"sneaky-popups-slide-5-h2-0\">研究问题</h2>\n<p>论文关注的不是单纯“有没有弹窗”，而是如何大规模采集真实应用里的欺骗设计。为此必须同时解决三个工程问题：弹窗形态和尺寸高度多样；GUI 树混入宿主页面控件，直接遍历会误点；商业应用界面频繁变化，普通 DFS 容易重复、退错页面或路径爆炸。</p>\n<p>作者把欺骗行为划分为五类：文本误导、界面误导、强制操作、默认侵犯隐私和脱离上下文。促销与功能只是弹窗用途分类，Sneaky 是对其设计方式的判断；一个权限弹窗也可能因诱导授权而被标成 Sneaky。</p>\n<p><img src=\"/research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_1.png\" alt=\"五类 Sneaky 弹窗模式\">\n<em>图 1：论文定义的五类操纵性弹窗示例。</em></p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-6",
+          "title": "数据与任务定义",
+          "html": "<h2 id=\"sneaky-popups-slide-6-h2-0\">数据与任务定义</h2>\n<table>\n<thead>\n<tr>\n<th>子任务</th>\n<th>数据或应用</th>\n<th>目标</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>弹窗识别</td>\n<td>来自不同应用的 1,048 个弹窗</td>\n<td>判断并定位弹窗区域</td>\n</tr>\n<tr>\n<td>弹窗处置</td>\n<td>AUI 数据集和真实探索中的弹窗</td>\n<td>找出可点击组件，使弹窗消失</td>\n</tr>\n<tr>\n<td>应用探索</td>\n<td>腾讯应用宝 50 个热门应用</td>\n<td>与 Monkey、Q-Testing 比较收集到的弹窗数</td>\n</tr>\n<tr>\n<td>生态测量</td>\n<td>中国 50 个、美国 50 个热门应用，每个探索一小时</td>\n<td>半自动标注类型与五类 Sneaky 模式</td>\n</tr>\n</tbody></table>\n<p>实验前会人工登录应用并清除缓存。Sneaky 模式最终采用 ChatGLM 辅助识别和人工复核，因此自动化覆盖的是弹窗采集，不是完整的欺骗模式判定。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-7",
+          "title": "方法主线",
+          "html": "<h2 id=\"sneaky-popups-slide-7-h2-0\">方法主线</h2>\n"
+        },
+        {
+          "id": "sneaky-popups-section-8",
+          "title": "机制流程",
+          "html": "<h3 id=\"sneaky-popups-slide-8-h3-0\">机制流程</h3>\n<ol>\n<li><strong>识别。</strong> YOLO 检测弹窗区域；移除检测框后计算屏幕剩余部分的 HSV 阴影比例，以“弹窗通常伴随半透明灰色遮罩”的经验复核假阳性。</li>\n<li><strong>处置。</strong> 第二个 YOLO 模型检测弹窗内部的可点击元素并优先执行；若视觉模型漏检，再把 XML 中位于弹窗区域的可点击组件加入低优先级队列。</li>\n<li><strong>采集上下文。</strong> 保存截图、GUI 信息、触发动作和界面转移，用于后续判断弹窗是否脱离上下文。</li>\n<li><strong>继续探索。</strong> 自适应 DFS 根据覆盖情况调整深度；界面状态由所有可点击组件的位置序列表示，并以最长公共子序列比较相似度。</li>\n<li><strong>恢复路径。</strong> 返回操作因 Fragment 栈而退回首页时，Poker 使用界面转移图重启应用并重放路径，回到此前状态。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/sneaky-popups/page_003_fig_figure_2.png\" alt=\"Poker 总体闭环\">\n<em>图 2：弹窗识别、处置、上下文保存和应用探索形成循环。</em></p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-9",
+          "title": "处置策略的真实含义",
+          "html": "<h3 id=\"sneaky-popups-slide-9-h3-0\">处置策略的真实含义</h3>\n<p>Poker 会动态测试弹窗中的可点击组件，目标函数是“让弹窗消失并继续采集”。因此一次点击可以是关闭，也可以是确认、领取、下一步或其他能改变弹窗的动作。论文没有任务目标或授权风险模型，不能把它直接改写成面向真实用户的自动同意器。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-10",
+          "title": "关键结果",
+          "html": "<h2 id=\"sneaky-popups-slide-10-h2-0\">关键结果</h2>\n"
+        },
+        {
+          "id": "sneaky-popups-section-11",
+          "title": "识别与点击次数",
+          "html": "<h3 id=\"sneaky-popups-slide-11-h3-0\">识别与点击次数</h3>\n<table>\n<thead>\n<tr>\n<th>指标</th>\n<th align=\"right\">结果</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>弹窗检测精确率</td>\n<td align=\"right\">98.3%</td>\n</tr>\n<tr>\n<td>弹窗检测召回率</td>\n<td align=\"right\">94.4%</td>\n</tr>\n<tr>\n<td>弹窗检测 F1</td>\n<td align=\"right\">96.3%</td>\n</tr>\n<tr>\n<td>确认按钮检测精确率</td>\n<td align=\"right\">94.9%</td>\n</tr>\n<tr>\n<td>确认按钮检测召回率</td>\n<td align=\"right\">97.6%</td>\n</tr>\n<tr>\n<td>退出按钮检测精确率</td>\n<td align=\"right\">91.7%</td>\n</tr>\n<tr>\n<td>退出按钮检测召回率</td>\n<td align=\"right\">96.5%</td>\n</tr>\n</tbody></table>\n<p>处置实验中有 1,217 个弹窗只需一次点击；论文报告超过 88% 的弹窗在两次点击内消失。少数弹窗需要六次以上点击，常见原因是弹窗只含复选框等非关闭组件，或其组件树混入宿主页面的可点击元素。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-12",
+          "title": "探索能力",
+          "html": "<h3 id=\"sneaky-popups-slide-12-h3-0\">探索能力</h3>\n<p>Poker 收集弹窗数的中位数高于 Monkey 和 Q-Testing。Q-Testing 在部分应用中收集到零个弹窗，作者将原因归为开屏广告和频繁视频页面切换导致不断重启。论文以箱线图和定性比较呈现结果，逐应用原始数值与统计检验没有进入主结果表，因此这一差异只宜作描述性解释。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-13",
+          "title": "生态测量",
+          "html": "<h3 id=\"sneaky-popups-slide-13-h3-0\">生态测量</h3>\n<p>中国应用共收集 1,374 个弹窗，其中 808 个被标记为 Sneaky；美国应用为 277 个和 152 个。两地促销弹窗中 Sneaky 比例都超过 90%。这些结果说明欺骗设计广泛存在，但地区差异可能同时受应用商店选择、登录状态、版本和探索路径影响。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-14",
+          "title": "深度分析",
+          "html": "<h2 id=\"sneaky-popups-slide-14-h2-0\">深度分析</h2>\n"
+        },
+        {
+          "id": "sneaky-popups-section-15",
+          "title": "“两次以内关闭”不能直接解释为安全成功率",
+          "html": "<h3 id=\"sneaky-popups-slide-15-h3-0\">“两次以内关闭”不能直接解释为安全成功率</h3>\n<p>论文的成功判定是覆盖层消失。对测试数据采集，这个定义合理；对真实用户任务，它不够。点击“下一步”可以让当前弹窗消失，却可能打开另一层促销；点击“允许”可以继续流程，却可能造成过度授权。评估生产方案还必须增加动作语义正确率、宿主状态恢复率和不可逆副作用率。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-16",
+          "title": "状态恢复机制值得单独复用",
+          "html": "<h3 id=\"sneaky-popups-slide-16-h3-0\">状态恢复机制值得单独复用</h3>\n<p>Poker 用可点击组件位置序列而非整棵 XML 树做状态摘要，再用 LCS 容忍文本和局部位置变化；返回失败时依靠显式转移图重启并重放。这解决了商业应用中 Fragment 返回不遵循 Activity 栈的问题。三项机制尚缺乏分别消融，恢复成功率也未作为独立评测端点。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-17",
+          "title": "对 Sneaky 判断的证据应保守",
+          "html": "<h3 id=\"sneaky-popups-slide-17-h3-0\">对 Sneaky 判断的证据应保守</h3>\n<p>Out-of-Context 需要触发按钮、文本和前后界面的关联；其余类别也依赖语义和设计意图。作者明确承认当前多模态模型不足以可靠全自动分类，所以使用模型加人工复核。站点中应把“Poker 自动采集弹窗”和“研究者半自动判断欺骗模式”分开表述。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-18",
+          "title": "局限",
+          "html": "<h2 id=\"sneaky-popups-slide-18-h2-0\">局限</h2>\n<ol>\n<li>只实现 Android，所谓迁移到 iOS 只是未来可行性判断。</li>\n<li>弹窗遮罩规则依赖半透明灰色背景，深色模式、灰色填充和边界不清会漏检。</li>\n<li>加载页和二维码扫描页可能被误判为弹窗。</li>\n<li>处置追求弹窗消失，不理解用户任务、授权风险或支付副作用。</li>\n<li>探索机制没有独立消融和专项恢复成功率。</li>\n<li>Sneaky 分类是模型辅助加人工复核，不是全自动端到端结果。</li>\n<li>论文是 arXiv 预印本，正文仍保留会议占位文本，实验与表述尚未经正式版本校订。</li>\n</ol>\n"
+        },
+        {
+          "id": "sneaky-popups-section-19",
+          "title": "我的笔记",
+          "html": "<h2 id=\"sneaky-popups-slide-19-h2-0\">我的笔记</h2>\n"
+        },
+        {
+          "id": "sneaky-popups-section-20",
+          "title": "最值得保留的设计",
+          "html": "<h3 id=\"sneaky-popups-slide-20-h3-0\">最值得保留的设计</h3>\n<p>Poker 的价值在于把弹窗处理嵌入长期探索：识别和点击只是局部动作，状态摘要、界面转移图和路径恢复才决定测试器能否继续收集。这个设计比固定按返回键更接近真实商业应用。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-21",
+          "title": "安全改造方向",
+          "html": "<h3 id=\"sneaky-popups-slide-21-h3-0\">安全改造方向</h3>\n<p>若用于用户任务，应把当前“可点击组件队列”换成三层策略：先判断动作是否可逆，再结合任务目标选择关闭、拒绝或暂缓，最后在点击后验证宿主状态。权限、订阅、支付、删除、身份验证和平台安全控制不能沿用覆盖率优先策略。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-22",
+          "title": "适合站点中的定位",
+          "html": "<h3 id=\"sneaky-popups-slide-22-h3-0\">适合站点中的定位</h3>\n<p><strong>Android 欺骗弹窗研究中的自动识别、快速处置和路径恢复系统。</strong> 它比 PopSweeper 更完整地处理探索连续性，但仍不是用户意图驱动的弹窗决策器。</p>\n"
+        },
+        {
+          "id": "sneaky-popups-section-23",
+          "title": "引用",
+          "html": "<h2 id=\"sneaky-popups-slide-23-h2-0\">引用</h2>\n<ul>\n<li>Dongpeng Wu et al., 2025, arXiv:2505.12056.</li>\n<li><a href=\"https://arxiv.org/abs/2505.12056\" target=\"_blank\" rel=\"noreferrer\">arXiv 论文页面</a></li>\n<li><a href=\"https://github.com/feymanpaper/UIDarkPatternPopup\" target=\"_blank\" rel=\"noreferrer\">Poker 项目</a></li>\n</ul>\n"
+        }
+      ]
+    },
+    {
+      "slug": "whispertest",
+      "file": "07-whispertest.md",
+      "kind": "论文精读",
+      "module": "papers",
+      "eyebrow": "PAPER READING / WHISPERTEST",
+      "summary": "拆解非越狱 iPhone 如何结合可访问性、OCR 与 Voice Control，完成阻塞弹窗的真机交互。",
+      "scope": "Accessibility · OCR · Voice Control · iOS",
+      "ogImage": "/research-mobile/popup-assets/whispertest/page_003_fig_figure_1.png",
+      "title": "WhisperTest：用 Voice Control 打通非越狱 iPhone 的弹窗执行链",
+      "date": "2026-08-22",
+      "sourceHash": "15639994a13873a4c5227e480a173e026284cf21b6d5a9d70d9727eb309734da",
+      "raw": "---\ntags:\n  - papers/gui-agent-testing\n  - papers/mobile-popup\n  - papers/ios-automation\naliases:\n  - WhisperTest\n  - iOS Voice Control Automation\ndate: 2026-08-22\ndoi: 10.1145/3719027.3765183\n---\n\n# WhisperTest：用 Voice Control 打通非越狱 iPhone 的弹窗执行链\n\n## 核心信息\n\n- 标题: WhisperTest: A Voice-Control-based Library for iOS UI Automation\n- 标题翻译: WhisperTest：基于语音控制的 iOS UI 自动化库\n- 作者: Zahra Moti, Tom Janssen-Groesbeek, Steven Monteiro, Andrea Continella, Gunes Acar\n- 机构: Radboud University; University of Twente\n- 发表时间: 2025\n- 发表渠道: ACM CCS 2025\n- DOI: 10.1145/3719027.3765183\n- 论文链接: [ACM DOI](https://doi.org/10.1145/3719027.3765183)\n- 代码 / 项目: [iOSWhisperTest/whispertest](https://github.com/iOSWhisperTest/whispertest)\n- 论文类型: 非越狱 iOS UI 自动化系统与隐私测量案例\n\n## 原文摘要翻译\n\n动态分析和用户界面自动化对于大规模发现移动应用中的隐私泄露、漏洞和恶意代码至关重要。安卓生态提供了多种工具，而 iOS 上的现有方案往往要求访问应用源码或越狱测试设备。\n\n论文提出开源 iOS 自动化库 WhisperTest，它无需越狱，而是利用 Apple 语音控制无障碍功能，通过文本转语音与应用或系统界面交互。交互期间，系统实时监控设备日志，并通过截图和可访问性审计抓取界面，从而恢复应用状态变化。\n\n作者以网页隐私测量和 200 个儿童 iOS 应用的自动动态分析展示其能力。面对多样界面，WhisperTest 可选接入多模态大模型，对上下文推理，并处理系统权限提示、同意对话框、订阅提示和年龄门槛。\n\n儿童应用分析发现第三方追踪广泛存在，用户拒绝同意的效果有限，并且仍有未加密网络请求。整体上，WhisperTest 为多类任务提供了可扩展的 iOS 动态分析能力。\n\n## 创新点\n\n1. **绕开第三方应用不可直接注入测试代码的限制。** WhisperTest 把 Apple 原生 Voice Control 作为输入通道，可在非越狱真机上操作应用和系统 UI。\n2. **同时提供感知、执行和验证。** 可访问性审计、OmniParser、截图、syslog、录屏和网络抓包被统一到同一个设备对象中。\n3. **对不可访问 UI 设置分层降级。** 可访问性数据失败后使用 OCR 和图标检测，再通过 Voice Control 的编号网格点击坐标区域。\n4. **把弹窗策略做成可插拔导航模块。** 原生权限弹窗走启发式规则，同意弹窗走检测模型和接受/拒绝模式，复杂订阅与年龄门槛再使用多模态模型。\n\n## 一句话总结\n\nWhisperTest 的关键贡献不是发明新的弹窗分类器，而是在非越狱真实 iPhone 上提供“看见弹窗—选择预设动作—用 Voice Control 点击—用日志和屏幕变化复核”的完整执行通道。\n\n## 研究问题\n\niOS 的安全模型让任意第三方应用自动化困难。XCTest、KIF 和 EarlGrey 适合开发者自己的应用。\n\nAppium 的 iOS 驱动依赖 macOS、Xcode 和 WebDriverAgent；越狱方案又受版本、反调试和取证完整性限制。\n\nWhisperTest 试图提供类似浏览器驱动的设备对象，但不修改应用，也不要求越狱。\n\n弹窗不是论文唯一目标。权限、同意、订阅和年龄门槛只是证明通用库能处理复杂流程的一组案例。核心研究问题仍是如何在 iOS 上建立开放、跨控制端、可监控的自动化执行层。\n\n## 数据与任务定义\n\n论文没有一个统一的弹窗基准，而是由多个不同实验组成：\n\n| 任务 | 样本 | 成功定义 |\n|---|---:|---|\n| 常用语音命令识别 | 40 类命令 | Voice Control 正确认出命令 |\n| 数字网格命令 | Tap 1 至 Tap 100，重复 5 次 | 正确认出目标数字 |\n| 应用安装 | 100 个应用 | 通过 App Store 链路完成安装 |\n| 同意弹窗检测 | 100 个样本 | Qwen2.5-7B 判断是否存在同意弹窗 |\n| 同意弹窗交互 | 随机选择的 50 个应用 | 按预设接受或拒绝模式完成交互 |\n| 动态分析案例 | 200 个儿童应用、50 个普通应用 | 安装、启动、导航并采集隐私与网络数据 |\n\n因此，48/50 不能解读成 WhisperTest 对所有类型弹窗的统一成功率。权限、订阅和年龄验证主要由示例展示，没有各自的系统化样本与指标。\n\n## 方法主线\n\n### 机制流程\n\n1. **感知。** 独立线程调用 AccessibilityAudit 获取可见元素、标签和开关状态；若应用缺少可访问性信息，则由 OmniParser 从截图提取文本、图标和坐标。\n2. **决策。** 稳定的 iOS 原生权限弹窗优先匹配预定义规则；同意弹窗先由小模型检测，再按预设接受或拒绝模式扩展导航提示；其余复杂页面才交给文本或视觉模型。\n3. **坐标映射。** 有标签时直接说出“Tap accept”等 Voice Control 命令；只有坐标时启用编号网格，选择覆盖目标的区域。\n4. **执行。** 控制机用本地 Piper TTS 播放命令。系统也实验性支持树莓派模拟 USB 麦克风、鼠标和键盘，但正式研究主要使用语音。\n5. **验证。** 通过 syslog 确认命令被系统识别，结合操作前后 OCR 文本的 Jaccard 相似度和图像平均哈希判断屏幕是否变化；应用退到后台时停止导航。\n\n![WhisperTest 自动化链路](/research-mobile/popup-assets/whispertest/page_003_fig_figure_1.png)\n*图 1：控制机通过感知模块理解界面，通过 TTS 与 Voice Control 执行动作，并持续收集日志和网络数据。*\n\n### 原生权限弹窗\n\nATT、定位和推送通知等系统对话框具有相对稳定的可访问性结构。WhisperTest 用启发式规则识别弹窗，再根据用户预先配置的偏好选择允许、拒绝或禁止应用跟踪。这里没有基于当前任务必要性的自主授权判断。\n\n![ATT 弹窗的屏幕、可访问性和 OCR 表示](/research-mobile/popup-assets/whispertest/page_024_fig_figure_11.png)\n*图 11：同一 ATT 弹窗可同时由可访问性元素和 OCR 坐标描述，供规则或模型选择动作。*\n\n### 同意与订阅弹窗\n\n同意弹窗先使用 Qwen2.5-7B 判断当前屏幕是否为隐私或 Cookie 同意界面，再用 Qwen2.5-14B 生成动作。拒绝模式不是简单点击关闭：若没有直接拒绝按钮，就进入管理选项或更多信息，再选择拒绝或确认默认选择。订阅页面则在提示词中明确优先寻找关闭或有限版本入口，并避开试用、付款和恢复购买。\n\n### 分层降级顺序\n\n正式儿童应用流水线依次使用可访问性数据、原生规则、OmniParser 加规则、视觉语言模型、文本模型。只要生成有效命令，就交给 Voice Control 执行。这个顺序把专用、便宜和可验证的方法放在前面，把大模型保留给无法通过结构规则解决的页面。\n\n## 关键结果\n\n### 输入与安装通道\n\n- 40 类常用命令的识别成功率为 99%。\n- Tap 1 到 Tap 100 的数字命令在五次重复中达到 98.6%。\n- 100 个应用的 App Store 安装试验成功 98 个；两个失败来自 App Store 链接未被激活。\n\n### 弹窗交互\n\n- Qwen2.5-7B 在 100 个同意弹窗检测样本上的准确率为 98%。\n- 对 50 个随机应用中的同意弹窗，Qwen2.5-14B 按指定模式成功完成 48 次交互。\n- 论文展示了 ATT、隐私同意、订阅关闭和年龄验证的完整示例，但没有为后三类分别提供成功率。\n\n### 应用级可执行性\n\n50 个普通应用均成功安装、启动和导航，平均到达 5.29 个独特屏幕；13 个应用使用 Apple 登录，其中 5 个后续附加表单未能完成。系统运行超过 20 小时没有崩溃或致命错误。200 个儿童应用最初有 5 个因 IPATool 无法启动，改用 WhisperTest 自有安装器后恢复。\n\n这些数字说明执行库具有实用性，但论文没有标准导航基准、代码覆盖率或统一任务完成率。\n\n## 深度分析\n\n### 它真正补齐的是执行层\n\n现有图形界面智能体即使能从截图选出正确按钮，也未必能在非越狱 iPhone 上实际点击。WhisperTest 把语音控制变成跨应用输入通道，并用系统日志确认命令已经被识别。这是它对移动弹窗问题最独特的价值。\n\n### 决策层仍然受预设约束\n\n权限弹窗按用户配置选择动作；同意弹窗实验也预先指定接受或拒绝。系统会自主寻找隐藏的拒绝入口，却不会判断某个权限是否为当前任务所必需。它解决“如何执行选择”，不解决“应该作何选择”。\n\n### 状态验证仍是弱语义的\n\nsyslog 能确认命令被识别和应用是否退到后台，却不一定知道业务目标是否完成。文本和平均哈希差异只判断屏幕变化：动画可能制造假变化，非视觉状态更新可能被漏掉。因此生产闭环还需针对权限状态、页面身份和任务进度设计专用断言。\n\n### 安全风险不是附注\n\n论文明确讨论恶意按钮、伪造可访问性标签、提示注入、敏感屏幕外传和高风险应用安装。作者建议只在测试设备和模拟身份上使用，并对重试次数、应用范围和敏感命令设限。这些限制应成为部署前置条件，而不是可选提醒。\n\n## 局限\n\n1. 只自动化 iOS；“跨平台”指控制机可运行于 macOS、Linux 或 Windows。\n2. Voice Control 较慢，噪声可能导致漏听或误识别；USB 静音注入在研究中未正式使用。\n3. 非越狱 iOS 不暴露完整 UI 树，无法做传统代码覆盖率和可靠导航深度测量。\n4. OmniParser 只看屏幕内可见内容，可能漏掉屏外元素和非标准图标。\n5. 弹窗实验不是统一基准，48/50 只对应同意弹窗小样本。\n6. 接受与拒绝依赖预设偏好，没有任务必要性与风险判断。\n7. 外部视觉或语言模型会扩大提示注入与屏幕数据泄露面。\n\n## 我的笔记\n\n### 最值得保留的架构\n\nWhisperTest 把“感知、决策、执行、验证”拆成可替换层：权限规则和同意处理可以改变，底层 Voice Control 执行通道仍可复用。对 iOS 自动化，这比把整个系统绑在一个大模型上更稳健。\n\n### 与权限决策论文的组合\n\n可以让独立授权层先根据任务—权限功能链选择 Allow、Deny 或 Defer，再把结果交给 WhisperTest 执行。这样既保留真机能力，也避免把预设偏好误当成安全决策。\n\n### 适合站点中的定位\n\n**非越狱 iOS 上的真实弹窗交互执行库。** 它是四篇中唯一明确在物理 iPhone 上实际操作系统权限与多类业务弹窗的方法，但不是自主决策器。\n\n## 引用\n\n- [ACM DOI](https://doi.org/10.1145/3719027.3765183)\n- [作者公开代码仓库](https://github.com/iOSWhisperTest/whispertest)\n",
+      "html": "<h1 id=\"whispertest-h1-0\">WhisperTest：用 Voice Control 打通非越狱 iPhone 的弹窗执行链</h1>\n<h2 id=\"whispertest-h2-1\">核心信息</h2>\n<ul>\n<li>标题: WhisperTest: A Voice-Control-based Library for iOS UI Automation</li>\n<li>标题翻译: WhisperTest：基于语音控制的 iOS UI 自动化库</li>\n<li>作者: Zahra Moti, Tom Janssen-Groesbeek, Steven Monteiro, Andrea Continella, Gunes Acar</li>\n<li>机构: Radboud University; University of Twente</li>\n<li>发表时间: 2025</li>\n<li>发表渠道: ACM CCS 2025</li>\n<li>DOI: 10.1145/3719027.3765183</li>\n<li>论文链接: <a href=\"https://doi.org/10.1145/3719027.3765183\" target=\"_blank\" rel=\"noreferrer\">ACM DOI</a></li>\n<li>代码 / 项目: <a href=\"https://github.com/iOSWhisperTest/whispertest\" target=\"_blank\" rel=\"noreferrer\">iOSWhisperTest/whispertest</a></li>\n<li>论文类型: 非越狱 iOS UI 自动化系统与隐私测量案例</li>\n</ul>\n<h2 id=\"whispertest-h2-2\">原文摘要翻译</h2>\n<p>动态分析和用户界面自动化对于大规模发现移动应用中的隐私泄露、漏洞和恶意代码至关重要。安卓生态提供了多种工具，而 iOS 上的现有方案往往要求访问应用源码或越狱测试设备。</p>\n<p>论文提出开源 iOS 自动化库 WhisperTest，它无需越狱，而是利用 Apple 语音控制无障碍功能，通过文本转语音与应用或系统界面交互。交互期间，系统实时监控设备日志，并通过截图和可访问性审计抓取界面，从而恢复应用状态变化。</p>\n<p>作者以网页隐私测量和 200 个儿童 iOS 应用的自动动态分析展示其能力。面对多样界面，WhisperTest 可选接入多模态大模型，对上下文推理，并处理系统权限提示、同意对话框、订阅提示和年龄门槛。</p>\n<p>儿童应用分析发现第三方追踪广泛存在，用户拒绝同意的效果有限，并且仍有未加密网络请求。整体上，WhisperTest 为多类任务提供了可扩展的 iOS 动态分析能力。</p>\n<h2 id=\"whispertest-h2-3\">创新点</h2>\n<ol>\n<li><strong>绕开第三方应用不可直接注入测试代码的限制。</strong> WhisperTest 把 Apple 原生 Voice Control 作为输入通道，可在非越狱真机上操作应用和系统 UI。</li>\n<li><strong>同时提供感知、执行和验证。</strong> 可访问性审计、OmniParser、截图、syslog、录屏和网络抓包被统一到同一个设备对象中。</li>\n<li><strong>对不可访问 UI 设置分层降级。</strong> 可访问性数据失败后使用 OCR 和图标检测，再通过 Voice Control 的编号网格点击坐标区域。</li>\n<li><strong>把弹窗策略做成可插拔导航模块。</strong> 原生权限弹窗走启发式规则，同意弹窗走检测模型和接受/拒绝模式，复杂订阅与年龄门槛再使用多模态模型。</li>\n</ol>\n<h2 id=\"whispertest-h2-4\">一句话总结</h2>\n<p>WhisperTest 的关键贡献不是发明新的弹窗分类器，而是在非越狱真实 iPhone 上提供“看见弹窗—选择预设动作—用 Voice Control 点击—用日志和屏幕变化复核”的完整执行通道。</p>\n<h2 id=\"whispertest-h2-5\">研究问题</h2>\n<p>iOS 的安全模型让任意第三方应用自动化困难。XCTest、KIF 和 EarlGrey 适合开发者自己的应用。</p>\n<p>Appium 的 iOS 驱动依赖 macOS、Xcode 和 WebDriverAgent；越狱方案又受版本、反调试和取证完整性限制。</p>\n<p>WhisperTest 试图提供类似浏览器驱动的设备对象，但不修改应用，也不要求越狱。</p>\n<p>弹窗不是论文唯一目标。权限、同意、订阅和年龄门槛只是证明通用库能处理复杂流程的一组案例。核心研究问题仍是如何在 iOS 上建立开放、跨控制端、可监控的自动化执行层。</p>\n<h2 id=\"whispertest-h2-6\">数据与任务定义</h2>\n<p>论文没有一个统一的弹窗基准，而是由多个不同实验组成：</p>\n<table>\n<thead>\n<tr>\n<th>任务</th>\n<th align=\"right\">样本</th>\n<th>成功定义</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>常用语音命令识别</td>\n<td align=\"right\">40 类命令</td>\n<td>Voice Control 正确认出命令</td>\n</tr>\n<tr>\n<td>数字网格命令</td>\n<td align=\"right\">Tap 1 至 Tap 100，重复 5 次</td>\n<td>正确认出目标数字</td>\n</tr>\n<tr>\n<td>应用安装</td>\n<td align=\"right\">100 个应用</td>\n<td>通过 App Store 链路完成安装</td>\n</tr>\n<tr>\n<td>同意弹窗检测</td>\n<td align=\"right\">100 个样本</td>\n<td>Qwen2.5-7B 判断是否存在同意弹窗</td>\n</tr>\n<tr>\n<td>同意弹窗交互</td>\n<td align=\"right\">随机选择的 50 个应用</td>\n<td>按预设接受或拒绝模式完成交互</td>\n</tr>\n<tr>\n<td>动态分析案例</td>\n<td align=\"right\">200 个儿童应用、50 个普通应用</td>\n<td>安装、启动、导航并采集隐私与网络数据</td>\n</tr>\n</tbody></table>\n<p>因此，48/50 不能解读成 WhisperTest 对所有类型弹窗的统一成功率。权限、订阅和年龄验证主要由示例展示，没有各自的系统化样本与指标。</p>\n<h2 id=\"whispertest-h2-7\">方法主线</h2>\n<h3 id=\"whispertest-h3-8\">机制流程</h3>\n<ol>\n<li><strong>感知。</strong> 独立线程调用 AccessibilityAudit 获取可见元素、标签和开关状态；若应用缺少可访问性信息，则由 OmniParser 从截图提取文本、图标和坐标。</li>\n<li><strong>决策。</strong> 稳定的 iOS 原生权限弹窗优先匹配预定义规则；同意弹窗先由小模型检测，再按预设接受或拒绝模式扩展导航提示；其余复杂页面才交给文本或视觉模型。</li>\n<li><strong>坐标映射。</strong> 有标签时直接说出“Tap accept”等 Voice Control 命令；只有坐标时启用编号网格，选择覆盖目标的区域。</li>\n<li><strong>执行。</strong> 控制机用本地 Piper TTS 播放命令。系统也实验性支持树莓派模拟 USB 麦克风、鼠标和键盘，但正式研究主要使用语音。</li>\n<li><strong>验证。</strong> 通过 syslog 确认命令被系统识别，结合操作前后 OCR 文本的 Jaccard 相似度和图像平均哈希判断屏幕是否变化；应用退到后台时停止导航。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/whispertest/page_003_fig_figure_1.png\" alt=\"WhisperTest 自动化链路\">\n<em>图 1：控制机通过感知模块理解界面，通过 TTS 与 Voice Control 执行动作，并持续收集日志和网络数据。</em></p>\n<h3 id=\"whispertest-h3-9\">原生权限弹窗</h3>\n<p>ATT、定位和推送通知等系统对话框具有相对稳定的可访问性结构。WhisperTest 用启发式规则识别弹窗，再根据用户预先配置的偏好选择允许、拒绝或禁止应用跟踪。这里没有基于当前任务必要性的自主授权判断。</p>\n<p><img src=\"/research-mobile/popup-assets/whispertest/page_024_fig_figure_11.png\" alt=\"ATT 弹窗的屏幕、可访问性和 OCR 表示\">\n<em>图 11：同一 ATT 弹窗可同时由可访问性元素和 OCR 坐标描述，供规则或模型选择动作。</em></p>\n<h3 id=\"whispertest-h3-10\">同意与订阅弹窗</h3>\n<p>同意弹窗先使用 Qwen2.5-7B 判断当前屏幕是否为隐私或 Cookie 同意界面，再用 Qwen2.5-14B 生成动作。拒绝模式不是简单点击关闭：若没有直接拒绝按钮，就进入管理选项或更多信息，再选择拒绝或确认默认选择。订阅页面则在提示词中明确优先寻找关闭或有限版本入口，并避开试用、付款和恢复购买。</p>\n<h3 id=\"whispertest-h3-11\">分层降级顺序</h3>\n<p>正式儿童应用流水线依次使用可访问性数据、原生规则、OmniParser 加规则、视觉语言模型、文本模型。只要生成有效命令，就交给 Voice Control 执行。这个顺序把专用、便宜和可验证的方法放在前面，把大模型保留给无法通过结构规则解决的页面。</p>\n<h2 id=\"whispertest-h2-12\">关键结果</h2>\n<h3 id=\"whispertest-h3-13\">输入与安装通道</h3>\n<ul>\n<li>40 类常用命令的识别成功率为 99%。</li>\n<li>Tap 1 到 Tap 100 的数字命令在五次重复中达到 98.6%。</li>\n<li>100 个应用的 App Store 安装试验成功 98 个；两个失败来自 App Store 链接未被激活。</li>\n</ul>\n<h3 id=\"whispertest-h3-14\">弹窗交互</h3>\n<ul>\n<li>Qwen2.5-7B 在 100 个同意弹窗检测样本上的准确率为 98%。</li>\n<li>对 50 个随机应用中的同意弹窗，Qwen2.5-14B 按指定模式成功完成 48 次交互。</li>\n<li>论文展示了 ATT、隐私同意、订阅关闭和年龄验证的完整示例，但没有为后三类分别提供成功率。</li>\n</ul>\n<h3 id=\"whispertest-h3-15\">应用级可执行性</h3>\n<p>50 个普通应用均成功安装、启动和导航，平均到达 5.29 个独特屏幕；13 个应用使用 Apple 登录，其中 5 个后续附加表单未能完成。系统运行超过 20 小时没有崩溃或致命错误。200 个儿童应用最初有 5 个因 IPATool 无法启动，改用 WhisperTest 自有安装器后恢复。</p>\n<p>这些数字说明执行库具有实用性，但论文没有标准导航基准、代码覆盖率或统一任务完成率。</p>\n<h2 id=\"whispertest-h2-16\">深度分析</h2>\n<h3 id=\"whispertest-h3-17\">它真正补齐的是执行层</h3>\n<p>现有图形界面智能体即使能从截图选出正确按钮，也未必能在非越狱 iPhone 上实际点击。WhisperTest 把语音控制变成跨应用输入通道，并用系统日志确认命令已经被识别。这是它对移动弹窗问题最独特的价值。</p>\n<h3 id=\"whispertest-h3-18\">决策层仍然受预设约束</h3>\n<p>权限弹窗按用户配置选择动作；同意弹窗实验也预先指定接受或拒绝。系统会自主寻找隐藏的拒绝入口，却不会判断某个权限是否为当前任务所必需。它解决“如何执行选择”，不解决“应该作何选择”。</p>\n<h3 id=\"whispertest-h3-19\">状态验证仍是弱语义的</h3>\n<p>syslog 能确认命令被识别和应用是否退到后台，却不一定知道业务目标是否完成。文本和平均哈希差异只判断屏幕变化：动画可能制造假变化，非视觉状态更新可能被漏掉。因此生产闭环还需针对权限状态、页面身份和任务进度设计专用断言。</p>\n<h3 id=\"whispertest-h3-20\">安全风险不是附注</h3>\n<p>论文明确讨论恶意按钮、伪造可访问性标签、提示注入、敏感屏幕外传和高风险应用安装。作者建议只在测试设备和模拟身份上使用，并对重试次数、应用范围和敏感命令设限。这些限制应成为部署前置条件，而不是可选提醒。</p>\n<h2 id=\"whispertest-h2-21\">局限</h2>\n<ol>\n<li>只自动化 iOS；“跨平台”指控制机可运行于 macOS、Linux 或 Windows。</li>\n<li>Voice Control 较慢，噪声可能导致漏听或误识别；USB 静音注入在研究中未正式使用。</li>\n<li>非越狱 iOS 不暴露完整 UI 树，无法做传统代码覆盖率和可靠导航深度测量。</li>\n<li>OmniParser 只看屏幕内可见内容，可能漏掉屏外元素和非标准图标。</li>\n<li>弹窗实验不是统一基准，48/50 只对应同意弹窗小样本。</li>\n<li>接受与拒绝依赖预设偏好，没有任务必要性与风险判断。</li>\n<li>外部视觉或语言模型会扩大提示注入与屏幕数据泄露面。</li>\n</ol>\n<h2 id=\"whispertest-h2-22\">我的笔记</h2>\n<h3 id=\"whispertest-h3-23\">最值得保留的架构</h3>\n<p>WhisperTest 把“感知、决策、执行、验证”拆成可替换层：权限规则和同意处理可以改变，底层 Voice Control 执行通道仍可复用。对 iOS 自动化，这比把整个系统绑在一个大模型上更稳健。</p>\n<h3 id=\"whispertest-h3-24\">与权限决策论文的组合</h3>\n<p>可以让独立授权层先根据任务—权限功能链选择 Allow、Deny 或 Defer，再把结果交给 WhisperTest 执行。这样既保留真机能力，也避免把预设偏好误当成安全决策。</p>\n<h3 id=\"whispertest-h3-25\">适合站点中的定位</h3>\n<p><strong>非越狱 iOS 上的真实弹窗交互执行库。</strong> 它是四篇中唯一明确在物理 iPhone 上实际操作系统权限与多类业务弹窗的方法，但不是自主决策器。</p>\n<h2 id=\"whispertest-h2-26\">引用</h2>\n<ul>\n<li><a href=\"https://doi.org/10.1145/3719027.3765183\" target=\"_blank\" rel=\"noreferrer\">ACM DOI</a></li>\n<li><a href=\"https://github.com/iOSWhisperTest/whispertest\" target=\"_blank\" rel=\"noreferrer\">作者公开代码仓库</a></li>\n</ul>\n",
+      "headings": [
+        {
+          "depth": 1,
+          "id": "whispertest-h1-0",
+          "text": "WhisperTest：用 Voice Control 打通非越狱 iPhone 的弹窗执行链"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-1",
+          "text": "核心信息"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-2",
+          "text": "原文摘要翻译"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-3",
+          "text": "创新点"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-4",
+          "text": "一句话总结"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-5",
+          "text": "研究问题"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-6",
+          "text": "数据与任务定义"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-7",
+          "text": "方法主线"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-8",
+          "text": "机制流程"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-9",
+          "text": "原生权限弹窗"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-10",
+          "text": "同意与订阅弹窗"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-11",
+          "text": "分层降级顺序"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-12",
+          "text": "关键结果"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-13",
+          "text": "输入与安装通道"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-14",
+          "text": "弹窗交互"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-15",
+          "text": "应用级可执行性"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-16",
+          "text": "深度分析"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-17",
+          "text": "它真正补齐的是执行层"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-18",
+          "text": "决策层仍然受预设约束"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-19",
+          "text": "状态验证仍是弱语义的"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-20",
+          "text": "安全风险不是附注"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-21",
+          "text": "局限"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-22",
+          "text": "我的笔记"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-23",
+          "text": "最值得保留的架构"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-24",
+          "text": "与权限决策论文的组合"
+        },
+        {
+          "depth": 3,
+          "id": "whispertest-h3-25",
+          "text": "适合站点中的定位"
+        },
+        {
+          "depth": 2,
+          "id": "whispertest-h2-26",
+          "text": "引用"
+        }
+      ],
+      "sections": [
+        {
+          "id": "whispertest-section-0",
+          "title": "导读",
+          "html": "<h1 id=\"whispertest-slide-0-h1-0\">WhisperTest：用 Voice Control 打通非越狱 iPhone 的弹窗执行链</h1>\n"
+        },
+        {
+          "id": "whispertest-section-1",
+          "title": "核心信息",
+          "html": "<h2 id=\"whispertest-slide-1-h2-0\">核心信息</h2>\n<ul>\n<li>标题: WhisperTest: A Voice-Control-based Library for iOS UI Automation</li>\n<li>标题翻译: WhisperTest：基于语音控制的 iOS UI 自动化库</li>\n<li>作者: Zahra Moti, Tom Janssen-Groesbeek, Steven Monteiro, Andrea Continella, Gunes Acar</li>\n<li>机构: Radboud University; University of Twente</li>\n<li>发表时间: 2025</li>\n<li>发表渠道: ACM CCS 2025</li>\n<li>DOI: 10.1145/3719027.3765183</li>\n<li>论文链接: <a href=\"https://doi.org/10.1145/3719027.3765183\" target=\"_blank\" rel=\"noreferrer\">ACM DOI</a></li>\n<li>代码 / 项目: <a href=\"https://github.com/iOSWhisperTest/whispertest\" target=\"_blank\" rel=\"noreferrer\">iOSWhisperTest/whispertest</a></li>\n<li>论文类型: 非越狱 iOS UI 自动化系统与隐私测量案例</li>\n</ul>\n"
+        },
+        {
+          "id": "whispertest-section-2",
+          "title": "原文摘要翻译",
+          "html": "<h2 id=\"whispertest-slide-2-h2-0\">原文摘要翻译</h2>\n<p>动态分析和用户界面自动化对于大规模发现移动应用中的隐私泄露、漏洞和恶意代码至关重要。安卓生态提供了多种工具，而 iOS 上的现有方案往往要求访问应用源码或越狱测试设备。</p>\n<p>论文提出开源 iOS 自动化库 WhisperTest，它无需越狱，而是利用 Apple 语音控制无障碍功能，通过文本转语音与应用或系统界面交互。交互期间，系统实时监控设备日志，并通过截图和可访问性审计抓取界面，从而恢复应用状态变化。</p>\n<p>作者以网页隐私测量和 200 个儿童 iOS 应用的自动动态分析展示其能力。面对多样界面，WhisperTest 可选接入多模态大模型，对上下文推理，并处理系统权限提示、同意对话框、订阅提示和年龄门槛。</p>\n<p>儿童应用分析发现第三方追踪广泛存在，用户拒绝同意的效果有限，并且仍有未加密网络请求。整体上，WhisperTest 为多类任务提供了可扩展的 iOS 动态分析能力。</p>\n"
+        },
+        {
+          "id": "whispertest-section-3",
+          "title": "创新点",
+          "html": "<h2 id=\"whispertest-slide-3-h2-0\">创新点</h2>\n<ol>\n<li><strong>绕开第三方应用不可直接注入测试代码的限制。</strong> WhisperTest 把 Apple 原生 Voice Control 作为输入通道，可在非越狱真机上操作应用和系统 UI。</li>\n<li><strong>同时提供感知、执行和验证。</strong> 可访问性审计、OmniParser、截图、syslog、录屏和网络抓包被统一到同一个设备对象中。</li>\n<li><strong>对不可访问 UI 设置分层降级。</strong> 可访问性数据失败后使用 OCR 和图标检测，再通过 Voice Control 的编号网格点击坐标区域。</li>\n<li><strong>把弹窗策略做成可插拔导航模块。</strong> 原生权限弹窗走启发式规则，同意弹窗走检测模型和接受/拒绝模式，复杂订阅与年龄门槛再使用多模态模型。</li>\n</ol>\n"
+        },
+        {
+          "id": "whispertest-section-4",
+          "title": "一句话总结",
+          "html": "<h2 id=\"whispertest-slide-4-h2-0\">一句话总结</h2>\n<p>WhisperTest 的关键贡献不是发明新的弹窗分类器，而是在非越狱真实 iPhone 上提供“看见弹窗—选择预设动作—用 Voice Control 点击—用日志和屏幕变化复核”的完整执行通道。</p>\n"
+        },
+        {
+          "id": "whispertest-section-5",
+          "title": "研究问题",
+          "html": "<h2 id=\"whispertest-slide-5-h2-0\">研究问题</h2>\n<p>iOS 的安全模型让任意第三方应用自动化困难。XCTest、KIF 和 EarlGrey 适合开发者自己的应用。</p>\n<p>Appium 的 iOS 驱动依赖 macOS、Xcode 和 WebDriverAgent；越狱方案又受版本、反调试和取证完整性限制。</p>\n<p>WhisperTest 试图提供类似浏览器驱动的设备对象，但不修改应用，也不要求越狱。</p>\n<p>弹窗不是论文唯一目标。权限、同意、订阅和年龄门槛只是证明通用库能处理复杂流程的一组案例。核心研究问题仍是如何在 iOS 上建立开放、跨控制端、可监控的自动化执行层。</p>\n"
+        },
+        {
+          "id": "whispertest-section-6",
+          "title": "数据与任务定义",
+          "html": "<h2 id=\"whispertest-slide-6-h2-0\">数据与任务定义</h2>\n<p>论文没有一个统一的弹窗基准，而是由多个不同实验组成：</p>\n<table>\n<thead>\n<tr>\n<th>任务</th>\n<th align=\"right\">样本</th>\n<th>成功定义</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>常用语音命令识别</td>\n<td align=\"right\">40 类命令</td>\n<td>Voice Control 正确认出命令</td>\n</tr>\n<tr>\n<td>数字网格命令</td>\n<td align=\"right\">Tap 1 至 Tap 100，重复 5 次</td>\n<td>正确认出目标数字</td>\n</tr>\n<tr>\n<td>应用安装</td>\n<td align=\"right\">100 个应用</td>\n<td>通过 App Store 链路完成安装</td>\n</tr>\n<tr>\n<td>同意弹窗检测</td>\n<td align=\"right\">100 个样本</td>\n<td>Qwen2.5-7B 判断是否存在同意弹窗</td>\n</tr>\n<tr>\n<td>同意弹窗交互</td>\n<td align=\"right\">随机选择的 50 个应用</td>\n<td>按预设接受或拒绝模式完成交互</td>\n</tr>\n<tr>\n<td>动态分析案例</td>\n<td align=\"right\">200 个儿童应用、50 个普通应用</td>\n<td>安装、启动、导航并采集隐私与网络数据</td>\n</tr>\n</tbody></table>\n<p>因此，48/50 不能解读成 WhisperTest 对所有类型弹窗的统一成功率。权限、订阅和年龄验证主要由示例展示，没有各自的系统化样本与指标。</p>\n"
+        },
+        {
+          "id": "whispertest-section-7",
+          "title": "方法主线",
+          "html": "<h2 id=\"whispertest-slide-7-h2-0\">方法主线</h2>\n"
+        },
+        {
+          "id": "whispertest-section-8",
+          "title": "机制流程",
+          "html": "<h3 id=\"whispertest-slide-8-h3-0\">机制流程</h3>\n<ol>\n<li><strong>感知。</strong> 独立线程调用 AccessibilityAudit 获取可见元素、标签和开关状态；若应用缺少可访问性信息，则由 OmniParser 从截图提取文本、图标和坐标。</li>\n<li><strong>决策。</strong> 稳定的 iOS 原生权限弹窗优先匹配预定义规则；同意弹窗先由小模型检测，再按预设接受或拒绝模式扩展导航提示；其余复杂页面才交给文本或视觉模型。</li>\n<li><strong>坐标映射。</strong> 有标签时直接说出“Tap accept”等 Voice Control 命令；只有坐标时启用编号网格，选择覆盖目标的区域。</li>\n<li><strong>执行。</strong> 控制机用本地 Piper TTS 播放命令。系统也实验性支持树莓派模拟 USB 麦克风、鼠标和键盘，但正式研究主要使用语音。</li>\n<li><strong>验证。</strong> 通过 syslog 确认命令被系统识别，结合操作前后 OCR 文本的 Jaccard 相似度和图像平均哈希判断屏幕是否变化；应用退到后台时停止导航。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/whispertest/page_003_fig_figure_1.png\" alt=\"WhisperTest 自动化链路\">\n<em>图 1：控制机通过感知模块理解界面，通过 TTS 与 Voice Control 执行动作，并持续收集日志和网络数据。</em></p>\n"
+        },
+        {
+          "id": "whispertest-section-9",
+          "title": "原生权限弹窗",
+          "html": "<h3 id=\"whispertest-slide-9-h3-0\">原生权限弹窗</h3>\n<p>ATT、定位和推送通知等系统对话框具有相对稳定的可访问性结构。WhisperTest 用启发式规则识别弹窗，再根据用户预先配置的偏好选择允许、拒绝或禁止应用跟踪。这里没有基于当前任务必要性的自主授权判断。</p>\n<p><img src=\"/research-mobile/popup-assets/whispertest/page_024_fig_figure_11.png\" alt=\"ATT 弹窗的屏幕、可访问性和 OCR 表示\">\n<em>图 11：同一 ATT 弹窗可同时由可访问性元素和 OCR 坐标描述，供规则或模型选择动作。</em></p>\n"
+        },
+        {
+          "id": "whispertest-section-10",
+          "title": "同意与订阅弹窗",
+          "html": "<h3 id=\"whispertest-slide-10-h3-0\">同意与订阅弹窗</h3>\n<p>同意弹窗先使用 Qwen2.5-7B 判断当前屏幕是否为隐私或 Cookie 同意界面，再用 Qwen2.5-14B 生成动作。拒绝模式不是简单点击关闭：若没有直接拒绝按钮，就进入管理选项或更多信息，再选择拒绝或确认默认选择。订阅页面则在提示词中明确优先寻找关闭或有限版本入口，并避开试用、付款和恢复购买。</p>\n"
+        },
+        {
+          "id": "whispertest-section-11",
+          "title": "分层降级顺序",
+          "html": "<h3 id=\"whispertest-slide-11-h3-0\">分层降级顺序</h3>\n<p>正式儿童应用流水线依次使用可访问性数据、原生规则、OmniParser 加规则、视觉语言模型、文本模型。只要生成有效命令，就交给 Voice Control 执行。这个顺序把专用、便宜和可验证的方法放在前面，把大模型保留给无法通过结构规则解决的页面。</p>\n"
+        },
+        {
+          "id": "whispertest-section-12",
+          "title": "关键结果",
+          "html": "<h2 id=\"whispertest-slide-12-h2-0\">关键结果</h2>\n"
+        },
+        {
+          "id": "whispertest-section-13",
+          "title": "输入与安装通道",
+          "html": "<h3 id=\"whispertest-slide-13-h3-0\">输入与安装通道</h3>\n<ul>\n<li>40 类常用命令的识别成功率为 99%。</li>\n<li>Tap 1 到 Tap 100 的数字命令在五次重复中达到 98.6%。</li>\n<li>100 个应用的 App Store 安装试验成功 98 个；两个失败来自 App Store 链接未被激活。</li>\n</ul>\n"
+        },
+        {
+          "id": "whispertest-section-14",
+          "title": "弹窗交互",
+          "html": "<h3 id=\"whispertest-slide-14-h3-0\">弹窗交互</h3>\n<ul>\n<li>Qwen2.5-7B 在 100 个同意弹窗检测样本上的准确率为 98%。</li>\n<li>对 50 个随机应用中的同意弹窗，Qwen2.5-14B 按指定模式成功完成 48 次交互。</li>\n<li>论文展示了 ATT、隐私同意、订阅关闭和年龄验证的完整示例，但没有为后三类分别提供成功率。</li>\n</ul>\n"
+        },
+        {
+          "id": "whispertest-section-15",
+          "title": "应用级可执行性",
+          "html": "<h3 id=\"whispertest-slide-15-h3-0\">应用级可执行性</h3>\n<p>50 个普通应用均成功安装、启动和导航，平均到达 5.29 个独特屏幕；13 个应用使用 Apple 登录，其中 5 个后续附加表单未能完成。系统运行超过 20 小时没有崩溃或致命错误。200 个儿童应用最初有 5 个因 IPATool 无法启动，改用 WhisperTest 自有安装器后恢复。</p>\n<p>这些数字说明执行库具有实用性，但论文没有标准导航基准、代码覆盖率或统一任务完成率。</p>\n"
+        },
+        {
+          "id": "whispertest-section-16",
+          "title": "深度分析",
+          "html": "<h2 id=\"whispertest-slide-16-h2-0\">深度分析</h2>\n"
+        },
+        {
+          "id": "whispertest-section-17",
+          "title": "它真正补齐的是执行层",
+          "html": "<h3 id=\"whispertest-slide-17-h3-0\">它真正补齐的是执行层</h3>\n<p>现有图形界面智能体即使能从截图选出正确按钮，也未必能在非越狱 iPhone 上实际点击。WhisperTest 把语音控制变成跨应用输入通道，并用系统日志确认命令已经被识别。这是它对移动弹窗问题最独特的价值。</p>\n"
+        },
+        {
+          "id": "whispertest-section-18",
+          "title": "决策层仍然受预设约束",
+          "html": "<h3 id=\"whispertest-slide-18-h3-0\">决策层仍然受预设约束</h3>\n<p>权限弹窗按用户配置选择动作；同意弹窗实验也预先指定接受或拒绝。系统会自主寻找隐藏的拒绝入口，却不会判断某个权限是否为当前任务所必需。它解决“如何执行选择”，不解决“应该作何选择”。</p>\n"
+        },
+        {
+          "id": "whispertest-section-19",
+          "title": "状态验证仍是弱语义的",
+          "html": "<h3 id=\"whispertest-slide-19-h3-0\">状态验证仍是弱语义的</h3>\n<p>syslog 能确认命令被识别和应用是否退到后台，却不一定知道业务目标是否完成。文本和平均哈希差异只判断屏幕变化：动画可能制造假变化，非视觉状态更新可能被漏掉。因此生产闭环还需针对权限状态、页面身份和任务进度设计专用断言。</p>\n"
+        },
+        {
+          "id": "whispertest-section-20",
+          "title": "安全风险不是附注",
+          "html": "<h3 id=\"whispertest-slide-20-h3-0\">安全风险不是附注</h3>\n<p>论文明确讨论恶意按钮、伪造可访问性标签、提示注入、敏感屏幕外传和高风险应用安装。作者建议只在测试设备和模拟身份上使用，并对重试次数、应用范围和敏感命令设限。这些限制应成为部署前置条件，而不是可选提醒。</p>\n"
+        },
+        {
+          "id": "whispertest-section-21",
+          "title": "局限",
+          "html": "<h2 id=\"whispertest-slide-21-h2-0\">局限</h2>\n<ol>\n<li>只自动化 iOS；“跨平台”指控制机可运行于 macOS、Linux 或 Windows。</li>\n<li>Voice Control 较慢，噪声可能导致漏听或误识别；USB 静音注入在研究中未正式使用。</li>\n<li>非越狱 iOS 不暴露完整 UI 树，无法做传统代码覆盖率和可靠导航深度测量。</li>\n<li>OmniParser 只看屏幕内可见内容，可能漏掉屏外元素和非标准图标。</li>\n<li>弹窗实验不是统一基准，48/50 只对应同意弹窗小样本。</li>\n<li>接受与拒绝依赖预设偏好，没有任务必要性与风险判断。</li>\n<li>外部视觉或语言模型会扩大提示注入与屏幕数据泄露面。</li>\n</ol>\n"
+        },
+        {
+          "id": "whispertest-section-22",
+          "title": "我的笔记",
+          "html": "<h2 id=\"whispertest-slide-22-h2-0\">我的笔记</h2>\n"
+        },
+        {
+          "id": "whispertest-section-23",
+          "title": "最值得保留的架构",
+          "html": "<h3 id=\"whispertest-slide-23-h3-0\">最值得保留的架构</h3>\n<p>WhisperTest 把“感知、决策、执行、验证”拆成可替换层：权限规则和同意处理可以改变，底层 Voice Control 执行通道仍可复用。对 iOS 自动化，这比把整个系统绑在一个大模型上更稳健。</p>\n"
+        },
+        {
+          "id": "whispertest-section-24",
+          "title": "与权限决策论文的组合",
+          "html": "<h3 id=\"whispertest-slide-24-h3-0\">与权限决策论文的组合</h3>\n<p>可以让独立授权层先根据任务—权限功能链选择 Allow、Deny 或 Defer，再把结果交给 WhisperTest 执行。这样既保留真机能力，也避免把预设偏好误当成安全决策。</p>\n"
+        },
+        {
+          "id": "whispertest-section-25",
+          "title": "适合站点中的定位",
+          "html": "<h3 id=\"whispertest-slide-25-h3-0\">适合站点中的定位</h3>\n<p><strong>非越狱 iOS 上的真实弹窗交互执行库。</strong> 它是四篇中唯一明确在物理 iPhone 上实际操作系统权限与多类业务弹窗的方法，但不是自主决策器。</p>\n"
+        },
+        {
+          "id": "whispertest-section-26",
+          "title": "引用",
+          "html": "<h2 id=\"whispertest-slide-26-h2-0\">引用</h2>\n<ul>\n<li><a href=\"https://doi.org/10.1145/3719027.3765183\" target=\"_blank\" rel=\"noreferrer\">ACM DOI</a></li>\n<li><a href=\"https://github.com/iOSWhisperTest/whispertest\" target=\"_blank\" rel=\"noreferrer\">作者公开代码仓库</a></li>\n</ul>\n"
+        }
+      ]
+    },
+    {
+      "slug": "cookieverse",
+      "file": "08-cookieverse.md",
+      "kind": "论文精读",
+      "module": "papers",
+      "eyebrow": "PAPER READING / BANNERCLICK",
+      "summary": "拆解 BannerClick 如何在移动网页配置中识别 Cookie Banner，并进入设置面板继续执行拒绝。",
+      "scope": "Mobile Web · DOM · Cookie Banner · CMP",
+      "ogImage": "/research-mobile/popup-assets/cookieverse/page_007_fig_fig_1.png",
+      "title": "Exploring the Cookieverse：BannerClick 如何进入设置并执行拒绝",
+      "date": "2026-08-22",
+      "sourceHash": "d8403d6146c9efe75d3bbb01324a1918e9bce79a25c4c7cb100e2f396b65686b",
+      "raw": "---\ntags:\n  - papers/web-privacy\n  - papers/mobile-popup\n  - papers/cookie-banner\naliases:\n  - Exploring the Cookieverse\n  - BannerClick\ndate: 2026-08-22\ndoi: 10.1007/978-3-031-28486-1_26\narxiv_id: 2302.05353\n---\n\n# Exploring the Cookieverse：BannerClick 如何进入设置并执行拒绝\n\n## 核心信息\n\n- 标题: Exploring the Cookieverse: A Multi-Perspective Analysis of Web Cookies\n- 标题翻译: 探索 Cookie 宇宙：Web Cookie 的多视角分析\n- 作者: Ali Rasaii, Shivani Singh, Devashish Gosain, Oliver Gasser\n- 机构: Max Planck Institute for Informatics; New York University; KU Leuven\n- 发表时间: 2023\n- 发表渠道: Passive and Active Measurement Conference 2023\n- DOI: 10.1007/978-3-031-28486-1_26\n- arXiv: 2302.05353\n- 论文链接: [Springer DOI](https://doi.org/10.1007/978-3-031-28486-1_26)\n- 代码 / 项目: [BannerClick](https://bannerclick.github.io/)\n- 数据 / 资源: [项目数据与分析脚本](https://bannerclick.github.io/)\n- 论文类型: Web 隐私测量与 Cookie Banner 自动交互工具\n\n## 原文摘要翻译\n\n近年来网络 Cookie 已成为大量研究的对象，但多数工作没有同时考虑会改变 Cookie 生态的多个关键视角，例如客户端位置、横幅交互方式以及访问网站所使用的操作系统。论文从多个地理位置对 Tranco Top-10K 网站开展综合测量。\n\nCookie 横幅是影响 Cookie 的重要因素，作者开发 BannerClick，自动检测、接受和拒绝横幅，准确率分别达到 99%、97% 和 87%。从欧盟地区访问网站时，横幅出现率高出 56%。\n\n作者还分析交互前后的第一方、第三方和追踪 Cookie；点击接受后，网站发送的第三方 Cookie 平均增加 5.5 倍。研究进一步考察统计一致性、同意管理平台、首页与内页差异，以及桌面和移动配置差异。\n\n结果表明，这些因素都会显著影响 Cookie 生态，因此网络测量应采用多视角设计。\n\n## 创新点\n\n1. **把 Banner 交互纳入 Cookie 测量变量。** 不再只被动加载页面，而是分别运行不交互、接受和拒绝三种模式。\n2. **用 DOM 结构定位完整 Banner。** 多语言关键词只提供种子，系统再沿 DOM 向上找带正 z-index 或固定定位的锚点，并向下收缩到最具体容器。\n3. **为拒绝入口设计多级回退。** 直接 Reject 失败后尝试 CMP 接口，再进入 Settings 对话框继续寻找拒绝。\n4. **明确比较移动与桌面配置。** 同一 OpenWPM 测量框架中改变 Android User-Agent 和视口，观察 Cookie 与 Banner 的差异。\n\n## 一句话总结\n\nBannerClick 是四篇中动作语义最明确的方法：它能区分 Accept、Reject 和 Settings，并在拒绝入口隐藏时进入下一层对话框；但它只适用于可访问 DOM 的移动 Web，不是原生应用弹窗处理器。\n\n## 研究问题\n\nWeb 隐私测量如果不与 Cookie Banner 交互，就只能看到默认状态下的 Cookie。不同地区的法规、不同按钮选择、首页与内页以及移动与桌面页面都可能改变观测结果。BannerClick 的角色是让研究者可重复地产生“不交互、接受、拒绝”三种实验条件。\n\n它不是一篇以 GUI 自动化为主目标的论文。论文主体是八个地域节点上的 Cookie 多视角测量，BannerClick 是其中关键的实验控制工具。因此站点中应同时保留它的交互机制与严格适用边界。\n\n## 数据与任务定义\n\n### 工具核验\n\n作者在 Tranco Top-1K 上人工确认 Banner 存在性和点击结果：518 个网站显示 Banner；444 个有显式接受入口；拒绝评估则覆盖 524 个样本。检测、接受和拒绝分别独立核验，避免把“找到 Banner”误当成“完成交互”。\n\n### 大规模测量\n\n主研究使用德国、瑞典、美国东部、美国西部、印度、巴西、南非和澳大利亚八个 AWS 节点，目标是 Tranco Top-10K。德国节点的 Banner 交互测量由一万个域名、五次重复和三种交互模式组成，最后保留 135,307 次成功测量。\n\n### 移动配置\n\n移动实验不是物理手机：OpenWPM 仍运行 Firefox，只把 User-Agent 改成 Android 12 移动版本，并把视口从 $1366\\times768$ 改成 $340\\times695$。作者人工确认多数网站会切换移动外观，但承认部分网站不会仅凭这两项配置提供真实移动版本。\n\n## 方法主线\n\n### 机制流程\n\n1. **关键词种子。** 从 50 个网站人工整理 Cookie、Privacy、Consent、Accept 等 8 个英文词，翻译到 11 种其他语言，形成 80 词词表。\n2. **定位锚点。** 搜索含词表命中的可见元素，沿 DOM 向上寻找具有正 z-index 或 fixed 定位的元素；找不到时退到 body。\n3. **收缩容器。** 从锚点向下遍历，寻找仍完整包含所有可见 Banner 元素的最具体父节点。\n4. **处理 iframe。** 常规 DOM 失败后，遍历所有可见 iframe，在其内部重复检测流程。\n5. **选择动作。** 在横幅容器中查找接受、拒绝、设置三类词。多候选时优先标准按钮标签，再选择文本最短的元素；同时兼容输入标签和分区标签等非标准按钮实现。\n6. **拒绝回退。** 没有直接 Reject 时，先调用 Never-Consent 支持的 CMP 拒绝接口；仍失败则点击 Settings，在新对话框中再次搜索拒绝。\n7. **保存证据。** 在交互前、检测到 Banner 后、每次点击后保存截图，供人工复核。\n\n![BannerClick 的 DOM 定位方法](/research-mobile/popup-assets/cookieverse/page_007_fig_fig_1.png)\n*图 1：从命中关键词的文本节点向上寻找锚点，再向下收缩到完整 Cookie Banner 容器。*\n\n### 为什么拒绝更困难\n\n接受通常是首层高亮按钮；拒绝经常被隐藏在管理选项、更多信息或设置内，甚至要求逐项关闭多个类别。BannerClick 因此不是一次关键词点击，而是一个最多跨越两层界面并可调用同意管理平台接口的策略链。\n\n## 关键结果\n\n### 检测、接受与拒绝\n\n| 能力 | 人工核验结果 | 主要失败原因 |\n|---|---:|---|\n| Banner 检测 | 513/518 个真实 Banner；假阳性 4 个 | Shadow DOM、词表缺词、正文中出现 Cookie 词但无 Banner |\n| 显式接受 | 430/444，准确率超过 97% | “NOT Accept”等否定语义、词表缺词 |\n| 拒绝 | 377/524，准确率 87.4% | 38 个网站需要多选机制，81 个样本没有拒绝入口 |\n\n接受错误中的 13 个网站含否定语义，说明字符串命中不能理解组合语义。拒绝结果也提醒我们：某些网站根本不给一键拒绝，工具能力与界面合规性不能混为一谈。\n\n### 对 Cookie 测量的影响\n\n在德国节点，作者约能在 47% 的可访问网站上检测 Banner，并在全部网站中的约 40% 和 30% 上分别完成接受和拒绝。点击接受后，第一方 Cookie 数量增加一倍以上，第三方 Cookie 平均增加 5.5 倍，平均追踪 Cookie 从 0 增加到 7。这证明交互模式是测量设计中的决定性变量。\n\n### 移动与桌面\n\n在所有地域中，14.6% 的网站在移动和桌面配置下呈现不同的第三方 Cookie 数量，9% 的网站呈现不同的追踪 Cookie 数量。Banner 检出比例在移动和桌面配置下接近，但这不代表真实手机浏览器和桌面浏览器等价，只说明该模拟设置中 Banner 出现率相近。\n\n## 深度分析\n\n### 结构化网页方法为何优先于视觉方法\n\nBannerClick 使用 DOM、可见性、层叠顺序、固定定位、内嵌框架和按钮文本，这些证据直接对应“容器在哪里”和“按钮是什么意思”。在可访问网页中，这比从截图猜关闭图标更可解释，也更容易区分接受和拒绝。视觉模型更适合作为影子 DOM、画布或不可访问覆盖层的补充，而不是默认第一层。\n\n### 它是否解决移动端弹窗\n\n严格地说，它解决的是移动视口下的网页 Cookie 横幅。它能定位并实际点击接受、拒绝和设置，也能处理隐藏拒绝入口，因此与“移动端弹窗动作语义”直接相关。但它不能看到原生 Android 或 iOS 对话框，也无法处理没有 DOM 的广告覆盖层。\n\n### 点击拒绝不等于隐私目标达成\n\n论文会继续采集 Cookie，从而能发现拒绝后的实际追踪行为；这比只看 Banner 消失更完整。但 BannerClick 的 87.4% 指标仍只是正确执行拒绝入口，不是“网站停止追踪”的成功率。工程系统应把界面处置和后端效果验证分成两个指标。\n\n### 与其他方法的互补\n\n- PopSweeper 适合无 DOM 的原生视觉覆盖层，但不理解动作语义。\n- WhisperTest 能在 iPhone 上执行原生和 WebView 交互，但同意偏好需预设。\n- BannerClick 可以作为移动 Web 专用策略层，通过浏览器 DOM 驱动准确动作。\n\n## 局限\n\n1. 只解决 Cookie Banner，不覆盖通用网页弹窗或原生 App 对话框。\n2. 依赖 12 种语言词表，其他语言和词表外文案可能漏检。\n3. Shadow DOM 会阻断常规 DOM 搜索；跨域或特殊 iframe 也可能受限。\n4. 关键词不能理解否定关系，“NOT Accept”会产生错误动作。\n5. 多选拒绝、无拒绝入口和非标准 CMP 实现仍是主要失败来源。\n6. 移动端仅由 Android User-Agent 和小视口模拟，不是物理 Android 或 iOS 设备。\n7. 使用 Firefox/OpenWPM，结果不能直接外推到 Chrome、Safari 或系统 WebView。\n\n## 我的笔记\n\n### 最值得保留的策略链\n\n拒绝流程的三层回退很实用：直接按钮、CMP 结构、设置页再搜索。它说明弹窗处理不应只有“找一个按钮并点掉”，而应根据动作目标维护有限状态机。\n\n### 与原生弹窗统一时的边界\n\n可以统一“动作意图”和“结果验证”，但不应统一底层感知：Web 优先 DOM 和协议，Android/iOS 原生界面优先可访问性树与系统事件，无结构覆盖层最后使用 OCR 和视觉模型。\n\n### 适合站点中的定位\n\n**移动 Web Cookie Banner 的结构化检测与接受、拒绝、设置多步交互方法。** 它不应被标成真机原生移动弹窗方案。\n\n## 引用\n\n- [Springer DOI](https://doi.org/10.1007/978-3-031-28486-1_26)\n- [arXiv 版本](https://arxiv.org/abs/2302.05353)\n- [BannerClick 项目](https://bannerclick.github.io/)\n",
+      "html": "<h1 id=\"cookieverse-h1-0\">Exploring the Cookieverse：BannerClick 如何进入设置并执行拒绝</h1>\n<h2 id=\"cookieverse-h2-1\">核心信息</h2>\n<ul>\n<li>标题: Exploring the Cookieverse: A Multi-Perspective Analysis of Web Cookies</li>\n<li>标题翻译: 探索 Cookie 宇宙：Web Cookie 的多视角分析</li>\n<li>作者: Ali Rasaii, Shivani Singh, Devashish Gosain, Oliver Gasser</li>\n<li>机构: Max Planck Institute for Informatics; New York University; KU Leuven</li>\n<li>发表时间: 2023</li>\n<li>发表渠道: Passive and Active Measurement Conference 2023</li>\n<li>DOI: 10.1007/978-3-031-28486-1_26</li>\n<li>arXiv: 2302.05353</li>\n<li>论文链接: <a href=\"https://doi.org/10.1007/978-3-031-28486-1_26\" target=\"_blank\" rel=\"noreferrer\">Springer DOI</a></li>\n<li>代码 / 项目: <a href=\"https://bannerclick.github.io/\" target=\"_blank\" rel=\"noreferrer\">BannerClick</a></li>\n<li>数据 / 资源: <a href=\"https://bannerclick.github.io/\" target=\"_blank\" rel=\"noreferrer\">项目数据与分析脚本</a></li>\n<li>论文类型: Web 隐私测量与 Cookie Banner 自动交互工具</li>\n</ul>\n<h2 id=\"cookieverse-h2-2\">原文摘要翻译</h2>\n<p>近年来网络 Cookie 已成为大量研究的对象，但多数工作没有同时考虑会改变 Cookie 生态的多个关键视角，例如客户端位置、横幅交互方式以及访问网站所使用的操作系统。论文从多个地理位置对 Tranco Top-10K 网站开展综合测量。</p>\n<p>Cookie 横幅是影响 Cookie 的重要因素，作者开发 BannerClick，自动检测、接受和拒绝横幅，准确率分别达到 99%、97% 和 87%。从欧盟地区访问网站时，横幅出现率高出 56%。</p>\n<p>作者还分析交互前后的第一方、第三方和追踪 Cookie；点击接受后，网站发送的第三方 Cookie 平均增加 5.5 倍。研究进一步考察统计一致性、同意管理平台、首页与内页差异，以及桌面和移动配置差异。</p>\n<p>结果表明，这些因素都会显著影响 Cookie 生态，因此网络测量应采用多视角设计。</p>\n<h2 id=\"cookieverse-h2-3\">创新点</h2>\n<ol>\n<li><strong>把 Banner 交互纳入 Cookie 测量变量。</strong> 不再只被动加载页面，而是分别运行不交互、接受和拒绝三种模式。</li>\n<li><strong>用 DOM 结构定位完整 Banner。</strong> 多语言关键词只提供种子，系统再沿 DOM 向上找带正 z-index 或固定定位的锚点，并向下收缩到最具体容器。</li>\n<li><strong>为拒绝入口设计多级回退。</strong> 直接 Reject 失败后尝试 CMP 接口，再进入 Settings 对话框继续寻找拒绝。</li>\n<li><strong>明确比较移动与桌面配置。</strong> 同一 OpenWPM 测量框架中改变 Android User-Agent 和视口，观察 Cookie 与 Banner 的差异。</li>\n</ol>\n<h2 id=\"cookieverse-h2-4\">一句话总结</h2>\n<p>BannerClick 是四篇中动作语义最明确的方法：它能区分 Accept、Reject 和 Settings，并在拒绝入口隐藏时进入下一层对话框；但它只适用于可访问 DOM 的移动 Web，不是原生应用弹窗处理器。</p>\n<h2 id=\"cookieverse-h2-5\">研究问题</h2>\n<p>Web 隐私测量如果不与 Cookie Banner 交互，就只能看到默认状态下的 Cookie。不同地区的法规、不同按钮选择、首页与内页以及移动与桌面页面都可能改变观测结果。BannerClick 的角色是让研究者可重复地产生“不交互、接受、拒绝”三种实验条件。</p>\n<p>它不是一篇以 GUI 自动化为主目标的论文。论文主体是八个地域节点上的 Cookie 多视角测量，BannerClick 是其中关键的实验控制工具。因此站点中应同时保留它的交互机制与严格适用边界。</p>\n<h2 id=\"cookieverse-h2-6\">数据与任务定义</h2>\n<h3 id=\"cookieverse-h3-7\">工具核验</h3>\n<p>作者在 Tranco Top-1K 上人工确认 Banner 存在性和点击结果：518 个网站显示 Banner；444 个有显式接受入口；拒绝评估则覆盖 524 个样本。检测、接受和拒绝分别独立核验，避免把“找到 Banner”误当成“完成交互”。</p>\n<h3 id=\"cookieverse-h3-8\">大规模测量</h3>\n<p>主研究使用德国、瑞典、美国东部、美国西部、印度、巴西、南非和澳大利亚八个 AWS 节点，目标是 Tranco Top-10K。德国节点的 Banner 交互测量由一万个域名、五次重复和三种交互模式组成，最后保留 135,307 次成功测量。</p>\n<h3 id=\"cookieverse-h3-9\">移动配置</h3>\n<p>移动实验不是物理手机：OpenWPM 仍运行 Firefox，只把 User-Agent 改成 Android 12 移动版本，并把视口从 $1366\\times768$ 改成 $340\\times695$。作者人工确认多数网站会切换移动外观，但承认部分网站不会仅凭这两项配置提供真实移动版本。</p>\n<h2 id=\"cookieverse-h2-10\">方法主线</h2>\n<h3 id=\"cookieverse-h3-11\">机制流程</h3>\n<ol>\n<li><strong>关键词种子。</strong> 从 50 个网站人工整理 Cookie、Privacy、Consent、Accept 等 8 个英文词，翻译到 11 种其他语言，形成 80 词词表。</li>\n<li><strong>定位锚点。</strong> 搜索含词表命中的可见元素，沿 DOM 向上寻找具有正 z-index 或 fixed 定位的元素；找不到时退到 body。</li>\n<li><strong>收缩容器。</strong> 从锚点向下遍历，寻找仍完整包含所有可见 Banner 元素的最具体父节点。</li>\n<li><strong>处理 iframe。</strong> 常规 DOM 失败后，遍历所有可见 iframe，在其内部重复检测流程。</li>\n<li><strong>选择动作。</strong> 在横幅容器中查找接受、拒绝、设置三类词。多候选时优先标准按钮标签，再选择文本最短的元素；同时兼容输入标签和分区标签等非标准按钮实现。</li>\n<li><strong>拒绝回退。</strong> 没有直接 Reject 时，先调用 Never-Consent 支持的 CMP 拒绝接口；仍失败则点击 Settings，在新对话框中再次搜索拒绝。</li>\n<li><strong>保存证据。</strong> 在交互前、检测到 Banner 后、每次点击后保存截图，供人工复核。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/cookieverse/page_007_fig_fig_1.png\" alt=\"BannerClick 的 DOM 定位方法\">\n<em>图 1：从命中关键词的文本节点向上寻找锚点，再向下收缩到完整 Cookie Banner 容器。</em></p>\n<h3 id=\"cookieverse-h3-12\">为什么拒绝更困难</h3>\n<p>接受通常是首层高亮按钮；拒绝经常被隐藏在管理选项、更多信息或设置内，甚至要求逐项关闭多个类别。BannerClick 因此不是一次关键词点击，而是一个最多跨越两层界面并可调用同意管理平台接口的策略链。</p>\n<h2 id=\"cookieverse-h2-13\">关键结果</h2>\n<h3 id=\"cookieverse-h3-14\">检测、接受与拒绝</h3>\n<table>\n<thead>\n<tr>\n<th>能力</th>\n<th align=\"right\">人工核验结果</th>\n<th>主要失败原因</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Banner 检测</td>\n<td align=\"right\">513/518 个真实 Banner；假阳性 4 个</td>\n<td>Shadow DOM、词表缺词、正文中出现 Cookie 词但无 Banner</td>\n</tr>\n<tr>\n<td>显式接受</td>\n<td align=\"right\">430/444，准确率超过 97%</td>\n<td>“NOT Accept”等否定语义、词表缺词</td>\n</tr>\n<tr>\n<td>拒绝</td>\n<td align=\"right\">377/524，准确率 87.4%</td>\n<td>38 个网站需要多选机制，81 个样本没有拒绝入口</td>\n</tr>\n</tbody></table>\n<p>接受错误中的 13 个网站含否定语义，说明字符串命中不能理解组合语义。拒绝结果也提醒我们：某些网站根本不给一键拒绝，工具能力与界面合规性不能混为一谈。</p>\n<h3 id=\"cookieverse-h3-15\">对 Cookie 测量的影响</h3>\n<p>在德国节点，作者约能在 47% 的可访问网站上检测 Banner，并在全部网站中的约 40% 和 30% 上分别完成接受和拒绝。点击接受后，第一方 Cookie 数量增加一倍以上，第三方 Cookie 平均增加 5.5 倍，平均追踪 Cookie 从 0 增加到 7。这证明交互模式是测量设计中的决定性变量。</p>\n<h3 id=\"cookieverse-h3-16\">移动与桌面</h3>\n<p>在所有地域中，14.6% 的网站在移动和桌面配置下呈现不同的第三方 Cookie 数量，9% 的网站呈现不同的追踪 Cookie 数量。Banner 检出比例在移动和桌面配置下接近，但这不代表真实手机浏览器和桌面浏览器等价，只说明该模拟设置中 Banner 出现率相近。</p>\n<h2 id=\"cookieverse-h2-17\">深度分析</h2>\n<h3 id=\"cookieverse-h3-18\">结构化网页方法为何优先于视觉方法</h3>\n<p>BannerClick 使用 DOM、可见性、层叠顺序、固定定位、内嵌框架和按钮文本，这些证据直接对应“容器在哪里”和“按钮是什么意思”。在可访问网页中，这比从截图猜关闭图标更可解释，也更容易区分接受和拒绝。视觉模型更适合作为影子 DOM、画布或不可访问覆盖层的补充，而不是默认第一层。</p>\n<h3 id=\"cookieverse-h3-19\">它是否解决移动端弹窗</h3>\n<p>严格地说，它解决的是移动视口下的网页 Cookie 横幅。它能定位并实际点击接受、拒绝和设置，也能处理隐藏拒绝入口，因此与“移动端弹窗动作语义”直接相关。但它不能看到原生 Android 或 iOS 对话框，也无法处理没有 DOM 的广告覆盖层。</p>\n<h3 id=\"cookieverse-h3-20\">点击拒绝不等于隐私目标达成</h3>\n<p>论文会继续采集 Cookie，从而能发现拒绝后的实际追踪行为；这比只看 Banner 消失更完整。但 BannerClick 的 87.4% 指标仍只是正确执行拒绝入口，不是“网站停止追踪”的成功率。工程系统应把界面处置和后端效果验证分成两个指标。</p>\n<h3 id=\"cookieverse-h3-21\">与其他方法的互补</h3>\n<ul>\n<li>PopSweeper 适合无 DOM 的原生视觉覆盖层，但不理解动作语义。</li>\n<li>WhisperTest 能在 iPhone 上执行原生和 WebView 交互，但同意偏好需预设。</li>\n<li>BannerClick 可以作为移动 Web 专用策略层，通过浏览器 DOM 驱动准确动作。</li>\n</ul>\n<h2 id=\"cookieverse-h2-22\">局限</h2>\n<ol>\n<li>只解决 Cookie Banner，不覆盖通用网页弹窗或原生 App 对话框。</li>\n<li>依赖 12 种语言词表，其他语言和词表外文案可能漏检。</li>\n<li>Shadow DOM 会阻断常规 DOM 搜索；跨域或特殊 iframe 也可能受限。</li>\n<li>关键词不能理解否定关系，“NOT Accept”会产生错误动作。</li>\n<li>多选拒绝、无拒绝入口和非标准 CMP 实现仍是主要失败来源。</li>\n<li>移动端仅由 Android User-Agent 和小视口模拟，不是物理 Android 或 iOS 设备。</li>\n<li>使用 Firefox/OpenWPM，结果不能直接外推到 Chrome、Safari 或系统 WebView。</li>\n</ol>\n<h2 id=\"cookieverse-h2-23\">我的笔记</h2>\n<h3 id=\"cookieverse-h3-24\">最值得保留的策略链</h3>\n<p>拒绝流程的三层回退很实用：直接按钮、CMP 结构、设置页再搜索。它说明弹窗处理不应只有“找一个按钮并点掉”，而应根据动作目标维护有限状态机。</p>\n<h3 id=\"cookieverse-h3-25\">与原生弹窗统一时的边界</h3>\n<p>可以统一“动作意图”和“结果验证”，但不应统一底层感知：Web 优先 DOM 和协议，Android/iOS 原生界面优先可访问性树与系统事件，无结构覆盖层最后使用 OCR 和视觉模型。</p>\n<h3 id=\"cookieverse-h3-26\">适合站点中的定位</h3>\n<p><strong>移动 Web Cookie Banner 的结构化检测与接受、拒绝、设置多步交互方法。</strong> 它不应被标成真机原生移动弹窗方案。</p>\n<h2 id=\"cookieverse-h2-27\">引用</h2>\n<ul>\n<li><a href=\"https://doi.org/10.1007/978-3-031-28486-1_26\" target=\"_blank\" rel=\"noreferrer\">Springer DOI</a></li>\n<li><a href=\"https://arxiv.org/abs/2302.05353\" target=\"_blank\" rel=\"noreferrer\">arXiv 版本</a></li>\n<li><a href=\"https://bannerclick.github.io/\" target=\"_blank\" rel=\"noreferrer\">BannerClick 项目</a></li>\n</ul>\n",
+      "headings": [
+        {
+          "depth": 1,
+          "id": "cookieverse-h1-0",
+          "text": "Exploring the Cookieverse：BannerClick 如何进入设置并执行拒绝"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-1",
+          "text": "核心信息"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-2",
+          "text": "原文摘要翻译"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-3",
+          "text": "创新点"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-4",
+          "text": "一句话总结"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-5",
+          "text": "研究问题"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-6",
+          "text": "数据与任务定义"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-7",
+          "text": "工具核验"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-8",
+          "text": "大规模测量"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-9",
+          "text": "移动配置"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-10",
+          "text": "方法主线"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-11",
+          "text": "机制流程"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-12",
+          "text": "为什么拒绝更困难"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-13",
+          "text": "关键结果"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-14",
+          "text": "检测、接受与拒绝"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-15",
+          "text": "对 Cookie 测量的影响"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-16",
+          "text": "移动与桌面"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-17",
+          "text": "深度分析"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-18",
+          "text": "结构化网页方法为何优先于视觉方法"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-19",
+          "text": "它是否解决移动端弹窗"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-20",
+          "text": "点击拒绝不等于隐私目标达成"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-21",
+          "text": "与其他方法的互补"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-22",
+          "text": "局限"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-23",
+          "text": "我的笔记"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-24",
+          "text": "最值得保留的策略链"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-25",
+          "text": "与原生弹窗统一时的边界"
+        },
+        {
+          "depth": 3,
+          "id": "cookieverse-h3-26",
+          "text": "适合站点中的定位"
+        },
+        {
+          "depth": 2,
+          "id": "cookieverse-h2-27",
+          "text": "引用"
+        }
+      ],
+      "sections": [
+        {
+          "id": "cookieverse-section-0",
+          "title": "导读",
+          "html": "<h1 id=\"cookieverse-slide-0-h1-0\">Exploring the Cookieverse：BannerClick 如何进入设置并执行拒绝</h1>\n"
+        },
+        {
+          "id": "cookieverse-section-1",
+          "title": "核心信息",
+          "html": "<h2 id=\"cookieverse-slide-1-h2-0\">核心信息</h2>\n<ul>\n<li>标题: Exploring the Cookieverse: A Multi-Perspective Analysis of Web Cookies</li>\n<li>标题翻译: 探索 Cookie 宇宙：Web Cookie 的多视角分析</li>\n<li>作者: Ali Rasaii, Shivani Singh, Devashish Gosain, Oliver Gasser</li>\n<li>机构: Max Planck Institute for Informatics; New York University; KU Leuven</li>\n<li>发表时间: 2023</li>\n<li>发表渠道: Passive and Active Measurement Conference 2023</li>\n<li>DOI: 10.1007/978-3-031-28486-1_26</li>\n<li>arXiv: 2302.05353</li>\n<li>论文链接: <a href=\"https://doi.org/10.1007/978-3-031-28486-1_26\" target=\"_blank\" rel=\"noreferrer\">Springer DOI</a></li>\n<li>代码 / 项目: <a href=\"https://bannerclick.github.io/\" target=\"_blank\" rel=\"noreferrer\">BannerClick</a></li>\n<li>数据 / 资源: <a href=\"https://bannerclick.github.io/\" target=\"_blank\" rel=\"noreferrer\">项目数据与分析脚本</a></li>\n<li>论文类型: Web 隐私测量与 Cookie Banner 自动交互工具</li>\n</ul>\n"
+        },
+        {
+          "id": "cookieverse-section-2",
+          "title": "原文摘要翻译",
+          "html": "<h2 id=\"cookieverse-slide-2-h2-0\">原文摘要翻译</h2>\n<p>近年来网络 Cookie 已成为大量研究的对象，但多数工作没有同时考虑会改变 Cookie 生态的多个关键视角，例如客户端位置、横幅交互方式以及访问网站所使用的操作系统。论文从多个地理位置对 Tranco Top-10K 网站开展综合测量。</p>\n<p>Cookie 横幅是影响 Cookie 的重要因素，作者开发 BannerClick，自动检测、接受和拒绝横幅，准确率分别达到 99%、97% 和 87%。从欧盟地区访问网站时，横幅出现率高出 56%。</p>\n<p>作者还分析交互前后的第一方、第三方和追踪 Cookie；点击接受后，网站发送的第三方 Cookie 平均增加 5.5 倍。研究进一步考察统计一致性、同意管理平台、首页与内页差异，以及桌面和移动配置差异。</p>\n<p>结果表明，这些因素都会显著影响 Cookie 生态，因此网络测量应采用多视角设计。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-3",
+          "title": "创新点",
+          "html": "<h2 id=\"cookieverse-slide-3-h2-0\">创新点</h2>\n<ol>\n<li><strong>把 Banner 交互纳入 Cookie 测量变量。</strong> 不再只被动加载页面，而是分别运行不交互、接受和拒绝三种模式。</li>\n<li><strong>用 DOM 结构定位完整 Banner。</strong> 多语言关键词只提供种子，系统再沿 DOM 向上找带正 z-index 或固定定位的锚点，并向下收缩到最具体容器。</li>\n<li><strong>为拒绝入口设计多级回退。</strong> 直接 Reject 失败后尝试 CMP 接口，再进入 Settings 对话框继续寻找拒绝。</li>\n<li><strong>明确比较移动与桌面配置。</strong> 同一 OpenWPM 测量框架中改变 Android User-Agent 和视口，观察 Cookie 与 Banner 的差异。</li>\n</ol>\n"
+        },
+        {
+          "id": "cookieverse-section-4",
+          "title": "一句话总结",
+          "html": "<h2 id=\"cookieverse-slide-4-h2-0\">一句话总结</h2>\n<p>BannerClick 是四篇中动作语义最明确的方法：它能区分 Accept、Reject 和 Settings，并在拒绝入口隐藏时进入下一层对话框；但它只适用于可访问 DOM 的移动 Web，不是原生应用弹窗处理器。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-5",
+          "title": "研究问题",
+          "html": "<h2 id=\"cookieverse-slide-5-h2-0\">研究问题</h2>\n<p>Web 隐私测量如果不与 Cookie Banner 交互，就只能看到默认状态下的 Cookie。不同地区的法规、不同按钮选择、首页与内页以及移动与桌面页面都可能改变观测结果。BannerClick 的角色是让研究者可重复地产生“不交互、接受、拒绝”三种实验条件。</p>\n<p>它不是一篇以 GUI 自动化为主目标的论文。论文主体是八个地域节点上的 Cookie 多视角测量，BannerClick 是其中关键的实验控制工具。因此站点中应同时保留它的交互机制与严格适用边界。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-6",
+          "title": "数据与任务定义",
+          "html": "<h2 id=\"cookieverse-slide-6-h2-0\">数据与任务定义</h2>\n"
+        },
+        {
+          "id": "cookieverse-section-7",
+          "title": "工具核验",
+          "html": "<h3 id=\"cookieverse-slide-7-h3-0\">工具核验</h3>\n<p>作者在 Tranco Top-1K 上人工确认 Banner 存在性和点击结果：518 个网站显示 Banner；444 个有显式接受入口；拒绝评估则覆盖 524 个样本。检测、接受和拒绝分别独立核验，避免把“找到 Banner”误当成“完成交互”。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-8",
+          "title": "大规模测量",
+          "html": "<h3 id=\"cookieverse-slide-8-h3-0\">大规模测量</h3>\n<p>主研究使用德国、瑞典、美国东部、美国西部、印度、巴西、南非和澳大利亚八个 AWS 节点，目标是 Tranco Top-10K。德国节点的 Banner 交互测量由一万个域名、五次重复和三种交互模式组成，最后保留 135,307 次成功测量。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-9",
+          "title": "移动配置",
+          "html": "<h3 id=\"cookieverse-slide-9-h3-0\">移动配置</h3>\n<p>移动实验不是物理手机：OpenWPM 仍运行 Firefox，只把 User-Agent 改成 Android 12 移动版本，并把视口从 $1366\\times768$ 改成 $340\\times695$。作者人工确认多数网站会切换移动外观，但承认部分网站不会仅凭这两项配置提供真实移动版本。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-10",
+          "title": "方法主线",
+          "html": "<h2 id=\"cookieverse-slide-10-h2-0\">方法主线</h2>\n"
+        },
+        {
+          "id": "cookieverse-section-11",
+          "title": "机制流程",
+          "html": "<h3 id=\"cookieverse-slide-11-h3-0\">机制流程</h3>\n<ol>\n<li><strong>关键词种子。</strong> 从 50 个网站人工整理 Cookie、Privacy、Consent、Accept 等 8 个英文词，翻译到 11 种其他语言，形成 80 词词表。</li>\n<li><strong>定位锚点。</strong> 搜索含词表命中的可见元素，沿 DOM 向上寻找具有正 z-index 或 fixed 定位的元素；找不到时退到 body。</li>\n<li><strong>收缩容器。</strong> 从锚点向下遍历，寻找仍完整包含所有可见 Banner 元素的最具体父节点。</li>\n<li><strong>处理 iframe。</strong> 常规 DOM 失败后，遍历所有可见 iframe，在其内部重复检测流程。</li>\n<li><strong>选择动作。</strong> 在横幅容器中查找接受、拒绝、设置三类词。多候选时优先标准按钮标签，再选择文本最短的元素；同时兼容输入标签和分区标签等非标准按钮实现。</li>\n<li><strong>拒绝回退。</strong> 没有直接 Reject 时，先调用 Never-Consent 支持的 CMP 拒绝接口；仍失败则点击 Settings，在新对话框中再次搜索拒绝。</li>\n<li><strong>保存证据。</strong> 在交互前、检测到 Banner 后、每次点击后保存截图，供人工复核。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/cookieverse/page_007_fig_fig_1.png\" alt=\"BannerClick 的 DOM 定位方法\">\n<em>图 1：从命中关键词的文本节点向上寻找锚点，再向下收缩到完整 Cookie Banner 容器。</em></p>\n"
+        },
+        {
+          "id": "cookieverse-section-12",
+          "title": "为什么拒绝更困难",
+          "html": "<h3 id=\"cookieverse-slide-12-h3-0\">为什么拒绝更困难</h3>\n<p>接受通常是首层高亮按钮；拒绝经常被隐藏在管理选项、更多信息或设置内，甚至要求逐项关闭多个类别。BannerClick 因此不是一次关键词点击，而是一个最多跨越两层界面并可调用同意管理平台接口的策略链。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-13",
+          "title": "关键结果",
+          "html": "<h2 id=\"cookieverse-slide-13-h2-0\">关键结果</h2>\n"
+        },
+        {
+          "id": "cookieverse-section-14",
+          "title": "检测、接受与拒绝",
+          "html": "<h3 id=\"cookieverse-slide-14-h3-0\">检测、接受与拒绝</h3>\n<table>\n<thead>\n<tr>\n<th>能力</th>\n<th align=\"right\">人工核验结果</th>\n<th>主要失败原因</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Banner 检测</td>\n<td align=\"right\">513/518 个真实 Banner；假阳性 4 个</td>\n<td>Shadow DOM、词表缺词、正文中出现 Cookie 词但无 Banner</td>\n</tr>\n<tr>\n<td>显式接受</td>\n<td align=\"right\">430/444，准确率超过 97%</td>\n<td>“NOT Accept”等否定语义、词表缺词</td>\n</tr>\n<tr>\n<td>拒绝</td>\n<td align=\"right\">377/524，准确率 87.4%</td>\n<td>38 个网站需要多选机制，81 个样本没有拒绝入口</td>\n</tr>\n</tbody></table>\n<p>接受错误中的 13 个网站含否定语义，说明字符串命中不能理解组合语义。拒绝结果也提醒我们：某些网站根本不给一键拒绝，工具能力与界面合规性不能混为一谈。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-15",
+          "title": "对 Cookie 测量的影响",
+          "html": "<h3 id=\"cookieverse-slide-15-h3-0\">对 Cookie 测量的影响</h3>\n<p>在德国节点，作者约能在 47% 的可访问网站上检测 Banner，并在全部网站中的约 40% 和 30% 上分别完成接受和拒绝。点击接受后，第一方 Cookie 数量增加一倍以上，第三方 Cookie 平均增加 5.5 倍，平均追踪 Cookie 从 0 增加到 7。这证明交互模式是测量设计中的决定性变量。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-16",
+          "title": "移动与桌面",
+          "html": "<h3 id=\"cookieverse-slide-16-h3-0\">移动与桌面</h3>\n<p>在所有地域中，14.6% 的网站在移动和桌面配置下呈现不同的第三方 Cookie 数量，9% 的网站呈现不同的追踪 Cookie 数量。Banner 检出比例在移动和桌面配置下接近，但这不代表真实手机浏览器和桌面浏览器等价，只说明该模拟设置中 Banner 出现率相近。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-17",
+          "title": "深度分析",
+          "html": "<h2 id=\"cookieverse-slide-17-h2-0\">深度分析</h2>\n"
+        },
+        {
+          "id": "cookieverse-section-18",
+          "title": "结构化网页方法为何优先于视觉方法",
+          "html": "<h3 id=\"cookieverse-slide-18-h3-0\">结构化网页方法为何优先于视觉方法</h3>\n<p>BannerClick 使用 DOM、可见性、层叠顺序、固定定位、内嵌框架和按钮文本，这些证据直接对应“容器在哪里”和“按钮是什么意思”。在可访问网页中，这比从截图猜关闭图标更可解释，也更容易区分接受和拒绝。视觉模型更适合作为影子 DOM、画布或不可访问覆盖层的补充，而不是默认第一层。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-19",
+          "title": "它是否解决移动端弹窗",
+          "html": "<h3 id=\"cookieverse-slide-19-h3-0\">它是否解决移动端弹窗</h3>\n<p>严格地说，它解决的是移动视口下的网页 Cookie 横幅。它能定位并实际点击接受、拒绝和设置，也能处理隐藏拒绝入口，因此与“移动端弹窗动作语义”直接相关。但它不能看到原生 Android 或 iOS 对话框，也无法处理没有 DOM 的广告覆盖层。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-20",
+          "title": "点击拒绝不等于隐私目标达成",
+          "html": "<h3 id=\"cookieverse-slide-20-h3-0\">点击拒绝不等于隐私目标达成</h3>\n<p>论文会继续采集 Cookie，从而能发现拒绝后的实际追踪行为；这比只看 Banner 消失更完整。但 BannerClick 的 87.4% 指标仍只是正确执行拒绝入口，不是“网站停止追踪”的成功率。工程系统应把界面处置和后端效果验证分成两个指标。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-21",
+          "title": "与其他方法的互补",
+          "html": "<h3 id=\"cookieverse-slide-21-h3-0\">与其他方法的互补</h3>\n<ul>\n<li>PopSweeper 适合无 DOM 的原生视觉覆盖层，但不理解动作语义。</li>\n<li>WhisperTest 能在 iPhone 上执行原生和 WebView 交互，但同意偏好需预设。</li>\n<li>BannerClick 可以作为移动 Web 专用策略层，通过浏览器 DOM 驱动准确动作。</li>\n</ul>\n"
+        },
+        {
+          "id": "cookieverse-section-22",
+          "title": "局限",
+          "html": "<h2 id=\"cookieverse-slide-22-h2-0\">局限</h2>\n<ol>\n<li>只解决 Cookie Banner，不覆盖通用网页弹窗或原生 App 对话框。</li>\n<li>依赖 12 种语言词表，其他语言和词表外文案可能漏检。</li>\n<li>Shadow DOM 会阻断常规 DOM 搜索；跨域或特殊 iframe 也可能受限。</li>\n<li>关键词不能理解否定关系，“NOT Accept”会产生错误动作。</li>\n<li>多选拒绝、无拒绝入口和非标准 CMP 实现仍是主要失败来源。</li>\n<li>移动端仅由 Android User-Agent 和小视口模拟，不是物理 Android 或 iOS 设备。</li>\n<li>使用 Firefox/OpenWPM，结果不能直接外推到 Chrome、Safari 或系统 WebView。</li>\n</ol>\n"
+        },
+        {
+          "id": "cookieverse-section-23",
+          "title": "我的笔记",
+          "html": "<h2 id=\"cookieverse-slide-23-h2-0\">我的笔记</h2>\n"
+        },
+        {
+          "id": "cookieverse-section-24",
+          "title": "最值得保留的策略链",
+          "html": "<h3 id=\"cookieverse-slide-24-h3-0\">最值得保留的策略链</h3>\n<p>拒绝流程的三层回退很实用：直接按钮、CMP 结构、设置页再搜索。它说明弹窗处理不应只有“找一个按钮并点掉”，而应根据动作目标维护有限状态机。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-25",
+          "title": "与原生弹窗统一时的边界",
+          "html": "<h3 id=\"cookieverse-slide-25-h3-0\">与原生弹窗统一时的边界</h3>\n<p>可以统一“动作意图”和“结果验证”，但不应统一底层感知：Web 优先 DOM 和协议，Android/iOS 原生界面优先可访问性树与系统事件，无结构覆盖层最后使用 OCR 和视觉模型。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-26",
+          "title": "适合站点中的定位",
+          "html": "<h3 id=\"cookieverse-slide-26-h3-0\">适合站点中的定位</h3>\n<p><strong>移动 Web Cookie Banner 的结构化检测与接受、拒绝、设置多步交互方法。</strong> 它不应被标成真机原生移动弹窗方案。</p>\n"
+        },
+        {
+          "id": "cookieverse-section-27",
+          "title": "引用",
+          "html": "<h2 id=\"cookieverse-slide-27-h2-0\">引用</h2>\n<ul>\n<li><a href=\"https://doi.org/10.1007/978-3-031-28486-1_26\" target=\"_blank\" rel=\"noreferrer\">Springer DOI</a></li>\n<li><a href=\"https://arxiv.org/abs/2302.05353\" target=\"_blank\" rel=\"noreferrer\">arXiv 版本</a></li>\n<li><a href=\"https://bannerclick.github.io/\" target=\"_blank\" rel=\"noreferrer\">BannerClick 项目</a></li>\n</ul>\n"
         }
       ]
     }
