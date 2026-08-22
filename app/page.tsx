@@ -26,7 +26,7 @@ export default function Home() {
             研究档案。
           </p>
           <a href="/research-mobile" className="primary-link">
-            进入 research-移动端 <span aria-hidden="true">→</span>
+            进入 reasearch-移动端弹窗问题 <span aria-hidden="true">→</span>
           </a>
         </div>
         <div
@@ -55,10 +55,10 @@ export default function Home() {
         <a href="/research-mobile" className="register-row">
           <span className="register-code">THEME / 001</span>
           <span>
-            <strong>research-移动端</strong>
+            <strong>reasearch-移动端弹窗问题</strong>
             <small>移动端 Agent、UI 中断与恢复策略</small>
           </span>
-          <span className="register-count">1 个课题 · 2 份报告</span>
+          <span className="register-count">1 个课题 · 2 个模块 · 4 份报告</span>
           <span className="register-arrow" aria-hidden="true">
             ↗
           </span>

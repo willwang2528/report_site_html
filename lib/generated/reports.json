@@ -1,18 +1,19 @@
 {
-  "generatedAt": "2026-08-22T07:47:01.001Z",
+  "generatedAt": "2026-08-22T08:37:53.170Z",
   "reports": [
     {
       "slug": "index",
       "file": "README.md",
       "kind": "课题索引",
+      "module": "index",
       "eyebrow": "POPUP RESEARCH / INDEX",
       "summary": "移动端 Agent 弹窗研究的入口、交付关系与安全边界。",
       "scope": "课题入口 · 研究边界 · 报告关系",
       "title": "Popup Research",
       "date": "2026-08-06",
-      "sourceHash": "837d77f1dca8d6d59c171b707b36cbf55771383c401e4a6996aaee85202e657c",
-      "raw": "# Popup Research\n\n本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。\n\n当前交付：\n\n1. [移动端 UI 弹窗底层原理调研](./01-popup-principles.md)\n2. [现有弹窗自动化方法对比](./02-methods-comparison.md)\n\n核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。\n\n",
-      "html": "<h1 id=\"index-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付：</p>\n<ol>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n",
+      "sourceHash": "94ae66f16b841b0e8ed9e54839e031e8ceb484c7b1078017caf153b6f73d950b",
+      "raw": "# Popup Research\n\n本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。\n\n当前交付分成两个子模块：\n\n1. **底层解决方法**\n   - [移动端 UI 弹窗底层原理调研](./01-popup-principles.md)\n   - [现有弹窗自动化方法对比](./02-methods-comparison.md)\n2. **论文模块**\n   - [移动 GUI Agent 权限素养论文精读](./03-popup-principles-brief.md)\n   - [VLM-Fuzz 弹窗递归探索论文精读](./04-vlm-fuzz.md)\n\n核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。\n",
+      "html": "<h1 id=\"index-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付分成两个子模块：</p>\n<ol>\n<li><strong>底层解决方法</strong><ul>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ul>\n</li>\n<li><strong>论文模块</strong><ul>\n<li><a href=\"/research-mobile/popup/principles-brief\">移动 GUI Agent 权限素养论文精读</a></li>\n<li><a href=\"/research-mobile/popup/vlm-fuzz\">VLM-Fuzz 弹窗递归探索论文精读</a></li>\n</ul>\n</li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n",
       "headings": [
         {
           "depth": 1,
@@ -24,7 +25,7 @@
         {
           "id": "index-section-0",
           "title": "导读",
-          "html": "<h1 id=\"index-slide-0-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付：</p>\n<ol>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n"
+          "html": "<h1 id=\"index-slide-0-h1-0\">Popup Research</h1>\n<p>本目录研究移动端 Agent 在正常、获授权的软件使用或测试流程中，如何识别并处理阻断任务的 UI 弹窗。</p>\n<p>当前交付分成两个子模块：</p>\n<ol>\n<li><strong>底层解决方法</strong><ul>\n<li><a href=\"/research-mobile/popup/principles\">移动端 UI 弹窗底层原理调研</a></li>\n<li><a href=\"/research-mobile/popup/methods\">现有弹窗自动化方法对比</a></li>\n</ul>\n</li>\n<li><strong>论文模块</strong><ul>\n<li><a href=\"/research-mobile/popup/principles-brief\">移动 GUI Agent 权限素养论文精读</a></li>\n<li><a href=\"/research-mobile/popup/vlm-fuzz\">VLM-Fuzz 弹窗递归探索论文精读</a></li>\n</ul>\n</li>\n</ol>\n<p>核心边界：处理 App/系统/浏览器弹窗不等于规避 CAPTCHA、风控、身份认证或平台安全控制。</p>\n"
         }
       ]
     },
@@ -32,6 +33,7 @@
       "slug": "principles",
       "file": "01-popup-principles.md",
       "kind": "底层原理",
+      "module": "solutions",
       "eyebrow": "INTERRUPT STACK / PRINCIPLES",
       "summary": "解释弹窗的所有者、显示层、输入焦点与语义树，以及它为何会阻断移动端 Agent。",
       "scope": "Android · iOS · Mobile Web / WebView",
@@ -249,6 +251,7 @@
       "slug": "methods",
       "file": "02-methods-comparison.md",
       "kind": "方法对比",
+      "module": "solutions",
       "eyebrow": "RECOVERY POLICY / METHODS",
       "summary": "比较状态预置、原生 watcher、语义 UI、OCR/VLM 与人工接管，并给出跨平台恢复架构。",
       "scope": "检测 · 分类 · 决策 · 动作 · 验证 · 恢复",
@@ -496,6 +499,7 @@
       "slug": "principles-brief",
       "file": "03-popup-principles-brief.md",
       "kind": "论文精读",
+      "module": "papers",
       "eyebrow": "PAPER READING / PERMISSION LITERACY",
       "summary": "拆解移动 GUI Agent 的权限素养、任务条件化请求者偏差，以及提示缓解中的安全—可用性权衡。",
       "scope": "权限素养 · 最小权限 · 任务先验 · 提示缓解",
@@ -617,6 +621,175 @@
           "id": "principles-brief-section-10",
           "title": "资料",
           "html": "<h2 id=\"principles-brief-slide-10-h2-0\">资料</h2>\n<ul>\n<li><a href=\"https://arxiv.org/abs/2608.04755\" target=\"_blank\" rel=\"noreferrer\">arXiv 摘要页</a></li>\n<li><a href=\"https://arxiv.org/pdf/2608.04755\" target=\"_blank\" rel=\"noreferrer\">arXiv PDF</a></li>\n<li>本页为论文精读后的中文拆解；具体数字以 arXiv v1 原文为准。</li>\n</ul>\n"
+        }
+      ]
+    },
+    {
+      "slug": "vlm-fuzz",
+      "file": "04-vlm-fuzz.md",
+      "kind": "论文精读",
+      "module": "papers",
+      "eyebrow": "PAPER READING / VLM-FUZZ",
+      "summary": "拆解 Android 测试器如何把 Dialog、Popup 与 Spinner 建模为临时状态，并在关闭后恢复宿主 DFS。",
+      "scope": "临时状态 · 宿主差分 · 路径重放 · 多入口测试",
+      "ogImage": "/research-mobile/popup-assets/vlm-fuzz/fig-7-popup-state-space.png",
+      "title": "VLM-Fuzz：把弹窗建模为可回放的临时状态",
+      "date": "2026-08-22",
+      "sourceHash": "4c9d6a26eec0153476b9521fefa8a4eff9a9d3c0488549e9a493c41ec935897d",
+      "raw": "# VLM-Fuzz：把弹窗建模为可回放的临时状态\n\n- 日期：2026-08-22\n- 论文：[VLM-Fuzz: Vision Language Model Assisted Recursive Depth-First Search Exploration for Effective GUI Testing of Android Apps](https://doi.org/10.1007/s10664-026-10816-4)\n- 正式版本：*Empirical Software Engineering* 31, Article 76，2026-02-13\n- 预印本：[arXiv:2504.11675](https://arxiv.org/abs/2504.11675)\n- 代码：[biniamf/VLM-Fuzz](https://github.com/biniamf/VLM-Fuzz)\n- 定位：覆盖率导向的 Android 黑盒 GUI 测试；弹窗恢复是总体系统的一个状态搜索子机制\n\n## 1. 一句话结论\n\nVLM-Fuzz 解决的是测试器进入 Dialog、Popup Menu 等临时界面后丢失宿主搜索位置的问题：它把覆盖层建模为有独立 UI 树、宿主关系和进入路径的临时状态，遍历其中的动作；当 OK、Cancel 等操作关闭弹窗后，再比较宿主 Activity 是否改变，决定创建新状态或从触发弹窗的控件继续执行。\n\n> 论文证明完整系统提高了代码覆盖率，但没有弹窗专项成功率，也没有把弹窗机制单独消融。因此不能把总体覆盖率写成“弹窗处理成功率”。\n\n## 2. 为什么普通 DFS 会被弹窗打断\n\n普通深度优先搜索假设，新页面探索完后可以返回父页面。但 Android 覆盖层同时具备三个特征：\n\n1. 它覆盖在当前 Activity 上，却可能有独立的 UI hierarchy XML；\n2. 点击任一选项便可能立即关闭、修改宿主、切换 Activity，甚至退出应用；\n3. 覆盖层关闭后，视觉上回到旧页面，不代表宿主状态和 DFS 游标没有变化。\n\n![三类复杂 Android GUI](/research-mobile/popup-assets/vlm-fuzz/fig-2-complex-gui.png)\n\n图 2 的左图是本文弹窗机制的核心场景：动态菜单覆盖宿主 GUI。中图需要语义有效输入，右图需要特定动作序列；后两类问题由按需 VLM 输入生成辅助处理。\n\n## 3. 总体方法\n\n系统不是“让 GPT-4o 从头到尾操作 App”，而是一个混合测试框架：\n\n1. 从 Manifest 提取公开 Activity、Intent Filter 和深链，以显式 Intent 从多个入口启动组件；\n2. 按普通交互控件数与菜单可达控件数，为每个 Activity 分配 60 分钟总预算的一部分；\n3. 含文本输入控件的页面调用 GPT-4o 生成动作序列，并与控件静态属性交叉校验；\n4. 无文本输入页面按启发式顺序执行点击、长按、滚动和菜单动作；\n5. 每次动作后比较 Activity 与 UI 树，递归探索新状态并保存转移记录。\n\n![VLM-Fuzz 总体架构](/research-mobile/popup-assets/vlm-fuzz/fig-3-architecture.png)\n\n组件 `i` 的预算比例为：\n\n```text\nBudgetRatio_i = (w_i + 4m_i) / Σ(j∈S)(w_j + 4m_j)\nB_i = BudgetRatio_i × B_total\n```\n\n`w_i` 是普通交互控件数，`m_i` 是菜单可达控件数。菜单按 4 倍计入是经验启发式，不是训练得到或经独立消融验证的最优参数。\n\n## 4. 弹窗递归探索机制\n\n### 4.1 识别临时状态\n\n执行动作后，如果 Activity 没有变化，系统比较动作前后的交互控件集合。若出现新的 GUI 层，再将布局包围盒与屏幕比较：只要任一边界间距超过经验阈值 **150 像素**，就分类为 Popup。\n\nDialog、Popup 和 Spinner 随后被标记为 transient state。进入临时状态时，不增加底层宿主 Activity 的访问次数；否则一个含多个弹窗的 Activity 很快就会达到访问阈值 $\\tau=2$，被测试器过早终止。\n\n### 4.2 Dialog 与 Popup：遍历、关闭、比较宿主\n\n系统尽量执行弹窗中的全部尚未探索动作。某个 OK、Cancel 或菜单项关闭弹窗后，它重新读取宿主 UI 树：\n\n| 关闭后的宿主 | 下一步 |\n|---|---|\n| 宿主 UI 已改变 | 把变化后的布局创建为新状态并递归探索 |\n| 宿主 UI 未改变 | 回到触发弹窗的控件，从其后继续原 DFS |\n\n### 4.3 Spinner：只随机选择一个条目\n\nSpinner 选择任一条目都会立即关闭下拉层。为避免每次选择后反复重开形成循环，VLM-Fuzz 只随机选择一个条目、不回溯，再从宿主的 Spinner 控件继续。这是提高终止性的工程折中，不是完整的下拉选项遍历。\n\n### 4.4 路径重放：找回未完成分支\n\n若弹窗中的某个动作在其余控件尚未遍历时就切走页面，系统保存进入该状态的动作序列。完成新状态探索后，它重放此前路径，跳过最后一个导致离开的动作，再执行旧状态中剩余控件。若重放不能回到旧状态，就把该 GUI 视为永久改变并结束该分支。\n\n![宿主 Activity 与 Popup 之间的递归状态路径](/research-mobile/popup-assets/vlm-fuzz/fig-7-popup-state-space.png)\n\n这张图展示 TimerActivity、Preferences 与 InstrumentedActivity 的宿主状态和多个 Popup 状态之间的往返。真正可复用的设计不是固定按 Back，而是“宿主指纹 + 触发控件 + 转移记录 + 重放后验证”。\n\n## 5. 关键结果\n\nAndroTest 原有 66 个插桩应用，排除 7 个无法运行或插桩的应用后使用 59 个。每个工具对每个应用运行 60 分钟并重复 5 次。\n\n| 覆盖率 | DeepGUI | APE | VLM-Fuzz | 相对 APE 的数值差 |\n|---|---:|---:|---:|---:|\n| 类 | 57.8% | 59.5% | **68.5%** | +9.0 个百分点 |\n| 方法 | 48.0% | 49.5% | **53.2%** | +3.7 个百分点 |\n| 行 | 43.7% | 44.4% | **46.5%** | +2.1 个百分点 |\n\n![覆盖率主结果](/research-mobile/popup-assets/vlm-fuzz/fig-9-coverage.png)\n\n类和方法覆盖率相对两个基线达到论文设定的显著性阈值。行覆盖率相对 APE 的 $p=0.037$，相对 DeepGUI 的 $p=0.072$；后一项不能宣称显著。\n\n### VLM 和多入口并非唯一原因\n\n- 59 个应用中有 13 个没有调用 VLM，其中 9 个只靠启发式便超过 APE 的行覆盖率；\n- VLM 消融只从 46 个需要模型的应用中随机选了 5 个，完整方法相对无 VLM 版本的平均行覆盖率相对提升为 5.28%；\n- 单入口变体与 APE 的平均类覆盖率同为 61.5%，行覆盖率为 45.9% 对 45.1%。\n\n因此，论文支持的是多入口、预算、语义输入和递归状态恢复的组合收益，不能把全部优势只归因于 GPT-4o 或弹窗处理。\n\n### 现实应用崩溃\n\n正式期刊版在 80 个 2024 年更新的 Google Play 应用上运行后，由两名作者结合日志和截图人工排除非真实用户路径异常，最终确认 **12 个应用中的 52 个独特崩溃**，涉及 23 种异常类型。APE 找到 14 个，二者重合 4 个。\n\nThemis 中两个工具都触发 3 个已记录缺陷；对未记录崩溃，VLM-Fuzz 为 140 个、APE 为 11 个，重合 5 个。该结果很大一部分来自多入口绕过失效首页，但 Themis 官方脚本本身只有 9/79 成功，解释时必须保留基准老化边界。\n\n## 6. 弹窗问题的严格边界\n\n1. **没有弹窗专项成功率。** 论文没有报告 Popup 检测精度、关闭后恢复率、重放成功率或弹窗机制独立消融。\n2. **不是随机广告处理器。** 主要处理应用内部可访问的 Dialog、Popup Menu、Spinner 和相关框架弹窗，不专门覆盖随机广告或任意跨应用覆盖层。\n3. **不是用户任务动作选择器。** 为提高代码覆盖率，测试器会尝试多个尚未探索的动作；它不负责选择最符合用户意图的唯一 OK、Cancel 或 Allow。\n4. **150 像素是经验阈值。** 规则可能漏掉全屏 Dialog，也可能误判大边距或边到边布局。\n5. **Spinner 探索不完整。** 每次只随机选一个条目，明确牺牲选项覆盖来避免循环。\n6. **动作空间有限。** VLM-Fuzz 只支持 7 类 GUI 事件，APE 支持 33 类；拖拽、缩放和部分硬件键事件没有覆盖。\n7. **VLM 证据有限。** 模型选择只有 10 张截图和一名评判者，消融只有 5 个应用；GPT-4o 还存在成本、专有模型漂移和复现风险。\n8. **只验证 Android。** 结果不能直接外推到 iOS、移动 Web 或安全验证弹窗。\n\n## 7. 对移动端弹窗处理的复用建议\n\n一个可恢复弹窗处理器至少应保存：\n\n```text\n宿主状态指纹\n  + 触发弹窗的控件\n  + 弹窗自己的控件集合\n  + 进入弹窗的动作序列\n  + 尚未探索的动作集合\n  + 关闭后的宿主差分\n```\n\n评估时还应新增弹窗检测精度、宿主恢复率、重放成功率、弹窗分支覆盖率与不可逆副作用率。若系统面向真实用户任务，则必须把“测试模式的多动作覆盖”与“任务模式的单动作、安全决策”分开；权限、支付、删除、身份验证、CAPTCHA 和平台安全控制不能沿用覆盖率优先策略。\n\n## 8. 精读判断\n\n这篇论文对弹窗问题最强的贡献是状态建模：临时覆盖层不会污染宿主访问计数，关闭后会核对宿主是否改变，未完成分支能通过动作序列重放恢复。最弱的地方也很明确：论文只证明完整 GUI 测试器有效，没有测量弹窗子机制的独立增益。\n\n所以，若把它放进移动端弹窗方案库，正确标签应是：**覆盖率导向测试框架中的递归弹窗恢复机制**，而不是“通用弹窗自动决策方案”。\n",
+      "html": "<h1 id=\"vlm-fuzz-h1-0\">VLM-Fuzz：把弹窗建模为可回放的临时状态</h1>\n<ul>\n<li>日期：2026-08-22</li>\n<li>论文：<a href=\"https://doi.org/10.1007/s10664-026-10816-4\" target=\"_blank\" rel=\"noreferrer\">VLM-Fuzz: Vision Language Model Assisted Recursive Depth-First Search Exploration for Effective GUI Testing of Android Apps</a></li>\n<li>正式版本：<em>Empirical Software Engineering</em> 31, Article 76，2026-02-13</li>\n<li>预印本：<a href=\"https://arxiv.org/abs/2504.11675\" target=\"_blank\" rel=\"noreferrer\">arXiv:2504.11675</a></li>\n<li>代码：<a href=\"https://github.com/biniamf/VLM-Fuzz\" target=\"_blank\" rel=\"noreferrer\">biniamf/VLM-Fuzz</a></li>\n<li>定位：覆盖率导向的 Android 黑盒 GUI 测试；弹窗恢复是总体系统的一个状态搜索子机制</li>\n</ul>\n<h2 id=\"vlm-fuzz-h2-1\">1. 一句话结论</h2>\n<p>VLM-Fuzz 解决的是测试器进入 Dialog、Popup Menu 等临时界面后丢失宿主搜索位置的问题：它把覆盖层建模为有独立 UI 树、宿主关系和进入路径的临时状态，遍历其中的动作；当 OK、Cancel 等操作关闭弹窗后，再比较宿主 Activity 是否改变，决定创建新状态或从触发弹窗的控件继续执行。</p>\n<blockquote>\n<p>论文证明完整系统提高了代码覆盖率，但没有弹窗专项成功率，也没有把弹窗机制单独消融。因此不能把总体覆盖率写成“弹窗处理成功率”。</p>\n</blockquote>\n<h2 id=\"vlm-fuzz-h2-2\">2. 为什么普通 DFS 会被弹窗打断</h2>\n<p>普通深度优先搜索假设，新页面探索完后可以返回父页面。但 Android 覆盖层同时具备三个特征：</p>\n<ol>\n<li>它覆盖在当前 Activity 上，却可能有独立的 UI hierarchy XML；</li>\n<li>点击任一选项便可能立即关闭、修改宿主、切换 Activity，甚至退出应用；</li>\n<li>覆盖层关闭后，视觉上回到旧页面，不代表宿主状态和 DFS 游标没有变化。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/vlm-fuzz/fig-2-complex-gui.png\" alt=\"三类复杂 Android GUI\"></p>\n<p>图 2 的左图是本文弹窗机制的核心场景：动态菜单覆盖宿主 GUI。中图需要语义有效输入，右图需要特定动作序列；后两类问题由按需 VLM 输入生成辅助处理。</p>\n<h2 id=\"vlm-fuzz-h2-3\">3. 总体方法</h2>\n<p>系统不是“让 GPT-4o 从头到尾操作 App”，而是一个混合测试框架：</p>\n<ol>\n<li>从 Manifest 提取公开 Activity、Intent Filter 和深链，以显式 Intent 从多个入口启动组件；</li>\n<li>按普通交互控件数与菜单可达控件数，为每个 Activity 分配 60 分钟总预算的一部分；</li>\n<li>含文本输入控件的页面调用 GPT-4o 生成动作序列，并与控件静态属性交叉校验；</li>\n<li>无文本输入页面按启发式顺序执行点击、长按、滚动和菜单动作；</li>\n<li>每次动作后比较 Activity 与 UI 树，递归探索新状态并保存转移记录。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/vlm-fuzz/fig-3-architecture.png\" alt=\"VLM-Fuzz 总体架构\"></p>\n<p>组件 <code>i</code> 的预算比例为：</p>\n<pre><code class=\"language-text\">BudgetRatio_i = (w_i + 4m_i) / Σ(j∈S)(w_j + 4m_j)\nB_i = BudgetRatio_i × B_total\n</code></pre>\n<p><code>w_i</code> 是普通交互控件数，<code>m_i</code> 是菜单可达控件数。菜单按 4 倍计入是经验启发式，不是训练得到或经独立消融验证的最优参数。</p>\n<h2 id=\"vlm-fuzz-h2-4\">4. 弹窗递归探索机制</h2>\n<h3 id=\"vlm-fuzz-h3-5\">4.1 识别临时状态</h3>\n<p>执行动作后，如果 Activity 没有变化，系统比较动作前后的交互控件集合。若出现新的 GUI 层，再将布局包围盒与屏幕比较：只要任一边界间距超过经验阈值 <strong>150 像素</strong>，就分类为 Popup。</p>\n<p>Dialog、Popup 和 Spinner 随后被标记为 transient state。进入临时状态时，不增加底层宿主 Activity 的访问次数；否则一个含多个弹窗的 Activity 很快就会达到访问阈值 $\\tau=2$，被测试器过早终止。</p>\n<h3 id=\"vlm-fuzz-h3-6\">4.2 Dialog 与 Popup：遍历、关闭、比较宿主</h3>\n<p>系统尽量执行弹窗中的全部尚未探索动作。某个 OK、Cancel 或菜单项关闭弹窗后，它重新读取宿主 UI 树：</p>\n<table>\n<thead>\n<tr>\n<th>关闭后的宿主</th>\n<th>下一步</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>宿主 UI 已改变</td>\n<td>把变化后的布局创建为新状态并递归探索</td>\n</tr>\n<tr>\n<td>宿主 UI 未改变</td>\n<td>回到触发弹窗的控件，从其后继续原 DFS</td>\n</tr>\n</tbody></table>\n<h3 id=\"vlm-fuzz-h3-7\">4.3 Spinner：只随机选择一个条目</h3>\n<p>Spinner 选择任一条目都会立即关闭下拉层。为避免每次选择后反复重开形成循环，VLM-Fuzz 只随机选择一个条目、不回溯，再从宿主的 Spinner 控件继续。这是提高终止性的工程折中，不是完整的下拉选项遍历。</p>\n<h3 id=\"vlm-fuzz-h3-8\">4.4 路径重放：找回未完成分支</h3>\n<p>若弹窗中的某个动作在其余控件尚未遍历时就切走页面，系统保存进入该状态的动作序列。完成新状态探索后，它重放此前路径，跳过最后一个导致离开的动作，再执行旧状态中剩余控件。若重放不能回到旧状态，就把该 GUI 视为永久改变并结束该分支。</p>\n<p><img src=\"/research-mobile/popup-assets/vlm-fuzz/fig-7-popup-state-space.png\" alt=\"宿主 Activity 与 Popup 之间的递归状态路径\"></p>\n<p>这张图展示 TimerActivity、Preferences 与 InstrumentedActivity 的宿主状态和多个 Popup 状态之间的往返。真正可复用的设计不是固定按 Back，而是“宿主指纹 + 触发控件 + 转移记录 + 重放后验证”。</p>\n<h2 id=\"vlm-fuzz-h2-9\">5. 关键结果</h2>\n<p>AndroTest 原有 66 个插桩应用，排除 7 个无法运行或插桩的应用后使用 59 个。每个工具对每个应用运行 60 分钟并重复 5 次。</p>\n<table>\n<thead>\n<tr>\n<th>覆盖率</th>\n<th align=\"right\">DeepGUI</th>\n<th align=\"right\">APE</th>\n<th align=\"right\">VLM-Fuzz</th>\n<th align=\"right\">相对 APE 的数值差</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>类</td>\n<td align=\"right\">57.8%</td>\n<td align=\"right\">59.5%</td>\n<td align=\"right\"><strong>68.5%</strong></td>\n<td align=\"right\">+9.0 个百分点</td>\n</tr>\n<tr>\n<td>方法</td>\n<td align=\"right\">48.0%</td>\n<td align=\"right\">49.5%</td>\n<td align=\"right\"><strong>53.2%</strong></td>\n<td align=\"right\">+3.7 个百分点</td>\n</tr>\n<tr>\n<td>行</td>\n<td align=\"right\">43.7%</td>\n<td align=\"right\">44.4%</td>\n<td align=\"right\"><strong>46.5%</strong></td>\n<td align=\"right\">+2.1 个百分点</td>\n</tr>\n</tbody></table>\n<p><img src=\"/research-mobile/popup-assets/vlm-fuzz/fig-9-coverage.png\" alt=\"覆盖率主结果\"></p>\n<p>类和方法覆盖率相对两个基线达到论文设定的显著性阈值。行覆盖率相对 APE 的 $p=0.037$，相对 DeepGUI 的 $p=0.072$；后一项不能宣称显著。</p>\n<h3 id=\"vlm-fuzz-h3-10\">VLM 和多入口并非唯一原因</h3>\n<ul>\n<li>59 个应用中有 13 个没有调用 VLM，其中 9 个只靠启发式便超过 APE 的行覆盖率；</li>\n<li>VLM 消融只从 46 个需要模型的应用中随机选了 5 个，完整方法相对无 VLM 版本的平均行覆盖率相对提升为 5.28%；</li>\n<li>单入口变体与 APE 的平均类覆盖率同为 61.5%，行覆盖率为 45.9% 对 45.1%。</li>\n</ul>\n<p>因此，论文支持的是多入口、预算、语义输入和递归状态恢复的组合收益，不能把全部优势只归因于 GPT-4o 或弹窗处理。</p>\n<h3 id=\"vlm-fuzz-h3-11\">现实应用崩溃</h3>\n<p>正式期刊版在 80 个 2024 年更新的 Google Play 应用上运行后，由两名作者结合日志和截图人工排除非真实用户路径异常，最终确认 <strong>12 个应用中的 52 个独特崩溃</strong>，涉及 23 种异常类型。APE 找到 14 个，二者重合 4 个。</p>\n<p>Themis 中两个工具都触发 3 个已记录缺陷；对未记录崩溃，VLM-Fuzz 为 140 个、APE 为 11 个，重合 5 个。该结果很大一部分来自多入口绕过失效首页，但 Themis 官方脚本本身只有 9/79 成功，解释时必须保留基准老化边界。</p>\n<h2 id=\"vlm-fuzz-h2-12\">6. 弹窗问题的严格边界</h2>\n<ol>\n<li><strong>没有弹窗专项成功率。</strong> 论文没有报告 Popup 检测精度、关闭后恢复率、重放成功率或弹窗机制独立消融。</li>\n<li><strong>不是随机广告处理器。</strong> 主要处理应用内部可访问的 Dialog、Popup Menu、Spinner 和相关框架弹窗，不专门覆盖随机广告或任意跨应用覆盖层。</li>\n<li><strong>不是用户任务动作选择器。</strong> 为提高代码覆盖率，测试器会尝试多个尚未探索的动作；它不负责选择最符合用户意图的唯一 OK、Cancel 或 Allow。</li>\n<li><strong>150 像素是经验阈值。</strong> 规则可能漏掉全屏 Dialog，也可能误判大边距或边到边布局。</li>\n<li><strong>Spinner 探索不完整。</strong> 每次只随机选一个条目，明确牺牲选项覆盖来避免循环。</li>\n<li><strong>动作空间有限。</strong> VLM-Fuzz 只支持 7 类 GUI 事件，APE 支持 33 类；拖拽、缩放和部分硬件键事件没有覆盖。</li>\n<li><strong>VLM 证据有限。</strong> 模型选择只有 10 张截图和一名评判者，消融只有 5 个应用；GPT-4o 还存在成本、专有模型漂移和复现风险。</li>\n<li><strong>只验证 Android。</strong> 结果不能直接外推到 iOS、移动 Web 或安全验证弹窗。</li>\n</ol>\n<h2 id=\"vlm-fuzz-h2-13\">7. 对移动端弹窗处理的复用建议</h2>\n<p>一个可恢复弹窗处理器至少应保存：</p>\n<pre><code class=\"language-text\">宿主状态指纹\n  + 触发弹窗的控件\n  + 弹窗自己的控件集合\n  + 进入弹窗的动作序列\n  + 尚未探索的动作集合\n  + 关闭后的宿主差分\n</code></pre>\n<p>评估时还应新增弹窗检测精度、宿主恢复率、重放成功率、弹窗分支覆盖率与不可逆副作用率。若系统面向真实用户任务，则必须把“测试模式的多动作覆盖”与“任务模式的单动作、安全决策”分开；权限、支付、删除、身份验证、CAPTCHA 和平台安全控制不能沿用覆盖率优先策略。</p>\n<h2 id=\"vlm-fuzz-h2-14\">8. 精读判断</h2>\n<p>这篇论文对弹窗问题最强的贡献是状态建模：临时覆盖层不会污染宿主访问计数，关闭后会核对宿主是否改变，未完成分支能通过动作序列重放恢复。最弱的地方也很明确：论文只证明完整 GUI 测试器有效，没有测量弹窗子机制的独立增益。</p>\n<p>所以，若把它放进移动端弹窗方案库，正确标签应是：<strong>覆盖率导向测试框架中的递归弹窗恢复机制</strong>，而不是“通用弹窗自动决策方案”。</p>\n",
+      "headings": [
+        {
+          "depth": 1,
+          "id": "vlm-fuzz-h1-0",
+          "text": "VLM-Fuzz：把弹窗建模为可回放的临时状态"
+        },
+        {
+          "depth": 2,
+          "id": "vlm-fuzz-h2-1",
+          "text": "1. 一句话结论"
+        },
+        {
+          "depth": 2,
+          "id": "vlm-fuzz-h2-2",
+          "text": "2. 为什么普通 DFS 会被弹窗打断"
+        },
+        {
+          "depth": 2,
+          "id": "vlm-fuzz-h2-3",
+          "text": "3. 总体方法"
+        },
+        {
+          "depth": 2,
+          "id": "vlm-fuzz-h2-4",
+          "text": "4. 弹窗递归探索机制"
+        },
+        {
+          "depth": 3,
+          "id": "vlm-fuzz-h3-5",
+          "text": "4.1 识别临时状态"
+        },
+        {
+          "depth": 3,
+          "id": "vlm-fuzz-h3-6",
+          "text": "4.2 Dialog 与 Popup：遍历、关闭、比较宿主"
+        },
+        {
+          "depth": 3,
+          "id": "vlm-fuzz-h3-7",
+          "text": "4.3 Spinner：只随机选择一个条目"
+        },
+        {
+          "depth": 3,
+          "id": "vlm-fuzz-h3-8",
+          "text": "4.4 路径重放：找回未完成分支"
+        },
+        {
+          "depth": 2,
+          "id": "vlm-fuzz-h2-9",
+          "text": "5. 关键结果"
+        },
+        {
+          "depth": 3,
+          "id": "vlm-fuzz-h3-10",
+          "text": "VLM 和多入口并非唯一原因"
+        },
+        {
+          "depth": 3,
+          "id": "vlm-fuzz-h3-11",
+          "text": "现实应用崩溃"
+        },
+        {
+          "depth": 2,
+          "id": "vlm-fuzz-h2-12",
+          "text": "6. 弹窗问题的严格边界"
+        },
+        {
+          "depth": 2,
+          "id": "vlm-fuzz-h2-13",
+          "text": "7. 对移动端弹窗处理的复用建议"
+        },
+        {
+          "depth": 2,
+          "id": "vlm-fuzz-h2-14",
+          "text": "8. 精读判断"
+        }
+      ],
+      "sections": [
+        {
+          "id": "vlm-fuzz-section-0",
+          "title": "导读",
+          "html": "<h1 id=\"vlm-fuzz-slide-0-h1-0\">VLM-Fuzz：把弹窗建模为可回放的临时状态</h1>\n<ul>\n<li>日期：2026-08-22</li>\n<li>论文：<a href=\"https://doi.org/10.1007/s10664-026-10816-4\" target=\"_blank\" rel=\"noreferrer\">VLM-Fuzz: Vision Language Model Assisted Recursive Depth-First Search Exploration for Effective GUI Testing of Android Apps</a></li>\n<li>正式版本：<em>Empirical Software Engineering</em> 31, Article 76，2026-02-13</li>\n<li>预印本：<a href=\"https://arxiv.org/abs/2504.11675\" target=\"_blank\" rel=\"noreferrer\">arXiv:2504.11675</a></li>\n<li>代码：<a href=\"https://github.com/biniamf/VLM-Fuzz\" target=\"_blank\" rel=\"noreferrer\">biniamf/VLM-Fuzz</a></li>\n<li>定位：覆盖率导向的 Android 黑盒 GUI 测试；弹窗恢复是总体系统的一个状态搜索子机制</li>\n</ul>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-1",
+          "title": "1. 一句话结论",
+          "html": "<h2 id=\"vlm-fuzz-slide-1-h2-0\">1. 一句话结论</h2>\n<p>VLM-Fuzz 解决的是测试器进入 Dialog、Popup Menu 等临时界面后丢失宿主搜索位置的问题：它把覆盖层建模为有独立 UI 树、宿主关系和进入路径的临时状态，遍历其中的动作；当 OK、Cancel 等操作关闭弹窗后，再比较宿主 Activity 是否改变，决定创建新状态或从触发弹窗的控件继续执行。</p>\n<blockquote>\n<p>论文证明完整系统提高了代码覆盖率，但没有弹窗专项成功率，也没有把弹窗机制单独消融。因此不能把总体覆盖率写成“弹窗处理成功率”。</p>\n</blockquote>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-2",
+          "title": "2. 为什么普通 DFS 会被弹窗打断",
+          "html": "<h2 id=\"vlm-fuzz-slide-2-h2-0\">2. 为什么普通 DFS 会被弹窗打断</h2>\n<p>普通深度优先搜索假设，新页面探索完后可以返回父页面。但 Android 覆盖层同时具备三个特征：</p>\n<ol>\n<li>它覆盖在当前 Activity 上，却可能有独立的 UI hierarchy XML；</li>\n<li>点击任一选项便可能立即关闭、修改宿主、切换 Activity，甚至退出应用；</li>\n<li>覆盖层关闭后，视觉上回到旧页面，不代表宿主状态和 DFS 游标没有变化。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/vlm-fuzz/fig-2-complex-gui.png\" alt=\"三类复杂 Android GUI\"></p>\n<p>图 2 的左图是本文弹窗机制的核心场景：动态菜单覆盖宿主 GUI。中图需要语义有效输入，右图需要特定动作序列；后两类问题由按需 VLM 输入生成辅助处理。</p>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-3",
+          "title": "3. 总体方法",
+          "html": "<h2 id=\"vlm-fuzz-slide-3-h2-0\">3. 总体方法</h2>\n<p>系统不是“让 GPT-4o 从头到尾操作 App”，而是一个混合测试框架：</p>\n<ol>\n<li>从 Manifest 提取公开 Activity、Intent Filter 和深链，以显式 Intent 从多个入口启动组件；</li>\n<li>按普通交互控件数与菜单可达控件数，为每个 Activity 分配 60 分钟总预算的一部分；</li>\n<li>含文本输入控件的页面调用 GPT-4o 生成动作序列，并与控件静态属性交叉校验；</li>\n<li>无文本输入页面按启发式顺序执行点击、长按、滚动和菜单动作；</li>\n<li>每次动作后比较 Activity 与 UI 树，递归探索新状态并保存转移记录。</li>\n</ol>\n<p><img src=\"/research-mobile/popup-assets/vlm-fuzz/fig-3-architecture.png\" alt=\"VLM-Fuzz 总体架构\"></p>\n<p>组件 <code>i</code> 的预算比例为：</p>\n<pre><code class=\"language-text\">BudgetRatio_i = (w_i + 4m_i) / Σ(j∈S)(w_j + 4m_j)\nB_i = BudgetRatio_i × B_total\n</code></pre>\n<p><code>w_i</code> 是普通交互控件数，<code>m_i</code> 是菜单可达控件数。菜单按 4 倍计入是经验启发式，不是训练得到或经独立消融验证的最优参数。</p>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-4",
+          "title": "4. 弹窗递归探索机制",
+          "html": "<h2 id=\"vlm-fuzz-slide-4-h2-0\">4. 弹窗递归探索机制</h2>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-5",
+          "title": "4.1 识别临时状态",
+          "html": "<h3 id=\"vlm-fuzz-slide-5-h3-0\">4.1 识别临时状态</h3>\n<p>执行动作后，如果 Activity 没有变化，系统比较动作前后的交互控件集合。若出现新的 GUI 层，再将布局包围盒与屏幕比较：只要任一边界间距超过经验阈值 <strong>150 像素</strong>，就分类为 Popup。</p>\n<p>Dialog、Popup 和 Spinner 随后被标记为 transient state。进入临时状态时，不增加底层宿主 Activity 的访问次数；否则一个含多个弹窗的 Activity 很快就会达到访问阈值 $\\tau=2$，被测试器过早终止。</p>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-6",
+          "title": "4.2 Dialog 与 Popup：遍历、关闭、比较宿主",
+          "html": "<h3 id=\"vlm-fuzz-slide-6-h3-0\">4.2 Dialog 与 Popup：遍历、关闭、比较宿主</h3>\n<p>系统尽量执行弹窗中的全部尚未探索动作。某个 OK、Cancel 或菜单项关闭弹窗后，它重新读取宿主 UI 树：</p>\n<table>\n<thead>\n<tr>\n<th>关闭后的宿主</th>\n<th>下一步</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>宿主 UI 已改变</td>\n<td>把变化后的布局创建为新状态并递归探索</td>\n</tr>\n<tr>\n<td>宿主 UI 未改变</td>\n<td>回到触发弹窗的控件，从其后继续原 DFS</td>\n</tr>\n</tbody></table>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-7",
+          "title": "4.3 Spinner：只随机选择一个条目",
+          "html": "<h3 id=\"vlm-fuzz-slide-7-h3-0\">4.3 Spinner：只随机选择一个条目</h3>\n<p>Spinner 选择任一条目都会立即关闭下拉层。为避免每次选择后反复重开形成循环，VLM-Fuzz 只随机选择一个条目、不回溯，再从宿主的 Spinner 控件继续。这是提高终止性的工程折中，不是完整的下拉选项遍历。</p>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-8",
+          "title": "4.4 路径重放：找回未完成分支",
+          "html": "<h3 id=\"vlm-fuzz-slide-8-h3-0\">4.4 路径重放：找回未完成分支</h3>\n<p>若弹窗中的某个动作在其余控件尚未遍历时就切走页面，系统保存进入该状态的动作序列。完成新状态探索后，它重放此前路径，跳过最后一个导致离开的动作，再执行旧状态中剩余控件。若重放不能回到旧状态，就把该 GUI 视为永久改变并结束该分支。</p>\n<p><img src=\"/research-mobile/popup-assets/vlm-fuzz/fig-7-popup-state-space.png\" alt=\"宿主 Activity 与 Popup 之间的递归状态路径\"></p>\n<p>这张图展示 TimerActivity、Preferences 与 InstrumentedActivity 的宿主状态和多个 Popup 状态之间的往返。真正可复用的设计不是固定按 Back，而是“宿主指纹 + 触发控件 + 转移记录 + 重放后验证”。</p>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-9",
+          "title": "5. 关键结果",
+          "html": "<h2 id=\"vlm-fuzz-slide-9-h2-0\">5. 关键结果</h2>\n<p>AndroTest 原有 66 个插桩应用，排除 7 个无法运行或插桩的应用后使用 59 个。每个工具对每个应用运行 60 分钟并重复 5 次。</p>\n<table>\n<thead>\n<tr>\n<th>覆盖率</th>\n<th align=\"right\">DeepGUI</th>\n<th align=\"right\">APE</th>\n<th align=\"right\">VLM-Fuzz</th>\n<th align=\"right\">相对 APE 的数值差</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>类</td>\n<td align=\"right\">57.8%</td>\n<td align=\"right\">59.5%</td>\n<td align=\"right\"><strong>68.5%</strong></td>\n<td align=\"right\">+9.0 个百分点</td>\n</tr>\n<tr>\n<td>方法</td>\n<td align=\"right\">48.0%</td>\n<td align=\"right\">49.5%</td>\n<td align=\"right\"><strong>53.2%</strong></td>\n<td align=\"right\">+3.7 个百分点</td>\n</tr>\n<tr>\n<td>行</td>\n<td align=\"right\">43.7%</td>\n<td align=\"right\">44.4%</td>\n<td align=\"right\"><strong>46.5%</strong></td>\n<td align=\"right\">+2.1 个百分点</td>\n</tr>\n</tbody></table>\n<p><img src=\"/research-mobile/popup-assets/vlm-fuzz/fig-9-coverage.png\" alt=\"覆盖率主结果\"></p>\n<p>类和方法覆盖率相对两个基线达到论文设定的显著性阈值。行覆盖率相对 APE 的 $p=0.037$，相对 DeepGUI 的 $p=0.072$；后一项不能宣称显著。</p>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-10",
+          "title": "VLM 和多入口并非唯一原因",
+          "html": "<h3 id=\"vlm-fuzz-slide-10-h3-0\">VLM 和多入口并非唯一原因</h3>\n<ul>\n<li>59 个应用中有 13 个没有调用 VLM，其中 9 个只靠启发式便超过 APE 的行覆盖率；</li>\n<li>VLM 消融只从 46 个需要模型的应用中随机选了 5 个，完整方法相对无 VLM 版本的平均行覆盖率相对提升为 5.28%；</li>\n<li>单入口变体与 APE 的平均类覆盖率同为 61.5%，行覆盖率为 45.9% 对 45.1%。</li>\n</ul>\n<p>因此，论文支持的是多入口、预算、语义输入和递归状态恢复的组合收益，不能把全部优势只归因于 GPT-4o 或弹窗处理。</p>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-11",
+          "title": "现实应用崩溃",
+          "html": "<h3 id=\"vlm-fuzz-slide-11-h3-0\">现实应用崩溃</h3>\n<p>正式期刊版在 80 个 2024 年更新的 Google Play 应用上运行后，由两名作者结合日志和截图人工排除非真实用户路径异常，最终确认 <strong>12 个应用中的 52 个独特崩溃</strong>，涉及 23 种异常类型。APE 找到 14 个，二者重合 4 个。</p>\n<p>Themis 中两个工具都触发 3 个已记录缺陷；对未记录崩溃，VLM-Fuzz 为 140 个、APE 为 11 个，重合 5 个。该结果很大一部分来自多入口绕过失效首页，但 Themis 官方脚本本身只有 9/79 成功，解释时必须保留基准老化边界。</p>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-12",
+          "title": "6. 弹窗问题的严格边界",
+          "html": "<h2 id=\"vlm-fuzz-slide-12-h2-0\">6. 弹窗问题的严格边界</h2>\n<ol>\n<li><strong>没有弹窗专项成功率。</strong> 论文没有报告 Popup 检测精度、关闭后恢复率、重放成功率或弹窗机制独立消融。</li>\n<li><strong>不是随机广告处理器。</strong> 主要处理应用内部可访问的 Dialog、Popup Menu、Spinner 和相关框架弹窗，不专门覆盖随机广告或任意跨应用覆盖层。</li>\n<li><strong>不是用户任务动作选择器。</strong> 为提高代码覆盖率，测试器会尝试多个尚未探索的动作；它不负责选择最符合用户意图的唯一 OK、Cancel 或 Allow。</li>\n<li><strong>150 像素是经验阈值。</strong> 规则可能漏掉全屏 Dialog，也可能误判大边距或边到边布局。</li>\n<li><strong>Spinner 探索不完整。</strong> 每次只随机选一个条目，明确牺牲选项覆盖来避免循环。</li>\n<li><strong>动作空间有限。</strong> VLM-Fuzz 只支持 7 类 GUI 事件，APE 支持 33 类；拖拽、缩放和部分硬件键事件没有覆盖。</li>\n<li><strong>VLM 证据有限。</strong> 模型选择只有 10 张截图和一名评判者，消融只有 5 个应用；GPT-4o 还存在成本、专有模型漂移和复现风险。</li>\n<li><strong>只验证 Android。</strong> 结果不能直接外推到 iOS、移动 Web 或安全验证弹窗。</li>\n</ol>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-13",
+          "title": "7. 对移动端弹窗处理的复用建议",
+          "html": "<h2 id=\"vlm-fuzz-slide-13-h2-0\">7. 对移动端弹窗处理的复用建议</h2>\n<p>一个可恢复弹窗处理器至少应保存：</p>\n<pre><code class=\"language-text\">宿主状态指纹\n  + 触发弹窗的控件\n  + 弹窗自己的控件集合\n  + 进入弹窗的动作序列\n  + 尚未探索的动作集合\n  + 关闭后的宿主差分\n</code></pre>\n<p>评估时还应新增弹窗检测精度、宿主恢复率、重放成功率、弹窗分支覆盖率与不可逆副作用率。若系统面向真实用户任务，则必须把“测试模式的多动作覆盖”与“任务模式的单动作、安全决策”分开；权限、支付、删除、身份验证、CAPTCHA 和平台安全控制不能沿用覆盖率优先策略。</p>\n"
+        },
+        {
+          "id": "vlm-fuzz-section-14",
+          "title": "8. 精读判断",
+          "html": "<h2 id=\"vlm-fuzz-slide-14-h2-0\">8. 精读判断</h2>\n<p>这篇论文对弹窗问题最强的贡献是状态建模：临时覆盖层不会污染宿主访问计数，关闭后会核对宿主是否改变，未完成分支能通过动作序列重放恢复。最弱的地方也很明确：论文只证明完整 GUI 测试器有效，没有测量弹窗子机制的独立增益。</p>\n<p>所以，若把它放进移动端弹窗方案库，正确标签应是：<strong>覆盖率导向测试框架中的递归弹窗恢复机制</strong>，而不是“通用弹窗自动决策方案”。</p>\n"
         }
       ]
     }

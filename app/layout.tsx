@@ -47,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: "/og.png",
           width: 1200,
           height: 630,
-          alt: "research-移动端：移动端 UI 弹窗研究档案",
+          alt: "reasearch-移动端弹窗问题：移动端 UI 弹窗研究档案",
         },
       ],
     },

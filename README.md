@@ -1,29 +1,35 @@
 # Research Archive HTML
 
-一个以 `GitHub + OpenAI Sites` 发布的分层研究报告站。首个主题为 `research-移动端`，首个课题为 `Popup Research`。
+一个以 `GitHub + OpenAI Sites` 发布的分层研究报告站。首个主题为 `reasearch-移动端弹窗问题`，首个课题为 `Popup Research`。
 
 ## 内容结构
 
 ```text
 Workspace
-└── Theme: research-移动端
+└── Theme: reasearch-移动端弹窗问题
     └── Topic: Popup Research
         ├── 课题目录索引
-        ├── 底层原理调研报告
-        └── 现有方法对比
+        ├── 底层解决方法
+        │   ├── 底层原理调研报告
+        │   └── 现有方法对比
+        └── 论文模块
+            ├── 权限素养论文精读
+            └── VLM-Fuzz 论文精读
 ```
 
 站点路由：
 
 - `/`：研究档案总入口
-- `/research-mobile`：`research-移动端` 主题页
+- `/research-mobile`：`reasearch-移动端弹窗问题` 主题页
 - `/research-mobile/popup`：Popup Research 课题索引
 - `/research-mobile/popup/principles`：底层原理调研
 - `/research-mobile/popup/methods`：现有方法对比
+- `/research-mobile/popup/principles-brief`：权限素养论文精读
+- `/research-mobile/popup/vlm-fuzz`：VLM-Fuzz 论文精读
 
 ## 原始材料与 HTML
 
-三份 Markdown 原文保存在 `content/research-mobile/popup/`。构建前，`scripts/generate-reports.mjs` 会：
+五份 Markdown 原文保存在 `content/research-mobile/popup/`。构建前，`scripts/generate-reports.mjs` 会：
 
 1. 读取可信的仓库内 Markdown；
 2. 保持原有标题、段落、列表、表格、代码块与链接顺序；
@@ -65,5 +71,7 @@ npm test
 - `/Users/will/Documents/ARIS-paper/popup/README.md`
 - `/Users/will/Documents/ARIS-paper/popup/01-popup-principles.md`
 - `/Users/will/Documents/ARIS-paper/popup/02-methods-comparison.md`
+- `/Users/will/Documents/ARIS-paper/paper/notes/20 Papers/gui-agent-security/Allow_to_Achieve_Over_Privileged_Inadvertently_深读笔记/Allow_to_Achieve_Over_Privileged_Inadvertently_深读笔记.md`
+- `/Users/will/Documents/ARIS-paper/paper/notes/20 Papers/gui-agent-testing/VLM-Fuzz_深读笔记/VLM-Fuzz_深读笔记.md`
 
 源研究文件不在构建过程中修改。更新站点内容时，应重新复制原文并运行测试确认哈希与结构变化符合预期。

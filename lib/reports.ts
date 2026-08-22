@@ -12,10 +12,13 @@ export type ReportSection = {
   html: string;
 };
 
+export type ReportModule = "index" | "solutions" | "papers";
+
 export type ReportRecord = {
   slug: string;
   file: string;
   kind: string;
+  module: ReportModule;
   eyebrow: string;
   title: string;
   summary: string;
@@ -37,4 +40,8 @@ export function getReport(slug: string) {
 
 export function getPublishedReports() {
   return reports.filter((report) => report.slug !== "index");
+}
+
+export function getReportsByModule(module: Exclude<ReportModule, "index">) {
+  return getPublishedReports().filter((report) => report.module === module);
 }

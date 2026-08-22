@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getPublishedReports } from "@/lib/reports";
 
 export const metadata: Metadata = {
-  title: "research-移动端",
+  title: "reasearch-移动端弹窗问题",
   description: "移动端 Agent、UI 中断与恢复策略研究主题。",
 };
 
@@ -13,7 +13,7 @@ export default function ResearchMobileTheme() {
     <div className="theme-page">
       <header className="theme-hero">
         <p className="report-eyebrow">THEME / MOBILE RESEARCH</p>
-        <h1>research-移动端</h1>
+        <h1>reasearch-移动端弹窗问题</h1>
         <p>
           围绕移动端 Agent 的观察、决策与执行边界，持续沉淀可阅读、可验证、可演示的专题研究。
         </p>
@@ -34,11 +34,11 @@ export default function ResearchMobileTheme() {
           </div>
           <div>
             <dt>材料</dt>
-            <dd>1 份索引 / {reports.length} 份报告</dd>
+            <dd>1 份索引 / 2 个模块 / {reports.length} 份报告</dd>
           </div>
           <div>
             <dt>状态</dt>
-            <dd>原理与方法调研完成</dd>
+            <dd>底层方法与论文精读持续更新</dd>
           </div>
         </dl>
         <div className="topic-actions">

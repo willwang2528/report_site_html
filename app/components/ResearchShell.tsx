@@ -6,22 +6,44 @@ import { useEffect, useState } from "react";
 
 const ARCHIVE_COLLAPSED_KEY = "research-archive:archive-collapsed";
 
-const reportLinks = [
-  { href: "/research-mobile/popup", label: "课题目录索引", code: "INDEX" },
+const topicIndex = {
+  href: "/research-mobile/popup",
+  label: "课题目录索引",
+  code: "INDEX",
+};
+
+const reportGroups = [
   {
-    href: "/research-mobile/popup/principles",
-    label: "底层原理调研",
-    code: "PRINCIPLES",
+    label: "底层解决方法",
+    code: "SOLUTIONS",
+    links: [
+      {
+        href: "/research-mobile/popup/principles",
+        label: "底层原理",
+        code: "PRINCIPLES",
+      },
+      {
+        href: "/research-mobile/popup/methods",
+        label: "现有方法",
+        code: "METHODS",
+      },
+    ],
   },
   {
-    href: "/research-mobile/popup/methods",
-    label: "现有方法对比",
-    code: "METHODS",
-  },
-  {
-    href: "/research-mobile/popup/principles-brief",
-    label: "权限素养论文精读",
-    code: "PAPER",
+    label: "论文模块",
+    code: "PAPERS",
+    links: [
+      {
+        href: "/research-mobile/popup/principles-brief",
+        label: "权限素养论文精读",
+        code: "PERMISSION",
+      },
+      {
+        href: "/research-mobile/popup/vlm-fuzz",
+        label: "VLM-Fuzz 论文精读",
+        code: "VLM-FUZZ",
+      },
+    ],
   },
 ];
 
@@ -75,7 +97,7 @@ export function ResearchShell({ children }: { children: React.ReactNode }) {
           <span aria-hidden="true">☰</span>
           研究档案
         </button>
-        <span className="mobile-path">research-移动端 / Popup</span>
+        <span className="mobile-path">reasearch-移动端弹窗问题 / Popup</span>
       </header>
 
       <aside
@@ -120,20 +142,36 @@ export function ResearchShell({ children }: { children: React.ReactNode }) {
                 className={`tree-theme ${pathname === "/research-mobile" ? "active" : ""}`}
                 onClick={() => setMenuOpen(false)}
               >
-                research-移动端
+                reasearch-移动端弹窗问题
               </a>
               <div className="tree-branch">
                 <span className="tree-topic">Popup Research</span>
-                {reportLinks.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className={`tree-report ${isCurrent(pathname, item.href) ? "active" : ""}`}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <span>{item.label}</span>
-                    <small>{item.code}</small>
-                  </a>
+                <a
+                  href={topicIndex.href}
+                  className={`tree-report ${isCurrent(pathname, topicIndex.href) ? "active" : ""}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <span>{topicIndex.label}</span>
+                  <small>{topicIndex.code}</small>
+                </a>
+                {reportGroups.map((group) => (
+                  <div className="tree-module" key={group.code}>
+                    <span className="tree-module-label">
+                      {group.label}
+                      <small>{group.code}</small>
+                    </span>
+                    {group.links.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        className={`tree-report ${isCurrent(pathname, item.href) ? "active" : ""}`}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        <span>{item.label}</span>
+                        <small>{item.code}</small>
+                      </a>
+                    ))}
+                  </div>
                 ))}
               </div>
             </nav>

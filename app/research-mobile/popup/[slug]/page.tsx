@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const report = getReport(slug);
   if (!report || report.slug === "index") return {};
-  const title = `${report.title} · research-移动端`;
+  const title = `${report.title} · reasearch-移动端弹窗问题`;
   const ogImage = report.ogImage ?? "/og.png";
   return {
     title,
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: ogImage,
           width: report.ogImage ? 1125 : 1200,
           height: report.ogImage ? 510 : 630,
-          alt: `${report.title} · research-移动端`,
+          alt: `${report.title} · reasearch-移动端弹窗问题`,
         },
       ],
     },

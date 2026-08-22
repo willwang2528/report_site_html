@@ -6,11 +6,11 @@ import test from "node:test";
 const expected = {
   index: {
     file: "README.md",
-    hash: "837d77f1dca8d6d59c171b707b36cbf55771383c401e4a6996aaee85202e657c",
+    hash: "94ae66f16b841b0e8ed9e54839e031e8ceb484c7b1078017caf153b6f73d950b",
     h2: 0,
     tables: 0,
     codeBlocks: 0,
-    links: 2,
+    links: 4,
     presentationSections: 1,
   },
   principles: {
@@ -30,6 +30,24 @@ const expected = {
     codeBlocks: 7,
     links: 20,
     presentationSections: 22,
+  },
+  "principles-brief": {
+    file: "03-popup-principles-brief.md",
+    hash: "61cc0fec3f953cd89116bb5bdaacef54e9fb6a794fc6e40abc750d02aadd0561",
+    h2: 10,
+    tables: 4,
+    codeBlocks: 2,
+    links: 3,
+    presentationSections: 11,
+  },
+  "vlm-fuzz": {
+    file: "04-vlm-fuzz.md",
+    hash: "4c9d6a26eec0153476b9521fefa8a4eff9a9d3c0488549e9a493c41ec935897d",
+    h2: 8,
+    tables: 2,
+    codeBlocks: 2,
+    links: 3,
+    presentationSections: 15,
   },
 };
 
@@ -54,7 +72,7 @@ for (const [slug, baseline] of Object.entries(expected)) {
     );
     assert.equal((raw.match(/^```/gm) ?? []).length / 2, baseline.codeBlocks);
     assert.equal(
-      (raw.match(/\[[^\]]+\]\([^)]+\)/g) ?? []).length,
+      (raw.match(/(?<!!)\[[^\]]+\]\([^)]+\)/g) ?? []).length,
       baseline.links,
     );
     assert.equal((report.html.match(/<table>/g) ?? []).length, baseline.tables);
@@ -84,4 +102,17 @@ test("every table-of-contents target has a stable heading id", () => {
       assert.match(report.html, new RegExp(`id="${heading.id}"`));
     }
   }
+});
+
+test("published reports declare one of the two topic modules", () => {
+  const published = generated.reports.filter((item) => item.slug !== "index");
+  assert.deepEqual(
+    published.map((item) => [item.slug, item.module]),
+    [
+      ["principles", "solutions"],
+      ["methods", "solutions"],
+      ["principles-brief", "papers"],
+      ["vlm-fuzz", "papers"],
+    ],
+  );
 });

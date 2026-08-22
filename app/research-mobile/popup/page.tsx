@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getPublishedReports, getReport } from "@/lib/reports";
+import { getReport, getReportsByModule } from "@/lib/reports";
 
 export const metadata: Metadata = {
   title: "Popup Research · 课题目录索引",
@@ -8,7 +8,8 @@ export const metadata: Metadata = {
 
 export default function PopupTopic() {
   const index = getReport("index");
-  const reports = getPublishedReports();
+  const solutionReports = getReportsByModule("solutions");
+  const paperReports = getReportsByModule("papers");
   if (!index) return null;
 
   return (
@@ -23,19 +24,57 @@ export default function PopupTopic() {
         aria-label="课题原始索引"
         dangerouslySetInnerHTML={{ __html: index.html }}
       />
-      <section className="report-register" aria-labelledby="reports-heading">
+      <section className="report-register" aria-labelledby="solutions-heading">
         <div className="section-heading">
-          <span>REPORT REGISTER</span>
-          <h2 id="reports-heading">当前报告</h2>
+          <span>MODULE / 01 · SOLUTIONS</span>
+          <h2 id="solutions-heading">底层解决方法</h2>
         </div>
-        {reports.map((report, indexNumber) => (
+        <p className="module-summary">
+          先理解弹窗如何取得前景控制权，再比较可直接落地的跨平台识别、决策与恢复方法。
+        </p>
+        {solutionReports.map((report, indexNumber) => (
           <a
             key={report.slug}
             href={`/research-mobile/popup/${report.slug}`}
             className="report-record"
           >
             <span className="record-number">
-              {String(indexNumber + 1).padStart(2, "0")}
+              {`S${String(indexNumber + 1).padStart(2, "0")}`}
+            </span>
+            <span className="record-main">
+              <small>{report.kind}</small>
+              <strong>{report.title}</strong>
+              <p>{report.summary}</p>
+            </span>
+            <span className="record-meta">
+              <span>{report.scope}</span>
+              <span>{report.date}</span>
+            </span>
+            <span className="record-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        ))}
+      </section>
+      <section
+        className="report-register report-module-papers"
+        aria-labelledby="papers-heading"
+      >
+        <div className="section-heading">
+          <span>MODULE / 02 · PAPER READING</span>
+          <h2 id="papers-heading">论文模块</h2>
+        </div>
+        <p className="module-summary">
+          精读论文不再与底层方法平铺：每篇文章独立保留研究问题、机制、证据、负结果和适用边界。
+        </p>
+        {paperReports.map((report, indexNumber) => (
+          <a
+            key={report.slug}
+            href={`/research-mobile/popup/${report.slug}`}
+            className="report-record"
+          >
+            <span className="record-number">
+              {`P${String(indexNumber + 1).padStart(2, "0")}`}
             </span>
             <span className="record-main">
               <small>{report.kind}</small>

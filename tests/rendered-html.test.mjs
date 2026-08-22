@@ -30,7 +30,7 @@ test("renders the research archive home", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /弹窗不是一个框/);
-  assert.match(html, /research-移动端/);
+  assert.match(html, /reasearch-移动端弹窗问题/);
   assert.equal((html.match(/href="\/research-mobile"/g) ?? []).length, 2);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
@@ -53,6 +53,12 @@ for (const [path, title, proof, ogImage] of [
     "“允许”以完成任务，却在无意中授予过多权限",
     "任务条件化的请求者身份偏差",
     "research-mobile/popup-assets/2608.04755/figure-2.png",
+  ],
+  [
+    "/research-mobile/popup/vlm-fuzz",
+    "VLM-Fuzz：把弹窗建模为可回放的临时状态",
+    "关闭弹窗后，再比较宿主",
+    "research-mobile/popup-assets/vlm-fuzz/fig-7-popup-state-space.png",
   ],
 ]) {
   test(`server-renders ${path}`, async () => {
@@ -98,16 +104,54 @@ test("publishes the paper deep reading and its primary result figure", async () 
   assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
 });
 
-test("lists the brief principles report after the existing reports", async () => {
+test("publishes the VLM-Fuzz deep reading with formal-version evidence", async () => {
+  const response = await render("/research-mobile/popup/vlm-fuzz");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /href="https:\/\/doi\.org\/10\.1007\/s10664-026-10816-4"/);
+  assert.match(html, /52 个独特崩溃/);
+  assert.match(html, /68\.5%/);
+  assert.match(html, /没有弹窗专项成功率/);
+  assert.match(html, /150 像素/);
+  assert.match(
+    html,
+    /src="\/research-mobile\/popup-assets\/vlm-fuzz\/fig-7-popup-state-space\.png"/,
+  );
+
+  const png = await readFile(
+    new URL(
+      "../dist/client/research-mobile/popup-assets/vlm-fuzz/fig-7-popup-state-space.png",
+      import.meta.url,
+    ),
+  );
+  assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+});
+
+test("groups reports into solution and paper modules", async () => {
   const response = await render("/research-mobile/popup");
   assert.equal(response.status, 200);
   const html = await response.text();
+  const solutionsHeading = html.indexOf("底层解决方法");
   const principles = html.indexOf('href="/research-mobile/popup/principles"');
   const methods = html.indexOf('href="/research-mobile/popup/methods"');
+  const papersHeading = html.indexOf("论文模块");
   const brief = html.indexOf('href="/research-mobile/popup/principles-brief"');
-  assert.ok(principles >= 0);
+  const vlmFuzz = html.indexOf('href="/research-mobile/popup/vlm-fuzz"');
+  assert.ok(solutionsHeading >= 0);
+  assert.ok(principles > solutionsHeading);
   assert.ok(methods > principles);
-  assert.ok(brief > methods);
+  assert.ok(papersHeading > methods);
+  assert.ok(brief > papersHeading);
+  assert.ok(vlmFuzz > brief);
+  assert.doesNotMatch(html, />当前报告</);
+});
+
+test("renames the mobile research theme across its hierarchy", async () => {
+  for (const path of ["/", "/research-mobile", "/research-mobile/popup/vlm-fuzz"]) {
+    const response = await render(path);
+    assert.equal(response.status, 200);
+    assert.match(await response.text(), /reasearch-移动端弹窗问题/);
+  }
 });
 
 test("report pages do not reserve space for the decorative interrupt stack", async () => {

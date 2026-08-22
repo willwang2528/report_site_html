@@ -421,7 +421,7 @@ export function ReportReader({ report }: { report: ReportRecord }) {
         <dl className="report-facts">
           <div>
             <dt>主题</dt>
-            <dd>research-移动端</dd>
+            <dd>reasearch-移动端弹窗问题</dd>
           </div>
           <div>
             <dt>范围</dt>

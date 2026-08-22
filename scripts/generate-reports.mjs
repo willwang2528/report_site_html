@@ -13,6 +13,7 @@ const definitions = [
     slug: "index",
     file: "README.md",
     kind: "课题索引",
+    module: "index",
     eyebrow: "POPUP RESEARCH / INDEX",
     summary: "移动端 Agent 弹窗研究的入口、交付关系与安全边界。",
     scope: "课题入口 · 研究边界 · 报告关系",
@@ -21,6 +22,7 @@ const definitions = [
     slug: "principles",
     file: "01-popup-principles.md",
     kind: "底层原理",
+    module: "solutions",
     eyebrow: "INTERRUPT STACK / PRINCIPLES",
     summary:
       "解释弹窗的所有者、显示层、输入焦点与语义树，以及它为何会阻断移动端 Agent。",
@@ -30,6 +32,7 @@ const definitions = [
     slug: "methods",
     file: "02-methods-comparison.md",
     kind: "方法对比",
+    module: "solutions",
     eyebrow: "RECOVERY POLICY / METHODS",
     summary:
       "比较状态预置、原生 watcher、语义 UI、OCR/VLM 与人工接管，并给出跨平台恢复架构。",
@@ -39,11 +42,23 @@ const definitions = [
     slug: "principles-brief",
     file: "03-popup-principles-brief.md",
     kind: "论文精读",
+    module: "papers",
     eyebrow: "PAPER READING / PERMISSION LITERACY",
     summary:
       "拆解移动 GUI Agent 的权限素养、任务条件化请求者偏差，以及提示缓解中的安全—可用性权衡。",
     scope: "权限素养 · 最小权限 · 任务先验 · 提示缓解",
     ogImage: "/research-mobile/popup-assets/2608.04755/figure-2.png",
+  },
+  {
+    slug: "vlm-fuzz",
+    file: "04-vlm-fuzz.md",
+    kind: "论文精读",
+    module: "papers",
+    eyebrow: "PAPER READING / VLM-FUZZ",
+    summary:
+      "拆解 Android 测试器如何把 Dialog、Popup 与 Spinner 建模为临时状态，并在关闭后恢复宿主 DFS。",
+    scope: "临时状态 · 宿主差分 · 路径重放 · 多入口测试",
+    ogImage: "/research-mobile/popup-assets/vlm-fuzz/fig-7-popup-state-space.png",
   },
 ];
 
@@ -52,7 +67,12 @@ marked.use({ gfm: true, breaks: false });
 function rewriteMarkdownLinks(markdown) {
   return markdown
     .replaceAll("(./01-popup-principles.md)", "(/research-mobile/popup/principles)")
-    .replaceAll("(./02-methods-comparison.md)", "(/research-mobile/popup/methods)");
+    .replaceAll("(./02-methods-comparison.md)", "(/research-mobile/popup/methods)")
+    .replaceAll(
+      "(./03-popup-principles-brief.md)",
+      "(/research-mobile/popup/principles-brief)",
+    )
+    .replaceAll("(./04-vlm-fuzz.md)", "(/research-mobile/popup/vlm-fuzz)");
 }
 
 function plainText(html) {
