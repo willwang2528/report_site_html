@@ -12,6 +12,7 @@ type SectionLayout = {
 };
 
 const LAYOUT_VERSION = 1;
+const REPORT_OUTLINE_COLLAPSED_KEY = "research-archive:report-outline-collapsed";
 
 function createDefaultLayout(report: ReportRecord): SectionLayout[] {
   return report.sections.map((section) => ({
@@ -74,6 +75,7 @@ export function ReportReader({ report }: { report: ReportRecord }) {
   const [slide, setSlide] = useState(0);
   const [progress, setProgress] = useState(0);
   const [activeHeading, setActiveHeading] = useState("");
+  const [outlineCollapsed, setOutlineCollapsed] = useState(false);
   const [layout, setLayout] = useState<SectionLayout[]>(() =>
     createDefaultLayout(report),
   );
@@ -109,6 +111,19 @@ export function ReportReader({ report }: { report: ReportRecord }) {
     const visible = arrangedLayoutSections.map((item) => item.section);
     return visible.length > 0 ? visible : report.sections;
   }, [arrangedLayoutSections, report.sections]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      try {
+        setOutlineCollapsed(
+          window.localStorage.getItem(REPORT_OUTLINE_COLLAPSED_KEY) === "true",
+        );
+      } catch {
+        setOutlineCollapsed(false);
+      }
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -232,6 +247,21 @@ export function ReportReader({ report }: { report: ReportRecord }) {
     } catch {
       setHasStoredLayout(false);
     }
+  }
+
+  function toggleOutline() {
+    setOutlineCollapsed((value) => {
+      const next = !value;
+      try {
+        window.localStorage.setItem(
+          REPORT_OUTLINE_COLLAPSED_KEY,
+          String(next),
+        );
+      } catch {
+        // The current page still updates when browser storage is unavailable.
+      }
+      return next;
+    });
   }
 
   function moveSection(id: string, delta: number) {
@@ -609,19 +639,42 @@ export function ReportReader({ report }: { report: ReportRecord }) {
           )}
         </section>
       ) : (
-        <div className="report-reading-grid">
-          <nav className="report-toc" aria-label="本文目录">
-            <p>本文目录</p>
-            {toc.map((heading) => (
-              <a
-                key={heading.id}
-                className={activeHeading === heading.id ? "active" : ""}
-                href={`#${heading.id}`}
-              >
-                {heading.text}
-              </a>
-            ))}
-          </nav>
+        <div
+          className={`report-reading-grid ${
+            outlineCollapsed ? "report-outline-collapsed" : ""
+          }`}
+        >
+          <aside className="report-toc-shell">
+            <button
+              className="report-toc-toggle"
+              type="button"
+              aria-expanded={!outlineCollapsed}
+              aria-controls={`report-outline-${report.slug}`}
+              aria-label={
+                outlineCollapsed ? "展开本文目录" : "收起本文目录"
+              }
+              onClick={toggleOutline}
+            >
+              <span>本文目录</span>
+              <i aria-hidden="true">{outlineCollapsed ? "›" : "‹"}</i>
+            </button>
+            <nav
+              id={`report-outline-${report.slug}`}
+              className="report-toc"
+              aria-label="本文目录"
+              hidden={outlineCollapsed}
+            >
+              {toc.map((heading) => (
+                <a
+                  key={heading.id}
+                  className={activeHeading === heading.id ? "active" : ""}
+                  href={`#${heading.id}`}
+                >
+                  {heading.text}
+                </a>
+              ))}
+            </nav>
+          </aside>
           <article
             className="markdown-body"
             dangerouslySetInnerHTML={{ __html: report.html }}

@@ -92,6 +92,26 @@ test("report pages do not reserve space for the decorative interrupt stack", asy
   assert.doesNotMatch(html, /FOREGROUND OWNERS/);
 });
 
+test("report pages expose independent controls for the archive and article outlines", async () => {
+  const response = await render("/research-mobile/popup/principles-brief");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  const buttons = html.match(/<button\b[^>]*>/g) ?? [];
+  const archiveToggle = buttons.find((button) =>
+    button.includes('aria-label="收起研究档案导航"'),
+  );
+  const articleToggle = buttons.find((button) =>
+    button.includes('aria-label="收起本文目录"'),
+  );
+
+  assert.ok(archiveToggle, "missing archive navigation collapse control");
+  assert.match(archiveToggle, /aria-expanded="true"/);
+  assert.match(archiveToggle, /aria-controls="archive-navigation-content"/);
+  assert.ok(articleToggle, "missing article outline collapse control");
+  assert.match(articleToggle, /aria-expanded="true"/);
+  assert.match(articleToggle, /aria-controls="report-outline-principles-brief"/);
+});
+
 test("renders the complete hierarchy and rejects unknown reports", async () => {
   for (const path of ["/research-mobile", "/research-mobile/popup"]) {
     const response = await render(path);

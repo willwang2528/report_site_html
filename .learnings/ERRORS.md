@@ -1,5 +1,40 @@
 # Errors
 
+## [ERR-20260822-003] local-preview-sandbox-boundary
+
+**Logged**: 2026-08-22T13:32:31+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: infra
+
+### Summary
+The sandboxed health check could not reach a vinext preview started in the approved host environment.
+
+### Error
+
+```text
+curl: (7) Failed to connect to localhost port 3000
+```
+
+### Context
+- The retained development session had already reported `http://localhost:3000/`.
+- The first `curl` ran across the sandbox boundary rather than beside that session.
+
+### Suggested Fix
+Run the non-mutating health check in the same approved host environment as the preview server before diagnosing an application failure.
+
+### Metadata
+- Reproducible: yes
+- Related Files: package.json, vite.config.ts
+- Tags: vinext, preview, sandbox, localhost
+- See Also: ERR-20260820-001
+
+### Resolution
+- **Resolved**: 2026-08-22T13:33:00+08:00
+- **Notes**: The same route returned HTTP 200 when checked in the preview server's environment.
+
+---
+
 ## [ERR-20260822-002] sites-package-script-arguments
 
 **Logged**: 2026-08-22T13:20:00+08:00
