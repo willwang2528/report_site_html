@@ -88,28 +88,7 @@ export function ResearchShell({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
-      <main className="research-main">
-        <div className="compact-owner-strip" aria-label="前景所有者中断栈">
-          <span>FOREGROUND OWNERS</span>
-          <i>APP</i>
-          <i className="active">OS</i>
-          <i>BROWSER</i>
-          <i className="security">SECURITY</i>
-        </div>
-        {children}
-      </main>
-
-      <aside className="interrupt-stack" aria-label="前景所有者中断栈">
-        <div className="stack-kicker">INTERRUPT</div>
-        <div className="stack-title">STACK</div>
-        <div className="stack-layers" aria-hidden="true">
-          <span className="stack-layer stack-app">APP</span>
-          <span className="stack-layer stack-os">OS</span>
-          <span className="stack-layer stack-browser">BROWSER</span>
-          <span className="stack-layer stack-security">SECURITY</span>
-        </div>
-        <p>前景控制权在所有者之间切换。</p>
-      </aside>
+      <main className="research-main">{children}</main>
 
       {menuOpen ? (
         <button

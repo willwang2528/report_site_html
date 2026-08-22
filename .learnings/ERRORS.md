@@ -1,5 +1,40 @@
 # Errors
 
+## [ERR-20260822-001] sites-get-site-transport
+
+**Logged**: 2026-08-22T13:17:00+08:00
+**Priority**: medium
+**Status**: resolved
+**Area**: infra
+
+### Summary
+The Sites metadata lookup failed before deployment because the MCP transport could not reach the ChatGPT backend.
+
+### Error
+
+```text
+Transport send error: HTTP request failed while sending a request to https://chatgpt.com/backend-api/ps/mcp
+```
+
+### Context
+- Operation: `sites_get_site`
+- Project: `appgprj_6a8679cc47648191873bd1a2636a14fe`
+- The source commit and local build had already passed all tests.
+
+### Suggested Fix
+Retry the same read-only lookup before interpreting the incident as a deployment or application failure.
+
+### Metadata
+- Reproducible: unknown
+- Related Files: .openai/hosting.json
+- Tags: sites, mcp, transport, deployment
+
+### Resolution
+- **Resolved**: 2026-08-22T13:18:00+08:00
+- **Notes**: The immediate retry succeeded and confirmed the site remained active and owner-only; no deployment rollback or source change was required.
+
+---
+
 ## [ERR-20260820-001] vinext-dev-sandbox-port
 
 **Logged**: 2026-08-20T00:00:00+08:00

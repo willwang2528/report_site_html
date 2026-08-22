@@ -83,6 +83,15 @@ test("lists the brief principles report after the existing reports", async () =>
   assert.ok(brief > methods);
 });
 
+test("report pages do not reserve space for the decorative interrupt stack", async () => {
+  const response = await render("/research-mobile/popup/principles-brief");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.doesNotMatch(html, /前景所有者中断栈/);
+  assert.doesNotMatch(html, /INTERRUPT/);
+  assert.doesNotMatch(html, /FOREGROUND OWNERS/);
+});
+
 test("renders the complete hierarchy and rejects unknown reports", async () => {
   for (const path of ["/research-mobile", "/research-mobile/popup"]) {
     const response = await render(path);
