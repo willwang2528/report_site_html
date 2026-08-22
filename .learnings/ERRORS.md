@@ -1,5 +1,39 @@
 # Errors
 
+## [ERR-20260822-002] sites-package-script-arguments
+
+**Logged**: 2026-08-22T13:20:00+08:00
+**Priority**: low
+**Status**: resolved
+**Area**: infra
+
+### Summary
+The first Sites packaging command omitted the required project-directory argument.
+
+### Error
+
+```text
+usage: package-site.sh PROJECT_DIR ARCHIVE_PATH
+```
+
+### Context
+- Operation: package the locally verified vinext build for Sites.
+- The first call supplied only the archive path.
+
+### Suggested Fix
+Always pass the project directory first and the absolute archive path second.
+
+### Metadata
+- Reproducible: yes
+- Related Files: .openai/hosting.json
+- Tags: sites, packaging, deployment
+
+### Resolution
+- **Resolved**: 2026-08-22T13:20:00+08:00
+- **Notes**: Re-ran the script with both required arguments and created the archive successfully.
+
+---
+
 ## [ERR-20260822-001] sites-get-site-transport
 
 **Logged**: 2026-08-22T13:17:00+08:00
