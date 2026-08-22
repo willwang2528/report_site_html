@@ -377,6 +377,10 @@ a {
   min-width: 0;
 }
 
+.archive-spine-content[hidden] {
+  display: none;
+}
+
 .archive-collapse-toggle {
   position: absolute;
   top: 74px;
