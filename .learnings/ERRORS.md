@@ -21,7 +21,7 @@ Other attempts failed to send the OpenAI file request to chatgpt.com/backend-api
 - Operation: `save_site_version` with a package produced by the official Sites packaging script.
 - Project: existing owner-only Sites project.
 - Source commit had already been pushed to GitHub and the Sites source repository.
-- Five bounded attempts used both `/private/tmp` and the ignored project `outputs/` path; no version or deployment was created.
+- Repeated bounded attempts used both `/private/tmp` and the ignored project `outputs/` path, including a fresh exact-source rebuild and commit; no version or deployment was created.
 
 ### Suggested Fix
 Retry the same archive with the same pushed commit after the transient upload path recovers; do not omit a locally available build archive or start deployment without a saved version.
