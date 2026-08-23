@@ -221,6 +221,43 @@ test("groups reports into solution and paper modules", async () => {
   assert.doesNotMatch(html, />当前报告</);
 });
 
+test("renders extracted content as a third peer module with closed explanations", async () => {
+  const indexResponse = await render("/research-mobile/popup");
+  assert.equal(indexResponse.status, 200);
+  const indexHtml = await indexResponse.text();
+  const papersHeading = indexHtml.indexOf("论文模块");
+  const extractsHeading = indexHtml.indexOf("提炼内容");
+  const paperExtracts = indexHtml.indexOf(
+    'href="/research-mobile/popup/popup-paper-extracts"',
+  );
+  const solutionSurvey = indexHtml.indexOf(
+    'href="/research-mobile/popup/mobile-popup-solutions"',
+  );
+
+  assert.ok(extractsHeading > papersHeading);
+  assert.ok(paperExtracts > extractsHeading);
+  assert.ok(solutionSurvey > paperExtracts);
+
+  const reportResponse = await render(
+    "/research-mobile/popup/popup-paper-extracts",
+  );
+  assert.equal(reportResponse.status, 200);
+  const reportHtml = await reportResponse.text();
+  assert.match(reportHtml, /五篇论文提炼/);
+  assert.match(reportHtml, /<details>/);
+  assert.match(reportHtml, /<summary>发现机制<\/summary>/);
+  assert.doesNotMatch(reportHtml, /<details\s+open/);
+
+  const surveyResponse = await render(
+    "/research-mobile/popup/mobile-popup-solutions",
+  );
+  assert.equal(surveyResponse.status, 200);
+  const surveyHtml = await surveyResponse.text();
+  assert.match(surveyHtml, /移动端弹窗补充调研/);
+  assert.match(surveyHtml, /The TCF doesn’t really A\(A\)ID/);
+  assert.match(surveyHtml, /WebChromeClient/);
+});
+
 test("renames the mobile research theme across its hierarchy", async () => {
   for (const path of ["/", "/research-mobile", "/research-mobile/popup/vlm-fuzz"]) {
     const response = await render(path);

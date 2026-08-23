@@ -58,7 +58,7 @@ export default function Home() {
             <strong>reasearch-移动端弹窗问题</strong>
             <small>移动端 Agent、UI 中断与恢复策略</small>
           </span>
-          <span className="register-count">1 个课题 · 2 个模块 · 4 份报告</span>
+          <span className="register-count">1 个课题 · 3 个模块 · 10 份报告</span>
           <span className="register-arrow" aria-hidden="true">
             ↗
           </span>

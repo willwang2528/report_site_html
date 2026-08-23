@@ -6,11 +6,11 @@ import test from "node:test";
 const expected = {
   index: {
     file: "README.md",
-    hash: "90fd3ce0109ec5d4e5dbd4fb068a9deec5bdc03a810e3b4d64b1ef975bf5b507",
+    hash: "1272ec71938947484c2ecce9baa7e7b6ddc6523836c3383293f6e1f5988748cc",
     h2: 0,
     tables: 0,
     codeBlocks: 0,
-    links: 8,
+    links: 10,
     presentationSections: 1,
   },
   principles: {
@@ -85,6 +85,24 @@ const expected = {
     links: 6,
     presentationSections: 28,
   },
+  "popup-paper-extracts": {
+    file: "09-popup-paper-extracts.md",
+    hash: "1b06074657bae36016139622e523b9daf1a7df510005965da7bd6cdc6ad47905",
+    h2: 6,
+    tables: 0,
+    codeBlocks: 0,
+    links: 5,
+    presentationSections: 7,
+  },
+  "mobile-popup-solutions": {
+    file: "10-mobile-popup-solutions.md",
+    hash: "a0774d756894bea0fbbcf8586dea0cefce26dd4674936af75adda1254accf078",
+    h2: 5,
+    tables: 1,
+    codeBlocks: 0,
+    links: 19,
+    presentationSections: 16,
+  },
 };
 
 const generated = JSON.parse(
@@ -140,7 +158,7 @@ test("every table-of-contents target has a stable heading id", () => {
   }
 });
 
-test("published reports declare one of the two topic modules", () => {
+test("published reports declare one of the three topic modules", () => {
   const published = generated.reports.filter((item) => item.slug !== "index");
   assert.deepEqual(
     published.map((item) => [item.slug, item.module]),
@@ -153,6 +171,8 @@ test("published reports declare one of the two topic modules", () => {
       ["sneaky-popups", "papers"],
       ["whispertest", "papers"],
       ["cookieverse", "papers"],
+      ["popup-paper-extracts", "extracts"],
+      ["mobile-popup-solutions", "extracts"],
     ],
   );
 });

@@ -166,6 +166,9 @@ Run the same development command in the approved host environment where local po
 - Reproducible: yes
 - Related Files: package.json, vite.config.ts
 - Tags: sites, vinext, sandbox, preview
+- Recurrence-Count: 2
+- First-Seen: 2026-08-20
+- Last-Seen: 2026-08-23
 
 ### Resolution
 - **Resolved**: 2026-08-20T00:00:00+08:00

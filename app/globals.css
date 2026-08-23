@@ -1011,6 +1011,50 @@ a {
   margin: 0;
 }
 
+.markdown-body details {
+  max-width: 790px;
+  margin: 12px 0 20px;
+  padding: 0 16px;
+  background: rgb(46 101 211 / 3%);
+  border: 1px solid rgb(23 35 47 / 14%);
+  border-radius: 7px;
+}
+
+.markdown-body summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  color: var(--focus-blue);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  list-style: none;
+}
+
+.markdown-body summary::-webkit-details-marker {
+  display: none;
+}
+
+.markdown-body summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.markdown-body details[open] summary::after {
+  content: "−";
+}
+
+.markdown-body details > :not(summary) {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
 .markdown-body code {
   padding: 0.12em 0.32em;
   color: #213c56;

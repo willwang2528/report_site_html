@@ -65,6 +65,22 @@ const reportGroups = [
       },
     ],
   },
+  {
+    label: "提炼内容",
+    code: "EXTRACTS",
+    links: [
+      {
+        href: "/research-mobile/popup/popup-paper-extracts",
+        label: "五篇论文提炼",
+        code: "PAPER-EXTRACTS",
+      },
+      {
+        href: "/research-mobile/popup/mobile-popup-solutions",
+        label: "补充方案调研",
+        code: "SOLUTION-SCAN",
+      },
+    ],
+  },
 ];
 
 function isCurrent(pathname: string, href: string) {

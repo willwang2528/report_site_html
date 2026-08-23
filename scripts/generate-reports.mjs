@@ -108,6 +108,26 @@ const definitions = [
     ogImage:
       "/research-mobile/popup-assets/cookieverse/page_007_fig_fig_1.png",
   },
+  {
+    slug: "popup-paper-extracts",
+    file: "09-popup-paper-extracts.md",
+    kind: "边界提炼",
+    module: "extracts",
+    eyebrow: "EXTRACTED READING / FIVE PAPERS",
+    summary:
+      "只保留五篇论文中与移动端弹窗发现、目标读取、动作执行和关闭判定直接相关的机制。",
+    scope: "发现 · 控件 · 规则 · 点击 · 关闭判定",
+  },
+  {
+    slug: "mobile-popup-solutions",
+    file: "10-mobile-popup-solutions.md",
+    kind: "补充调研",
+    module: "extracts",
+    eyebrow: "SOLUTION SCAN / MOBILE POP-UPS",
+    summary:
+      "补充检索真正执行过弹窗拒绝、接受、关闭或阻止出现的移动端论文与工程实现。",
+    scope: "Android · iOS · Mobile Web / WebView",
+  },
 ];
 
 marked.use({ gfm: true, breaks: false });
@@ -127,7 +147,15 @@ function rewriteMarkdownLinks(markdown) {
       "(/research-mobile/popup/sneaky-popups)",
     )
     .replaceAll("(./07-whispertest.md)", "(/research-mobile/popup/whispertest)")
-    .replaceAll("(./08-cookieverse.md)", "(/research-mobile/popup/cookieverse)");
+    .replaceAll("(./08-cookieverse.md)", "(/research-mobile/popup/cookieverse)")
+    .replaceAll(
+      "(./09-popup-paper-extracts.md)",
+      "(/research-mobile/popup/popup-paper-extracts)",
+    )
+    .replaceAll(
+      "(./10-mobile-popup-solutions.md)",
+      "(/research-mobile/popup/mobile-popup-solutions)",
+    );
 }
 
 function stripFrontmatter(markdown) {

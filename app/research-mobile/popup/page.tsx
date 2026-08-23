@@ -10,6 +10,7 @@ export default function PopupTopic() {
   const index = getReport("index");
   const solutionReports = getReportsByModule("solutions");
   const paperReports = getReportsByModule("papers");
+  const extractedReports = getReportsByModule("extracts");
   if (!index) return null;
 
   return (
@@ -75,6 +76,41 @@ export default function PopupTopic() {
           >
             <span className="record-number">
               {`P${String(indexNumber + 1).padStart(2, "0")}`}
+            </span>
+            <span className="record-main">
+              <small>{report.kind}</small>
+              <strong>{report.title}</strong>
+              <p>{report.summary}</p>
+            </span>
+            <span className="record-meta">
+              <span>{report.scope}</span>
+              <span>{report.date}</span>
+            </span>
+            <span className="record-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        ))}
+      </section>
+      <section
+        className="report-register report-module-extracts"
+        aria-labelledby="extracts-heading"
+      >
+        <div className="section-heading">
+          <span>MODULE / 03 · EXTRACTED READING</span>
+          <h2 id="extracts-heading">提炼内容</h2>
+        </div>
+        <p className="module-summary">
+          严格收束到移动端弹窗如何被发现、目标如何被读取、动作如何执行，以及是否真的完成关闭。
+        </p>
+        {extractedReports.map((report, indexNumber) => (
+          <a
+            key={report.slug}
+            href={`/research-mobile/popup/${report.slug}`}
+            className="report-record"
+          >
+            <span className="record-number">
+              {`E${String(indexNumber + 1).padStart(2, "0")}`}
             </span>
             <span className="record-main">
               <small>{report.kind}</small>

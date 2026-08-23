@@ -34,11 +34,11 @@ export default function ResearchMobileTheme() {
           </div>
           <div>
             <dt>材料</dt>
-            <dd>1 份索引 / 2 个模块 / {reports.length} 份报告</dd>
+            <dd>1 份索引 / 3 个模块 / {reports.length} 份报告</dd>
           </div>
           <div>
             <dt>状态</dt>
-            <dd>底层方法与论文精读持续更新</dd>
+            <dd>底层方法、论文精读与边界提炼持续更新</dd>
           </div>
         </dl>
         <div className="topic-actions">

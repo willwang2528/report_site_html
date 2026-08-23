@@ -12,7 +12,7 @@ export type ReportSection = {
   html: string;
 };
 
-export type ReportModule = "index" | "solutions" | "papers";
+export type ReportModule = "index" | "solutions" | "papers" | "extracts";
 
 export type ReportRecord = {
   slug: string;
